@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <title>RDF 1.2 Turtle</title>
   <meta charset="utf-8"/>
@@ -20,13 +20,14 @@
       previousMaturity:     "REC",
       prevRecShortname:     "turtle",
 
-      // editors, add as many as you like
-      // only "name" is required
       editors:  [
-        { name: "Eric Prud&apos;hommeaux", url: "http://www.w3.org/People/Eric/",
-          company: "W3C", companyURL: "http://www.w3.org/" },
-        { name: "Gavin Carothers", url: "http://gavin.carothers.name/",
-          company: "Lex Machina, Inc", companyURL: "http://lexmachina.com/"},
+        { name: "Gregg Kellogg", w3cid: "44770" },
+        { name: "Dominik Tomaszuk", w3cid: "44239"},
+      ],
+
+      formerEditors:  [
+        { name: "Eric Prud&apos;hommeaux" },
+        { name: "Gavin Carothers" },
       ],
 
       // authors, add as many as you like.
@@ -1469,106 +1470,102 @@
 <section id="sec-acks" class="appendix">
   <h2>Acknowledgements</h2>
 
-  <p>This work was described in the paper
-  <a href="http://www.dajobe.org/2003/11/new-syntaxes-rdf/">New Syntaxes for RDF</a>
-  which discusses other RDF syntaxes and the background
-  to the Turtle (Submitted to WWW2004, referred to as <em>N-Triples
-  Plus</em> there).</p>
+  <section class="informative">
+    <h3>Acknowledgements for RDF 1.1</h3>
 
-  <p>This work was started during the
-  <a href="http://www.w3.org/2001/sw/Europe/">Semantic Web Advanced Development Europe (SWAD-Europe)</a>
-  project funded by the EU IST-7 programme IST-2001-34732 (2002-2004)
-  and further development supported by the
-  <a href="http://www.ilrt.bris.ac.uk/">Institute for Learning and Research Technology</a> at the  <a href="http://www.bristol.ac.uk/">University of Bristol</a>, UK (2002-Sep 2005).
-  </p>
+    <p>This work was described in the paper
+    <a href="http://www.dajobe.org/2003/11/new-syntaxes-rdf/">New Syntaxes for RDF</a>
+    which discusses other RDF syntaxes and the background
+    to the Turtle (Submitted to WWW2004, referred to as <em>N-Triples
+    Plus</em> there).</p>
 
-  <p>Valuable contributions to this version were made by Gregg
-    Kellogg, Andy Seaborn, Sandro Hawke and the members of the RDF Working Group.</p>
+    <p>This work was started during the
+    <a href="http://www.w3.org/2001/sw/Europe/">Semantic Web Advanced Development Europe (SWAD-Europe)</a>
+    project funded by the EU IST-7 programme IST-2001-34732 (2002-2004)
+    and further development supported by the
+    <a href="http://www.ilrt.bris.ac.uk/">Institute for Learning and Research Technology</a> at the  <a href="http://www.bristol.ac.uk/">University of Bristol</a>, UK (2002-Sep 2005).
+    </p>
 
-  <p>The document was improved through the review process by the wider community.</p>
+    <p>Valuable contributions to this version were made by Gregg
+      Kellogg, Andy Seaborn, Sandro Hawke and the members of the RDF Working Group.</p>
+
+    <p>The document was improved through the review process by the wider community.</p>
+  </section>
+
+  <section class="informative">
+    <h3>Acknowledgements for RDF 1.2</h3>
+
+    <p>In addition to the editors, the following people have contributed to this specification:
+      <span id="gh-contributors"></span>
+    </p>
+
+    <p data-include="common/participants.html"></p>
+
+    <p class="ednote">Recognize members of the Task Force? Not an easy to find list of contributors.</p>
+  </section>
 
 </section>
 
-<section id="sec-changelog" class="appendix">
-  <h2>Change Log</h2>
+<section class="appendix informative" id="changes-11">
+  <h2>Changes between Team Submission and RDF 1.1</h2>
 
-  <section id="sec-change-log-PR-REC">
-    <h3>Changes since
-      <a href="http://www.w3.org/TR/2014/PR-turtle-20140109/">January
-      2014 Proposed Recommendation</a></h3>
-
-    <ul>
-      <li>Missing prefix added in example 11 in response to <a
-        href="http://lists.w3.org/Archives/Public/public-rdf-comments/2014Feb/0008.html">comment
-        from Lars Svensson</a>.</li>
-      <li><a href="http://lists.w3.org/Archives/Public/public-rdf-wg/2014Feb/0027.html">Error</a>
-        in grammar productions [21] and [23] fixed.</li>
-      <li><a href="http://lists.w3.org/Archives/Public/public-rdf-comments/2014Feb/0018.html">Error</a>
-         in grammar productions [24] and [25] fixed.</li>
-    </ul>
-  </section>
-
-  <section id="sec-changelog-CR-PR">
-    <h3>Changes from
-      <a href="http://www.w3.org/TR/2013/CR-turtle-20130219/">February 2013 Candidate Recommendation</a>
-      to <a href="http://www.w3.org/TR/2014/PR-turtle-20140109/">January 2014 Proposed Recommendation</a></h3>
-
-    <ul>
-      <li>The addition of <a href="#grammar-production-sparqlPrefix">sparqlPrefix</a>
-        and <a href="#grammar-production-sparqlBase">sparqlBase</a>
-        which allow for using SPARQL style <code>BASE</code> and <code>PREFIX</code>
-        directives in a Turtle document was marked "at risk"
-        in the Candidate Recommendation publication.
-        This feature is no longer at risk.</li>
-      <li>The title of this document was changed from
-        "<em>Turtle</em>" to "<em>RDF 1.1 Turtle</em>".</li>
-      <li>Removed the obsolete links to tests in
-        <a href="#sec-parsing-state">Sec. 7.1</a>.</li>
-    </ul>
-  </section>
-
-  <section id="sec-changelog-WD-CR">
-    <h3>Changes from <a href="http://www.w3.org/TR/2011/WD-turtle-20110809/">August 2011 First Public Working Draft</a> to <a href="http://www.w3.org/TR/2013/CR-turtle-20130219/">Candidate Recommendation</a></h3>
-    <ul>
-      <li>Renaming for STRING_* productions to STRING_LITERAL_QUOTE sytle names rather than numbers
-      <li>Local part of prefix names can now include ":"
-      <li>Turtle in HTML
-      <li>Renaming of grammar tokens and rules around IRIs
-      <li>Reserved character escape sequences
-      <li>String escape sequences limited to strings
-      <li>Numeric escape sequences limited to IRIs and Strings
-      <li>Support top-level blank-predicate-object lists
-      <li>Whitespace required between @prefix and prefix label
-    </ul>
-  </section>
-
-  <section id="sec-changelog-Subm-WD">
-    <h3>Changes from <a href="http://www.w3.org/TeamSubmission/2008/SUBM-turtle-20080114/">January 2008 Team Submission</a> to <a href="http://www.w3.org/TR/2011/WD-turtle-20110809/">First Public Working Draft</a></h3>
-    <ul>
-      <li>Adopted three additional string syntaxes from SPARQL:
-        <a data-cite="SPARQL12-QUERY#rSTRING_LITERAL2">STRING_LITERAL2</a>,
-        <a data-cite="SPARQL12-QUERY#rSTRING_LITERAL_LONG1">STRING_LITERAL_LONG1</a>,
-        <a data-cite="SPARQL12-QUERY#rSTRING_LITERAL_LONG2">STRING_LITERAL_LONG2</a>
-      </li>
-      <li>Adopted SPARQL's syntax for prefixed names
-        (see <a data-cite="SPARQL12-QUERY#rPrefixedName">editor's draft</a>):
-        <ul>
-          <li>'.'s in names in all positions of a local name apart from the first or last,
-            e.g. <code>ex:first.name</code>.</li>
-          <li>digits in the first character of the
-            <a data-cite="SPARQL12-QUERY#rPN_LOCAL">PN_LOCAL</a> lexical token, e.g. <code>ex:7tm</code>.</li>
-        </ul>
-      </li>
-      <li>adopted SPARQL's IRI resolution and prefix substitution text.</li>
-      <li>explicitly allowed re-use of the same prefix.</li>
-      <li>Added <a href="#sec-parsing">parsing rules</a>.</li>
-    </ul>
-
-    <p>
+  <ul>
+    <li>Adopted three additional string syntaxes from SPARQL:
+      <a data-cite="SPARQL12-QUERY#rSTRING_LITERAL2">STRING_LITERAL2</a>,
+      <a data-cite="SPARQL12-QUERY#rSTRING_LITERAL_LONG1">STRING_LITERAL_LONG1</a>,
+      <a data-cite="SPARQL12-QUERY#rSTRING_LITERAL_LONG2">STRING_LITERAL_LONG2</a>
+    </li>
+    <li>Adopted SPARQL's syntax for prefixed names
+      (see <a data-cite="SPARQL12-QUERY#rPrefixedName">editor's draft</a>):
+      <ul>
+        <li>'.'s in names in all positions of a local name apart from the first or last,
+          e.g. <code>ex:first.name</code>.</li>
+        <li>digits in the first character of the
+          <a data-cite="SPARQL12-QUERY#rPN_LOCAL">PN_LOCAL</a> lexical token, e.g. <code>ex:7tm</code>.</li>
+      </ul>
+    </li>
+    <li>adopted SPARQL's IRI resolution and prefix substitution text.</li>
+    <li>explicitly allowed re-use of the same prefix.</li>
+    <li>Added <a href="#sec-parsing">parsing rules</a>.</li>
+    <li>
       See also the <a href="http://www.w3.org/TeamSubmission/2008/SUBM-turtle-20080114#sec-changelog">pre-W3C Submission changelog</a>.
-    </p>
+    </li>
+    <li>Renaming for STRING_* productions to STRING_LITERAL_QUOTE sytle names rather than numbers
+    <li>Local part of prefix names can now include ":"
+    <li>Turtle in HTML
+    <li>Renaming of grammar tokens and rules around IRIs
+    <li>Reserved character escape sequences
+    <li>String escape sequences limited to strings
+    <li>Numeric escape sequences limited to IRIs and Strings
+    <li>Support top-level blank-predicate-object lists
+    <li>Whitespace required between @prefix and prefix label
+    <li>The addition of <a href="#grammar-production-sparqlPrefix">sparqlPrefix</a>
+      and <a href="#grammar-production-sparqlBase">sparqlBase</a>
+      which allow for using SPARQL style <code>BASE</code> and <code>PREFIX</code>
+      directives in a Turtle document was marked "at risk"
+      in the Candidate Recommendation publication.
+      This feature is no longer at risk.</li>
+    <li>The title of this document was changed from
+      "<em>Turtle</em>" to "<em>RDF 1.1 Turtle</em>".</li>
+    <li>Removed the obsolete links to tests in
+      <a href="#sec-parsing-state">Sec. 7.1</a>.</li>
+    <li>Missing prefix added in example 11 in response to <a
+      href="http://lists.w3.org/Archives/Public/public-rdf-comments/2014Feb/0008.html">comment
+      from Lars Svensson</a>.</li>
+    <li><a href="http://lists.w3.org/Archives/Public/public-rdf-wg/2014Feb/0027.html">Error</a>
+      in grammar productions [21] and [23] fixed.</li>
+    <li><a href="http://lists.w3.org/Archives/Public/public-rdf-comments/2014Feb/0018.html">Error</a>
+       in grammar productions [24] and [25] fixed.</li>
+  </ul>
+</section>
 
-  </section>
+
+<section class="appendix informative" id="changes-12">
+  <h2>Changes between RDF 1.1 and RDF 1.2</h2>
+
+  <ul>
+    
+  </ul>
 </section>
 
 <section id="index"></section>
