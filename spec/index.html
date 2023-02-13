@@ -410,13 +410,15 @@
 
       <ul>
         <li>Literals delimited by <code>'</code> (<span class="codepoint">U+0027</span>),
-          may not contain the characters <code>'</code>,
+          may not contain unescaped <code>'</code>,
           <code title="LINE FEED"><sub>LF</sub></code>(<span class="codepoint">U+000A</span>),
-          or <code title="CARRIAGE RETURN"><sub>CR</sub></code> (<span class="codepoint">U+000D</span>).</li>
-        <li>Literals delimited by <code>"</code>, may not contain the characters
+          or <code title="CARRIAGE RETURN"><sub>CR</sub></code> (<span class="codepoint">U+000D</span>)
+          characters.</li>
+        <li>Literals delimited by <code>"</code>, may not contain unescaped
           <code>"</code>,
           <code title="LINE FEED"><sub>LF</sub></code>,
-          or <code title="CARRIAGE RETURN"><sub>CR</sub></code>.</li>
+          or <code title="CARRIAGE RETURN"><sub>CR</sub></code>
+          characters.</li>
         <li>Literals delimited by <code>'''</code> may not contain the sequence of characters
           <code>'''</code>.</li>
         <li>Literals delimited by <code>"""</code> may not contain the sequence of characters
@@ -1567,7 +1569,8 @@
   <h2>Changes between RDF 1.1 and RDF 1.2</h2>
 
   <ul>
-    
+    <li>Update informative restrictions on included characters for `STRING_LITERAL_QUOTE`
+      and `STRING_LITERAL_SINGLE_QUOTE`.</li>
   </ul>
 </section>
 
