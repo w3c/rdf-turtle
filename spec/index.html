@@ -405,7 +405,7 @@
       </p>
 
       <p>'<code>\</code>' (<span class="codepoint">U+005C</span>)
-        must not appear in any quoted literal except as part of an escape sequence.
+        may not appear in any quoted literal except as part of an escape sequence.
         Other restrictions depend on the delimiter:</p>
 
       <ul>
@@ -1421,7 +1421,7 @@
     <dd>Turtle is a general-purpose assertion language; applications may evaluate given data to infer more assertions or to dereference IRIs, invoking the security considerations of the scheme for that IRI. Note in particular, the privacy issues in [[!RFC3023]] section 10 for HTTP IRIs. Data obtained from an inaccurate or malicious data source may lead to inaccurate or misleading conclusions, as well as the dereferencing of unintended IRIs. Care must be taken to align the trust in consulted resources with the sensitivity of the intended use of the data; inferences of potential medical treatments would likely require different trust than inferences for trip planning.</dd>
 
     <dd>Turtle is used to express arbitrary application data; security considerations will vary by domain of use. Security tools and protocols applicable to text (e.g. PGP encryption, MD5 sum validation, password-protected compression) may also be used on Turtle documents. Security/privacy protocols must be imposed which reflect the sensitivity of the embedded information.</dd>
-    <dd>Turtle can express data which is presented to the user, for example, RDF Schema labels. Application rendering strings retrieved from untrusted Turtle documents must ensure that malignant strings may not be used to mislead the reader. The security considerations in the media type registration for XML ([[!RFC3023]] section 10) provide additional guidance around the expression of arbitrary data and markup.</dd>
+    <dd>Turtle can express data which is presented to the user, for example, RDF Schema labels. Application rendering strings retrieved from untrusted Turtle documents must ensure that malignant strings MUST NOT be used to mislead the reader. The security considerations in the media type registration for XML ([[!RFC3023]] section 10) provide additional guidance around the expression of arbitrary data and markup.</dd>
     <dd>Turtle uses IRIs as term identifiers. Applications interpreting data expressed in Turtle should address the security issues of
       [[[!RFC3987]]] [[!RFC3987]] Section 8, as well as
       [[![RFC3986]]] [[!RFC3986]] Section 7.</dd>
