@@ -357,7 +357,7 @@
     <div class="note">
       <p>The '<code>@prefix</code>' and '<code>@base</code>' directives
         require a trailing '<code>.</code>' after the IRI,
-        the equalivent '<code>PREFIX</code>' and '<code>BASE</code>'
+        the equivalent '<code>PREFIX</code>' and '<code>BASE</code>'
         must not have a trailing '<code>.</code>' after the IRI part of the directive.
     </div>
   </section>
@@ -410,13 +410,15 @@
 
       <ul>
         <li>Literals delimited by <code>'</code> (<span class="codepoint">U+0027</span>),
-          may not contain the characters <code>'</code>,
+          may not contain unescaped <code>'</code>,
           <code title="LINE FEED"><sub>LF</sub></code>(<span class="codepoint">U+000A</span>),
-          or <code title="CARRIAGE RETURN"><sub>CR</sub></code> (<span class="codepoint">U+000D</span>).</li>
-        <li>Literals delimited by <code>"</code>, may not contain the characters
+          or <code title="CARRIAGE RETURN"><sub>CR</sub></code> (<span class="codepoint">U+000D</span>)
+          characters.</li>
+        <li>Literals delimited by <code>"</code>, may not contain unescaped
           <code>"</code>,
           <code title="LINE FEED"><sub>LF</sub></code>,
-          or <code title="CARRIAGE RETURN"><sub>CR</sub></code>.</li>
+          or <code title="CARRIAGE RETURN"><sub>CR</sub></code>
+          characters.</li>
         <li>Literals delimited by <code>'''</code> may not contain the sequence of characters
           <code>'''</code>.</li>
         <li>Literals delimited by <code>"""</code> may not contain the sequence of characters
@@ -727,6 +729,7 @@
   <pre  class="example turtle untested" data-transform="updateExample">
     <!--
     @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+    @prefix : <http://example.org/stuff/1.0/>
     _:b0  rdf:first  1 ;
           rdf:rest   _:b1 .
     _:b1  rdf:first  2.0 ;
@@ -750,6 +753,8 @@
   <pre class="example turtle untested" data-transform="updateExample">
     <!--
     @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+    @prefix : <http://example.org/stuff/1.0/>
+    _:b0  :p2  :q2 .
     _:b0  rdf:first  1 ;
           rdf:rest   _:b1 .
     _:b1  rdf:first  _:b2 .
@@ -767,7 +772,7 @@
   <h3>Turtle compared to SPARQL</h3>
 
   <p>The [[[SPARQL12-QUERY]]]
-    (<abbr title="SPARQL Protocol And RDF Query Language">SPARQL</abbr>) [[SPARQL12-QUERY]]
+    (<abbr title="SPARQL 1.2 Query Language">SPARQL</abbr>) [[SPARQL12-QUERY]]
     uses a Turtle style syntax for its
     <a data-cite="SPARQL12-QUERY#rTriplesBlock">TriplesBlock production</a>.
     This production differs from the Turtle language in that:
@@ -785,7 +790,7 @@
       (at the start of the SPARQL query).</li>
     <li>SPARQL uses case insensitive keywords, except for '<code>a</code>'.
       Turtle's <code>@prefix</code> and <code>@base</code> declarations are case sensitive,
-      the SPARQL dervied <code>PREFIX</code> and <code>BASE</code> are case insensitive.</li>
+      the SPARQL derived <code>PREFIX</code> and <code>BASE</code> are case insensitive.</li>
     <li>'<code>true</code>' and '<code>false</code>' are case insensitive in SPARQL
       and case sensitive in Turtle.
       <code>TrUe</code> is not a valid boolean value in Turtle.</li>
@@ -1416,7 +1421,7 @@
     <dd>Turtle is a general-purpose assertion language; applications may evaluate given data to infer more assertions or to dereference IRIs, invoking the security considerations of the scheme for that IRI. Note in particular, the privacy issues in [[!RFC3023]] section 10 for HTTP IRIs. Data obtained from an inaccurate or malicious data source may lead to inaccurate or misleading conclusions, as well as the dereferencing of unintended IRIs. Care must be taken to align the trust in consulted resources with the sensitivity of the intended use of the data; inferences of potential medical treatments would likely require different trust than inferences for trip planning.</dd>
 
     <dd>Turtle is used to express arbitrary application data; security considerations will vary by domain of use. Security tools and protocols applicable to text (e.g. PGP encryption, MD5 sum validation, password-protected compression) may also be used on Turtle documents. Security/privacy protocols must be imposed which reflect the sensitivity of the embedded information.</dd>
-    <dd>Turtle can express data which is presented to the user, for example, RDF Schema labels. Application rendering strings retrieved from untrusted Turtle documents must ensure that malignant strings may not be used to mislead the reader. The security considerations in the media type registration for XML ([[!RFC3023]] section 10) provide additional guidance around the expression of arbitrary data and markup.</dd>
+    <dd>Turtle can express data which is presented to the user, for example, RDF Schema labels. Application rendering strings retrieved from untrusted Turtle documents must ensure that malignant strings MUST NOT be used to mislead the reader. The security considerations in the media type registration for XML ([[!RFC3023]] section 10) provide additional guidance around the expression of arbitrary data and markup.</dd>
     <dd>Turtle uses IRIs as term identifiers. Applications interpreting data expressed in Turtle should address the security issues of
       [[[!RFC3987]]] [[!RFC3987]] Section 8, as well as
       [[![RFC3986]]] [[!RFC3986]] Section 7.</dd>
@@ -1564,7 +1569,8 @@
   <h2>Changes between RDF 1.1 and RDF 1.2</h2>
 
   <ul>
-    
+    <li>Update informative restrictions on included characters for `STRING_LITERAL_QUOTE`
+      and `STRING_LITERAL_SINGLE_QUOTE`.</li>
   </ul>
 </section>
 
