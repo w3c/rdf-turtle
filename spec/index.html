@@ -814,7 +814,9 @@
 
   <p>A conforming <dfn>Turtle document</dfn> is a Unicode string that conforms to the grammar and additional constraints defined in <a href="#sec-grammar" class="sectionRef"></a>, starting with the <a href="#grammar-production-turtleDoc"><code>turtleDoc</code> production</a>. A <a>Turtle document</a> serializes an <a data-cite="RDF12-CONCEPTS#dfn-rdf-graph">RDF graph</a>.</p>
 
-  <p>A conforming <strong>Turtle parser</strong> is a system capable of reading Turtle documents on behalf of an application. It makes the serialized RDF dataset, as defined in <a href="#sec-parsing" class="sectionRef"></a>, available to the application, usually through some form of API.</p>
+  <p>A conforming <strong>Turtle parser</strong> is a system capable of reading Turtle documents on behalf of an application.
+    It makes the serialized RDF graph, as defined in <a href="#sec-parsing" class="sectionRef"></a>,
+    available to the application, usually through some form of API.</p>
 
   <p>The IRI that identifies the Turtle language is: <code>http://www.w3.org/ns/formats/Turtle</code></p>
 
@@ -869,11 +871,18 @@
     Characters additionally allowed in IRI references are treated in the same way that unreserved characters are treated in URI references, per section 6.5 of [[[RFC3987]]] [[RFC3987]].
     </p>
     <p>
-      The <code>@base</code> or <code>BASE</code> directive defines the Base IRI used to resolve relative IRIs per RFC3986 section 5.1.1, "Base URI Embedded in Content".
-      Section 5.1.2, "Base URI from the Encapsulating Entity" defines how the In-Scope Base IRI may come from an encapsulating document, such as a SOAP envelope with an xml:base directive or a mime multipart document with a Content-Location header.
-      The "Retrieval URI" identified in 5.1.3, Base "URI from the Retrieval URI", is the URL from which a particular <a>Turtle document</a> was retrieved.
-      If none of the above specifies the Base URI, the default Base URI (section 5.1.4, "Default Base URI") is used.
-      Each <code>@base</code> or <code>BASE</code> directive sets a new In-Scope Base URI, relative to the previous one.
+      The <code>@base</code> or <code>BASE</code> directive defines the Base IRI used to resolve relative IRIs
+      per [[RFC3986]] <a data-cite="RFC3986#section-5.1.1">section 5.1.1, "Base URI Embedded in Content"</a>.
+      <a data-cite="RFC3986#section-5.1.2">Section 5.1.2, "Base URI from the Encapsulating Entity"</a>
+      defines how the In-Scope Base IRI may come from an encapsulating document,
+      such as a SOAP envelope with an xml:base directive or a mime multipart document with a
+      Content-Location header.
+      The "Retrieval URI" identified in <a data-cite="RFC3986#section-5.1.3">5.1.3, Base "URI from the Retrieval URI"</a>,
+      is the URL from which a particular <a>Turtle document</a> was retrieved.
+      If none of the above specifies the Base URI, the default
+      Base URI (<a data-cite="RFC3986#section-5.1.4">section 5.1.4, "Default Base URI"</a>) is used.
+      Each <code>@base</code> or <code>BASE</code> directive sets a new In-Scope Base URI,
+      relative to the previous one.
     </p>
   </section>
 
