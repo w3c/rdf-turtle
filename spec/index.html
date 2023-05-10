@@ -537,7 +537,7 @@
     <p>
       <a data-cite="RDF12-CONCEPTS#dfn-blank-node">RDF blank nodes</a> in Turtle are expressed
       as <code>_:</code> followed by a <a data-cite="RDF12-CONCEPTS#dfn-blank-node-identifier">blank node identifier</a> which is a series of name characters.
-      The characters in the label are built upon
+      The characters in the identifier are built upon
       <a href="#grammar-production-PN_CHARS_BASE">PN_CHARS_BASE</a>,
       liberalized as follows:
     </p>
@@ -566,7 +566,7 @@
   </section>
 
   <section id="unlabeled-bnodes">
-    <h3>Nesting Unlabeled Blank Nodes in Turtle</h3>
+    <h3>Nesting of Blank Nodes without Blank Node Identifiers</h3>
     <p>
       In Turtle, fresh RDF <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank nodes</a> are also allocated when matching
       the production <a href="#grammar-production-blankNodePropertyList">blankNodePropertyList</a>
