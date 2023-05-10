@@ -536,13 +536,13 @@
     <h3>RDF Blank Nodes</h3>
     <p>
       <a data-cite="RDF12-CONCEPTS#dfn-blank-node">RDF blank nodes</a> in Turtle are expressed
-      as <code>_:</code> followed by a blank node label which is a series of name characters.
+      as <code>_:</code> followed by a <a data-cite="RDF12-CONCEPTS#dfn-blank-node-identifier">blank node identifier</a> which is a series of name characters.
       The characters in the label are built upon
       <a href="#grammar-production-PN_CHARS_BASE">PN_CHARS_BASE</a>,
       liberalized as follows:
     </p>
     <ul>
-      <li>The characters <code>_</code> and digits may appear anywhere in a blank node label.</li>
+      <li>The characters <code>_</code> and digits may appear anywhere in a <a data-cite="RDF12-CONCEPTS#dfn-blank-node-identifier">blank node identifier</a>.</li>
       <li>The character <code>.</code> may appear anywhere except the first or last character.</li>
       <li>The characters
         <code>-</code>,
@@ -552,8 +552,8 @@
         are permitted anywhere except the first character.</li>
     </ul>
     <p>
-      A fresh RDF blank node is allocated for each unique blank node label in a document.
-      Repeated use of the same blank node label identifies the same RDF blank node.
+      A fresh RDF <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank node</a> is allocated for each unique <a data-cite="RDF12-CONCEPTS#dfn-blank-node-identifier">blank node identifier</a> in a document.
+      Repeated use of the same <a data-cite="RDF12-CONCEPTS#dfn-blank-node-identifier">blank node identifier</a> identifies the same blank node.
     </p>
     <pre class="example turtle" data-transform="updateExample">
       <!--
@@ -568,13 +568,13 @@
   <section id="unlabeled-bnodes">
     <h3>Nesting Unlabeled Blank Nodes in Turtle</h3>
     <p>
-      In Turtle, fresh RDF blank nodes are also allocated when matching
+      In Turtle, fresh RDF <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank nodes</a> are also allocated when matching
       the production <a href="#grammar-production-blankNodePropertyList">blankNodePropertyList</a>
       and the terminal <a href="#grammar-production-ANON">ANON</a>.
       Both of these may appear in the <a href="#grammar-production-subject">subject</a>
       or <a href="#grammar-production-object">object</a> position of a triple
       (see the Turtle Grammar).
-      That subject or object is a fresh RDF blank node.
+      That subject or object is a fresh RDF <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank node</a>.
       This blank node also serves as the subject of the triples produced by matching
       the <a href="#grammar-production-predicateObjectList">predicateObjectList</a> production
       embedded in a blankNodePropertyList.
@@ -596,7 +596,7 @@
     The Turtle grammar allows <a href="#grammar-production-blankNodePropertyList">blankNodePropertyList</a>s
     to be nested.
     In this case, each inner <code>[</code>
-    establishes a new subject blank node which reverts to the outer node
+    establishes a new subject <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank node</a> which reverts to the outer node
     at the <code>]</code>, and serves as the current subject
     for <a href="#grammar-production-predicateObjectList">predicate object lists</a>.
   </p>
@@ -659,7 +659,7 @@
       <a href="#grammar-production-subject">subject</a>
       or <a href="#grammar-production-object">object</a> position of a triple
       (see the Turtle Grammar).
-      The blank node at the head of the list is the subject or object of the containing triple.
+      The <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank node</a> at the head of the list is the subject or object of the containing triple.
     </p>
 
     <pre class="example turtle" data-transform="updateExample">
@@ -710,7 +710,7 @@
     a <a href="#grammar-production-collection">collection</a> can be either
     a <a href="#grammar-production-subject">subject</a> or
     an <a href="#grammar-production-object">object</a>.
-    This subject or object will be the novel blank node for the first object,
+    This subject or object will be the novel <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank node</a> for the first object,
     if the collection has one or more objects, or <code>rdf:nil</code>
     if the collection is empty.</p>
 
@@ -723,7 +723,7 @@
     -->
   </pre>
 
-  <p>is syntactic sugar for (noting that the blank nodes <code>b0</code>, <code>b1</code> and <code>b2</code>
+  <p>is syntactic sugar for (noting that the <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank nodes</a> <code>b0</code>, <code>b1</code> and <code>b2</code>
     do not occur anywhere else in the RDF graph):</p>
 
   <pre  class="example turtle untested" data-transform="updateExample">
@@ -1231,7 +1231,7 @@
       <tr id="handle-DECIMAL"                         ><td style="text-align:left;"            ><a class="type decimal"     href="#grammar-production-DECIMAL"                         >DECIMAL                         </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-literal">     literal     </a></td><td>The literal has a lexical form of the input string, and a datatype of <code>xsd:decimal</code>.</td></tr>
       <tr id="handle-DOUBLE"                          ><td style="text-align:left;"            ><a class="type double"      href="#grammar-production-DOUBLE"                          >DOUBLE                          </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-literal">     literal     </a></td><td>The literal has a lexical form of the input string, and a datatype of <code>xsd:double</code>.</td></tr>
       <tr id="handle-BooleanLiteral"                  ><td style="text-align:left;"            ><a class="type boolean"     href="#grammar-production-BooleanLiteral"                  >BooleanLiteral                  </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-literal">     literal     </a></td><td>The literal has a lexical form of the <code>true</code> or <code>false</code>, depending on which matched the input, and a datatype of <code>xsd:boolean</code>.</td></tr>
-      <tr id="handle-BLANK_NODE_LABEL"                ><td style="text-align:left;"            ><a class="type bNode"       href="#grammar-production-BLANK_NODE_LABEL"                >BLANK_NODE_LABEL                </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-blank-node">  blank node  </a></td><td>The string matching the second argument, <code>PN_LOCAL</code>, is a key in <a href="#bnodeLabels">bnodeLabels</a>. If there is no corresponding blank node in the map, one is allocated.</td></tr>
+      <tr id="handle-BLANK_NODE_LABEL"                ><td style="text-align:left;"            ><a class="type bNode"       href="#grammar-production-BLANK_NODE_LABEL"                >BLANK_NODE_LABEL                </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-blank-node">  blank node  </a></td><td>The string matching the second argument, <code>PN_LOCAL</code>, is a key in <a href="#bnodeLabels">bnodeLabels</a>. If there is no corresponding <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank node</a> in the map, one is allocated.</td></tr>
       <tr id="handle-ANON"                            ><td style="text-align:left;"            ><a class="type bNode"       href="#grammar-production-ANON"                            >ANON                            </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-blank-node">  blank node  </a></td><td>A blank node is generated.</td></tr>
       <tr id="handle-blankNodePropertyList"           ><td style="text-align:left;"            ><a class="type bNode"       href="#grammar-production-blankNodePropertyList"           >blankNodePropertyList           </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-blank-node">  blank node  </a></td><td>A blank node is generated. Note the rules for <code>blankNodePropertyList</code> in the next section.</td></tr>
       <tr id="handle-collection"                      ><td style="text-align:left;" rowspan="2"><a class="type bNode"       href="#grammar-production-collection"                      >collection                      </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-blank-node">  blank node  </a></td><td>For non-empty lists, a blank node is generated. Note the rules for <code>collection</code> in the next section.</td></tr>
