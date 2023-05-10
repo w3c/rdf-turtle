@@ -134,7 +134,7 @@
 
   <p>
     This example introduces many of features of the Turtle language:
-    <a href="#relative-iri">@base and Relative IRIs</a>,
+    <a href="#relative-iri">@base and Relative IRI references</a>,
     <a href="#prefixed-name">@prefix and prefixed names</a>,
     <a href="#predicate-lists">predicate lists</a> separated by '<code>;</code>',
     <a href="#object-lists">object lists</a> separated by '<code>,</code>',
@@ -250,7 +250,7 @@
       may contain <a href="#numeric">numeric escape sequences</a> (described below).
       For example <code>&lt;http://example.org/#green-goblin&gt;</code>.
     </p>
-    <p id="relative-iri">Relative IRIs like <code>&lt;#green-goblin&gt;</code>
+    <p id="relative-iri"><a data-cite="RDF12-CONCEPTS#dfn-relative-iri">Relative IRI references</a> like <code>&lt;#green-goblin&gt;</code>
       are resolved relative to the current base IRI.
       A new base IRI can be defined using the '<code>@base</code>' or '<code>BASE</code>'
       directive. Specifics of this operation are defined in
@@ -331,10 +331,10 @@
       <http://one.example/subject1> <http://one.example/predicate1> <http://one.example/object1> .
 
       @base <http://one.example/> .
-      <subject2> <predicate2> <object2> .     # relative IRIs, e.g. http://one.example/subject2
+      <subject2> <predicate2> <object2> .     # relative IRI references, e.g. http://one.example/subject2
 
       BASE <http://one.example/>
-      <subject2> <predicate2> <object2> .     # relative IRIs, e.g. http://one.example/subject2
+      <subject2> <predicate2> <object2> .     # relative IRI references, e.g. http://one.example/subject2
 
       @prefix p: <http://two.example/> .
       p:subject3 p:predicate3 p:object3 .     # prefixed name, e.g. http://two.example/subject3
@@ -398,7 +398,7 @@
         (<span class="codepoint">U+005E</span> <span class="codepoint">U+005E</span>).
         The datatype IRI in Turtle may be written using either an
         <a href="#sec-iri">absolute IRI</a>,
-        a <a href="#sec-iri">relative IRI</a>,
+        a <a href="#relative-iri">relative IRI reference</a>,
         or <a href="#prefixed-name">prefixed name</a>.
         If there is no datatype IRI and no language tag,
         the datatype is <code>xsd:string</code>.
@@ -866,12 +866,12 @@
   <section id="sec-iri-references">
     <h3>IRI References</h3>
     <p>
-    Relative IRIs are resolved with base IRIs as per [[[RFC3986]]] [[RFC3986]] using only the basic algorithm in section 5.2.
+    <a data-cite="RDF12-CONCEPTS#dfn-relative-iri">Relative IRI references</a> are resolved with base IRIs as per [[[RFC3986]]] [[RFC3986]] using only the basic algorithm in section 5.2.
     Neither Syntax-Based Normalization nor Scheme-Based Normalization (described in sections 6.2.2 and 6.2.3 of RFC3986) are performed.
     Characters additionally allowed in IRI references are treated in the same way that unreserved characters are treated in URI references, per section 6.5 of [[[RFC3987]]] [[RFC3987]].
     </p>
     <p>
-      The <code>@base</code> or <code>BASE</code> directive defines the Base IRI used to resolve relative IRIs
+      The <code>@base</code> or <code>BASE</code> directive defines the Base IRI used to resolve <a data-cite="RDF12-CONCEPTS#dfn-relative-iri">relative IRI references</a>
       per [[RFC3986]] <a data-cite="RFC3986#section-5.1.1">section 5.1.1, "Base URI Embedded in Content"</a>.
       <a data-cite="RFC3986#section-5.1.2">Section 5.1.2, "Base URI from the Encapsulating Entity"</a>
       defines how the In-Scope Base IRI may come from an encapsulating document,
@@ -1216,7 +1216,7 @@
         <tr><th>                                                                       production               </th><th>                                                                                       type            </th><th>procedure</th></tr>
       </thead>
       <tbody>
-      <tr id="handle-IRIREF"                          ><td style="text-align:left;"            ><a class="type IRI"         href="#grammar-production-IRIREF"                          >IRIREF                          </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-iri">         IRI         </a></td><td>The characters between "&lt;" and "&gt;" are taken, with the <a href="#numeric">numeric escape sequences</a> unescaped, to form the unicode string of the IRI. Relative IRI resolution is performed per <a href="#sec-iri-references" class="sectionRef">Section 6.3</a>.</td></tr>
+      <tr id="handle-IRIREF"                          ><td style="text-align:left;"            ><a class="type IRI"         href="#grammar-production-IRIREF"                          >IRIREF                          </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-iri">         IRI         </a></td><td>The characters between "&lt;" and "&gt;" are taken, with the <a href="#numeric">numeric escape sequences</a> unescaped, to form the unicode string of the IRI. <a data-cite="RDF12-CONCEPTS#dfn-relative-iri">Relative IRI reference</a> resolution is performed per <a href="#sec-iri-references" class="sectionRef">Section 6.3</a>.</td></tr>
       <tr id="handle-PNAME_NS"                        ><td style="text-align:left;" rowspan="2"><a class="type string"      href="#grammar-production-PNAME_NS"                        >PNAME_NS                        </a></td><td><a href="#prefix">                         prefix      </a></td><td>When used in a <a href="#grammar-production-prefixID">prefixID</a> or <a href="#grammar-production-sparqlPrefix">sparqlPrefix</a> production, the <code>prefix</code> is the potentially empty unicode string matching the first argument of the rule is a key into the <a href="#namespaces">namespaces map</a>.</td></tr>
       <tr id="handle-PNAME_NS2"                       >                                                                                                                                                                          <td><a data-cite="RDF12-CONCEPTS#dfn-iri">         IRI         </a></td><td>When used in a <a href="#grammar-production-PrefixedName">PrefixedName</a> production, the <code>iri</code> is the value in the <a href="#namespaces">namespaces map</a> corresponding to the first argument of the rule.</td></tr>
       <tr id="handle-PNAME_LN"                        ><td style="text-align:left;"            ><a class="type IRI"         href="#grammar-production-PNAME_LN"                        >PNAME_LN                        </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-iri">         IRI         </a></td><td>A potentially empty <a href="#prefix">prefix</a> is identified by the first sequence, <code>PNAME_NS</code>. The <a href="#namespaces">namespaces map</a> <em class="rfc2119">MUST</em> have a corresponding <code>namespace</code>. The unicode string of the IRI is formed by unescaping the <a href="#reserved">reserved characters</a> in the second argument, <code>PN_LOCAL</code>, and concatenating this onto the <code>namespace</code>.</td></tr>
@@ -1505,7 +1505,7 @@
     <dd>".ttl"</dd>
 
     <dt>Base URI:</dt>
-    <dd>The Turtle '@base &lt;IRIref&gt;' or 'BASE &lt;IRIref&gt;' term can change the current base URI for relative IRIrefs in the query language that are used sequentially later in the document.</dd>
+    <dd>The Turtle '@base &lt;IRIref&gt;' or 'BASE &lt;IRIref&gt;' term can change the current base URI for <a data-cite="RDF12-CONCEPTS#dfn-relative-iri">relative IRI references</a> in the query language that are used sequentially later in the document.</dd>
     <dt>Macintosh file type code(s):</dt>
     <dd>&quot;TEXT&quot;</dd>
     <dt>Person &amp; email address to contact for further information:</dt>
