@@ -72,6 +72,9 @@
     @media (max-width: 767px) {
       table { word-break: break-all; }
       .separated thead tr th { border:1px solid black; padding: .2em; min-width: 10vw }
+      .separated thead tr th:nth-child(2) { word-break: break-all; }
+      .separated tbody tr td:nth-child(2) {padding: 3px 2px;}
+      .separated tbody tr td:nth-child(3) {padding: 3px 2px;}
       .separated tbody tr td { border:1px solid black; text-align: center; min-width: 10vw }
       table { word-break: normal; overflow-wrap: anywhere; }
       table.ex, .ex th, .ex td { border: none; padding: 0; }
