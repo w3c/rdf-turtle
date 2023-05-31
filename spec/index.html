@@ -124,7 +124,10 @@
     Green Goblin and Spiderman.
   </p>
 
-  <pre class="example turtle" data-transform="updateExample">
+  <pre id="ex-intro"
+       class="example turtle"
+       data-transform="updateExample"
+       title="Example Turtle">
     <!--
     @base <http://example.org/> .
     @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -181,7 +184,9 @@
     <h3>Simple Triples</h3>
     <p>The simplest triple statement is a sequence of (subject, predicate, object) terms,
       separated by whitespace and terminated by '<code>.</code>' after each triple.</p>
-    <pre class="example turtle" data-transform="updateExample">
+    <pre id="ex-simple-triple"
+         class="example turtle" data-transform="updateExample"
+         title="Simple Triple">
       <!--
       <http://example.org/#spiderman>
         <http://www.perceive.net/schemas/relationship/enemyOf>
@@ -202,14 +207,18 @@
       that vary only in predicate and object RDF terms.</p>
       <p>These two examples are equivalent ways of writing the triples about Spiderman.</p>
 
-    <pre class="example turtle" data-transform="updateExample">
+    <pre id="ex-predicateObjectList"
+         class="example turtle" data-transform="updateExample"
+         title="Predicate List">
       <!--
       <http://example.org/#spiderman> <http://www.perceive.net/schemas/relationship/enemyOf> <http://example.org/#green-goblin> ;
         <http://xmlns.com/foaf/0.1/name> "Spiderman" .
       -->
     </pre>
 
-    <pre class="example turtle" data-transform="updateExample">
+    <pre id="ex-predicateObjectList-expanded"
+         class="example turtle" data-transform="updateExample"
+         title="Predicate List expanded to Simiple Triples">
       <!--
       <http://example.org/#spiderman> <http://www.perceive.net/schemas/relationship/enemyOf> <http://example.org/#green-goblin> .
       <http://example.org/#spiderman> <http://xmlns.com/foaf/0.1/name> "Spiderman" .
@@ -230,13 +239,17 @@
 
     <p>These two examples  are equivalent ways of writing Spiderman's name in two languages.<p>
 
-    <pre class="example turtle" data-transform="updateExample">
+    <pre id="ex-object-list"
+         class="example turtle" data-transform="updateExample"
+         title="Object List">
       <!--
       <http://example.org/#spiderman> <http://xmlns.com/foaf/0.1/name> "Spiderman", "Человек-паук"@ru .
       -->
     </pre>
 
-    <pre class="example turtle" data-transform="updateExample">
+    <pre id="ex-object-list-expanded"
+         class="example turtle" data-transform="updateExample"
+         title="Object List expanded to Simple Triples">
       <!--
       <http://example.org/#spiderman> <http://xmlns.com/foaf/0.1/name> "Spiderman" .
       <http://example.org/#spiderman> <http://xmlns.com/foaf/0.1/name> "Человек-паук"@ru .
@@ -305,7 +318,9 @@
 
     <p>This can be written using either the original Turtle syntax for prefix declarations:</p>
 
-    <pre class="example turtle" data-transform="updateExample">
+    <pre id="ex-prefix-decl"
+         class="example turtle" data-transform="updateExample"
+         title="Original syntax for prefix declarations">
       <!--
       @prefix somePrefix: <http://www.perceive.net/schemas/relationship/> .
 
@@ -315,7 +330,9 @@
 
     <p>or SPARQL's syntax for prefix declarations:</p>
 
-    <pre class="example turtle" data-transform="updateExample">
+    <pre id="ex-sparql-prefix-decl"
+         class="example turtle" data-transform="updateExample"
+         title="SPARQL syntax for prefix declarations">
       <!--
       PREFIX somePrefix: <http://www.perceive.net/schemas/relationship/>
 
@@ -337,7 +354,9 @@
 
     <p>The following Turtle document contains examples of all the different ways of writing IRIs in Turtle.</p>
 
-    <pre class="example turtle" data-transform="updateExample">
+    <pre id="ex-turtle-abbreviations"
+         class="example turtle" data-transform="updateExample"
+         title="Different ways of writing IRIs">
       <!--
       # A triple with all absolute IRIs
       <http://one.example/subject1> <http://one.example/predicate1> <http://one.example/object1> .
@@ -379,7 +398,9 @@
 
     <p><a data-cite="RDF12-CONCEPTS#dfn-literal">Literals</a> are used to identify values such as strings, numbers, dates.</p>
 
-    <pre class="example turtle" data-transform="updateExample">
+    <pre id="ex-rdf-literal"
+         class="example turtle" data-transform="updateExample"
+         title="Literals in Turtle">
       <!--
       @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 
@@ -437,7 +458,9 @@
           <code>"""</code>.</li>
       </ul>
 
-      <pre class="example turtle" data-transform="updateExample">
+      <pre id="ex-quoted-literals"
+           class="example turtle" data-transform="updateExample"
+           title="Quoted Literals">
         <!--
         @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
         @prefix show: <http://example.org/vocab/show/> .
@@ -517,7 +540,9 @@
         </tbody>
       </table>
  -->
-      <pre class="example turtle" data-transform="updateExample">
+      <pre id="ex-numbers"
+           class="example turtle" data-transform="updateExample"
+           title="Number Literalss">
         <!--
         @prefix : <http://example.org/elements> .
         <http://en.wikipedia.org/wiki/Helium>
@@ -533,7 +558,9 @@
       <p>Boolean values may be written as either '<code>true</code>'
         or '<code>false</code>' (case-sensitive)
         and represent RDF literals with the datatype <a data-cite="xmlschema11-2#boolean">xsd:boolean</a>.</p>
-      <pre class="example turtle" data-transform="updateExample">
+      <pre it="ex-boolean"
+           class="example turtle" data-transform="updateExample"
+           title="Boolean Literals">
         <!--
         @prefix : <http://example.org/stats> .
         <http://somecountry.example/census2007>
@@ -567,7 +594,9 @@
       A fresh RDF <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank node</a> is allocated for each unique <a data-cite="RDF12-CONCEPTS#dfn-blank-node-identifier">blank node identifier</a> in a document.
       Repeated use of the same <a data-cite="RDF12-CONCEPTS#dfn-blank-node-identifier">blank node identifier</a> identifies the same blank node.
     </p>
-    <pre class="example turtle" data-transform="updateExample">
+    <pre id="ex-blank-node"
+         class="example turtle" data-transform="updateExample"
+         title="Blank Node in Turtle">
       <!--
       @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 
@@ -595,7 +624,9 @@
       Blank nodes are also allocated for <a href="#collections">collections</a>
       described below.
     </p>
-    <pre class="example turtle" data-transform="updateExample">
+    <pre id="ex-blankNodePropertyList"
+         class="example turtle" data-transform="updateExample"
+         title="Blank Node Property List">
       <!--
       @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 
@@ -674,7 +705,9 @@
       The <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank node</a> at the head of the list is the subject or object of the containing triple.
     </p>
 
-    <pre class="example turtle" data-transform="updateExample">
+    <pre id="ex-collection"
+         class="example turtle" data-transform="updateExample"
+         title="Collections in Turtle">
       <!--
       @prefix : <http://example.org/foo> .
       # the object of this triple is the RDF collection blank node
@@ -700,7 +733,9 @@
   <div data-include="examples/example1.ttl" data-oninclude="updateExample"></div>
 
   <p>An example of an RDF collection of two literals.</p>
-  <pre class="example turtle" data-transform="updateExample">
+  <pre id="ex-collection-two-literals"
+       class="example turtle" data-transform="updateExample"
+       title="RDF collection of two literals">
     <!--
     PREFIX : <http://example.org/stuff/1.0/>
     :a :b ( "apple" "banana" ) .
@@ -728,7 +763,9 @@
 
   <p>For example,</p>
 
-  <pre  class="example turtle untested" data-transform="updateExample">
+  <pre id="ex-collection-as-subject"
+       class="example turtle untested" data-transform="updateExample"
+       title="Collection used as Subject">
     <!--
     @prefix : <http://example.org/stuff/1.0/> .
     (1 2.0 3E1) :p "w" .
@@ -738,7 +775,9 @@
   <p>is syntactic sugar for (noting that the <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank nodes</a> <code>b0</code>, <code>b1</code> and <code>b2</code>
     do not occur anywhere else in the RDF graph):</p>
 
-  <pre  class="example turtle untested" data-transform="updateExample">
+  <pre id="ex-collection-as-subject-expanded"
+       class="example turtle untested" data-transform="updateExample"
+       title="Collection represented with Blank Nodes">
     <!--
     @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
     @prefix : <http://example.org/stuff/1.0/>
@@ -754,7 +793,9 @@
 
   <p>RDF collections can be nested and can involve other syntactic forms:</p>
 
-  <pre  class="example turtle untested" data-transform="updateExample">
+  <pre id="ex-nested-collection"
+       class="example turtle untested" data-transform="updateExample"
+       title="Nested Collections">
     <!--
     PREFIX : <http://example.org/stuff/1.0/>
     (1 [:p :q] ( 2 ) ) :p2 :q2 .
@@ -762,7 +803,9 @@
   </pre>
 
   <p>is syntactic sugar for:</p>
-  <pre class="example turtle untested" data-transform="updateExample">
+  <pre id="ex-nested-collection-expanded"
+       class="example turtle untested" data-transform="updateExample"
+       title="Nested Collections represented with Blank Nodes">
     <!--
     @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
     @prefix : <http://example.org/stuff/1.0/>
@@ -1296,7 +1339,9 @@
     <h3>Parsing Example</h3>
 
     <p>The following informative example shows the semantic actions performed when  parsing this Turtle document with an LALR(1) parser:</p>
-    <pre class="example turtle" data-transform="updateExample">
+    <pre id="ex-parsing"
+         class="example turtle" data-transform="updateExample"
+         title="Example of parsing Turtle">
       <!--
         @prefix ericFoaf: <http://www.w3.org/People/Eric/ericP-foaf.rdf#> .
         @prefix : <http://xmlns.com/foaf/0.1/> .
@@ -1341,7 +1386,9 @@
     -->
     can be used to embed data blocks in documents. Turtle can be easily embedded in HTML this way.</p>
 
-  <pre class="example html" data-transform="updateExample">
+  <pre id="ex-html-embedding"
+       class="example html" data-transform="updateExample"
+       title="Embedding Turtle in HTML">
     <!--
     <script type="text/turtle">
       @prefix dc: <http://purl.org/dc/terms/> .
@@ -1375,7 +1422,9 @@
     (<code>application/xhtml+xml</code>). The solution is the same one used for JavaScript.
     </p>
 
-    <pre class="example html" data-transform="updateExample">
+    <pre id="ex-xhtml-embedding"
+         class="example html" data-transform="updateExample"
+         title="Embedding Turtle in XHTML">
       <!--
       <script type="text/turtle">
         ****# <![CDATA[****
