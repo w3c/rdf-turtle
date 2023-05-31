@@ -89,17 +89,27 @@
 <body>
 <section id='abstract'>
   <p>The Resource Description Framework
-  (<abbr title="Resource Description Framework">RDF</abbr>) is a
-  general-purpose language for representing information in the Web.</p>
+    (<abbr title="Resource Description Framework">RDF</abbr>) is a
+    general-purpose language for representing information in the Web.</p>
 
   <p>This document defines a textual syntax for RDF called Turtle
-  that allows an <a data-cite="RDF12-CONCEPTS#dfn-rdf-graph">RDF graph</a> to be completely written in a compact and
-  natural text form, with abbreviations for common usage patterns and
-  datatypes.  Turtle provides levels of compatibility with the
-  N-Triples [[RDF12-N-TRIPLES]]
-  format as well as the triple pattern syntax of
-  [[[SPARQL12-QUERY]]] W3C Recommendation.
-  </p>
+    that allows an <a data-cite="RDF12-CONCEPTS#dfn-rdf-graph">RDF graph</a> to be completely written in a compact and
+    natural text form, with abbreviations for common usage patterns and
+    datatypes.  Turtle provides levels of compatibility with the
+    N-Triples [[RDF12-N-TRIPLES]]
+    format as well as the triple pattern syntax of
+    [[[SPARQL12-QUERY]]] W3C Recommendation.</p>
+
+  <p>RDF 1.2 Turtle introduces <a>quoted triples</a>
+    as a fourth kind of <a data-cite="RDF12-CONCEPTS#dfn-rdf-term">RDF term</a>
+    which can be used as the
+    <a data-cite="RDF12-CONCEPTS#dfn-subject">subject</a> or
+    <a data-cite="RDF12-CONCEPTS#dfn-object">object</a> of another
+    <a data-cite="RDF12-CONCEPTS#dfn-rdf-triple">triple</a>,
+    making it possible to make statements about other statements.</p>
+
+  <p>RDF 1.2 Turtle also introduces an <a>annotation syntax</a> which allows
+    <a>quoted triples</a> to also be <a data-lt="asserted triple">asserted</a>.</p>
 </section>
 
 <section id='sotd'>
@@ -255,15 +265,15 @@
       <http://example.org/#spiderman> <http://xmlns.com/foaf/0.1/name> "Человек-паук"@ru .
       -->
     </pre>
-
   </section>
 
   <p>
     There are three types of <em>RDF Term</em> defined in RDF Concepts:
     <a data-cite="RDF12-CONCEPTS#dfn-iri">IRIs</a> (Internationalized Resource Identifiers),
-    <a data-cite="RDF12-CONCEPTS#dfn-literal">literals</a> and
-    <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank nodes</a>. Turtle provides a number
-    of ways of writing each.
+    <a data-cite="RDF12-CONCEPTS#dfn-literal">literals</a>,
+    <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank nodes</a>, and.
+    <a data-cite="RDF12-CONCEPTS#dfn-quoted-triple">quoted triples</a>,
+    Turtle provides a number of ways of writing each.
   </p>
 
   <section id="sec-iri">
@@ -717,6 +727,87 @@
       :subject :predicate2 () .
       -->
     </pre>
+
+  </section>
+
+  <section id="quoted-triples">
+    <h3>Quoted Triples</h3>
+
+    <p>A <dfn data-cite="RDF12-CONCEPTS#dfn-quoted-triple">quoted triple</dfn>
+      may be the <a data-cite="RDF12-CONCEPTS#dfn-subject">subject</a> or
+      <a data-cite="RDF12-CONCEPTS#dfn-object">object</a> of an
+      <a data-cite="RDF12-CONCEPTS#dfn-rdf-triple">RDF triple</a>.</p>
+
+    <p>A <a data-cite="RDF12-CONCEPTS#dfn-quoted-triple">quoted triple</a>
+      is represented using the <code><a href="#grammar-production-quotedTriple">quotedTriple</a></code> production
+      with <code><a href="#grammar-production-subject">subject</a></code>,
+      <code><a href="#grammar-production-predicate">predicate</a></code>, and
+      <code><a href="#grammar-production-object">object</a></code>
+      preceded by <code>&lt;&lt;</code> and followed by <code>&gt;&gt;</code>.
+      Note that <a data-cite="RDF12-CONCEPTS#dfn-quoted-triple">quoted triples</a>
+      may be recursive.
+     </p>
+
+    <pre id="ex-quoted-triple"
+         class="example turtle" data-transform="updateExample"
+         title="Quoted Triple">
+      <!--
+      PREFIX :    <http://www.example.org/>
+
+      :employee38 :familyName "Smith" .
+      << :employee38 :jobTitle "Assistant Designer" >> :accordingTo :employee22 .
+      -->
+    </pre>
+
+    <p>After declaring a prefix so that IRIs can be abbreviated,
+      the first triple in this example asserts that `employee38` has a `familyName` of "Smith".
+      Note that this graph does not assert that `employee38` has a `jobTitle` of "Assistant Designer";
+      it says that `employee22` has made that claim.
+      In other words, the triple "`employee38` has a `jobTitle` of 'Assistant Designer'"
+      is not what we call an <dfn data-cite="RDF12-CONCEPTS#dfn-asserted-triple">asserted triple</dfn>,
+      like "employee38 has a `familyName` of 'Smith'" above;
+      rather, it is known as a <a data-cite="RDF12-CONCEPTS#dfn-quoted-triple">quoted triple</a>.</p>
+
+    <section id="annotation-syntax">
+      <h2>Annotation Syntax</h2>
+      <p>Turtle also defines an <dfn data-lt="annotation-syntax">annotation syntax</dfn>
+        to both quote and assert a <a data-cite="RDF12-CONCEPTS#dfn-rdf-triple">triple</a>,
+        which provides a convenient shortcut.
+        An annotation can be used to both assert a triple and have that triple be the
+        <a data-cite="RDF12-CONCEPTS#dfn-subject">subject</a> of further triples.
+        The delimiters `{|` and `|}` follow an
+        <a>asserted triple</a> to make that triple,
+        as a <a>quoted triple</a>,
+        the <a data-cite="RDF12-CONCEPTS#dfn-subject">subject</a>
+        of the <a href="#grammar-production-predicateObjectList">predicateObjectList</a>
+        contained within the annotation delimeters.
+      </p>
+
+      <p class="note">The annotation syntax is a syntactic short cut in Turtle,
+        and the RDF Abstract Syntax [[RDF11-CONCEPTS]] does not
+        distinguished how the triples were written.</p>
+
+      <pre id="ex-annotated-triple"
+           class="example turtle" data-transform="updateExample" 
+           title="Annotated Triple">
+        <!--
+        PREFIX : <http://example.com/>
+        :a :name "Alice" {| :statedBy :bob ; :recorded "2021-07-07"^^xsd:date |} .
+          -->
+      </pre>
+      <p>is the same set of triples as:</p>
+      <pre id="ex-annotated-triple-expanded"
+           class="nohighlight example"data-transform="updateExample"
+           title="Annotated Triple expanded to Quoted Triples">
+        <!--
+        PREFIX : <http://example.com/>
+        << :a :name "Alice" >> :statedBy :bob .
+        << :a :name "Alice" >> :recorded "2021-07-07"^^xsd:date .
+        :a :name "Alice"
+         -->
+      </pre>
+      <p>and the graph contains three <a>asserted triples</a>.</p>
+    </section>
 
   </section>
 </section>
@@ -1629,6 +1720,9 @@
       and `STRING_LITERAL_SINGLE_QUOTE`.</li>
     <li>Separated <a href="#security"></a> from <a href="#sec-mediaReg"></a>
       and updated language.</li>
+    <li>Added <a href="#quoted-triples" class="sectionRef"></a>
+      and <a href="#annotation-syntax" class="sectionRef"></a>
+      for representing <a>quoted triples</a> in Turtle.</li>
   </ul>
 </section>
 
