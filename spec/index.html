@@ -61,8 +61,8 @@
     .separated tbody tr td { border:1px solid black; text-align: center; min-width: 10vw }
     .separated tbody tr td.r { text-align: right; padding: .5em; }
     .grammar td { font-family: monospace; vertical-align: top; }
-    .grammar-literal { color: gray;}
-    .grammar_comment { color: #A52A2A; font-style: italic; }
+    .grammar-paren { color: gray;}
+    .grammar-brac { color: gray;}
     .hl-bold { font-weight: bold; color: #0a3; }
     code { color: #ff4500; }  /* Old W3C Style */
     var { color: #ff4500; }
@@ -1250,12 +1250,12 @@
             <span>[162s]</span>
             <span><code>ANON</code></span>
             <span>::=</span>
-            <span>'<code class="grammar-literal">[</code>'
+            <span>'<code class="grammar-brac">[</code>'
               <a href="#grammar-production-WS">WS</a><code class="grammar-star">*</code>
-              '<code class="grammar-literal">]</code>'</span>
+              '<code class="grammar-brac">]</code>'</span>
           </span>
           token allows any amount of white space and comments between
-          <code class="grammar-literal">[]</code>s.
+          <code class="grammar-brac">[]</code>s.
           The single space version is used in the grammar for clarity.
         </li>
         <li>
