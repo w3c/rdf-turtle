@@ -179,7 +179,8 @@
       <td>[30]</td>
       <td><code>IRIREF</code></td>
       <td>::=</td>
-      <td>"<code class="grammar-literal">&lt;</code>" <code class="grammar-paren">(</code><code class="grammar-brac">[</code><code class="grammar-literal">^</code><code class="grammar-char-escape"><abbr title="null">#x00</abbr></code><code class="grammar-literal">-</code><code class="grammar-char-escape"><abbr title="space">#x20</abbr></code><code class="grammar-literal">&lt;&gt;&quot;{}|^`\</code><code class="grammar-brac">]</code> <code class="grammar-alt">|</code> <a href="#grammar-production-UCHAR">UCHAR</a><code class="grammar-paren">)</code><code class="grammar-star">*</code> "<code class="grammar-literal">&gt;</code>"</td>
+      <td>"<code class="grammar-literal">&lt;</code>" <code class="grammar-paren">(</code><code class="grammar-brac">[</code><code class="grammar-literal">^</code><code class="grammar-char-escape"><abbr title="null">#x00</abbr></code><code class="grammar-literal">-</code><code class="grammar-char-escape"><abbr title="space">#x20</abbr></code><code class="grammar-literal">&lt;&gt;&quot;{}|^`\</code><code class="grammar-brac">]</code> <code class="grammar-alt">|</code> <a href="#grammar-production-UCHAR">UCHAR</a><code class="grammar-paren">)</code><code class="grammar-star">*</code> "<code class="grammar-literal">&gt;</code>"
+        <br/><span class="grammar_comment">/* #x00=NULL #x01-#x1F=control codes #x20=space */</span></td>
     </tr>
     <tr id="grammar-production-PNAME_NS">
       <td>[31]</td>
@@ -233,13 +234,17 @@
       <td>[39]</td>
       <td><code>STRING_LITERAL_QUOTE</code></td>
       <td>::=</td>
-      <td>'<code class="grammar-literal">&quot;</code>' <code class="grammar-paren">(</code><code class="grammar-brac">[</code><code class="grammar-literal">^</code><code class="grammar-char-escape"><abbr title="quot">>&quot;</abbr></code><code class="grammar-char-escape"><abbr title="ascii '\'">#x5C</abbr></code><code class="grammar-char-escape"><abbr title="new line">#x0A</abbr></code><code class="grammar-char-escape"><abbr title="carriage return">#x0D</abbr></code><code class="grammar-brac">]</code> <code class="grammar-alt">|</code> <a href="#grammar-production-ECHAR">ECHAR</a> <code class="grammar-alt">|</code> <a href="#grammar-production-UCHAR">UCHAR</a><code class="grammar-paren">)</code><code class="grammar-star">*</code> '<code class="grammar-literal">&quot;</code>'</td>
+      <td>'<code class="grammar-literal">&quot;</code>' <code class="grammar-paren">(</code><code class="grammar-brac">[</code><code class="grammar-literal">^</code><code class="grammar-char-escape"><abbr title="quot">>&quot;</abbr></code><code class="grammar-char-escape"><abbr title="ascii '\'">#x5C</abbr></code><code class="grammar-char-escape"><abbr title="new line">#x0A</abbr></code><code class="grammar-char-escape"><abbr title="carriage return">#x0D</abbr></code><code class="grammar-brac">]</code> <code class="grammar-alt">|</code> <a href="#grammar-production-ECHAR">ECHAR</a> <code class="grammar-alt">|</code> <a href="#grammar-production-UCHAR">UCHAR</a><code class="grammar-paren">)</code><code class="grammar-star">*</code> '<code class="grammar-literal">&quot;</code>'
+        <br/><span class="grammar_comment">/* #x22=" #x5C=\ #xA=new line #xD=carriage return */</span>
+      </td>
     </tr>
     <tr id="grammar-production-STRING_LITERAL_SINGLE_QUOTE">
       <td>[40]</td>
       <td><code>STRING_LITERAL_SINGLE_QUOTE</code></td>
       <td>::=</td>
-      <td>"<code class="grammar-literal">&apos;</code>" <code class="grammar-paren">(</code><code class="grammar-brac">[</code><code class="grammar-literal">^</code><code class="grammar-char-escape"><abbr title="ascii '&apos;'">#x27</abbr></code><code class="grammar-char-escape"><abbr title="ascii '\'">#x5C</abbr></code><code class="grammar-char-escape"><abbr title="new line">#x0A</abbr></code><code class="grammar-char-escape"><abbr title="carriage return">#x0D</abbr></code><code class="grammar-brac">]</code> <code class="grammar-alt">|</code> <a href="#grammar-production-ECHAR">ECHAR</a> <code class="grammar-alt">|</code> <a href="#grammar-production-UCHAR">UCHAR</a><code class="grammar-paren">)</code><code class="grammar-star">*</code> "<code class="grammar-literal">&apos;</code>"</td>
+      <td>"<code class="grammar-literal">&apos;</code>" <code class="grammar-paren">(</code><code class="grammar-brac">[</code><code class="grammar-literal">^</code><code class="grammar-char-escape"><abbr title="ascii '&apos;'">#x27</abbr></code><code class="grammar-char-escape"><abbr title="ascii '\'">#x5C</abbr></code><code class="grammar-char-escape"><abbr title="new line">#x0A</abbr></code><code class="grammar-char-escape"><abbr title="carriage return">#x0D</abbr></code><code class="grammar-brac">]</code> <code class="grammar-alt">|</code> <a href="#grammar-production-ECHAR">ECHAR</a> <code class="grammar-alt">|</code> <a href="#grammar-production-UCHAR">UCHAR</a><code class="grammar-paren">)</code><code class="grammar-star">*</code> "<code class="grammar-literal">&apos;</code>"
+        <br/><span class="grammar_comment">/* #x27=' #x5C=\ #xA=new line #xD=carriage return */</span>
+      </td>
     </tr>
     <tr id="grammar-production-STRING_LITERAL_LONG_SINGLE_QUOTE">
       <td>[41]</td>
@@ -275,7 +280,9 @@
       <td>[46]</td>
       <td><code>WS</code></td>
       <td>::=</td>
-      <td><code class="grammar-char-escape"><abbr title="space">#x20</abbr></code> <code class="grammar-alt">|</code> <code class="grammar-char-escape"><abbr title="horizontal tab">#x09</abbr></code> <code class="grammar-alt">|</code> <code class="grammar-char-escape"><abbr title="carriage return">#x0D</abbr></code> <code class="grammar-alt">|</code> <code class="grammar-char-escape"><abbr title="new line">#x0A</abbr></code></td>
+      <td><code class="grammar-char-escape"><abbr title="space">#x20</abbr></code> <code class="grammar-alt">|</code> <code class="grammar-char-escape"><abbr title="horizontal tab">#x09</abbr></code> <code class="grammar-alt">|</code> <code class="grammar-char-escape"><abbr title="carriage return">#x0D</abbr></code> <code class="grammar-alt">|</code> <code class="grammar-char-escape"><abbr title="new line">#x0A</abbr></code>
+        <br/><span class="grammar_comment">/* #x20=space #x09=character tabulation #x0D=carriage return #x0A=new line */</span>
+      </td>
     </tr>
     <tr id="grammar-production-ANON">
       <td>[47]</td>
