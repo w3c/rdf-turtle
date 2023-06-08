@@ -61,10 +61,21 @@
     .separated tbody tr td { border:1px solid black; text-align: center; min-width: 10vw }
     .separated tbody tr td.r { text-align: right; padding: .5em; }
     .grammar td { font-family: monospace; vertical-align: top; }
-    .grammar-literal { color: gray;}
+    .grammar-opt,
+    .grammar-alt,
+    .grammar-paren,
+    .grammar-diff,
+    .grammar-plus,
+    .grammar-star,
+    .grammar-brac { color: gray;}
     .grammar_comment { color: #A52A2A; font-style: italic; }
+    #grammar-declaration-terminals h3 {
+      margin-top: 1em;
+    }
     .hl-bold { font-weight: bold; color: #0a3; }
     code { color: #ff4500; }  /* Old W3C Style */
+    var { color: #ff4500; }
+    abbr[title] {text-decoration: none;}
     @media (max-width: 850px) {
         table th, table td { font-size: 12px; padding: 3px 4px;}
         table.ex th, table.ex td {overflow-x: scroll; max-width: 42vw !important;}
@@ -89,17 +100,27 @@
 <body>
 <section id='abstract'>
   <p>The Resource Description Framework
-  (<abbr title="Resource Description Framework">RDF</abbr>) is a
-  general-purpose language for representing information in the Web.</p>
+    (<abbr title="Resource Description Framework">RDF</abbr>) is a
+    general-purpose language for representing information in the Web.</p>
 
   <p>This document defines a textual syntax for RDF called Turtle
-  that allows an <a data-cite="RDF12-CONCEPTS#dfn-rdf-graph">RDF graph</a> to be completely written in a compact and
-  natural text form, with abbreviations for common usage patterns and
-  datatypes.  Turtle provides levels of compatibility with the
-  N-Triples [[RDF12-N-TRIPLES]]
-  format as well as the triple pattern syntax of
-  [[[SPARQL12-QUERY]]] W3C Recommendation.
-  </p>
+    that allows an <a data-cite="RDF12-CONCEPTS#dfn-rdf-graph">RDF graph</a> to be completely written in a compact and
+    natural text form, with abbreviations for common usage patterns and
+    datatypes.  Turtle provides levels of compatibility with the
+    N-Triples [[RDF12-N-TRIPLES]]
+    format as well as the triple pattern syntax of
+    [[[SPARQL12-QUERY]]] W3C Recommendation.</p>
+
+  <p>RDF 1.2 Turtle introduces <a>quoted triples</a>
+    as a fourth kind of <a data-cite="RDF12-CONCEPTS#dfn-rdf-term">RDF term</a>
+    which can be used as the
+    <a data-cite="RDF12-CONCEPTS#dfn-subject">subject</a> or
+    <a data-cite="RDF12-CONCEPTS#dfn-object">object</a> of another
+    <a data-cite="RDF12-CONCEPTS#dfn-rdf-triple">triple</a>,
+    making it possible to make statements about other statements.</p>
+
+  <p>RDF 1.2 Turtle also introduces an <a>annotation syntax</a> which allows
+    <a>quoted triples</a> to also be <a data-lt="asserted triple">asserted</a>.</p>
 </section>
 
 <section id='sotd'>
@@ -124,7 +145,10 @@
     Green Goblin and Spiderman.
   </p>
 
-  <pre class="example turtle" data-transform="updateExample">
+  <pre id="ex-intro"
+       class="example turtle"
+       data-transform="updateExample"
+       title="Example Turtle">
     <!--
     @base <http://example.org/> .
     @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -181,7 +205,9 @@
     <h3>Simple Triples</h3>
     <p>The simplest triple statement is a sequence of (subject, predicate, object) terms,
       separated by whitespace and terminated by '<code>.</code>' after each triple.</p>
-    <pre class="example turtle" data-transform="updateExample">
+    <pre id="ex-simple-triple"
+         class="example turtle" data-transform="updateExample"
+         title="Simple Triple">
       <!--
       <http://example.org/#spiderman>
         <http://www.perceive.net/schemas/relationship/enemyOf>
@@ -202,14 +228,18 @@
       that vary only in predicate and object RDF terms.</p>
       <p>These two examples are equivalent ways of writing the triples about Spiderman.</p>
 
-    <pre class="example turtle" data-transform="updateExample">
+    <pre id="ex-predicateObjectList"
+         class="example turtle" data-transform="updateExample"
+         title="Predicate List">
       <!--
       <http://example.org/#spiderman> <http://www.perceive.net/schemas/relationship/enemyOf> <http://example.org/#green-goblin> ;
         <http://xmlns.com/foaf/0.1/name> "Spiderman" .
       -->
     </pre>
 
-    <pre class="example turtle" data-transform="updateExample">
+    <pre id="ex-predicateObjectList-expanded"
+         class="example turtle" data-transform="updateExample"
+         title="Predicate List expanded to Simiple Triples">
       <!--
       <http://example.org/#spiderman> <http://www.perceive.net/schemas/relationship/enemyOf> <http://example.org/#green-goblin> .
       <http://example.org/#spiderman> <http://xmlns.com/foaf/0.1/name> "Spiderman" .
@@ -230,27 +260,31 @@
 
     <p>These two examples  are equivalent ways of writing Spiderman's name in two languages.<p>
 
-    <pre class="example turtle" data-transform="updateExample">
+    <pre id="ex-object-list"
+         class="example turtle" data-transform="updateExample"
+         title="Object List">
       <!--
       <http://example.org/#spiderman> <http://xmlns.com/foaf/0.1/name> "Spiderman", "Человек-паук"@ru .
       -->
     </pre>
 
-    <pre class="example turtle" data-transform="updateExample">
+    <pre id="ex-object-list-expanded"
+         class="example turtle" data-transform="updateExample"
+         title="Object List expanded to Simple Triples">
       <!--
       <http://example.org/#spiderman> <http://xmlns.com/foaf/0.1/name> "Spiderman" .
       <http://example.org/#spiderman> <http://xmlns.com/foaf/0.1/name> "Человек-паук"@ru .
       -->
     </pre>
-
   </section>
 
   <p>
     There are three types of <em>RDF Term</em> defined in RDF Concepts:
     <a data-cite="RDF12-CONCEPTS#dfn-iri">IRIs</a> (Internationalized Resource Identifiers),
-    <a data-cite="RDF12-CONCEPTS#dfn-literal">literals</a> and
-    <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank nodes</a>. Turtle provides a number
-    of ways of writing each.
+    <a data-cite="RDF12-CONCEPTS#dfn-literal">literals</a>,
+    <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank nodes</a>, and.
+    <a data-cite="RDF12-CONCEPTS#dfn-quoted-triple">quoted triples</a>,
+    Turtle provides a number of ways of writing each.
   </p>
 
   <section id="sec-iri">
@@ -305,7 +339,9 @@
 
     <p>This can be written using either the original Turtle syntax for prefix declarations:</p>
 
-    <pre class="example turtle" data-transform="updateExample">
+    <pre id="ex-prefix-decl"
+         class="example turtle" data-transform="updateExample"
+         title="Original syntax for prefix declarations">
       <!--
       @prefix somePrefix: <http://www.perceive.net/schemas/relationship/> .
 
@@ -315,7 +351,9 @@
 
     <p>or SPARQL's syntax for prefix declarations:</p>
 
-    <pre class="example turtle" data-transform="updateExample">
+    <pre id="ex-sparql-prefix-decl"
+         class="example turtle" data-transform="updateExample"
+         title="SPARQL syntax for prefix declarations">
       <!--
       PREFIX somePrefix: <http://www.perceive.net/schemas/relationship/>
 
@@ -337,7 +375,9 @@
 
     <p>The following Turtle document contains examples of all the different ways of writing IRIs in Turtle.</p>
 
-    <pre class="example turtle" data-transform="updateExample">
+    <pre id="ex-turtle-abbreviations"
+         class="example turtle" data-transform="updateExample"
+         title="Different ways of writing IRIs">
       <!--
       # A triple with all absolute IRIs
       <http://one.example/subject1> <http://one.example/predicate1> <http://one.example/object1> .
@@ -379,7 +419,9 @@
 
     <p><a data-cite="RDF12-CONCEPTS#dfn-literal">Literals</a> are used to identify values such as strings, numbers, dates.</p>
 
-    <pre class="example turtle" data-transform="updateExample">
+    <pre id="ex-rdf-literal"
+         class="example turtle" data-transform="updateExample"
+         title="Literals in Turtle">
       <!--
       @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 
@@ -437,7 +479,9 @@
           <code>"""</code>.</li>
       </ul>
 
-      <pre class="example turtle" data-transform="updateExample">
+      <pre id="ex-quoted-literals"
+           class="example turtle" data-transform="updateExample"
+           title="Quoted Literals">
         <!--
         @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
         @prefix show: <http://example.org/vocab/show/> .
@@ -463,7 +507,7 @@
         Turtle has a shorthand syntax for writing integer values,
         arbitrary precision decimal values, and double precision floating point values.</p>
 
-      <table class="separated">
+      <table id="tab-numbers" class="separated">
         <thead>
           <tr>
             <th>Data Type</th>
@@ -517,7 +561,9 @@
         </tbody>
       </table>
  -->
-      <pre class="example turtle" data-transform="updateExample">
+      <pre id="ex-numbers"
+           class="example turtle" data-transform="updateExample"
+           title="Number Literals">
         <!--
         @prefix : <http://example.org/elements> .
         <http://en.wikipedia.org/wiki/Helium>
@@ -533,7 +579,9 @@
       <p>Boolean values may be written as either '<code>true</code>'
         or '<code>false</code>' (case-sensitive)
         and represent RDF literals with the datatype <a data-cite="xmlschema11-2#boolean">xsd:boolean</a>.</p>
-      <pre class="example turtle" data-transform="updateExample">
+      <pre id="ex-boolean"
+           class="example turtle" data-transform="updateExample"
+           title="Boolean Literals">
         <!--
         @prefix : <http://example.org/stats> .
         <http://somecountry.example/census2007>
@@ -567,7 +615,9 @@
       A fresh RDF <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank node</a> is allocated for each unique <a data-cite="RDF12-CONCEPTS#dfn-blank-node-identifier">blank node identifier</a> in a document.
       Repeated use of the same <a data-cite="RDF12-CONCEPTS#dfn-blank-node-identifier">blank node identifier</a> identifies the same blank node.
     </p>
-    <pre class="example turtle" data-transform="updateExample">
+    <pre id="ex-blank-node"
+         class="example turtle" data-transform="updateExample"
+         title="Blank Node in Turtle">
       <!--
       @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 
@@ -595,7 +645,9 @@
       Blank nodes are also allocated for <a href="#collections">collections</a>
       described below.
     </p>
-    <pre class="example turtle" data-transform="updateExample">
+    <pre id="ex-blankNodePropertyList"
+         class="example turtle" data-transform="updateExample"
+         title="Blank Node Property List">
       <!--
       @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 
@@ -619,7 +671,7 @@
     is a common idiom for representing a series of properties of a node.
   </p>
 
-  <table class="ex">
+  <table id="tab-bnproplist" class="ex">
     <tr>
       <th class="idlAttrName" style="padding-left:2em;">Abbreviated:</th>
       <th class="idlAttrName" style="padding-left:2em;">Corresponding simple triples:</th>
@@ -674,7 +726,9 @@
       The <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank node</a> at the head of the list is the subject or object of the containing triple.
     </p>
 
-    <pre class="example turtle" data-transform="updateExample">
+    <pre id="ex-collection"
+         class="example turtle" data-transform="updateExample"
+         title="Collections in Turtle">
       <!--
       @prefix : <http://example.org/foo> .
       # the object of this triple is the RDF collection blank node
@@ -684,6 +738,87 @@
       :subject :predicate2 () .
       -->
     </pre>
+
+  </section>
+
+  <section id="quoted-triples">
+    <h3>Quoted Triples</h3>
+
+    <p>A <dfn data-cite="RDF12-CONCEPTS#dfn-quoted-triple">quoted triple</dfn>
+      may be the <a data-cite="RDF12-CONCEPTS#dfn-subject">subject</a> or
+      <a data-cite="RDF12-CONCEPTS#dfn-object">object</a> of an
+      <a data-cite="RDF12-CONCEPTS#dfn-rdf-triple">RDF triple</a>.</p>
+
+    <p>A <a data-cite="RDF12-CONCEPTS#dfn-quoted-triple">quoted triple</a>
+      is represented using the <code><a href="#grammar-production-quotedTriple">quotedTriple</a></code> production
+      with <code><a href="#grammar-production-subject">subject</a></code>,
+      <code><a href="#grammar-production-predicate">predicate</a></code>, and
+      <code><a href="#grammar-production-object">object</a></code>
+      preceded by <code>&lt;&lt;</code> and followed by <code>&gt;&gt;</code>.
+      Note that <a data-cite="RDF12-CONCEPTS#dfn-quoted-triple">quoted triples</a>
+      may be nested.
+     </p>
+
+    <pre id="ex-quoted-triple"
+         class="example turtle" data-transform="updateExample"
+         title="Quoted Triple">
+      <!--
+      PREFIX :    <http://www.example.org/>
+
+      :employee38 :familyName "Smith" .
+      << :employee38 :jobTitle "Assistant Designer" >> :accordingTo :employee22 .
+      -->
+    </pre>
+
+    <p>After declaring a prefix so that IRIs can be abbreviated,
+      the first triple in this example asserts that `employee38` has a `familyName` of "Smith".
+      Note that this graph does not assert that `employee38` has a `jobTitle` of "Assistant Designer";
+      it says that `employee22` has made that claim.
+      In other words, the triple "`employee38` has a `jobTitle` of 'Assistant Designer'"
+      is not what we call an <dfn data-cite="RDF12-CONCEPTS#dfn-asserted-triple">asserted triple</dfn>,
+      like "employee38 has a `familyName` of 'Smith'" above;
+      rather, it is known as a <a data-cite="RDF12-CONCEPTS#dfn-quoted-triple">quoted triple</a>.</p>
+
+    <section id="annotation-syntax">
+      <h2>Annotation Syntax</h2>
+      <p>Turtle also defines an <dfn data-lt="annotation-syntax">annotation syntax</dfn>
+        to both quote and assert a <a data-cite="RDF12-CONCEPTS#dfn-rdf-triple">triple</a>,
+        which provides a convenient shortcut.
+        An annotation can be used to both assert a triple and have that triple be the
+        <a data-cite="RDF12-CONCEPTS#dfn-subject">subject</a> of further triples.
+        The delimiters `{|` and `|}` follow an
+        <a>asserted triple</a> to make that triple,
+        as a <a>quoted triple</a>,
+        the <a data-cite="RDF12-CONCEPTS#dfn-subject">subject</a>
+        of the <a href="#grammar-production-predicateObjectList">predicateObjectList</a>
+        contained within the annotation delimeters.
+      </p>
+
+      <p class="note">The annotation syntax is a syntactic short cut in Turtle,
+        and the RDF Abstract Syntax [[RDF11-CONCEPTS]] does not
+        distinguished how the triples were written.</p>
+
+      <pre id="ex-annotated-triple"
+           class="example turtle" data-transform="updateExample" 
+           title="Annotated Triple">
+        <!--
+        PREFIX : <http://example.com/>
+        :a :name "Alice" {| :statedBy :bob ; :recorded "2021-07-07"^^xsd:date |} .
+          -->
+      </pre>
+      <p>is the same set of triples as:</p>
+      <pre id="ex-annotated-triple-expanded"
+           class="nohighlight example" data-transform="updateExample"
+           title="Annotated Triple expanded to Quoted Triples">
+        <!--
+        PREFIX : <http://example.com/>
+        << :a :name "Alice" >> :statedBy :bob .
+        << :a :name "Alice" >> :recorded "2021-07-07"^^xsd:date .
+        :a :name "Alice"
+         -->
+      </pre>
+      <p>and the graph contains three <a>asserted triples</a>.</p>
+    </section>
 
   </section>
 </section>
@@ -700,7 +835,9 @@
   <div data-include="examples/example1.ttl" data-oninclude="updateExample"></div>
 
   <p>An example of an RDF collection of two literals.</p>
-  <pre class="example turtle" data-transform="updateExample">
+  <pre id="ex-collection-two-literals"
+       class="example turtle" data-transform="updateExample"
+       title="RDF collection of two literals">
     <!--
     PREFIX : <http://example.org/stuff/1.0/>
     :a :b ( "apple" "banana" ) .
@@ -728,7 +865,9 @@
 
   <p>For example,</p>
 
-  <pre  class="example turtle untested" data-transform="updateExample">
+  <pre id="ex-collection-as-subject"
+       class="example turtle untested" data-transform="updateExample"
+       title="Collection used as Subject">
     <!--
     @prefix : <http://example.org/stuff/1.0/> .
     (1 2.0 3E1) :p "w" .
@@ -738,7 +877,9 @@
   <p>is syntactic sugar for (noting that the <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank nodes</a> <code>b0</code>, <code>b1</code> and <code>b2</code>
     do not occur anywhere else in the RDF graph):</p>
 
-  <pre  class="example turtle untested" data-transform="updateExample">
+  <pre id="ex-collection-as-subject-expanded"
+       class="example turtle untested" data-transform="updateExample"
+       title="Collection represented with Blank Nodes">
     <!--
     @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
     @prefix : <http://example.org/stuff/1.0/>
@@ -754,7 +895,9 @@
 
   <p>RDF collections can be nested and can involve other syntactic forms:</p>
 
-  <pre  class="example turtle untested" data-transform="updateExample">
+  <pre id="ex-nested-collection"
+       class="example turtle untested" data-transform="updateExample"
+       title="Nested Collections">
     <!--
     PREFIX : <http://example.org/stuff/1.0/>
     (1 [:p :q] ( 2 ) ) :p2 :q2 .
@@ -762,7 +905,9 @@
   </pre>
 
   <p>is syntactic sugar for:</p>
-  <pre class="example turtle untested" data-transform="updateExample">
+  <pre id="ex-nested-collection-expanded"
+       class="example turtle untested" data-transform="updateExample"
+       title="Nested Collections represented with Blank Nodes">
     <!--
     @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
     @prefix : <http://example.org/stuff/1.0/>
@@ -907,7 +1052,7 @@
       <li>
         <p><em id="numeric">numeric escape sequences</em> represent Unicode code points:</p>
 
-        <table>
+        <table id="tab-uchar">
           <thead>
             <tr>
               <th>Escape sequence</th>
@@ -954,7 +1099,7 @@
           <em id="string">string escape sequences</em> represent the characters traditionally escaped in string literals:
         </p>
 
-        <table>
+        <table id="tab-echar">
           <thead>
             <tr>
               <th>Escape sequence</th>
@@ -1110,20 +1255,6 @@
           In signed numbers, no white space is allowed between the sign and the number.
         </li>
         <li>
-          The
-          <span style="font-size: smaller;">
-            <span>[162s]</span>
-            <span><code>ANON</code></span>
-            <span>::=</span>
-            <span>'<code class="grammar-literal">[</code>'
-              <a href="#grammar-production-WS">WS</a><code class="grammar-star">*</code>
-              '<code class="grammar-literal">]</code>'</span>
-          </span>
-          token allows any amount of white space and comments between
-          <code class="grammar-literal">[]</code>s.
-          The single space version is used in the grammar for clarity.
-        </li>
-        <li>
           The strings '<a href="#grammar-production-prefixID"><code class="grammar-literal">@prefix</code></a>'
           and '<a href="#grammar-production-base"><code class="grammar-literal">@base</code></a>'
           match the pattern for <a href="#grammar-production-LANGTAG">LANGTAG</a>,
@@ -1161,10 +1292,10 @@
   <section id="sec-parsing-state">
     <h3>Parser State</h3>
 
-    <p>Parsing Turtle requires a state of five items:</p>
+    <p>Parsing Turtle requires a state of six items:</p>
 
     <ul>
-      <li id="baseURI">IRI <code class="dfn">baseURI</code>
+      <li id="baseURI">IRI |baseURI|
         — When the <a href="#grammar-production-base">base
         production</a> is reached, the second rule argument,
         <code>IRIREF</code>, is the base URI used for relative
@@ -1178,8 +1309,7 @@
 
       <li id="namespaces">Map[<a class="type prefix" href="#prefix">prefix</a>
         -&gt; IRI]
-        <code class="dfn">namespaces</code>
-        — The second and third rule arguments
+        |namespaces| — The second and third rule arguments
         (<code>PNAME_NS</code> and <code>IRIREF</code>)
         in the <a href="#grammar-production-prefixID">prefixID production</a>
         assign a namespace name (<code>IRIREF</code>) for the prefix
@@ -1198,56 +1328,75 @@
       </li>
 
       <li id="bnodeLabels">Map[<a class="type string" href="#string">string</a>
-        -&gt; <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank node</a>] <code class="dfn">bnodeLabels</code>
+        -&gt; <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank node</a>] |bnodeLabels|
         — A mapping from string to blank node.</li>
 
-      <li id="curSubject">RDF_Term <code class="dfn">curSubject</code>
-        — The <code class="curSubject">curSubject</code> is bound to the
-        <code><a href="#grammar-production-subject">subject</a></code> production.</li>
+      <li id="curSubject">RDF_Term |curSubject|
+        — The |curSubject| is bound to the
+        <code><a href="#grammar-production-subject">subject</a></code>
+        and <code><a href="#grammar-production-qtSubject">qtSubject</a></code> productions.</li>
 
-      <li id="curPredicate">RDF_Term <code class="dfn">curPredicate</code>
-        — The <code class="curPredicate">curPredicate</code> is bound to
+      <li id="curPredicate">RDF_Term |curPredicate|
+        — The |curPredicate| is bound to
         the <code><a href="#grammar-production-verb">verb</a></code> production.
         If token matched was "<code>a</code>",
-        <code class="curPredicate">curPredicate</code> is bound to the IRI
+        |curPredicate| is bound to the IRI
         <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</code>.
         <!--
           <span class="testrefs">(test: <a href="tests/#type">type</a>)</span>
         -->
       </li>
+      <li id="curObject">RDF_Term |curObject| —
+        The |curObject| is bound to the
+        <a href="#grammar-production-object">`object`</a>
+        <a href="#grammar-production-qtObject">`qtObject`</a> productions.</li>
     </ul>
+    <p>Additionally, |curSubject|
+      can be bound to any RDF_Term
+      (including a <a>quoted triple</a>).</p>
   </section>
 
   <section  id="sec-parsing-terms">
     <h3>RDF Term Constructors</h3>
 
-    <p>This table maps productions and lexical tokens to <code>RDF terms</code> or components of <code>RDF terms</code> listed in <a href="#sec-parsing" class="sectionRef"></a>:</p>
+    <p>This table maps productions and lexical tokens to <code>RDF terms</code>
+      or components of <code>RDF terms</code>
+      listed in <a href="#sec-parsing" class="sectionRef"></a>:</p>
 
-    <table class="separated">
+    <table id="tab-term-constructors" class="separated">
       <thead>
         <tr><th>                                                                       production               </th><th>                                                                                       type            </th><th>procedure</th></tr>
       </thead>
       <tbody>
-      <tr id="handle-IRIREF"                          ><td style="text-align:left;"            ><a class="type IRI"         href="#grammar-production-IRIREF"                          >IRIREF                          </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-iri">         IRI         </a></td><td>The characters between "&lt;" and "&gt;" are taken, with the <a href="#numeric">numeric escape sequences</a> unescaped, to form the unicode string of the IRI. <a data-cite="RDF12-CONCEPTS#dfn-relative-iri">Relative IRI reference</a> resolution is performed per <a href="#sec-iri-references" class="sectionRef">Section 6.3</a>.</td></tr>
-      <tr id="handle-PNAME_NS"                        ><td style="text-align:left;" rowspan="2"><a class="type string"      href="#grammar-production-PNAME_NS"                        >PNAME_NS                        </a></td><td><a href="#prefix">                         prefix      </a></td><td>When used in a <a href="#grammar-production-prefixID">prefixID</a> or <a href="#grammar-production-sparqlPrefix">sparqlPrefix</a> production, the <code>prefix</code> is the potentially empty unicode string matching the first argument of the rule is a key into the <a href="#namespaces">namespaces map</a>.</td></tr>
-      <tr id="handle-PNAME_NS2"                       >                                                                                                                                                                          <td><a data-cite="RDF12-CONCEPTS#dfn-iri">         IRI         </a></td><td>When used in a <a href="#grammar-production-PrefixedName">PrefixedName</a> production, the <code>iri</code> is the value in the <a href="#namespaces">namespaces map</a> corresponding to the first argument of the rule.</td></tr>
-      <tr id="handle-PNAME_LN"                        ><td style="text-align:left;"            ><a class="type IRI"         href="#grammar-production-PNAME_LN"                        >PNAME_LN                        </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-iri">         IRI         </a></td><td>A potentially empty <a href="#prefix">prefix</a> is identified by the first sequence, <code>PNAME_NS</code>. The <a href="#namespaces">namespaces map</a> <em class="rfc2119">MUST</em> have a corresponding <code>namespace</code>. The unicode string of the IRI is formed by unescaping the <a href="#reserved">reserved characters</a> in the second argument, <code>PN_LOCAL</code>, and concatenating this onto the <code>namespace</code>.</td></tr>
-      <!-- tr id="handle-PrefixedName"                ><td style="text-align:left;"            ><a class="type IRI"         href="#grammar-production-PrefixedName"                    >PrefixedName                    </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-iri">         IRI         </a></td><td>.</td></tr -->
-      <tr id="handle-STRING_LITERAL_SINGLE_QUOTE"     ><td style="text-align:left;"            ><a class="type lexicalForm" href="#grammar-production-STRING_LITERAL_SINGLE_QUOTE"     >STRING_LITERAL_SINGLE_QUOTE     </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-lexical-form">lexical form</a></td><td>The characters between the outermost "'"s   are taken, with <a href="#numeric">numeric</a> and <a href="#string">string</a> escape sequences unescaped, to form the unicode string of a lexical form.</td></tr>
-      <tr id="handle-STRING_LITERAL_QUOTE"            ><td style="text-align:left;"            ><a class="type lexicalForm" href="#grammar-production-STRING_LITERAL_QUOTE"            >STRING_LITERAL_QUOTE            </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-lexical-form">lexical form</a></td><td>The characters between the outermost '"'s   are taken, with <a href="#numeric">numeric</a> and <a href="#string">string</a> escape sequences unescaped, to form the unicode string of a lexical form.</td></tr>
-      <tr id="handle-STRING_LITERAL_LONG_SINGLE_QUOTE"><td style="text-align:left;"            ><a class="type lexicalForm" href="#grammar-production-STRING_LITERAL_LONG_SINGLE_QUOTE">STRING_LITERAL_LONG_SINGLE_QUOTE</a></td><td><a data-cite="RDF12-CONCEPTS#dfn-lexical-form">lexical form</a></td><td>The characters between the outermost "'''"s are taken, with <a href="#numeric">numeric</a> and <a href="#string">string</a> escape sequences unescaped, to form the unicode string of a lexical form.</td></tr>
-      <tr id="handle-STRING_LITERAL_LONG_QUOTE"       ><td style="text-align:left;"            ><a class="type lexicalForm" href="#grammar-production-STRING_LITERAL_LONG_QUOTE"       >STRING_LITERAL_LONG_QUOTE       </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-lexical-form">lexical form</a></td><td>The characters between the outermost '"""'s are taken, with <a href="#numeric">numeric</a> and <a href="#string">string</a> escape sequences unescaped, to form the unicode string of a lexical form.</td></tr>
-      <tr id="handle-LANGTAG"                         ><td style="text-align:left;"            ><a class="type langTag"     href="#grammar-production-LANGTAG"                         >LANGTAG                         </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-language-tag">language tag</a></td><td>The characters following the <code>@</code> form the unicode string of the language tag.</td></tr>
-      <tr id="handle-RDFLiteral"                      ><td style="text-align:left;"            ><a class="type literal"     href="#grammar-production-RDFLiteral"                      >RDFLiteral                      </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-literal">     literal     </a></td><td>The literal has a lexical form of the first rule argument, <code>String</code>. If the <code>'^^' iri</code> rule matched, the datatype is <code>iri</code> and the literal has no language tag. If the <code>LANGTAG</code> rule matched, the datatype is <code>rdf:langString</code> and the language tag is <code>LANGTAG</code>. If neither matched, the datatype is <code>xsd:string</code> and the literal has no language tag.</td></tr>
-      <tr id="handle-INTEGER"                         ><td style="text-align:left;"            ><a class="type integer"     href="#grammar-production-INTEGER"                         >INTEGER                         </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-literal">     literal     </a></td><td>The literal has a lexical form of the input string, and a datatype of <code>xsd:integer</code>.</td></tr>
-      <tr id="handle-DECIMAL"                         ><td style="text-align:left;"            ><a class="type decimal"     href="#grammar-production-DECIMAL"                         >DECIMAL                         </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-literal">     literal     </a></td><td>The literal has a lexical form of the input string, and a datatype of <code>xsd:decimal</code>.</td></tr>
-      <tr id="handle-DOUBLE"                          ><td style="text-align:left;"            ><a class="type double"      href="#grammar-production-DOUBLE"                          >DOUBLE                          </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-literal">     literal     </a></td><td>The literal has a lexical form of the input string, and a datatype of <code>xsd:double</code>.</td></tr>
-      <tr id="handle-BooleanLiteral"                  ><td style="text-align:left;"            ><a class="type boolean"     href="#grammar-production-BooleanLiteral"                  >BooleanLiteral                  </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-literal">     literal     </a></td><td>The literal has a lexical form of the <code>true</code> or <code>false</code>, depending on which matched the input, and a datatype of <code>xsd:boolean</code>.</td></tr>
-      <tr id="handle-BLANK_NODE_LABEL"                ><td style="text-align:left;"            ><a class="type bNode"       href="#grammar-production-BLANK_NODE_LABEL"                >BLANK_NODE_LABEL                </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-blank-node">  blank node  </a></td><td>The string matching the second argument, <code>PN_LOCAL</code>, is a key in <a href="#bnodeLabels">bnodeLabels</a>. If there is no corresponding <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank node</a> in the map, one is allocated.</td></tr>
-      <tr id="handle-ANON"                            ><td style="text-align:left;"            ><a class="type bNode"       href="#grammar-production-ANON"                            >ANON                            </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-blank-node">  blank node  </a></td><td>A blank node is generated.</td></tr>
-      <tr id="handle-blankNodePropertyList"           ><td style="text-align:left;"            ><a class="type bNode"       href="#grammar-production-blankNodePropertyList"           >blankNodePropertyList           </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-blank-node">  blank node  </a></td><td>A blank node is generated. Note the rules for <code>blankNodePropertyList</code> in the next section.</td></tr>
-      <tr id="handle-collection"                      ><td style="text-align:left;" rowspan="2"><a class="type bNode"       href="#grammar-production-collection"                      >collection                      </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-blank-node">  blank node  </a></td><td>For non-empty lists, a blank node is generated. Note the rules for <code>collection</code> in the next section.</td></tr>
-      <tr id="handle-collection2"                     >                                                                                                                                                                          <td><a data-cite="RDF12-CONCEPTS#dfn-iri">         IRI         </a></td><td>For empty lists, the resulting IRI is <code>rdf:nil</code>. Note the rules for <code>collection</code> in the next section.</td></tr>
+      <tr id="handle-IRIREF"                          ><td style="text-align:left;"            ><a class="type IRI"          href="#grammar-production-IRIREF"                          >IRIREF                          </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-iri">          IRI          </a></td><td>The characters between "&lt;" and "&gt;" are taken, with the <a href="#numeric">numeric escape sequences</a> unescaped, to form the unicode string of the IRI. <a data-cite="RDF12-CONCEPTS#dfn-relative-iri">Relative IRI reference</a> resolution is performed per <a href="#sec-iri-references" class="sectionRef">Section 6.3</a>.</td></tr>
+      <tr id="handle-PNAME_NS"                        ><td style="text-align:left;" rowspan="2"><a class="type string"       href="#grammar-production-PNAME_NS"                        >PNAME_NS                        </a></td><td><a href="#prefix">                              prefix       </a></td><td>When used in a <a href="#grammar-production-prefixID">prefixID</a> or <a href="#grammar-production-sparqlPrefix">sparqlPrefix</a> production, the <code>prefix</code> is the potentially empty unicode string matching the first argument of the rule is a key into the <a href="#namespaces">namespaces map</a>.</td></tr>
+      <tr id="handle-PNAME_NS2"                       >                                                                                                                                                                           <td><a data-cite="RDF12-CONCEPTS#dfn-iri">          IRI          </a></td><td>When used in a <a href="#grammar-production-PrefixedName">PrefixedName</a> production, the <code>iri</code> is the value in the <a href="#namespaces">namespaces map</a> corresponding to the first argument of the rule.</td></tr>
+      <tr id="handle-PNAME_LN"                        ><td style="text-align:left;"            ><a class="type IRI"          href="#grammar-production-PNAME_LN"                        >PNAME_LN                        </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-iri">          IRI          </a></td><td>A potentially empty <a href="#prefix">prefix</a> is identified by the first sequence, <code>PNAME_NS</code>. The <a href="#namespaces">namespaces map</a> <em class="rfc2119">MUST</em> have a corresponding <code>namespace</code>. The unicode string of the IRI is formed by unescaping the <a href="#reserved">reserved characters</a> in the second argument, <code>PN_LOCAL</code>, and concatenating this onto the <code>namespace</code>.</td></tr>
+      <!-- tr id="handle-PrefixedName"                ><td style="text-align:left;"            ><a class="type IRI"          href="#grammar-production-PrefixedName"                    >PrefixedName                    </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-iri">          IRI          </a></td><td>.</td></tr -->
+      <tr id="handle-STRING_LITERAL_SINGLE_QUOTE"     ><td style="text-align:left;"            ><a class="type lexicalForm"  href="#grammar-production-STRING_LITERAL_SINGLE_QUOTE"     >STRING_LITERAL_SINGLE_QUOTE     </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-lexical-form"> lexical form </a></td><td>The characters between the outermost "'"s   are taken, with <a href="#numeric">numeric</a> and <a href="#string">string</a> escape sequences unescaped, to form the unicode string of a lexical form.</td></tr>
+      <tr id="handle-STRING_LITERAL_QUOTE"            ><td style="text-align:left;"            ><a class="type lexicalForm"  href="#grammar-production-STRING_LITERAL_QUOTE"            >STRING_LITERAL_QUOTE            </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-lexical-form"> lexical form </a></td><td>The characters between the outermost '"'s   are taken, with <a href="#numeric">numeric</a> and <a href="#string">string</a> escape sequences unescaped, to form the unicode string of a lexical form.</td></tr>
+      <tr id="handle-STRING_LITERAL_LONG_SINGLE_QUOTE"><td style="text-align:left;"            ><a class="type lexicalForm"  href="#grammar-production-STRING_LITERAL_LONG_SINGLE_QUOTE">STRING_LITERAL_LONG_SINGLE_QUOTE</a></td><td><a data-cite="RDF12-CONCEPTS#dfn-lexical-form"> lexical form </a></td><td>The characters between the outermost "'''"s are taken, with <a href="#numeric">numeric</a> and <a href="#string">string</a> escape sequences unescaped, to form the unicode string of a lexical form.</td></tr>
+      <tr id="handle-STRING_LITERAL_LONG_QUOTE"       ><td style="text-align:left;"            ><a class="type lexicalForm"  href="#grammar-production-STRING_LITERAL_LONG_QUOTE"       >STRING_LITERAL_LONG_QUOTE       </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-lexical-form"> lexical form </a></td><td>The characters between the outermost '"""'s are taken, with <a href="#numeric">numeric</a> and <a href="#string">string</a> escape sequences unescaped, to form the unicode string of a lexical form.</td></tr>
+      <tr id="handle-LANGTAG"                         ><td style="text-align:left;"            ><a class="type langTag"      href="#grammar-production-LANGTAG"                         >LANGTAG                         </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-language-tag"> language tag </a></td><td>The characters following the <code>@</code> form the unicode string of the language tag.</td></tr>
+      <tr id="handle-RDFLiteral"                      ><td style="text-align:left;"            ><a class="type literal"      href="#grammar-production-RDFLiteral"                      >RDFLiteral                      </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-literal">      literal      </a></td><td>The literal has a lexical form of the first rule argument, <code>String</code>. If the <code>'^^' iri</code> rule matched, the datatype is <code>iri</code> and the literal has no language tag. If the <code>LANGTAG</code> rule matched, the datatype is <code>rdf:langString</code> and the language tag is <code>LANGTAG</code>. If neither matched, the datatype is <code>xsd:string</code> and the literal has no language tag.</td></tr>
+      <tr id="handle-INTEGER"                         ><td style="text-align:left;"            ><a class="type integer"      href="#grammar-production-INTEGER"                         >INTEGER                         </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-literal">      literal      </a></td><td>The literal has a lexical form of the input string, and a datatype of <code>xsd:integer</code>.</td></tr>
+      <tr id="handle-DECIMAL"                         ><td style="text-align:left;"            ><a class="type decimal"      href="#grammar-production-DECIMAL"                         >DECIMAL                         </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-literal">      literal      </a></td><td>The literal has a lexical form of the input string, and a datatype of <code>xsd:decimal</code>.</td></tr>
+      <tr id="handle-DOUBLE"                          ><td style="text-align:left;"            ><a class="type double"       href="#grammar-production-DOUBLE"                          >DOUBLE                          </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-literal">      literal      </a></td><td>The literal has a lexical form of the input string, and a datatype of <code>xsd:double</code>.</td></tr>
+      <tr id="handle-BooleanLiteral"                  ><td style="text-align:left;"            ><a class="type boolean"      href="#grammar-production-BooleanLiteral"                  >BooleanLiteral                  </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-literal">      literal      </a></td><td>The literal has a lexical form of the <code>true</code> or <code>false</code>, depending on which matched the input, and a datatype of <code>xsd:boolean</code>.</td></tr>
+      <tr id="handle-BLANK_NODE_LABEL"                ><td style="text-align:left;"            ><a class="type bNode"        href="#grammar-production-BLANK_NODE_LABEL"                >BLANK_NODE_LABEL                </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-blank-node">   blank node   </a></td><td>The string matching the second argument, <code>PN_LOCAL</code>, is a key in <a href="#bnodeLabels">bnodeLabels</a>. If there is no corresponding <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank node</a> in the map, one is allocated.</td></tr>
+      <tr id="handle-ANON"                            ><td style="text-align:left;"            ><a class="type bNode"        href="#grammar-production-ANON"                            >ANON                            </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-blank-node">   blank node   </a></td><td>A blank node is generated.</td></tr>
+      <tr id="handle-blankNodePropertyList"           ><td style="text-align:left;"            ><a class="type bNode"        href="#grammar-production-blankNodePropertyList"           >blankNodePropertyList           </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-blank-node">   blank node   </a></td><td>A blank node is generated. Note the rules for <code>blankNodePropertyList</code> in the next section.</td></tr>
+      <tr id="handle-collection"                      ><td style="text-align:left;" rowspan="2"><a class="type bNode"        href="#grammar-production-collection"                      >collection                      </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-blank-node">   blank node   </a></td><td>For non-empty lists, a blank node is generated. Note the rules for <code>collection</code> in the next section.</td></tr>
+      <tr id="handle-collection2"                     >                                                                                                                                                                           <td><a data-cite="RDF12-CONCEPTS#dfn-iri">          IRI          </a></td><td>For empty lists, the resulting IRI is <code>rdf:nil</code>. Note the rules for <code>collection</code> in the next section.</td></tr>
+      <tr id="handle-quotedTriple"                    ><td style="text-align:left;"            ><a class="type quotedTriple" href="#grammar-production-quotedTriple"                    >quotedTriple                    </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-quoted-triple">quoted triple</a></td>
+        <td>
+          The <a data-cite="RDF12-CONCEPTS#dfn-quoted-triple">quoted triple</a>
+          is composed of the terms constructed from
+          the <code><a href="#grammar-production-subject">subject</a></code>,
+          <code><a href="#grammar-production-predicate">predicate</a></code>, and
+          <code><a href="#grammar-production-object">object</a></code> productions.
+        </td>
+      </tr>
       </tbody>
     </table>
 
@@ -1258,25 +1407,38 @@
 
     <p>
       A <a>Turtle document</a> defines an <a data-cite="RDF12-CONCEPTS#dfn-rdf-graph">RDF graph</a> composed of set of <a data-cite="RDF12-CONCEPTS#dfn-rdf-triple">RDF triple</a>s.
-      The <code><a href="#grammar-production-subject">subject</a></code> production sets the <code class="curSubject">curSubject</code>.
-      The <code><a href="#grammar-production-verb">verb</a></code> production sets the <code class="curPredicate">curPredicate</code>.
+      The <code><a href="#grammar-production-subject">subject</a></code> and <code><a href="#grammar-production-qtSubject">qtSubject</a></code> productions set the |curSubject|.
+      The <code><a href="#grammar-production-verb">verb</a></code> production sets the |curPredicate|.
+      The <code><a href="#grammar-production-object">object</a></code> and <code><a href="#grammar-production-qtObject">qtObject</a></code> productions set the }curObject|.
       Each <a tabindex="30" class="grammarRef" href="#grammar-production-object">object</a> <code>N</code>
       in the document produces an RDF triple:
-      <span class="ntriple"><code class="curSubject">curSubject</code>
-        <code class="curPredicate">curPredicate</code> <code>N</code> .</span>
+      <span class="ntriple">|curSubject|
+        |curPredicate| <code>N</code> .</span>
     </p>
+
+    <p>Beginning the <a href="#grammar-production-quotedTriple">`quotedTriple`</a> production
+      records the |curSubject| and |curPredicate|.
+      Finishing the <a href="#grammar-production-quotedTriple">`quotedTriple`</a> production
+      yields the RDF triple |curSubject| |curPredicate| |curObject|
+      and restores the recorded values of |curSubject| and |curPredicate|.</p>
+
+    <p>Beginning the <a href="#grammar-production-annotation">`annotation`</a> production
+      records the |curSubject| and |curPredicate|,
+      and sets the |curSubject| to the RDF triple |curSubject| |curPredicate| |curObject|.
+      Finishing the <a href="#grammar-production-annotation">`annotation`</a> production
+      restores the recorded values of |curSubject| and |curPredicate|.</p>
 
     <h4 id="propertyList" style="padding-bottom:0; margin-bottom:0;"><span>Property Lists:</span></h4>
 
     <p style="padding-top:0; margin-top:0;">
       Beginning the <code><a href="#grammar-production-blankNodePropertyList">blankNodePropertyList</a></code>
-      production records the <code class="curSubject">curSubject</code>
-      and <code class="curPredicate">curPredicate</code>,
-      and sets <code class="curSubject">curSubject</code>
+      production records the |curSubject|
+      and |curPredicate|,
+      and sets |curSubject|
       to a novel <code>blank node</code> <code>B</code>.
       Finishing the <code><a href="#grammar-production-blankNodePropertyList">blankNodePropertyList</a></code>
-      production restores <code class="curSubject">curSubject</code>
-      and <code class="curPredicate">curPredicate</code>.
+      production restores |curSubject|
+      and |curPredicate|.
       The node produced by matching <code><a href="#grammar-production-blankNodePropertyList">blankNodePropertyList</a></code>
       is the blank node <code>B</code>.
     </p>
@@ -1284,10 +1446,10 @@
     <h4 id="collection" style="padding-bottom:0; margin-bottom:0;"><span>Collections:</span></h4>
 
     <p style="padding-top:0; margin-top:0;">
-      Beginning the <code><a href="#grammar-production-collection">collection</a></code> production records the <code class="curSubject">curSubject</code> and <code class="curPredicate">curPredicate</code>.
-      Each <code>object</code> in the <code><a href="#grammar-production-collection">collection</a></code> production has a <code class="curSubject">curSubject</code> set to a novel <code>blank node</code> <code>B</code> and a <code class="curPredicate">curPredicate</code> set to <code>rdf:first</code>.
+      Beginning the <code><a href="#grammar-production-collection">collection</a></code> production records the |curSubject| and |curPredicate|.
+      Each <code>object</code> in the <code><a href="#grammar-production-collection">collection</a></code> production has a |curSubject| set to a novel <code>blank node</code> <code>B</code> and a |curPredicate| set to <code>rdf:first</code>.
       For each object <code>object<sub>n</sub></code> after the first produces a triple:<span class="ntriple"><code>object<sub>n-1</sub></code> <code>rdf:rest</code> <code>object<sub>n</sub></code> .</span>
-      Finishing the <code><a href="#grammar-production-collection">collection</a></code> production creates an additional triple <span class="ntriple"><code>curSubject rdf:rest rdf:nil</code> .</span> and restores <code class="curSubject">curSubject</code> and <code class="curPredicate">curPredicate</code>
+      Finishing the <code><a href="#grammar-production-collection">collection</a></code> production creates an additional triple <span class="ntriple"><code>curSubject rdf:rest rdf:nil</code> .</span> and restores |curSubject| and |curPredicate|
       The node produced by matching <code><a href="#grammar-production-collection">collection</a></code> is the first blank node <code>B</code> for non-empty lists and <code>rdf:nil</code> for empty lists.
     </p>
   </section>
@@ -1296,7 +1458,9 @@
     <h3>Parsing Example</h3>
 
     <p>The following informative example shows the semantic actions performed when  parsing this Turtle document with an LALR(1) parser:</p>
-    <pre class="example turtle" data-transform="updateExample">
+    <pre id="ex-parsing"
+         class="example turtle" data-transform="updateExample"
+         title="Example of parsing Turtle">
       <!--
         @prefix ericFoaf: <http://www.w3.org/People/Eric/ericP-foaf.rdf#> .
         @prefix : <http://xmlns.com/foaf/0.1/> .
@@ -1310,22 +1474,22 @@
     <ul>
       <li>Map the prefix <code>ericFoaf</code> to the IRI <code>http://www.w3.org/People/Eric/ericP-foaf.rdf#</code>.</li>
       <li>Map the empty prefix to the IRI <code>http://xmlns.com/foaf/0.1/</code>.</li>
-      <li>Assign <code class="curSubject">curSubject</code> the IRI <code>http://www.w3.org/People/Eric/ericP-foaf.rdf#ericP</code>.</li>
+      <li>Assign |curSubject| the IRI <code>http://www.w3.org/People/Eric/ericP-foaf.rdf#ericP</code>.</li>
 
-      <li>Assign <code class="curPredicate">curPredicate</code> the IRI <code>http://xmlns.com/foaf/0.1/givenName</code>.</li>
+      <li>Assign |curPredicate| the IRI <code>http://xmlns.com/foaf/0.1/givenName</code>.</li>
       <li>Emit an RDF triple: <span class="ntriple"><code>&lt;...rdf#ericP&gt;</code> <code>&lt;.../givenName&gt;</code> <code>"Eric"</code> .</span></li>
 
-      <li>Assign <code class="curPredicate">curPredicate</code> the IRI <code>http://xmlns.com/foaf/0.1/knows</code>.</li>
+      <li>Assign |curPredicate| the IRI <code>http://xmlns.com/foaf/0.1/knows</code>.</li>
       <li>Emit an RDF triple: <span class="ntriple"><code>&lt;...rdf#ericP&gt;</code> <code>&lt;.../knows&gt;</code> <code>&lt;...who/dan-brickley&gt;</code> .</span></li>
 
       <li>Emit an RDF triple: <span class="ntriple"><code>&lt;...rdf#ericP&gt;</code> <code>&lt;.../knows&gt;</code> <code>_:1</code> .</span></li>
-      <li>Save <code class="curSubject">curSubject</code> and reassign to the blank node <code>_:1</code>.</li>
+      <li>Save |curSubject| and reassign to the blank node <code>_:1</code>.</li>
 
-      <li>Save <code class="curPredicate">curPredicate</code>.</li>
-      <li>Assign <code class="curPredicate">curPredicate</code> the IRI <code>http://xmlns.com/foaf/0.1/mbox</code>.</li>
+      <li>Save |curPredicate|.</li>
+      <li>Assign |curPredicate| the IRI <code>http://xmlns.com/foaf/0.1/mbox</code>.</li>
       <li>Emit an RDF triple: <span class="ntriple"><code>_:1</code> <code>&lt;.../mbox&gt;</code> <code>&lt;mailto:timbl@w3.org&gt;</code> .</span></li>
 
-      <li>Restore <code class="curSubject">curSubject</code> and <code class="curPredicate">curPredicate</code> to their saved values (<code>&lt;...rdf#ericP&gt;</code>, <code>&lt;.../knows&gt;</code>).</li>
+      <li>Restore |curSubject| and |curPredicate| to their saved values (<code>&lt;...rdf#ericP&gt;</code>, <code>&lt;.../knows&gt;</code>).</li>
       <li>Emit an RDF triple: <span class="ntriple"><code>&lt;...rdf#ericP&gt;</code> <code>&lt;.../knows&gt;</code> <code>&lt;http://getopenid.com/amyvdh&gt;</code> .</span></li>
 
     </ul>
@@ -1341,7 +1505,9 @@
     -->
     can be used to embed data blocks in documents. Turtle can be easily embedded in HTML this way.</p>
 
-  <pre class="example html" data-transform="updateExample">
+  <pre id="ex-html-embedding"
+       class="example html" data-transform="updateExample"
+       title="Embedding Turtle in HTML">
     <!--
     <script type="text/turtle">
       @prefix dc: <http://purl.org/dc/terms/> .
@@ -1375,7 +1541,9 @@
     (<code>application/xhtml+xml</code>). The solution is the same one used for JavaScript.
     </p>
 
-    <pre class="example html" data-transform="updateExample">
+    <pre id="ex-xhtml-embedding"
+         class="example html" data-transform="updateExample"
+         title="Embedding Turtle in XHTML">
       <!--
       <script type="text/turtle">
         ****# <![CDATA[****
@@ -1580,6 +1748,9 @@
       and `STRING_LITERAL_SINGLE_QUOTE`.</li>
     <li>Separated <a href="#security"></a> from <a href="#sec-mediaReg"></a>
       and updated language.</li>
+    <li>Added <a href="#quoted-triples" class="sectionRef"></a>
+      and <a href="#annotation-syntax" class="sectionRef"></a>
+      for representing <a>quoted triples</a> in Turtle.</li>
   </ul>
 </section>
 
