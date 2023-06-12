@@ -438,10 +438,10 @@
         Quoted Literals (Grammar production
         <a href="#grammar-production-RDFLiteral">RDFLiteral</a>) have a lexical form
         followed by a language tag, a datatype IRI, or neither.
-        The representation of the lexical form consists of an initial delimiter,
-        e.g., <code>"</code> (<span class="codepoint">U+0022</span>),
-        a sequence of permitted characters or <a href="#numeric">numeric escape sequence</a>
-        or <a href="#string">string escape sequence</a>, and a final delimiter.
+        The representation of the lexical form consists of an initial delimiter
+        (e.g., <code>"</code> (<span class="codepoint">U+0022</span>));
+        a sequence of permitted characters, <a href="#numeric">numeric escapes</a>,
+        and/or <a href="#string">string escapes</a>; and a final delimiter.
         The corresponding <a data-cite="RDF12-CONCEPTS#dfn-lexical-form">RDF lexical form</a>
         is the characters between the delimiters,
         after processing any escape sequences.
@@ -453,25 +453,25 @@
         The datatype IRI in Turtle may be written using either an
         <a href="#sec-iri">absolute IRI</a>,
         a <a href="#relative-iri">relative IRI reference</a>,
-        or <a href="#prefixed-name">prefixed name</a>.
+        or a <a href="#prefixed-name">prefixed name</a>.
         If there is no datatype IRI and no language tag,
         the datatype is <code>xsd:string</code>.
       </p>
 
-      <p>'<code>\</code>' (<span class="codepoint">U+005C</span>)
+      <p>A backslash ('<code>\</code>', <span class="codepoint">U+005C</span>)
         may not appear in any quoted literal except as part of an escape sequence.
         Other restrictions depend on the delimiter:</p>
 
       <ul>
         <li>Literals delimited by <code>'</code> (<span class="codepoint">U+0027</span>)
           may not contain unescaped <code>'</code>,
-          <code title="LINE FEED"><sub>LF</sub></code>(<span class="codepoint">U+000A</span>),
-          or <code title="CARRIAGE RETURN"><sub>CR</sub></code> (<span class="codepoint">U+000D</span>)
+          <code title="LINE FEED"><sub>LF</sub></code> (<span class="codepoint">U+000A</span>),
+          nor <code title="CARRIAGE RETURN"><sub>CR</sub></code> (<span class="codepoint">U+000D</span>)
           characters.</li>
         <li>Literals delimited by <code>"</code>, may not contain unescaped
           <code>"</code>,
           <code title="LINE FEED"><sub>LF</sub></code>,
-          or <code title="CARRIAGE RETURN"><sub>CR</sub></code>
+          nor <code title="CARRIAGE RETURN"><sub>CR</sub></code>
           characters.</li>
         <li>Literals delimited by <code>'''</code> may not contain the sequence of characters
           <code>'''</code>.</li>
@@ -530,7 +530,7 @@
             <td><code>"-5.0"^^xsd:decimal</code></td>
             <td>Arbitrary-precision decimals may be written as an optional sign,
               zero or more digits,
-              a decimal point and one or more digits.
+              a decimal point, and one or more digits.
               Decimals match the regular expression "<code>[+-]?[0-9]*\.[0-9]+</code>".</td>
           </tr>
           <tr>
@@ -541,9 +541,9 @@
               an optionally signed mantissa with an optional decimal point,
               the letter "e" or "E", and an optionally signed integer exponent.
               The exponent matches the regular expression "<code>[+-]?[0-9]+</code>"
-              and the mantissa one of these regular expressions:
+              and the mantissa matches one of these regular expressions:
               "<code>[+-]?[0-9]+\.[0-9]+</code>",
-              "<code>[+-]?\.[0-9]+</code>"
+              "<code>[+-]?\.[0-9]+</code>",
               or "<code>[+-]?[0-9]</code>".</td>
           </tr>
         </tbody>
@@ -641,7 +641,7 @@
       the <a href="#grammar-production-predicateObjectList">predicateObjectList</a> production
       embedded in a blankNodePropertyList.
       The generation of these triples is described in
-      <a href="#predicate-lists">Predicate  Lists</a>.
+      <a href="#predicate-lists">Predicate Lists</a>.
       Blank nodes are also allocated for <a href="#collections">collections</a>
       described below.
     </p>
@@ -874,7 +874,9 @@
     -->
   </pre>
 
-  <p>is syntactic sugar for (noting that the <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank nodes</a> <code>b0</code>, <code>b1</code> and <code>b2</code>
+  <p>is syntactic sugar for (noting that the 
+    <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank nodes</a> 
+    <code>b0</code>, <code>b1</code>, and <code>b2</code>
     do not occur anywhere else in the RDF graph):</p>
 
   <pre id="ex-collection-as-subject-expanded"
@@ -1013,7 +1015,7 @@
   <section id="sec-grammar-comments">
     <h3>Comments</h3>
 
-    <p>Comments in Turtle take the form of '#', outside an
+    <p>Comments in Turtle take the form of '#' outside an
     <a href="#grammar-production-IRIREF">IRIREF</a> or <a href="#grammar-production-String">String</a>,
     and continue to the end of line (marked by characters U+000D or U+000A)
     or end of file if there is no end of line after the comment
