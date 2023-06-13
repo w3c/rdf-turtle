@@ -25,6 +25,7 @@ jobs:
           W3C_WG_DECISION_URL: https://www.w3.org/2023/04/20-rdf-star-minutes.html#r03
           W3C_BUILD_OVERRIDE: |
             specStatus: WD
+            shortName: rdf12-turtle
       - name: "Verify common files are consistent"
         run: |
           git submodule add https://github.com/w3c/rdf-common.git spec/rdf-common
