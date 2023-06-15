@@ -279,7 +279,7 @@
   </section>
 
   <p>
-    There are three types of <em>RDF Term</em> defined in RDF Concepts:
+    There are three four of <em>RDF Term</em> defined in RDF Concepts:
     <a data-cite="RDF12-CONCEPTS#dfn-iri">IRIs</a> (Internationalized Resource Identifiers),
     <a data-cite="RDF12-CONCEPTS#dfn-literal">literals</a>,
     <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank nodes</a>, and.
@@ -1216,10 +1216,6 @@
     <h3>Grammar</h3>
     <p>The <abbr title="Extended Backus–Naur Form">EBNF</abbr> used here is defined in XML 1.0
       [[!EBNF-NOTATION]].
-      Production labels consisting of a number and a final 's', e.g.,
-      [<a data-cite="SPARQL12-QUERY#rRDFLiteral"><span class="prodNo">60s</span></a>],
-      reference the production with that number in the
-      [[[SPARQL12-QUERY]]] [[SPARQL12-QUERY]].
     </p>
 
     <div>
@@ -1277,10 +1273,11 @@
 <section id="sec-parsing">
   <h2>Parsing</h2>
 
-  <p>The RDF 1.2 Concepts and Abstract Syntax specification [[!RDF12-CONCEPTS]] defines three types of <em>RDF Term</em>:
+  <p>The RDF 1.2 Concepts and Abstract Syntax specification [[!RDF12-CONCEPTS]] defines four types of <em>RDF Term</em>:
     <a data-cite="RDF12-CONCEPTS#dfn-iri">IRIs</a>,
-    <a data-cite="RDF12-CONCEPTS#dfn-literal">literals</a> and
-    <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank nodes</a>.
+    <a data-cite="RDF12-CONCEPTS#dfn-literal">literals</a>,
+    <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank nodes</a>, and
+    <a data-cite="RDF12-CONCEPTS#dfn-quoted-triple">quoted triples</a>.
 
     Literals are composed of a <a data-cite="RDF12-CONCEPTS#dfn-lexical-form">lexical form</a> and an optional <a data-cite="RDF12-CONCEPTS#dfn-language-tag">language tag</a> [[!BCP47]] or datatype IRI.
     An extra type, <code id="prefix" class="dfn">prefix</code>, is used during parsing to map string identifiers to namespace IRIs.
@@ -1350,7 +1347,7 @@
       </li>
       <li id="curObject">RDF_Term |curObject| —
         The |curObject| is bound to the
-        <a href="#grammar-production-object">`object`</a>
+        <a href="#grammar-production-object">`object`</a> and
         <a href="#grammar-production-qtObject">`qtObject`</a> productions.</li>
     </ul>
     <p>Additionally, |curSubject|
