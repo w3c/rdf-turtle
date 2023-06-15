@@ -367,9 +367,9 @@
         They differ in that the local part of prefixed names may include:
       </p>
       <ul>
-        <li>leading digits, e.g. <code>leg:3032571</code> or <code>isbn13:9780136019701</code></li>
-        <li>non leading colons, e.g. <code>og:video:height</code></li>
-        <li><a href="#reserved">reserved character escape sequences</a>, e.g. <code>wgs:lat\-long</code></li>
+        <li>leading digits, e.g., <code>leg:3032571</code> or <code>isbn13:9780136019701</code></li>
+        <li>non leading colons, e.g., <code>og:video:height</code></li>
+        <li><a href="#reserved">reserved character escape sequences</a>, e.g., <code>wgs:lat\-long</code></li>
       </ul>
     </div>
 
@@ -383,22 +383,22 @@
       <http://one.example/subject1> <http://one.example/predicate1> <http://one.example/object1> .
 
       @base <http://one.example/> .
-      <subject2> <predicate2> <object2> .     # relative IRI references, e.g. http://one.example/subject2
+      <subject2> <predicate2> <object2> .     # relative IRI references, e.g., http://one.example/subject2
 
       BASE <http://one.example/>
-      <subject2> <predicate2> <object2> .     # relative IRI references, e.g. http://one.example/subject2
+      <subject2> <predicate2> <object2> .     # relative IRI references, e.g., http://one.example/subject2
 
       @prefix p: <http://two.example/> .
-      p:subject3 p:predicate3 p:object3 .     # prefixed name, e.g. http://two.example/subject3
+      p:subject3 p:predicate3 p:object3 .     # prefixed name, e.g., http://two.example/subject3
 
       PREFIX p: <http://two.example/>
-      p:subject3 p:predicate3 p:object3 .     # prefixed name, e.g. http://two.example/subject3
+      p:subject3 p:predicate3 p:object3 .     # prefixed name, e.g., http://two.example/subject3
 
       @prefix p: <path/> .                    # prefix p: now stands for http://one.example/path/
-      p:subject4 p:predicate4 p:object4 .     # prefixed name, e.g. http://one.example/path/subject4
+      p:subject4 p:predicate4 p:object4 .     # prefixed name, e.g., http://one.example/path/subject4
 
       @prefix : <http://another.example/> .    # empty prefix
-      :subject5 :predicate5 :object5 .        # prefixed name, e.g. http://another.example/subject5
+      :subject5 :predicate5 :object5 .        # prefixed name, e.g., http://another.example/subject5
 
       :subject6 a :subject7 .                 # same as :subject6 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> :subject7 .
 
@@ -438,10 +438,10 @@
         Quoted Literals (Grammar production
         <a href="#grammar-production-RDFLiteral">RDFLiteral</a>) have a lexical form
         followed by a language tag, a datatype IRI, or neither.
-        The representation of the lexical form consists of an initial delimiter,
-        e.g. <code>"</code> (<span class="codepoint">U+0022</span>),
-        a sequence of permitted characters or <a href="#numeric">numeric escape sequence</a>
-        or <a href="#string">string escape sequence</a>, and a final delimiter.
+        The representation of the lexical form consists of an initial delimiter
+        (e.g., <code>"</code> (<span class="codepoint">U+0022</span>));
+        a sequence of permitted characters, <a href="#numeric">numeric escapes</a>,
+        and/or <a href="#string">string escapes</a>; and a final delimiter.
         The corresponding <a data-cite="RDF12-CONCEPTS#dfn-lexical-form">RDF lexical form</a>
         is the characters between the delimiters,
         after processing any escape sequences.
@@ -453,25 +453,25 @@
         The datatype IRI in Turtle may be written using either an
         <a href="#sec-iri">absolute IRI</a>,
         a <a href="#relative-iri">relative IRI reference</a>,
-        or <a href="#prefixed-name">prefixed name</a>.
+        or a <a href="#prefixed-name">prefixed name</a>.
         If there is no datatype IRI and no language tag,
         the datatype is <code>xsd:string</code>.
       </p>
 
-      <p>'<code>\</code>' (<span class="codepoint">U+005C</span>)
+      <p>A backslash ('<code>\</code>', <span class="codepoint">U+005C</span>)
         may not appear in any quoted literal except as part of an escape sequence.
         Other restrictions depend on the delimiter:</p>
 
       <ul>
-        <li>Literals delimited by <code>'</code> (<span class="codepoint">U+0027</span>),
+        <li>Literals delimited by <code>'</code> (<span class="codepoint">U+0027</span>)
           may not contain unescaped <code>'</code>,
-          <code title="LINE FEED"><sub>LF</sub></code>(<span class="codepoint">U+000A</span>),
-          or <code title="CARRIAGE RETURN"><sub>CR</sub></code> (<span class="codepoint">U+000D</span>)
+          <code title="LINE FEED"><sub>LF</sub></code> (<span class="codepoint">U+000A</span>),
+          nor <code title="CARRIAGE RETURN"><sub>CR</sub></code> (<span class="codepoint">U+000D</span>)
           characters.</li>
         <li>Literals delimited by <code>"</code>, may not contain unescaped
           <code>"</code>,
           <code title="LINE FEED"><sub>LF</sub></code>,
-          or <code title="CARRIAGE RETURN"><sub>CR</sub></code>
+          nor <code title="CARRIAGE RETURN"><sub>CR</sub></code>
           characters.</li>
         <li>Literals delimited by <code>'''</code> may not contain the sequence of characters
           <code>'''</code>.</li>
@@ -503,7 +503,7 @@
     <section id="abbrev">
       <h3>Numbers</h3>
       <p>Numbers can be written like other literals with lexical form and datatype
-        (e.g. <code>"-5.0"^^xsd:decimal</code>).
+        (e.g., <code>"-5.0"^^xsd:decimal</code>).
         Turtle has a shorthand syntax for writing integer values,
         arbitrary precision decimal values, and double precision floating point values.</p>
 
@@ -530,7 +530,7 @@
             <td><code>"-5.0"^^xsd:decimal</code></td>
             <td>Arbitrary-precision decimals may be written as an optional sign,
               zero or more digits,
-              a decimal point and one or more digits.
+              a decimal point, and one or more digits.
               Decimals match the regular expression "<code>[+-]?[0-9]*\.[0-9]+</code>".</td>
           </tr>
           <tr>
@@ -541,9 +541,9 @@
               an optionally signed mantissa with an optional decimal point,
               the letter "e" or "E", and an optionally signed integer exponent.
               The exponent matches the regular expression "<code>[+-]?[0-9]+</code>"
-              and the mantissa one of these regular expressions:
+              and the mantissa matches one of these regular expressions:
               "<code>[+-]?[0-9]+\.[0-9]+</code>",
-              "<code>[+-]?\.[0-9]+</code>"
+              "<code>[+-]?\.[0-9]+</code>",
               or "<code>[+-]?[0-9]</code>".</td>
           </tr>
         </tbody>
@@ -641,7 +641,7 @@
       the <a href="#grammar-production-predicateObjectList">predicateObjectList</a> production
       embedded in a blankNodePropertyList.
       The generation of these triples is described in
-      <a href="#predicate-lists">Predicate  Lists</a>.
+      <a href="#predicate-lists">Predicate Lists</a>.
       Blank nodes are also allocated for <a href="#collections">collections</a>
       described below.
     </p>
@@ -874,7 +874,9 @@
     -->
   </pre>
 
-  <p>is syntactic sugar for (noting that the <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank nodes</a> <code>b0</code>, <code>b1</code> and <code>b2</code>
+  <p>is syntactic sugar for (noting that the 
+    <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank nodes</a> 
+    <code>b0</code>, <code>b1</code>, and <code>b2</code>
     do not occur anywhere else in the RDF graph):</p>
 
   <pre id="ex-collection-as-subject-expanded"
@@ -936,8 +938,8 @@
   </p>
 
   <ol>
-    <li><a data-cite="SPARQL12-QUERY#rGraphTerm">SPARQL permits RDF Literals</a>
-      as the subject of RDF triples.</li>
+    <li>SPARQL permits <a data-cite="RDF12-CONCEPTS#dfn-literal">RDF Literals</a>
+      as the subject of <a data-cite="SPARQL12-QUERY#sparqlTriplePatterns">Triple Patterns</a>.</li>
     <li>SPARQL permits variables (<code>?</code><em>name</em> or <code>$</code><em>name</em>)
       in any part of the triple of the form.</li>
     <li>Turtle allows <a href="#grammar-production-directive">prefix and base declarations</a>
@@ -1013,7 +1015,7 @@
   <section id="sec-grammar-comments">
     <h3>Comments</h3>
 
-    <p>Comments in Turtle take the form of '#', outside an
+    <p>Comments in Turtle take the form of '#' outside an
     <a href="#grammar-production-IRIREF">IRIREF</a> or <a href="#grammar-production-String">String</a>,
     and continue to the end of line (marked by characters U+000D or U+000A)
     or end of file if there is no end of line after the comment
@@ -1258,7 +1260,7 @@
           nor "<code class="grammar-literal">base</code>"
           are <a data-cite="?LANG-SUBTAG-REGISTRY#">registered language subtags</a>.
           This specification does not define whether a quoted literal
-          followed by either of these tokens (e.g. <code>"A"@base</code>)
+          followed by either of these tokens (e.g., <code>"A"@base</code>)
           is in the Turtle language.
         </li>
       </ol>
@@ -1282,7 +1284,7 @@
 
     This section maps a string conforming to the grammar in <a href="#sec-grammar-grammar" class="sectionRef"></a>
     to a set of triples by mapping strings matching productions and lexical tokens
-    to RDF terms or their components (e.g. language tags, lexical forms of literals).
+    to RDF terms or their components (e.g., language tags, lexical forms of literals).
     Grammar productions change the parser state and emit triples.
   </p>
 
