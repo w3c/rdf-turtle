@@ -292,7 +292,8 @@
 
     <p>
       <a data-cite="RDF12-CONCEPTS#dfn-iri">IRIs</a> may be written as relative or absolute IRIs or prefixed names.
-      Relative and absolute IRIs are enclosed in '&lt;' and '&gt;' and
+      Relative and absolute IRIs are preceded by <code>&lt;</code> (code point <span class="codepoint">U+003C</span>),
+      followed by <code>&gt;</code> (code point <span class="codepoint">U+003E</span>), and
       may contain <a href="#numeric">numeric escape sequences</a> (described below).
       For example <code>&lt;http://example.org/#green-goblin&gt;</code>.
     </p>
@@ -754,7 +755,8 @@
       with <code><a href="#grammar-production-subject">subject</a></code>,
       <code><a href="#grammar-production-predicate">predicate</a></code>, and
       <code><a href="#grammar-production-object">object</a></code>
-      preceded by <code>&lt;&lt;</code> and followed by <code>&gt;&gt;</code>.
+      preceded by two concatenated <code>&lt;</code> characters, each having the code point <span class="codepoint">U+003C</span>, and
+      followed by two concatenated <code>&gt;</code> characters, each having the code point <span class="codepoint">U+003E</span>.
       Note that <a data-cite="RDF12-CONCEPTS#dfn-quoted-triple">quoted triples</a>
       may be nested.
      </p>
