@@ -446,7 +446,7 @@
         <a href="#grammar-production-RDFLiteral">RDFLiteral</a>) have a lexical form
         followed by a language tag, a datatype IRI, or neither.
         The representation of the lexical form consists of an initial delimiter
-        (e.g., <code>&quot;</code> (quotation mark, code point <code class="codepoint">U+0022</code>));
+        (e.g., '<code>&quot;</code>' (quotation mark, code point <code class="codepoint">U+0022</code>));
         a sequence of permitted characters, <a href="#numeric">numeric escapes</a>,
         and/or <a href="#string">string escapes</a>; and a final delimiter.
         The corresponding <a data-cite="RDF12-CONCEPTS#dfn-lexical-form">RDF lexical form</a>
@@ -1008,8 +1008,8 @@
 
   <p>A <a>Turtle document</a> is a
   Unicode string [[!UNICODE]] encoded in UTF-8 [[!RFC3629]].
-  Unicode <a data-cite="i18n-glossary#dfn-code-point">code points</a>
-  only in the range <code class="codepoint">U+0000</code> to <code class="codepoint">U+10FFFF </code>
+  Only Unicode <a data-cite="i18n-glossary#dfn-code-point">code points</a>
+  in the range <code class="codepoint">U+0000</code> to <code class="codepoint">U+10FFFF</code>
   inclusive are allowed.
   </p>
 
@@ -1024,7 +1024,7 @@
   <section id="sec-grammar-comments">
     <h3>Comments</h3>
 
-    <p>Comments in Turtle take the form of '<code>#</code>' outside an
+    <p>Comments in Turtle start with a '<code>#</code>' (number sign, <code class="codepoint">U+0023</code>) outside an
     <a href="#grammar-production-IRIREF">IRIREF</a> or <a href="#grammar-production-String">String</a>,
     and continue to the end of line (marked by
     <code>LF</code> (line feed, code point <code class="codepoint">U+000A</code>), or
