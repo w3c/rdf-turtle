@@ -204,7 +204,9 @@
   <section id="simple-triples">
     <h3>Simple Triples</h3>
     <p>The simplest triple statement is a sequence of (subject, predicate, object) terms,
-      separated by whitespace and terminated by '<code>.</code>' after each triple.</p>
+      separated by white space
+      (spaces, code point <code class="codepoint">U+0020</code>, or tabs, code point <code class="codepoint">U+0009</code>)
+      and terminated by '<code>.</code>' after each triple.</p>
     <pre id="ex-simple-triple"
          class="example turtle" data-transform="updateExample"
          title="Simple Triple">
@@ -613,10 +615,12 @@
       <li>The characters <code>_</code> and digits may appear anywhere in a <a data-cite="RDF12-CONCEPTS#dfn-blank-node-identifier">blank node identifier</a>.</li>
       <li>The character <code>.</code> may appear anywhere except the first or last character.</li>
       <li>The characters
-        <code>-</code>,
-        <code class="codepoint">U+00B7</code>,
-        <code class="codepoint">U+0300</code> to <code class="codepoint">U+036F</code>, and
-        <code class="codepoint">U+203F</code> to <code class="codepoint">U+2040</code>
+        <code>-</code> (hyphen, <code class="codepoint">U+2010</code>),
+        <code>·</code> (middle dot, <code class="codepoint">U+00B7</code>),
+        the combining diacritical marks (<code class="codepoint">U+0300</code>
+                                      to <code class="codepoint">U+036F</code>),
+        &#x203F;&nbsp; (undertie, <code class="codepoint">U+203F</code>), and
+        &#x2040;&nbsp; (character tie, <code class="codepoint">U+2040</code>)
         are permitted anywhere except the first character.</li>
     </ul>
     <p>
