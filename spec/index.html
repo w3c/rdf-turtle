@@ -291,8 +291,10 @@
     <h3>IRIs</h3>
 
     <p>
-      <a data-cite="RDF12-CONCEPTS#dfn-iri">IRIs</a> may be written as relative or absolute IRIs or prefixed names.
-      Relative and absolute IRIs are preceded by <code>&lt;</code> (code point <span class="codepoint">U+003C</span>),
+      <a data-cite="RDF12-CONCEPTS#dfn-iri">IRIs</a> may be written as <a data-cite="RFC3986#section-5">resolved</a> IRIs,
+      <a data-cite="RDF12-CONCEPTS#dfn-relative-iri">Relative IRI references</a>,
+      or <a>prefixed names</a>.
+      Relative and resolved IRIs are preceded by <code>&lt;</code> (code point <span class="codepoint">U+003C</span>),
       followed by <code>&gt;</code> (code point <span class="codepoint">U+003E</span>), and
       may contain <a href="#numeric">numeric escape sequences</a> (described below).
       For example <code>&lt;http://example.org/#green-goblin&gt;</code>.
@@ -309,7 +311,7 @@
     </p>
 
     <p>
-      A <em id="prefixed-name">prefixed name</em> is a prefix label and a local part,
+      A <span id="prefixed-name"><dfn>prefixed name</dfn></span> is a prefix label and a local part,
       separated by a colon ":".
       A prefixed name is turned into an IRI by concatenating the IRI associated
       with the prefix and the local part.
@@ -364,7 +366,7 @@
 
     <div class="note">
       <p>
-        Prefixed names are a superset of XML QNames.
+        <a>Prefixed names</a> are a superset of XML <a data-cite="XML-NAMES/#ns-qualnames">QNames</a>.
         They differ in that the local part of prefixed names may include:
       </p>
       <ul>
@@ -380,7 +382,7 @@
          class="example turtle" data-transform="updateExample"
          title="Different ways of writing IRIs">
       <!--
-      # A triple with all absolute IRIs
+      # A triple with all resolved IRIs
       <http://one.example/subject1> <http://one.example/predicate1> <http://one.example/object1> .
 
       @base <http://one.example/> .
@@ -451,10 +453,10 @@
         If there is no language tag, there may be a <a data-cite="RDF12-CONCEPTS#dfn-datatype-iri">datatype IRI</a>,
         preceded by two concatenated <code>^</code> characters,
         each having the code point <span class="codepoint">U+005E</span>.
-        The datatype IRI in Turtle may be written using either an
-        <a href="#sec-iri">absolute IRI</a>,
-        a <a href="#relative-iri">relative IRI reference</a>,
-        or a <a href="#prefixed-name">prefixed name</a>.
+        The datatype IRI in Turtle may be written using either a
+        <a data-cite="RFC3986#section-5">resolved</a> IRI,
+        a <a data-cite="RDF12-CONCEPTS#dfn-relative-iri">relative IRI reference</a>,
+        or a <a>prefixed name</a>.
         If there is no datatype IRI and no language tag,
         the datatype is <code>xsd:string</code>.
       </p>
