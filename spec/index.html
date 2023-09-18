@@ -206,7 +206,7 @@
     <p>The simplest triple statement is a sequence of (subject, predicate, object) terms,
       separated by white space
       (spaces, code point <code class="codepoint">U+0020</code>, and/or tabs, code point <code class="codepoint">U+0009</code>)
-      and terminated by '<code>.</code>' after each triple.</p>
+      and terminated by '<code>.</code>' after the object.</p>
     <pre id="ex-simple-triple"
          class="example turtle" data-transform="updateExample"
          title="Simple Triple">
@@ -459,7 +459,7 @@
         If there is no language tag, there may be a <a data-cite="RDF12-CONCEPTS#dfn-datatype-iri">datatype IRI</a>,
         preceded by two concatenated <code>^</code> characters,
         each having the code point <code class="codepoint">U+005E</code>.
-        The datatype IRI in Turtle may be written using either a
+        A datatype IRI in Turtle may be written using either a
         <a href="#sec-iri">resolved IRI</a>,
         a <a href="#relative-iri">relative IRI reference</a>,
         or a <a href="#prefixed-name">prefixed name</a>.
@@ -483,8 +483,8 @@
           <code>LF</code> (line feed, code point <code class="codepoint">U+000A</code>), nor
           <code>CR</code> (carriage return, code point <code class="codepoint">U+000D</code>)
           characters.</li>
-        <li>Literals delimited by <code>'''</code> may not contain the sequence of characters
-          <code>'''</code>.</li>
+        <li>Literals delimited by a sequence of three <code>'</code> (apostrophe, code point <span class="codepoint">U+0027</span>) may not contain a sequence of three <code>'</code> (apostrophe, code point <span class="codepoint">U+0027</span>).</li>        
+        <li>Literals delimited by a sequence of three <code>&quot;</code> (quotation mark, code point <code class="codepoint">U+0022</span>) may not contain a sequence of three <code>&quot;</code> (quotation mark, code point <code class="codepoint">U+0022</span>).</li>
         <li>Literals delimited by <code>"""</code> may not contain the sequence of characters
           <code>"""</code>.</li>
       </ul>
