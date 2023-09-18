@@ -296,8 +296,8 @@
       <a data-cite="RDF12-CONCEPTS#dfn-iri">IRIs</a> may be written as <a data-cite="RFC3986#section-5">resolved</a> IRIs,
       <a data-cite="RDF12-CONCEPTS#dfn-relative-iri">Relative IRI references</a>,
       or <a>prefixed names</a>.
-      Relative and resolved IRIs are preceded by <code>&lt;</code> (code point <span class="codepoint">U+003C</span>),
-      followed by <code>&gt;</code> (code point <span class="codepoint">U+003E</span>), and
+      Relative and resolved IRIs are preceded by <code>&lt;</code> (code point <code class="codepoint">U+003C</code>),
+      followed by <code>&gt;</code> (code point <code class="codepoint">U+003E</code>), and
       may contain <a href="#numeric">numeric escape sequences</a> (described below).
       For example <code>&lt;http://example.org/#green-goblin&gt;</code>.
     </p>
@@ -458,7 +458,7 @@
         an '<code>@</code>' (at sign, <code class="codepoint">U+0040</code>).
         If there is no language tag, there may be a <a data-cite="RDF12-CONCEPTS#dfn-datatype-iri">datatype IRI</a>,
         preceded by two concatenated <code>^</code> characters,
-        each having the code point <span class="codepoint">U+005E</span>.
+        each having the code point <code class="codepoint">U+005E</code>.
         The datatype IRI in Turtle may be written using either a
         <a href="#sec-iri">resolved IRI</a>,
         a <a href="#relative-iri">relative IRI reference</a>,
@@ -467,12 +467,12 @@
         the datatype is <code>xsd:string</code>.
       </p>
 
-      <p>A '<code>\</code>' (backslash, code point <span class="codepoint">U+005C</span>)
+      <p>A '<code>\</code>' (backslash, code point <code class="codepoint">U+005C</code>)
         may not appear in any quoted literal except as part of an escape sequence.
         Other restrictions depend on the delimiter:</p>
 
       <ul>
-        <li>Literals delimited by <code>'</code> (apostrophe, code point <span class="codepoint">U+0027</span>)
+        <li>Literals delimited by <code>'</code> (apostrophe, code point <code class="codepoint">U+0027</code>)
           may not contain unescaped
           <code>'</code> (apostrophe, code point <code class="codepoint">U+0027</code>),
           <code>LF</code> (line feed, code point <code class="codepoint">U+000A</code>), nor
@@ -767,8 +767,8 @@
       with <code><a href="#grammar-production-subject">subject</a></code>,
       <code><a href="#grammar-production-predicate">predicate</a></code>, and
       <code><a href="#grammar-production-object">object</a></code>
-      preceded by two concatenated <code>&lt;</code> characters, each having the code point <span class="codepoint">U+003C</span>, and
-      followed by two concatenated <code>&gt;</code> characters, each having the code point <span class="codepoint">U+003E</span>.
+      preceded by two concatenated <code>&lt;</code> characters, each having the code point <code class="codepoint">U+003C</code>, and
+      followed by two concatenated <code>&gt;</code> characters, each having the code point <code class="codepoint">U+003E</code>.
       Note that <a data-cite="RDF12-CONCEPTS#dfn-quoted-triple">quoted triples</a>
       may be nested.
      </p>
