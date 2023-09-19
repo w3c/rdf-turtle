@@ -1699,7 +1699,10 @@
 
     <dt>Encoding considerations:</dt>
     <dd>The syntax of Turtle is expressed over code points in Unicode [[!UNICODE]]. The encoding is always UTF-8 [[!UTF-8]].</dd>
-    <dd><a data-cite="i18n-glossary#dfn-code-point">Unicode code points</a> may also be expressed using <code>\uXXXX</code> (<code class="codepoint">U+0000</code> to <code class="codepoint">U+FFFF</code>) or <code>\UXXXXXXXX</code> syntax (for <code class="codepoint">U+10000</code> onwards) where X is a hexadecimal digit `[0-9A-Fa-f]`</dd>
+    <dd><a data-cite="i18n-glossary#dfn-code-point">Unicode code points</a> may also be expressed
+      using <code>\uXXXX</code> (<code class="codepoint">U+0000</code> to <code class="codepoint">U+FFFF</code>)
+      or <code>\UXXXXXXXX</code> syntax (for code points up to <code class="codepoint">U+10FFFF</code>)
+      where X is a hexadecimal digit `[0-9A-Fa-f]`</dd>
     <dt>Security considerations:</dt>
     <dd>See <a href="#security" class="sectionRef"></a>.</dd>
     <dt>Interoperability considerations:</dt>
