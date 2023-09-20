@@ -8,7 +8,7 @@ sparqlBase            ::=	"BASE" IRIREF
 triples               ::= subject predicateObjectList | blankNodePropertyList predicateObjectList?
 predicateObjectList   ::= verb objectList (';' (verb objectList)? )*
 objectList            ::= object annotation? ( ',' object annotation? )*
-verb                  ::= predicate | "a"
+verb                  ::= predicate | 'a'
 subject               ::= iri | BlankNode | collection | quotedTriple
 predicate             ::= iri
 object                ::= iri | BlankNode | collection | blankNodePropertyList | literal | quotedTriple
@@ -17,7 +17,7 @@ blankNodePropertyList ::= "[" predicateObjectList "]"
 collection            ::= "(" object* ")"
 NumericLiteral        ::= INTEGER | DECIMAL | DOUBLE
 RDFLiteral            ::= String ( LANGTAG | ( "^^" iri ) )?
-BooleanLiteral        ::= "true" | "false"
+BooleanLiteral        ::= 'true' | 'false'
 String                ::= STRING_LITERAL_QUOTE | STRING_LITERAL_SINGLE_QUOTE
                         | STRING_LITERAL_LONG_SINGLE_QUOTE | STRING_LITERAL_LONG_QUOTE
 iri                   ::= IRIREF | PrefixedName
