@@ -478,7 +478,8 @@
           <code>LF</code> (line feed, code point <code class="codepoint">U+000A</code>), nor
           <code>CR</code> (carriage return, code point <code class="codepoint">U+000D</code>)
           characters.</li>
-        <li>Literals delimited by '<code>&quot;</code>', may not contain unescaped
+        <li>Literals delimited by '<code>&quot;</code>' (quotation mark, code point <code class="codepoint">U+0022</code>)
+          may not contain unescaped
           '<code>&quot;</code>' (quotation mark, code point <code class="codepoint">U+0022</code>),
           <code>LF</code> (line feed, code point <code class="codepoint">U+000A</code>), nor
           <code>CR</code> (carriage return, code point <code class="codepoint">U+000D</code>)
@@ -612,7 +613,12 @@
       liberalized as follows:
     </p>
     <ul>
-      <li>The characters <code>_</code> (underscore, <code class="codepoint">U+005F</code>) and digits may appear anywhere in a <a data-cite="RDF12-CONCEPTS#dfn-blank-node-identifier">blank node identifier</a>.</li>
+      <li>The character "<code>_</code>" (underscore, <code class="codepoint">U+005F</code>) and
+      the digit characters "<code>0</code>"–"<code>9</code>" (zero through nine, 
+      <code class="codepoint">U+0030</code> 
+      through <code class="codepoint">U+0039</code>, inclusive)
+      may appear anywhere in a
+      <a data-cite="RDF12-CONCEPTS#dfn-blank-node-identifier">blank node identifier</a>.</li>
       <li>The character "<code>.</code>" (full stop, <code class="codepoint">U+002E</code>) may appear anywhere except the first or last character.</li>
       <li>The characters
         <code>-</code> (hyphen, <code class="codepoint">U+2010</code>),
