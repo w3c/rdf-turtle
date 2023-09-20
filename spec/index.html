@@ -314,7 +314,7 @@
 
     <p>
       A <span id="prefixed-name"><dfn>prefixed name</dfn></span> is a prefix label and a local part,
-      separated by a colon ":" (colon, code point <code class="codepoint">U+003A</code>).
+      separated by a ":" (colon, code point <code class="codepoint">U+003A</code>).
       A prefixed name is turned into an IRI by concatenating the IRI associated
       with the prefix and the local part.
       The '<code>@prefix</code>' or '<code>PREFIX</code>' directive associates
@@ -547,8 +547,8 @@
             <td><code>"4.2E9"^^xsd:double</code></td>
             <td>Double-precision floating point values may be written as
               an optionally signed mantissa with an optional decimal point,
-              the letter "e" or "E"
-              (code points <code class="codepoint">U+0065</code> or <code class="codepoint">U+0045</code>),
+              the letter "e" (code point <code class="codepoint">U+0065</code>)
+              or the letter "E" (code point <code class="codepoint">U+0045</code>),
               and an optionally signed integer exponent.
               The exponent matches the regular expression "<code>[+-]?[0-9]+</code>"
               and the mantissa matches one of these regular expressions:
@@ -613,10 +613,10 @@
     </p>
     <ul>
       <li>The characters <code>_</code> (underscore, <code class="codepoint">U+005F</code>) and digits may appear anywhere in a <a data-cite="RDF12-CONCEPTS#dfn-blank-node-identifier">blank node identifier</a>.</li>
-      <li>The character <code>.</code> (middle dot, <code class="codepoint">U+00B7</code>) may appear anywhere except the first or last character.</li>
+      <li>The character "<code>.</code>" (full stop, <code class="codepoint">U+002E</code>) may appear anywhere except the first or last character.</li>
       <li>The characters
         <code>-</code> (hyphen, <code class="codepoint">U+2010</code>),
-        <code>·</code> (middle dot, <code class="codepoint">U+00B7</code>),
+        <code>.</code> (full stop, <code class="codepoint">U+002E</code >),
         &#x203F;&nbsp; (undertie, <code class="codepoint">U+203F</code>),
         &#x2040;&nbsp; (character tie, <code class="codepoint">U+2040</code>),
         and
@@ -1220,7 +1220,7 @@
     <p class="note">%-encoded sequences are in the
       <a href="#grammar-production-IRIREF">character range for IRIs</a>
       and are <a href="#grammar-production-PERCENT">explicitly allowed</a> in local names.
-      These appear as a "%" (precent, code point <code class="codepoint">U+0025</code>)
+      These appear as a "%" (percent sign, code point <code class="codepoint">U+0025</code>)
       followed by two hex characters and represent that
       same sequence of three characters. These sequences are <em>not</em>
       decoded during processing.
@@ -1392,10 +1392,10 @@
       <tr id="handle-PNAME_NS2"                       >                                                                                                                                                                           <td><a data-cite="RDF12-CONCEPTS#dfn-iri">          IRI          </a></td><td>When used in a <a href="#grammar-production-PrefixedName">PrefixedName</a> production, the <code>iri</code> is the value in the <a href="#namespaces">namespaces map</a> corresponding to the first argument of the rule.</td></tr>
       <tr id="handle-PNAME_LN"                        ><td style="text-align:left;"            ><a class="type IRI"          href="#grammar-production-PNAME_LN"                        >PNAME_LN                        </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-iri">          IRI          </a></td><td>A potentially empty <a href="#prefix">prefix</a> is identified by the first sequence, <code>PNAME_NS</code>. The <a href="#namespaces">namespaces map</a> <em class="rfc2119">MUST</em> have a corresponding <code>namespace</code>. The <a data-cite="RDF12-CONCEPTS#dfn-rdf-string">RDF string</a> of the IRI is formed by unescaping the <a href="#reserved">reserved characters</a> in the second argument, <code>PN_LOCAL</code>, and concatenating this onto the <code>namespace</code>.</td></tr>
       <!-- tr id="handle-PrefixedName"                ><td style="text-align:left;"            ><a class="type IRI"          href="#grammar-production-PrefixedName"                    >PrefixedName                    </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-iri">          IRI          </a></td><td>.</td></tr -->
-      <tr id="handle-STRING_LITERAL_SINGLE_QUOTE"     ><td style="text-align:left;"            ><a class="type lexicalForm"  href="#grammar-production-STRING_LITERAL_SINGLE_QUOTE"     >STRING_LITERAL_SINGLE_QUOTE     </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-lexical-form"> lexical form </a></td><td>The characters between the outermost "<code>'</code>"s  (apostrophe, <code class="codepoint">U+0027</code>are taken, with <a href="#numeric">numeric</a> and <a href="#string">string</a> escape sequences unescaped, to form the <a data-cite="RDF12-CONCEPTS#dfn-rdf-string">RDF string</a> of a lexical form.</td></tr>
+      <tr id="handle-STRING_LITERAL_SINGLE_QUOTE"><td style="text-align:left;"><a class="type lexicalForm" href="#grammar-production-STRING_LITERAL_SINGLE_QUOTE">STRING_LITERAL_SINGLE_QUOTE</a></td><td><a data-cite="RDF12-CONCEPTS#dfn-lexical-form"> lexical form </a></td><td>The characters between the outermost "<code>'</code>"s (apostrophe, <code class="codepoint">U+0027</code>are taken, after <a href="#numeric">numeric</a> and <a href="#string">string</a> escape sequences are replaced with the characters that they represent, to form the <a data-cite="RDF12-CONCEPTS#dfn-rdf-string">RDF string</a> of a lexical form.</td></tr>
       <tr id="handle-STRING_LITERAL_QUOTE"            ><td style="text-align:left;"            ><a class="type lexicalForm"  href="#grammar-production-STRING_LITERAL_QUOTE"            >STRING_LITERAL_QUOTE            </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-lexical-form"> lexical form </a></td><td>The characters between the outermost '<code>"</code>'s   are taken, with <a href="#numeric">numeric</a> and <a href="#string">string</a> escape sequences unescaped, to form the <a data-cite="RDF12-CONCEPTS#dfn-rdf-string">RDF string</a> of a lexical form.</td></tr>
       <tr id="handle-STRING_LITERAL_LONG_SINGLE_QUOTE"><td style="text-align:left;"            ><a class="type lexicalForm"  href="#grammar-production-STRING_LITERAL_LONG_SINGLE_QUOTE">STRING_LITERAL_LONG_SINGLE_QUOTE</a></td><td><a data-cite="RDF12-CONCEPTS#dfn-lexical-form"> lexical form </a></td><td>The characters between the outermost "<code>'''</code>"s are taken, with <a href="#numeric">numeric</a> and <a href="#string">string</a> escape sequences unescaped, to form the <a data-cite="RDF12-CONCEPTS#dfn-rdf-string">RDF string</a> of a lexical form.</td></tr>
-      <tr id="handle-STRING_LITERAL_LONG_QUOTE"       ><td style="text-align:left;"            ><a class="type lexicalForm"  href="#grammar-production-STRING_LITERAL_LONG_QUOTE"       >STRING_LITERAL_LONG_QUOTE       </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-lexical-form"> lexical form </a></td><td>The characters between the outermost '<code>"""</code>'s (sequence of three quotation mark characters, <code class="codepoint">U+0022</code>are taken, with <a href="#numeric">numeric</a> and <a href="#string">string</a> escape sequences unescaped, to form the <a data-cite="RDF12-CONCEPTS#dfn-rdf-string">RDF string</a> of a lexical form.</td></tr>
+      <tr id="handle-STRING_LITERAL_LONG_QUOTE"><td style="text-align:left;"><a class="type lexicalForm" href="#grammar-production-STRING_LITERAL_LONG_QUOTE">STRING_LITERAL_LONG_QUOTE</a></td><td><a data-cite="RDF12-CONCEPTS#dfn-lexical-form"> lexical form </a></td><td>The characters between the outermost '<code>"""</code>'s (sequence of three quotation mark characters, <code class="codepoint">U+0022</code>) are taken, after <a href="#numeric">numeric</a> and <a href="#string">string</a> escape sequences are are replaced with the characters that they represent, to form the <a data-cite="RDF12-CONCEPTS#dfn-rdf-string">RDF string</a> of a lexical form.</td></tr>
       <tr id="handle-LANGTAG"                         ><td style="text-align:left;"            ><a class="type langTag"      href="#grammar-production-LANGTAG"                         >LANGTAG                         </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-language-tag"> language tag </a></td><td>The characters following the <code>@</code> form the the <a data-cite="RDF12-CONCEPTS#dfn-language-tag">language tag</a>.</td></tr>
       <tr id="handle-RDFLiteral"                      ><td style="text-align:left;"            ><a class="type literal"      href="#grammar-production-RDFLiteral"                      >RDFLiteral                      </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-literal">      literal      </a></td><td>The literal has a lexical form of the first rule argument, <code>String</code>. If the <code>'^^' iri</code> rule matched, the datatype is <code>iri</code> and the literal has no language tag. If the <code>LANGTAG</code> rule matched, the datatype is <code>rdf:langString</code> and the language tag is <code>LANGTAG</code>. If neither matched, the datatype is <code>xsd:string</code> and the literal has no language tag.</td></tr>
       <tr id="handle-INTEGER"                         ><td style="text-align:left;"            ><a class="type integer"      href="#grammar-production-INTEGER"                         >INTEGER                         </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-literal">      literal      </a></td><td>The literal has a lexical form of the input string, and a datatype of <code>xsd:integer</code>.</td></tr>
