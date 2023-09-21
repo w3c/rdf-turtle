@@ -1,4 +1,4 @@
-@prefix : <http://example.org/stuff/1.0/> .
+PREFIX : <http://example.org/stuff/1.0/>
 
 :a :b "The first line\nThe second line\n  more" .
 
