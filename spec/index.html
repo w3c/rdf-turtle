@@ -43,7 +43,7 @@
             company: "Lex Machina, Inc", companyURL: "https://lexmachina.com/"},
       ],
 
-      xref: [ "RDF11-CONCEPTS" ], // Fixme: change to RDF12-CONCEPTS
+      xref: [ "RDF12-CONCEPTS", "i18n-glossary" ],
       github: "https://github.com/w3c/rdf-turtle/",
       group:           "rdf-star",
       doJsonLd:     true,
@@ -172,9 +172,9 @@
     This example introduces many of features of the Turtle language:
     <a href="#relative-iri">BASE and Relative IRI references</a>,
     <a href="#prefixed-name">PREFIX and prefixed names</a>,
-    <a href="#predicate-lists">predicate lists</a> separated by '<code>;</code>',
-    <a href="#object-lists">object lists</a> separated by '<code>,</code>',
-    the token <code><a href="#iri-a">a</a></code>,
+    <a href="#predicate-lists">predicate lists</a> separated by <code>;</code> (semicolon, code point <code class="codepoint">U+003B</code>),
+    <a href="#object-lists">object lists</a> separated by <code>,</code> (comma, code point <code class="codepoint">U+002C</code>),
+    the token <a href="#iri-a"><code>a</code></a>,
     and <a href="#literals">literals</a>.
   </p>
 
@@ -198,13 +198,15 @@
   <p>A <a>Turtle document</a> allows writing down an <a data-cite="RDF12-CONCEPTS#dfn-rdf-graph">RDF graph</a> in a compact textual form.
     An <a data-cite="RDF12-CONCEPTS#dfn-rdf-graph">RDF graph</a> is made up of <a data-cite="RDF12-CONCEPTS#dfn-rdf-triple">triples</a>
     consisting of a subject, predicate and object.</p>
-  <p>Comments may be given after a '<code>#</code>' that is not part of
-    another lexical token and continue to the end of the line.</p>
+  <p>Comments may follow a <code>#</code> (number sign, code point <code class="codepoint">U+0023</code>) that is not part of
+    another lexical token, and continue to the end of the line.</p>
 
   <section id="simple-triples">
     <h3>Simple Triples</h3>
     <p>The simplest triple statement is a sequence of (subject, predicate, object) terms,
-      separated by whitespace and terminated by '<code>.</code>' after each triple.</p>
+      separated by white space
+      (spaces, code point <code class="codepoint">U+0020</code>, and/or tabs, code point <code class="codepoint">U+0009</code>)
+      and terminated by <code>.</code> (full stop, <code class="codepoint">U+002E</code>) after the object.</p>
     <pre id="ex-simple-triple"
          class="example turtle" data-transform="updateExample"
          title="Simple Triple">
@@ -220,11 +222,11 @@
     <h3>Predicate Lists</h3>
     <p>Often the same subject will be referenced by a number of predicates.
       The <a href="#grammar-production-predicateObjectList">predicateObjectList production</a>
-      matches a series of predicates and objects, separated by '<code>;</code>',
+      matches a series of predicates and objects, separated by <code>;</code> (semicolon, code point <code class="codepoint">U+003B</code>),
       following a subject.
       This expresses a series of RDF Triples with that subject and each predicate
       and object allocated to one triple.
-      Thus, the '<code>;</code>' symbol is used to repeat the subject of triples
+      Thus, the <code>;</code> (semicolon, code point <code class="codepoint">U+003B</code>) is used to repeat the subject of triples
       that vary only in predicate and object RDF terms.</p>
       <p>These two examples are equivalent ways of writing the triples about Spiderman.</p>
 
@@ -250,12 +252,12 @@
   <section id="object-lists">
     <h3>Object Lists</h3>
     <p>
-      As with predicates often objects are repeated with the same subject and predicate.
+      As with predicates, the same subject and predicate often repeat with different objects.
       The <a href="#grammar-production-objectList">objectList production</a>
-      matches a series of objects separated by '<code>,</code>' following a predicate.
-      This expresses a series of RDF Triples with the corresponding subject and predicate
+      matches a series of objects separated by <code>,</code> (comma, code point <code class="codepoint">U+002C</code>) following a predicate.
+      This expresses a series of RDF Triples with the same subject and predicate
       and each object allocated to one triple.
-      Thus, the '<code>,</code>' symbol is used to repeat the subject and predicate
+      Thus, the <code>,</code> (comma, code point <code class="codepoint">U+002C</code>) is used to repeat the subject and predicate
       of triples that only differ in the object RDF term.</p>
 
     <p>These two examples  are equivalent ways of writing Spiderman's name in two languages.<p>
@@ -294,39 +296,39 @@
       <a data-cite="RDF12-CONCEPTS#dfn-iri">IRIs</a> may be written as <a data-cite="RFC3986#section-5">resolved</a> IRIs,
       <a data-cite="RDF12-CONCEPTS#dfn-relative-iri">Relative IRI references</a>,
       or <a>prefixed names</a>.
-      Relative and resolved IRIs are preceded by <code>&lt;</code> (code point <span class="codepoint">U+003C</span>),
-      followed by <code>&gt;</code> (code point <span class="codepoint">U+003E</span>), and
+      Relative and resolved IRIs are preceded by <code>&lt;</code> (code point <code class="codepoint">U+003C</code>),
+      followed by <code>&gt;</code> (code point <code class="codepoint">U+003E</code>), and
       may contain <a href="#numeric">numeric escape sequences</a> (described below).
-      For example <code>&lt;http://example.org/#green-goblin&gt;</code>.
+      For example, <code>&lt;http://example.org/#green-goblin&gt;</code>.
     </p>
     <p id="relative-iri"><a data-cite="RDF12-CONCEPTS#dfn-relative-iri">Relative IRI references</a> like <code>&lt;#green-goblin&gt;</code>
       are resolved relative to the current base IRI.
-      A new base IRI can be defined using the '<code>@base</code>' or '<code>BASE</code>'
+      A new base IRI can be defined using the <code>@base</code> or <code>BASE</code>
       directive. Specifics of this operation are defined in
       <a href="#sec-iri-references" class="sectionRef"></a>.</p>
 
     <p id="iri-a">
-      The token '<code>a</code>' in the predicate position of a Turtle triple
+      The token <code>a</code> in the predicate position of a Turtle triple
       represents the IRI <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</code> .
     </p>
 
     <p>
       A <span id="prefixed-name"><dfn>prefixed name</dfn></span> is a prefix label and a local part,
-      separated by a colon ":".
+      separated by a <code>:</code> (colon, code point <code class="codepoint">U+003A</code>).
       A prefixed name is turned into an IRI by concatenating the IRI associated
       with the prefix and the local part.
-      The '<code>@prefix</code>' or '<code>PREFIX</code>' directive associates
+      The <code>@prefix</code> or <code>PREFIX</code> directive associates
       a prefix label with an IRI.
-      Subsequent '<code>@prefix</code>' or '<code>PREFIX</code>' directives
+      Subsequent <code>@prefix</code> or <code>PREFIX</code> directives
       may re-map the same prefix label.</p>
 
     <p class="note">
       The Turtle language originally permitted only the syntax including
-      the '<code>@</code>' character for writing prefix and base directives.
-      The case-insensitive '<code>PREFIX</code>' and '<code>BASE</code>'
+      the <code>@</code> character (at sign, code point <code class="codepoint">U+0040</code>) for writing prefix and base directives.
+      The case-insensitive <code>PREFIX</code> and <code>BASE</code>
       forms were added to align Turtle's syntax with that of SPARQL.
-      The original directives '<code>@prefix</code>'' and '<code>@base</code>' may also be used.
-      Using '<code>PREFIX</code>' and '<code>BASE</code>' may make it easier
+      The original directives <code>@prefix</code> and <code>@base</code> may also be used.
+      Using <code>PREFIX</code> and <code>BASE</code> may make it easier
       to copy declarations to SPARQL queries.
     </p>
 
@@ -411,12 +413,12 @@
     </pre>
 
     <div class="note">
-      <p>The '<code>@prefix</code>' and '<code>@base</code>' directives
-        require a trailing '<code>.</code>' after the IRI,
-        the equivalent '<code>PREFIX</code>' and '<code>BASE</code>'
-        must not have a trailing '<code>.</code>' after the IRI part of the directive.
-        The '<code>PREFIX</code>' and '<code>BASE</code>' are case-insensitive
-        and can be written as '<code>prefix</code>' and '<code>base</code>'
+      <p>While the <code>@prefix</code> and <code>@base</code> directives
+        require a trailing <code>.</code> (full stop, <code class="codepoint">U+002E</code>) after the IRI,
+        the equivalent <code>PREFIX</code> and <code>BASE</code>
+        do not have a trailing <code>.</code> (full stop, <code class="codepoint">U+002E</code>) after the IRI part of the directive.
+        The <code>PREFIX</code> and <code>BASE</code> are case-insensitive
+        and can be written as <code>prefix</code> and <code>base</code>
         or use mixed case.
     </div>
   </section>
@@ -446,44 +448,44 @@
         <a href="#grammar-production-RDFLiteral">RDFLiteral</a>) have a lexical form
         followed by a language tag, a datatype IRI, or neither.
         The representation of the lexical form consists of an initial delimiter
-        (e.g., <code>"</code> (<span class="codepoint">U+0022</span>));
+        (e.g., <code>&quot;</code> (quotation mark, code point <code class="codepoint">U+0022</code>));
         a sequence of permitted characters, <a href="#numeric">numeric escapes</a>,
         and/or <a href="#string">string escapes</a>; and a final delimiter.
         The corresponding <a data-cite="RDF12-CONCEPTS#dfn-lexical-form">RDF lexical form</a>
         is the characters between the delimiters,
         after processing any escape sequences.
-        If present, the <a data-cite="RDF12-CONCEPTS#dfn-language-tag">language tag</a> is preceded by a '<code>@</code>'
-        (<span class="codepoint">U+0040</span>).
+        If present, the <a data-cite="RDF12-CONCEPTS#dfn-language-tag">language tag</a> is preceded by
+        an <code>@</code> (at sign, <code class="codepoint">U+0040</code>).
         If there is no language tag, there may be a <a data-cite="RDF12-CONCEPTS#dfn-datatype-iri">datatype IRI</a>,
-        preceded by two concatenated <code>^</code> characters,
-        each having the code point <span class="codepoint">U+005E</span>.
-        The datatype IRI in Turtle may be written using either a
-        <a data-cite="RFC3986#section-5">resolved</a> IRI,
-        a <a data-cite="RDF12-CONCEPTS#dfn-relative-iri">relative IRI reference</a>,
-        or a <a>prefixed name</a>.
+        preceded by <code>^^</code>
+        (two concatenated circumflex accent characters, each having the code point <code class="codepoint">U+005E</code>).
+        A datatype IRI in Turtle may be written using either a
+        <a href="#sec-iri">resolved IRI</a>,
+        a <a href="#relative-iri">relative IRI reference</a>,
+        or a <a href="#prefixed-name">prefixed name</a>.
         If there is no datatype IRI and no language tag,
         the datatype is <code>xsd:string</code>.
       </p>
 
-      <p>A backslash ('<code>\</code>', <span class="codepoint">U+005C</span>)
+      <p>A <code>\</code> (backslash, code point <code class="codepoint">U+005C</code>)
         may not appear in any quoted literal except as part of an escape sequence.
         Other restrictions depend on the delimiter:</p>
 
       <ul>
-        <li>Literals delimited by <code>'</code> (<span class="codepoint">U+0027</span>)
-          may not contain unescaped <code>'</code>,
-          <code title="LINE FEED"><sub>LF</sub></code> (<span class="codepoint">U+000A</span>),
-          nor <code title="CARRIAGE RETURN"><sub>CR</sub></code> (<span class="codepoint">U+000D</span>)
+        <li>Literals delimited by <code>'</code> (apostrophe, code point <code class="codepoint">U+0027</code>)
+          may not contain unescaped
+          <code>'</code> (apostrophe, code point <code class="codepoint">U+0027</code>),
+          <code>LF</code> (line feed, code point <code class="codepoint">U+000A</code>), nor
+          <code>CR</code> (carriage return, code point <code class="codepoint">U+000D</code>)
           characters.</li>
-        <li>Literals delimited by <code>"</code>, may not contain unescaped
-          <code>"</code>,
-          <code title="LINE FEED"><sub>LF</sub></code>,
-          nor <code title="CARRIAGE RETURN"><sub>CR</sub></code>
+        <li>Literals delimited by <code>&quot;</code> (quotation mark, code point <code class="codepoint">U+0022</code>)
+          may not contain unescaped
+          <code>&quot;</code> (quotation mark, code point <code class="codepoint">U+0022</code>),
+          <code>LF</code> (line feed, code point <code class="codepoint">U+000A</code>), nor
+          <code>CR</code> (carriage return, code point <code class="codepoint">U+000D</code>)
           characters.</li>
-        <li>Literals delimited by <code>'''</code> may not contain the sequence of characters
-          <code>'''</code>.</li>
-        <li>Literals delimited by <code>"""</code> may not contain the sequence of characters
-          <code>"""</code>.</li>
+        <li>Literals delimited by <code>'''</code> (sequence of three apostrophes, code point <code class="codepoint">U+0027</code>) may not contain such a sequence.</li>        
+        <li>Literals delimited by <code>"""</code> (sequence of three quotation marks, code point <code class="codepoint">U+0022</code>) may not contain such a sequence.</li>
       </ul>
 
       <pre id="ex-quoted-literals"
@@ -546,7 +548,9 @@
             <td><code>"4.2E9"^^xsd:double</code></td>
             <td>Double-precision floating point values may be written as
               an optionally signed mantissa with an optional decimal point,
-              the letter "e" or "E", and an optionally signed integer exponent.
+              the letter <code>e</code> (code point <code class="codepoint">U+0065</code>)
+              or the letter <code>E</code> (code point <code class="codepoint">U+0045</code>),
+              and an optionally signed integer exponent.
               The exponent matches the regular expression "<code>[+-]?[0-9]+</code>"
               and the mantissa matches one of these regular expressions:
               "<code>[+-]?[0-9]+\.[0-9]+</code>",
@@ -583,8 +587,8 @@
 
     <section id="booleans">
       <h3>Booleans</h3>
-      <p>Boolean values may be written as either '<code>true</code>'
-        or '<code>false</code>' (case-sensitive)
+      <p>Boolean values may be written as either <code>true</code>
+        or <code>false</code> (case-sensitive)
         and represent RDF literals with the datatype <a data-cite="xmlschema11-2#boolean">xsd:boolean</a> [[XMLSCHEMA11-2]].</p>
       <pre id="ex-boolean"
            class="example turtle" data-transform="updateExample"
@@ -609,13 +613,21 @@
       liberalized as follows:
     </p>
     <ul>
-      <li>The characters <code>_</code> and digits may appear anywhere in a <a data-cite="RDF12-CONCEPTS#dfn-blank-node-identifier">blank node identifier</a>.</li>
-      <li>The character <code>.</code> may appear anywhere except the first or last character.</li>
+      <li>The character <code>_</code> (underscore, <code class="codepoint">U+005F</code>) and
+      the digit characters <code>0</code>–<code>9</code> (zero through nine, 
+      <code class="codepoint">U+0030</code> 
+      through <code class="codepoint">U+0039</code>, inclusive)
+      may appear anywhere in a
+      <a data-cite="RDF12-CONCEPTS#dfn-blank-node-identifier">blank node identifier</a>.</li>
+      <li>The character <code>.</code> (full stop, <code class="codepoint">U+002E</code>) may appear anywhere except the first or last character.</li>
       <li>The characters
-        <code>-</code>,
-        <code>U+00B7</code>,
-        <code>U+0300</code> to <code>U+036F</code>
-        and <code>U+203F</code> to <code>U+2040</code>
+        <code>-</code> (hyphen, <code class="codepoint">U+2010</code>),
+        <code>.</code> (full stop, <code class="codepoint">U+002E</code >),
+        &#x203F;&nbsp; (undertie, <code class="codepoint">U+203F</code>),
+        &#x2040;&nbsp; (character tie, <code class="codepoint">U+2040</code>),
+        and
+        the combining diacritical marks (<code class="codepoint">U+0300</code>
+                                      to <code class="codepoint">U+036F</code>)
         are permitted anywhere except the first character.</li>
     </ul>
     <p>
@@ -761,8 +773,8 @@
       with <code><a href="#grammar-production-subject">subject</a></code>,
       <code><a href="#grammar-production-predicate">predicate</a></code>, and
       <code><a href="#grammar-production-object">object</a></code>
-      preceded by two concatenated <code>&lt;</code> characters, each having the code point <span class="codepoint">U+003C</span>, and
-      followed by two concatenated <code>&gt;</code> characters, each having the code point <span class="codepoint">U+003E</span>.
+      preceded by <code>&lt;&lt;</code> (two concatenated less-than sign characters, each having the code point <code class="codepoint">U+003C</code>), and
+      followed by <code>&gt;&gt;</code> (two concatenated greater-than sign characters, each having the code point <code class="codepoint">U+003E</code>).
       Note that <a data-cite="RDF12-CONCEPTS#dfn-quoted-triple">quoted triples</a>
       may be nested.
      </p>
@@ -840,7 +852,7 @@
   (<a href="examples/example1.ttl">example1.ttl</a>):
   </p>
 
-  <div data-include="examples/example1.ttl" data-oninclude="updateExample"></div>
+  <pre class="example" data-include="examples/example1.ttl" data-oninclude="updateExample"></pre>
 
   <p>An example of an RDF collection of two literals.</p>
   <pre id="ex-collection-two-literals"
@@ -854,14 +866,14 @@
 
   <p>which is short for (<a href="examples/example2.ttl">example2.ttl</a>):</p>
 
-  <div data-include="examples/example2.ttl" data-oninclude="updateExample"></div>
+  <pre class="example" data-include="examples/example2.ttl" data-oninclude="updateExample"></pre>
 
   <p>An example of two identical triples containing literal objects
   containing newlines, written in plain and long literal forms.
-  The line breaks in this example are LINE FEED characters (U+000A).
+  The line breaks in this example are <code>LF</code> (line feed, code point <code class="codepoint">U+000A</code>).
   (<a href="examples/example3.ttl">example3.ttl</a>):</p>
 
-  <div data-include="examples/example3.ttl" data-oninclude="updateExample"></div>
+  <pre class="example" data-include="examples/example3.ttl" data-oninclude="updateExample"></pre>
 
   <p>As indicated by the grammar,
     a <a href="#grammar-production-collection">collection</a> can be either
@@ -955,13 +967,12 @@
       In SPARQL, they are only allowed in the
       <a data-cite="SPARQL12-QUERY#rPrologue">Prologue</a>
       (at the start of the SPARQL query).</li>
-    <li>SPARQL uses case insensitive keywords, except for '<code>a</code>'.
+    <li>SPARQL uses case insensitive keywords, except for <code>a</code>.
       Turtle's <code>@prefix</code> and <code>@base</code> declarations are case sensitive,
       the SPARQL derived <code>PREFIX</code> and <code>BASE</code> are case insensitive.</li>
-    <li>'<code>true</code>' and '<code>false</code>' are case insensitive in SPARQL
+    <li><code>true</code> and <code>false</code> are case insensitive in SPARQL
       and case sensitive in Turtle.
       <code>TrUe</code> is not a valid boolean value in Turtle.</li>
-
   </ol>
 
   <p>For further information see the
@@ -979,7 +990,7 @@
     <li>Turtle parsers</li>
   </ul>
 
-  <p>A conforming <dfn>Turtle document</dfn> is a Unicode string that conforms to the grammar and additional constraints defined in <a href="#sec-grammar" class="sectionRef"></a>, starting with the <a href="#grammar-production-turtleDoc"><code>turtleDoc</code> production</a>. A <a>Turtle document</a> serializes an <a data-cite="RDF12-CONCEPTS#dfn-rdf-graph">RDF graph</a>.</p>
+  <p>A conforming <dfn>Turtle document</dfn> is an <a data-cite="RDF12-CONCEPTS#dfn-rdf-string">RDF string</a> that conforms to the grammar and additional constraints defined in <a href="#sec-grammar" class="sectionRef"></a>, starting with the <a href="#grammar-production-turtleDoc"><code>turtleDoc</code> production</a>. A <a>Turtle document</a> serializes an <a data-cite="RDF12-CONCEPTS#dfn-rdf-graph">RDF graph</a>.</p>
 
   <p>A conforming <strong>Turtle parser</strong> is a system capable of reading Turtle documents on behalf of an application.
     It makes the serialized RDF graph, as defined in <a href="#sec-parsing" class="sectionRef"></a>,
@@ -993,8 +1004,8 @@
     <h2>Media Type and Content Encoding</h2>
 
     <p>The media type of Turtle is <code>text/turtle</code>.
-    The content encoding of Turtle content is always UTF-8. Charset
-    parameters on the media type are required until such time as the
+    The content encoding of Turtle content is always UTF-8 [[!RFC3629]].
+    Charset parameters on the media type are required until such time as the
     <code>text/</code> media type tree permits UTF-8 to be sent without a
     charset parameter. See <a href="#sec-mediaReg" class="sectionRef"></a> for the media type
     registration form.
@@ -1005,11 +1016,11 @@
 <section id="sec-grammar">
   <h2>Turtle Grammar</h2>
 
-  <p>A <a>Turtle document</a> is a
-  Unicode[[!UNICODE]]
-  character string encoded in UTF-8.
-  Unicode characters only in the range U+0000 to U+10FFFF inclusive are
-  allowed.
+  <p>A <a>Turtle document</a> is an <a data-cite="RDF12-CONCEPTS#dfn-rdf-string">RDF string</a>
+    encoded in UTF-8 [[!RFC3629]].
+  Only <a data-cite="i18n-glossary#dfn-code-point">Unicode code points</a>
+  in the range <code class="codepoint">U+0000</code> to <code class="codepoint">U+10FFFF</code>
+  inclusive are allowed.
   </p>
 
   <section id="sec-grammar-ws">
@@ -1023,11 +1034,13 @@
   <section id="sec-grammar-comments">
     <h3>Comments</h3>
 
-    <p>Comments in Turtle take the form of '#' outside an
+    <p>Comments in Turtle start with a <code>#</code> (number sign, <code class="codepoint">U+0023</code>) outside an
     <a href="#grammar-production-IRIREF">IRIREF</a> or <a href="#grammar-production-String">String</a>,
-    and continue to the end of line (marked by characters U+000D or U+000A)
-    or end of file if there is no end of line after the comment
-    marker.  Comments are treated as white space.</p>
+    and continue to the end of line (marked by
+    <code>LF</code> (line feed, code point <code class="codepoint">U+000A</code>), or
+    <code>CR</code> (carriage return, code point <code class="codepoint">U+000D</code>)),
+    or end of file if there is no end of line after the comment marker.
+    Comments are treated as white space.</p>
   </section>
 
   <section id="sec-iri-references">
@@ -1060,7 +1073,7 @@
 
     <ul>
       <li>
-        <p><em id="numeric">numeric escape sequences</em> represent Unicode code points:</p>
+        <p><em id="numeric">numeric escape sequences</em> represent <a data-cite="i18n-glossary#dfn-code-point">Unicode code points</a>:</p>
 
         <table id="tab-uchar">
           <thead>
@@ -1071,17 +1084,18 @@
           </thead>
           <tbody>
             <tr>
-              <td>'\u' <a href="#grammar-production-HEX">hex</a>
+              <td><code>\u</code> <a href="#grammar-production-HEX">hex</a>
                 <a href="#grammar-production-HEX">hex</a>
                 <a href="#grammar-production-HEX">hex</a>
                 <a href="#grammar-production-HEX">hex</a></td>
-              <td>A Unicode character in the range U+0000 to U+FFFF inclusive
+              <td>A <a data-cite="i18n-glossary#dfn-code-point">Unicode code point</a>
+                in the range <code class="codepoint">U+0000</code> to <code class="codepoint">U+FFFF</code> inclusive
                 corresponding to the value encoded by the four hexadecimal digits interpreted
                 from most significant to least significant digit.</td>
             </tr>
 
             <tr>
-              <td>'\U' <a href="#grammar-production-HEX">hex</a>
+              <td><code>\U</code> <a href="#grammar-production-HEX">hex</a>
                 <a href="#grammar-production-HEX">hex</a>
                 <a href="#grammar-production-HEX">hex</a>
                 <a href="#grammar-production-HEX">hex</a>
@@ -1089,7 +1103,8 @@
                 <a href="#grammar-production-HEX">hex</a>
                 <a href="#grammar-production-HEX">hex</a>
                 <a href="#grammar-production-HEX">hex</a></td>
-              <td>A Unicode character in the range U+0000 to U+10FFFF inclusive
+              <td>A <a data-cite="i18n-glossary#dfn-code-point">Unicode code point</a>
+                in the range <code class="codepoint">U+0000</code> to <code class="codepoint">U+0010FFFF</code> inclusive
                 corresponding to the value encoded by the eight hexadecimal digits
                 interpreted from most significant to least significant digit.</td>
             </tr>
@@ -1118,43 +1133,43 @@
           </thead>
           <tbody>
             <tr>
-              <td>'\t'</td>
-              <td>U+0009</td>
+              <td><code>\t</code></td>
+              <td><code class="codepoint">U+0009</code></td>
             </tr>
 
             <tr>
-              <td>'\b'</td>
-              <td>U+0008</td>
+              <td><code>\b</code></td>
+              <td><code class="codepoint">U+0008</code></td>
             </tr>
 
             <tr>
-              <td>'\n'</td>
-              <td>U+000A</td>
+              <td><code>\n</code></td>
+              <td><code class="codepoint">U+000A</code></td>
             </tr>
 
             <tr>
-              <td>'\r'</td>
-              <td>U+000D</td>
+              <td><code>\r</code></td>
+              <td><code class="codepoint">U+000D</code></td>
             </tr>
 
             <tr>
-              <td>'\f'</td>
-              <td>U+000C</td>
+              <td><code>\f</code></td>
+              <td><code class="codepoint">U+000C</code></td>
             </tr>
 
             <tr>
-              <td>'\"'</td>
-              <td>U+0022</td>
+              <td><code>\"</code></td>
+              <td><code class="codepoing">U+0022</code></td>
             </tr>
 
             <tr>
-              <td>'\''</td>
-              <td>U+0027</td>
+              <td><code>\'</code></td>
+              <td><code class="codepoint">U+0027</code></td>
             </tr>
 
             <tr>
-              <td>'\\'</td>
-              <td>U+005C</td>
+              <td><code>\\</code></td>
+              <td><code class="codepoint">U+005C</code></td>
             </tr>
           </tbody>
         </table>
@@ -1163,8 +1178,9 @@
       <li>
         <p>
           <em id="reserved">reserved character escape sequences</em> consist of
-          a '\' followed by one of <code>~.-!$&amp;'()*+,;=/?#@%_</code>
-          and represent the character to the right of the '\'.
+          a <code>\</code> (backslash, code point <code class="codepoint">U+005C</code>)
+          followed by one of <code>~.-!$&amp;'()*+,;=/?#@%_</code>
+          and represent the character to the right of the <code>\</code>.
         </p>
       </li>
     </ul>
@@ -1209,7 +1225,8 @@
     <p class="note">%-encoded sequences are in the
       <a href="#grammar-production-IRIREF">character range for IRIs</a>
       and are <a href="#grammar-production-PERCENT">explicitly allowed</a> in local names.
-      These appear as a '%' followed by two hex characters and represent that
+      These appear as a <code>%</code> (percent sign, code point <code class="codepoint">U+0025</code>)
+      followed by two hex characters and represent that
       same sequence of three characters. These sequences are <em>not</em>
       decoded during processing.
       A term written as <code>&lt;http://a.example/%66oo-bar&gt;</code>
@@ -1237,7 +1254,7 @@
           '<code class="grammar-literal">true</code>',
           '<code class="grammar-literal">false</code>')
           are case-sensitive.
-          Keywords in double quotes
+          Keywords in quotation marks
           ("<code class="grammar-literal">BASE</code>",
           "<code class="grammar-literal">PREFIX</code>")
           are case-insensitive.
@@ -1264,8 +1281,8 @@
           The strings '<a href="#grammar-production-prefixID"><code class="grammar-literal">@prefix</code></a>'
           and '<a href="#grammar-production-base"><code class="grammar-literal">@base</code></a>'
           match the pattern for <a href="#grammar-production-LANGTAG">LANGTAG</a>,
-          though neither "<code class="grammar-literal">prefix</code>"
-          nor "<code class="grammar-literal">base</code>"
+          though neither <code class="grammar-literal">prefix</code>
+          nor <code class="grammar-literal">base</code>
           are <a data-cite="?LANG-SUBTAG-REGISTRY#">registered language subtags</a>.
           This specification does not define whether a quoted literal
           followed by either of these tokens (e.g., <code>"A"@base</code>)
@@ -1328,7 +1345,7 @@
         <a href="tests/#escapedNamespace1">escapedNamespace1</a>)</span>
       -->
         Note that the prefix may be an empty string, per the
-        <code>PNAME_NS</code> production: <code>(PN_PREFIX)? ":"</code>.
+        <code>PNAME_NS</code> production: <code>PN_PREFIX? ':'</code>.
         <!--
           <span class="testrefs">(test: <a href="tests/#default1">default1</a>)</span>.
           -->
@@ -1346,7 +1363,7 @@
       <li id="curPredicate">RDF_Term |curPredicate|
         — The |curPredicate| is bound to
         the <code><a href="#grammar-production-verb">verb</a></code> production.
-        If token matched was "<code>a</code>",
+        If token matched was <code>a</code>,
         |curPredicate| is bound to the IRI
         <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</code>.
         <!--
@@ -1375,16 +1392,16 @@
         <tr><th>                                                                       production               </th><th>                                                                                       type            </th><th>procedure</th></tr>
       </thead>
       <tbody>
-      <tr id="handle-IRIREF"                          ><td style="text-align:left;"            ><a class="type IRI"          href="#grammar-production-IRIREF"                          >IRIREF                          </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-iri">          IRI          </a></td><td>The characters between "&lt;" and "&gt;" are taken, with the <a href="#numeric">numeric escape sequences</a> unescaped, to form the unicode string of the IRI. <a data-cite="RDF12-CONCEPTS#dfn-relative-iri">Relative IRI reference</a> resolution is performed per <a href="#sec-iri-references" class="sectionRef">Section 6.3</a>.</td></tr>
-      <tr id="handle-PNAME_NS"                        ><td style="text-align:left;" rowspan="2"><a class="type string"       href="#grammar-production-PNAME_NS"                        >PNAME_NS                        </a></td><td><a href="#prefix">                              prefix       </a></td><td>When used in a <a href="#grammar-production-prefixID">prefixID</a> or <a href="#grammar-production-sparqlPrefix">sparqlPrefix</a> production, the <code>prefix</code> is the potentially empty unicode string matching the first argument of the rule is a key into the <a href="#namespaces">namespaces map</a>.</td></tr>
+      <tr id="handle-IRIREF"                          ><td style="text-align:left;"            ><a class="type IRI"          href="#grammar-production-IRIREF"                          >IRIREF                          </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-iri">          IRI          </a></td><td>The characters between <code>&lt;</code> and <code>&gt;</code> are taken, with the <a href="#numeric">numeric escape sequences</a> unescaped, to form the IRI. <a data-cite="RDF12-CONCEPTS#dfn-relative-iri">Relative IRI reference</a> resolution is performed per <a href="#sec-iri-references" class="sectionRef">Section 6.3</a>.</td></tr>
+      <tr id="handle-PNAME_NS"                        ><td style="text-align:left;" rowspan="2"><a class="type string"       href="#grammar-production-PNAME_NS"                        >PNAME_NS                        </a></td><td><a href="#prefix">                              prefix       </a></td><td>When used in a <a href="#grammar-production-prefixID">prefixID</a> or <a href="#grammar-production-sparqlPrefix">sparqlPrefix</a> production, the <code>prefix</code> is the potentially empty <a data-cite="RDF12-CONCEPTS#dfn-rdf-string">RDF string</a> matching the first argument of the rule is a key into the <a href="#namespaces">namespaces map</a>.</td></tr>
       <tr id="handle-PNAME_NS2"                       >                                                                                                                                                                           <td><a data-cite="RDF12-CONCEPTS#dfn-iri">          IRI          </a></td><td>When used in a <a href="#grammar-production-PrefixedName">PrefixedName</a> production, the <code>iri</code> is the value in the <a href="#namespaces">namespaces map</a> corresponding to the first argument of the rule.</td></tr>
-      <tr id="handle-PNAME_LN"                        ><td style="text-align:left;"            ><a class="type IRI"          href="#grammar-production-PNAME_LN"                        >PNAME_LN                        </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-iri">          IRI          </a></td><td>A potentially empty <a href="#prefix">prefix</a> is identified by the first sequence, <code>PNAME_NS</code>. The <a href="#namespaces">namespaces map</a> <em class="rfc2119">MUST</em> have a corresponding <code>namespace</code>. The unicode string of the IRI is formed by unescaping the <a href="#reserved">reserved characters</a> in the second argument, <code>PN_LOCAL</code>, and concatenating this onto the <code>namespace</code>.</td></tr>
+      <tr id="handle-PNAME_LN"                        ><td style="text-align:left;"            ><a class="type IRI"          href="#grammar-production-PNAME_LN"                        >PNAME_LN                        </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-iri">          IRI          </a></td><td>A potentially empty <a href="#prefix">prefix</a> is identified by the first sequence, <code>PNAME_NS</code>. The <a href="#namespaces">namespaces map</a> <em class="rfc2119">MUST</em> have a corresponding <code>namespace</code>. The <a data-cite="RDF12-CONCEPTS#dfn-rdf-string">RDF string</a> of the IRI is formed by unescaping the <a href="#reserved">reserved characters</a> in the second argument, <code>PN_LOCAL</code>, and concatenating this onto the <code>namespace</code>.</td></tr>
       <!-- tr id="handle-PrefixedName"                ><td style="text-align:left;"            ><a class="type IRI"          href="#grammar-production-PrefixedName"                    >PrefixedName                    </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-iri">          IRI          </a></td><td>.</td></tr -->
-      <tr id="handle-STRING_LITERAL_SINGLE_QUOTE"     ><td style="text-align:left;"            ><a class="type lexicalForm"  href="#grammar-production-STRING_LITERAL_SINGLE_QUOTE"     >STRING_LITERAL_SINGLE_QUOTE     </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-lexical-form"> lexical form </a></td><td>The characters between the outermost "'"s   are taken, with <a href="#numeric">numeric</a> and <a href="#string">string</a> escape sequences unescaped, to form the unicode string of a lexical form.</td></tr>
-      <tr id="handle-STRING_LITERAL_QUOTE"            ><td style="text-align:left;"            ><a class="type lexicalForm"  href="#grammar-production-STRING_LITERAL_QUOTE"            >STRING_LITERAL_QUOTE            </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-lexical-form"> lexical form </a></td><td>The characters between the outermost '"'s   are taken, with <a href="#numeric">numeric</a> and <a href="#string">string</a> escape sequences unescaped, to form the unicode string of a lexical form.</td></tr>
-      <tr id="handle-STRING_LITERAL_LONG_SINGLE_QUOTE"><td style="text-align:left;"            ><a class="type lexicalForm"  href="#grammar-production-STRING_LITERAL_LONG_SINGLE_QUOTE">STRING_LITERAL_LONG_SINGLE_QUOTE</a></td><td><a data-cite="RDF12-CONCEPTS#dfn-lexical-form"> lexical form </a></td><td>The characters between the outermost "'''"s are taken, with <a href="#numeric">numeric</a> and <a href="#string">string</a> escape sequences unescaped, to form the unicode string of a lexical form.</td></tr>
-      <tr id="handle-STRING_LITERAL_LONG_QUOTE"       ><td style="text-align:left;"            ><a class="type lexicalForm"  href="#grammar-production-STRING_LITERAL_LONG_QUOTE"       >STRING_LITERAL_LONG_QUOTE       </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-lexical-form"> lexical form </a></td><td>The characters between the outermost '"""'s are taken, with <a href="#numeric">numeric</a> and <a href="#string">string</a> escape sequences unescaped, to form the unicode string of a lexical form.</td></tr>
-      <tr id="handle-LANGTAG"                         ><td style="text-align:left;"            ><a class="type langTag"      href="#grammar-production-LANGTAG"                         >LANGTAG                         </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-language-tag"> language tag </a></td><td>The characters following the <code>@</code> form the unicode string of the language tag.</td></tr>
+      <tr id="handle-STRING_LITERAL_SINGLE_QUOTE"     ><td style="text-align:left;"            ><a class="type lexicalForm"  href="#grammar-production-STRING_LITERAL_SINGLE_QUOTE"     >STRING_LITERAL_SINGLE_QUOTE     </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-lexical-form"> lexical form </a></td><td>The characters between the outermost <code>'</code>s (apostrophe, <code class="codepoint">U+0027</code>) are taken, after <a href="#numeric">numeric</a> and <a href="#string">string</a> escape sequences are replaced with the characters that they represent, to form the <a data-cite="RDF12-CONCEPTS#dfn-rdf-string">RDF string</a> of a lexical form.</td></tr>
+      <tr id="handle-STRING_LITERAL_QUOTE"            ><td style="text-align:left;"            ><a class="type lexicalForm"  href="#grammar-production-STRING_LITERAL_QUOTE"            >STRING_LITERAL_QUOTE            </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-lexical-form"> lexical form </a></td><td>The characters between the outermost <code>"</code>s   are taken, with <a href="#numeric">numeric</a> and <a href="#string">string</a> escape sequences unescaped, to form the <a data-cite="RDF12-CONCEPTS#dfn-rdf-string">RDF string</a> of a lexical form.</td></tr>
+      <tr id="handle-STRING_LITERAL_LONG_SINGLE_QUOTE"><td style="text-align:left;"            ><a class="type lexicalForm"  href="#grammar-production-STRING_LITERAL_LONG_SINGLE_QUOTE">STRING_LITERAL_LONG_SINGLE_QUOTE</a></td><td><a data-cite="RDF12-CONCEPTS#dfn-lexical-form"> lexical form </a></td><td>The characters between the outermost <code>'''</code>s are taken, with <a href="#numeric">numeric</a> and <a href="#string">string</a> escape sequences unescaped, to form the <a data-cite="RDF12-CONCEPTS#dfn-rdf-string">RDF string</a> of a lexical form.</td></tr>
+      <tr id="handle-STRING_LITERAL_LONG_QUOTE"       ><td style="text-align:left;"            ><a class="type lexicalForm"  href="#grammar-production-STRING_LITERAL_LONG_QUOTE"       >STRING_LITERAL_LONG_QUOTE       </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-lexical-form"> lexical form </a></td><td>The characters between the outermost <code>"""</code>s (sequence of three quotation mark characters, <code class="codepoint">U+0022</code>) are taken, after <a href="#numeric">numeric</a> and <a href="#string">string</a> escape sequences are are replaced with the characters that they represent, to form the <a data-cite="RDF12-CONCEPTS#dfn-rdf-string">RDF string</a> of a lexical form.</td></tr>
+      <tr id="handle-LANGTAG"                         ><td style="text-align:left;"            ><a class="type langTag"      href="#grammar-production-LANGTAG"                         >LANGTAG                         </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-language-tag"> language tag </a></td><td>The characters following the <code>@</code> form the the <a data-cite="RDF12-CONCEPTS#dfn-language-tag">language tag</a>.</td></tr>
       <tr id="handle-RDFLiteral"                      ><td style="text-align:left;"            ><a class="type literal"      href="#grammar-production-RDFLiteral"                      >RDFLiteral                      </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-literal">      literal      </a></td><td>The literal has a lexical form of the first rule argument, <code>String</code>. If the <code>'^^' iri</code> rule matched, the datatype is <code>iri</code> and the literal has no language tag. If the <code>LANGTAG</code> rule matched, the datatype is <code>rdf:langString</code> and the language tag is <code>LANGTAG</code>. If neither matched, the datatype is <code>xsd:string</code> and the literal has no language tag.</td></tr>
       <tr id="handle-INTEGER"                         ><td style="text-align:left;"            ><a class="type integer"      href="#grammar-production-INTEGER"                         >INTEGER                         </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-literal">      literal      </a></td><td>The literal has a lexical form of the input string, and a datatype of <code>xsd:integer</code>.</td></tr>
       <tr id="handle-DECIMAL"                         ><td style="text-align:left;"            ><a class="type decimal"      href="#grammar-production-DECIMAL"                         >DECIMAL                         </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-literal">      literal      </a></td><td>The literal has a lexical form of the input string, and a datatype of <code>xsd:decimal</code>.</td></tr>
@@ -1562,8 +1579,8 @@
       -->
     </pre>
 
-    <p>When embedded in XHTML Turtle data blocks must be enclosed in CDATA sections. Those CDATA markers must be in Turtle comments. If the character sequence "<code>]]></code>" occurs in the document it must be escaped using strings escapes (<code>\u005d\u0054\u003e</code>). This will also make Turtle safe in polyglot documents served as both <code>text/html</code>
-    and <code>application/xhtml+xml</code>. Failing to use CDATA sections or escape "<code>]]></code>" may result in a non well-formed XML document.</p>
+    <p>When embedded in XHTML Turtle data blocks must be enclosed in CDATA sections. Those CDATA markers must be in Turtle comments. If the character sequence <code>]]></code> occurs in the document it must be escaped using strings escapes (<code>\u005d\u0054\u003e</code>). This will also make Turtle safe in polyglot documents served as both <code>text/html</code>
+    and <code>application/xhtml+xml</code>. Failing to use CDATA sections or escape <code>]]></code> may result in a non well-formed XML document.</p>
   </section>
 
   <section id="in-html-parsing" class="informative">
@@ -1572,7 +1589,7 @@
     <p>There are no syntactic or grammar differences between parsing Turtle
       that has been embedded and normal Turtle documents.
       A <a>Turtle document</a> parsed from an HTML DOM will be a stream
-      of character data rather than a stream of UTF-8 encoded bytes.
+      of character data rather than a stream of UTF-8 [[!RFC3629]] code points.
       No decoding is necessary if the HTML document has already been parsed into DOM.
       Each <code>script</code> data block is considered to be its own Turtle document.
       <code>PREFIX</code> and <code>BASE</code> declarations in a Turtle data block
@@ -1644,10 +1661,12 @@
 
   <p>Multiple <a data-cite="RDF12-CONCEPTS#dfn-iri">IRIs</a> may have the same appearance.
     Characters in different scripts may look similar (for instance,
-    a Cyrillic &quot;&#1086;&quot; may appear similar to a Latin &quot;o&quot;).
+    a Cyrillic "&#1086;" (code point <code class="codepoint">U+043E</code>) may appear similar to a Latin "o" (code point <code class="codepoint">U+006F</code>)).
     A character followed by combining characters may have the same visual representation
-    as another character (for example, LATIN SMALL LETTER "E" followed by COMBINING ACUTE
-    ACCENT has the same visual representation as LATIN SMALL LETTER "E" WITH ACUTE).
+    as another character (for example, LATIN SMALL LETTER "E" (code point <code class="codepoint">U+0065</code>)
+    followed by COMBINING ACUTE ACCENT (code point <code class="codepoint">U+0301</code>)
+    has the same visual representation as LATIN SMALL LETTER "E" WITH ACUTE
+    (<code class="codepoint">U+00E9</code>)).
     <!-- (<code>foo:resum&#40751;code> and <code>f&#1086;&#1086;:resume&#769;</code>)-->
     Any person or application that is writing or interpreting data in Turtle
     must take care to use the IRI that matches the intended semantics,
@@ -1685,7 +1704,10 @@
 
     <dt>Encoding considerations:</dt>
     <dd>The syntax of Turtle is expressed over code points in Unicode [[!UNICODE]]. The encoding is always UTF-8 [[!UTF-8]].</dd>
-    <dd>Unicode code points may also be expressed using an \uXXXX (U+0000 to U+FFFF) or \UXXXXXXXX syntax (for U+10000 onwards) where X is a hexadecimal digit [0-9A-Fa-f]</dd>
+    <dd><a data-cite="i18n-glossary#dfn-code-point">Unicode code points</a> may also be expressed
+      using <code>\uXXXX</code> (<code class="codepoint">U+0000</code> to <code class="codepoint">U+FFFF</code>)
+      or <code>\UXXXXXXXX</code> syntax (for code points up to <code class="codepoint">U+10FFFF</code>)
+      where X is a hexadecimal digit `[0-9A-Fa-f]`</dd>
     <dt>Security considerations:</dt>
     <dd>See <a href="#security" class="sectionRef"></a>.</dd>
     <dt>Interoperability considerations:</dt>
