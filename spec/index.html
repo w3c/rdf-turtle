@@ -172,8 +172,8 @@
     This example introduces many of features of the Turtle language:
     <a href="#relative-iri">BASE and Relative IRI references</a>,
     <a href="#prefixed-name">PREFIX and prefixed names</a>,
-    <a href="#predicate-lists">predicate lists</a> separated by <code>;</code>,
-    <a href="#object-lists">object lists</a> separated by <code>,</code>,
+    <a href="#predicate-lists">predicate lists</a> separated by <code>;</code> (semicolon, code point <code class="codepoint">U+003B</code>),
+    <a href="#object-lists">object lists</a> separated by <code>,</code> (comma, code point <code class="codepoint">U+002C</code>),
     the token <a href="#iri-a"><code>a</code></a>,
     and <a href="#literals">literals</a>.
   </p>
@@ -198,15 +198,15 @@
   <p>A <a>Turtle document</a> allows writing down an <a data-cite="RDF12-CONCEPTS#dfn-rdf-graph">RDF graph</a> in a compact textual form.
     An <a data-cite="RDF12-CONCEPTS#dfn-rdf-graph">RDF graph</a> is made up of <a data-cite="RDF12-CONCEPTS#dfn-rdf-triple">triples</a>
     consisting of a subject, predicate and object.</p>
-  <p>Comments may be given after a <code>#</code> that is not part of
-    another lexical token and continue to the end of the line.</p>
+  <p>Comments may follow a <code>#</code> (number sign, code point <code class="codepoint">U+0023</code>) that is not part of
+    another lexical token, and continue to the end of the line.</p>
 
   <section id="simple-triples">
     <h3>Simple Triples</h3>
     <p>The simplest triple statement is a sequence of (subject, predicate, object) terms,
       separated by white space
       (spaces, code point <code class="codepoint">U+0020</code>, and/or tabs, code point <code class="codepoint">U+0009</code>)
-      and terminated by <code>.</code> after the object.</p>
+      and terminated by <code>.</code> (full stop, <code class="codepoint">U+002E</code>) after the object.</p>
     <pre id="ex-simple-triple"
          class="example turtle" data-transform="updateExample"
          title="Simple Triple">
@@ -222,11 +222,11 @@
     <h3>Predicate Lists</h3>
     <p>Often the same subject will be referenced by a number of predicates.
       The <a href="#grammar-production-predicateObjectList">predicateObjectList production</a>
-      matches a series of predicates and objects, separated by <code>;</code>,
+      matches a series of predicates and objects, separated by <code>;</code> (semicolon, code point <code class="codepoint">U+003B</code>),
       following a subject.
       This expresses a series of RDF Triples with that subject and each predicate
       and object allocated to one triple.
-      Thus, the <code>;</code> symbol is used to repeat the subject of triples
+      Thus, the <code>;</code> (semicolon, code point <code class="codepoint">U+003B</code>) is used to repeat the subject of triples
       that vary only in predicate and object RDF terms.</p>
       <p>These two examples are equivalent ways of writing the triples about Spiderman.</p>
 
@@ -252,12 +252,12 @@
   <section id="object-lists">
     <h3>Object Lists</h3>
     <p>
-      As with predicates often objects are repeated with the same subject and predicate.
+      As with predicates, the same subject and predicate often repeat with different objects.
       The <a href="#grammar-production-objectList">objectList production</a>
-      matches a series of objects separated by <code>,</code> following a predicate.
+      matches a series of objects separated by <code>,</code> (comma, code point <code class="codepoint">U+002C</code>) following a predicate.
       This expresses a series of RDF Triples with the corresponding subject and predicate
       and each object allocated to one triple.
-      Thus, the <code>,</code> symbol is used to repeat the subject and predicate
+      Thus, the <code>,</code> (comma, code point <code class="codepoint">U+002C</code>) is used to repeat the subject and predicate
       of triples that only differ in the object RDF term.</p>
 
     <p>These two examples  are equivalent ways of writing Spiderman's name in two languages.<p>
@@ -299,7 +299,7 @@
       Relative and resolved IRIs are preceded by <code>&lt;</code> (code point <code class="codepoint">U+003C</code>),
       followed by <code>&gt;</code> (code point <code class="codepoint">U+003E</code>), and
       may contain <a href="#numeric">numeric escape sequences</a> (described below).
-      For example <code>&lt;http://example.org/#green-goblin&gt;</code>.
+      For example, <code>&lt;http://example.org/#green-goblin&gt;</code>.
     </p>
     <p id="relative-iri"><a data-cite="RDF12-CONCEPTS#dfn-relative-iri">Relative IRI references</a> like <code>&lt;#green-goblin&gt;</code>
       are resolved relative to the current base IRI.
@@ -413,10 +413,10 @@
     </pre>
 
     <div class="note">
-      <p>The <code>@prefix</code> and <code>@base</code> directives
-        require a trailing <code>.</code> after the IRI,
+      <p>While the <code>@prefix</code> and <code>@base</code> directives
+        require a trailing <code>.</code> (full stop, <code class="codepoint">U+002E</code>) after the IRI,
         the equivalent <code>PREFIX</code> and <code>BASE</code>
-        must not have a trailing <code>.</code> after the IRI part of the directive.
+        must not have a trailing <code>.</code> (full stop, <code class="codepoint">U+002E</code>) after the IRI part of the directive.
         The <code>PREFIX</code> and <code>BASE</code> are case-insensitive
         and can be written as <code>prefix</code> and <code>base</code>
         or use mixed case.
