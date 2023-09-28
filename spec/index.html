@@ -255,7 +255,7 @@
       As with predicates, the same subject and predicate often repeat with different objects.
       The <a href="#grammar-production-objectList">objectList production</a>
       matches a series of objects separated by <code>,</code> (comma, code point <code class="codepoint">U+002C</code>) following a predicate.
-      This expresses a series of RDF Triples with the corresponding subject and predicate
+      This expresses a series of RDF Triples with the same subject and predicate
       and each object allocated to one triple.
       Thus, the <code>,</code> (comma, code point <code class="codepoint">U+002C</code>) is used to repeat the subject and predicate
       of triples that only differ in the object RDF term.</p>
@@ -416,7 +416,7 @@
       <p>While the <code>@prefix</code> and <code>@base</code> directives
         require a trailing <code>.</code> (full stop, <code class="codepoint">U+002E</code>) after the IRI,
         the equivalent <code>PREFIX</code> and <code>BASE</code>
-        must not have a trailing <code>.</code> (full stop, <code class="codepoint">U+002E</code>) after the IRI part of the directive.
+        do not have a trailing <code>.</code> (full stop, <code class="codepoint">U+002E</code>) after the IRI part of the directive.
         The <code>PREFIX</code> and <code>BASE</code> are case-insensitive
         and can be written as <code>prefix</code> and <code>base</code>
         or use mixed case.
