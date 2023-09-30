@@ -94,7 +94,13 @@
 
     }
     .ex th { text-align: center; }
-  </style>
+
+    table.cp-definitions { border-collapse:collapse; background-color: #DDDDFF}
+
+    table.cp-definitions,
+    table.cp-definitions th,
+    table.cp-definitions td { border:1px solid black; padding:0.2em; }
+  </style> 
 </head>
 
 <body>
@@ -172,8 +178,8 @@
     This example introduces many of features of the Turtle language:
     <a href="#relative-iri">BASE and Relative IRI references</a>,
     <a href="#prefixed-name">PREFIX and prefixed names</a>,
-    <a href="#predicate-lists">predicate lists</a> separated by <code>;</code> (semicolon, code point <code class="codepoint">U+003B</code>),
-    <a href="#object-lists">object lists</a> separated by <code>,</code> (comma, code point <code class="codepoint">U+002C</code>),
+    <a href="#predicate-lists">predicate lists</a> separated by <a href="#cp-semicolon"><code title="semicolon">;</code></a>,
+    <a href="#object-lists">object lists</a> separated by <a href="#cp-comma"><code title="comma">,</code></a>,
     the token <a href="#iri-a"><code>a</code></a>,
     and <a href="#literals">literals</a>.
   </p>
@@ -191,6 +197,214 @@
     <a href="#sec-grammar" class="sectionRef">Turtle Grammar</a>
     and <a href="#sec-parsing" class="sectionRef">Parsing</a>.
   </p>
+
+<section id="typographical-conventions" class="informative">
+  <h3>Typographical conventions</h3>
+
+  <p>The following typographic conventions are used in this specification:</p>
+
+  <dl class="typography">
+    <dt><code>markup</code></dt><dd>
+      Markup (elements, attributes, properties),
+      machine processable values (string, characters, media types),
+      property name,
+      or a file name is in red-orange monospace font.</dd>
+    <dt><dfn data-no-xref="">definition</dfn></dt><dd>
+      A definition of a term, to be used elsewhere in this or other specifications,
+      is in bold and italics.</dd>
+    <dt><a data-lt="definition">definition reference</a></dt><dd>
+      A reference to a definition <em>in this document</em>
+      is underlined and is also an active link to the definition itself. </dd>
+    <dt><a href="">hyperlink</a></dt><dd>
+      A hyperlink is underlined and in blue.</dd>
+    <dt>[<a href="">reference</a>]</dt><dd>
+      A document reference (normative or informative) is enclosed in square brackets
+      and links to the references section.</dd>
+    <dt><a href="" class="cp-terminal"><code>:</code></a></dt><dd>
+      A grammar literal terminal with specific Unicode code points.
+      Grammar literal terminals used in this specification include the following:
+
+      <!-- Selected unicode character descriptions, taken from https://en.wikipedia.org/wiki/List_of_Unicode_characters -->
+      <table class="cp-definitions">
+        <thead>
+          <tr><th>Code</th><th>Glyph</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+          <tr id="cp-tab">
+            <td><code class="codepoint">U+0009</code></td>
+            <td><code title="horizontal tab">HT</code></td>
+            <td>Horizontal tab</td>
+          </tr>
+          <tr id="cp-line-feed">
+            <td><code class="codepoint">U+000A</code></td>
+            <td><code title="line feed">LF</code></td>
+            <td>Line feed</td>
+          </tr>
+          <tr id="cp-carriage-return">
+            <td><code class="codepoint">U+000D</code></td>
+            <td><code title="carriage return">CR</code></td>
+            <td>Carriage return</td>
+          </tr>
+          <tr id="cp-quotation-mark">
+            <td><code class="codepoint">U+0022</code></td>
+            <td><code title="quotation mark">&quot;</code></td>
+            <td>Quotation mark</td>
+          </tr>
+          <tr id="cp-number-sign">
+            <td><code class="codepoint">U+0023</code></td>
+            <td><code title="number sign">#</code></td>
+            <td>Number sign</td>
+          </tr>
+          <tr id="cp-percent-sign">
+            <td><code class="codepoint">U+0025</code></td>
+            <td><code title="percent sign">%</code></td>
+            <td>Percent sign</td>
+          </tr>
+          <tr id="cp-apostrophe">
+            <td><code class="codepoint">U+0027</code></td>
+            <td><code title="apostrophe">'</code></td>
+            <td>Apostrophe</td>
+          </tr>
+          <tr id="cp-paren-left">
+            <td><code class="codepoint">U+0028</code></td>
+            <td><code title="left parenthesis">(</code></td>
+            <td>Left parenthesis</td>
+          </tr>
+          <tr id="cp-paren-right">
+            <td><code class="codepoint">U+0029</code></td>
+            <td><code title="right parenthesis">)</code></td>
+            <td>Right parenthesis</td>
+          </tr>
+          <tr id="cp-comma">
+            <td><code class="codepoint">U+002C</code></td>
+            <td><code title="comma">,</code></td>
+            <td>Comma</td>
+          </tr>
+          <tr id="cp-hyphen">
+            <td><code class="codepoint">U+002D</code></td>
+            <td><code title="hyphen">-</code></td>
+            <td>Hyphen</td>
+          </tr>
+          <tr id="cp-full-stop">
+            <td><code class="codepoint">U+002E</code></td>
+            <td><code title="full stop">.</code></td>
+            <td>Full stop</td>
+          </tr>
+          <tr id="cp-zero">
+            <td><code class="codepoint">U+0030</code></td>
+            <td><code title="digit zero">0</code></td>
+            <td>Digit zero</td>
+          </tr>
+          <tr id="cp-nine">
+            <td><code class="codepoint">U+0039</code></td>
+            <td><code title="digit nine">9</code></td>
+            <td>Digit nine</td>
+          </tr>
+          <tr id="cp-colon">
+            <td><code class="codepoint">U+003B</code></td>
+            <td><code title="colon">:</code></td>
+            <td>Colon</td>
+          </tr>
+          <tr id="cp-semicolon">
+            <td><code class="codepoint">U+003B</code></td>
+            <td><code title="semicolon">;</code></td>
+            <td>Semicolon</td>
+          </tr>
+          <tr id="cp-less-than">
+            <td><code class="codepoint">U+003C</code></td>
+            <td><code title="less than sign">&lt;</code></td>
+            <td>Less-than sign</td>
+          </tr>
+          <tr id="cp-greater-than">
+            <td><code class="codepoint">U+003E</code></td>
+            <td><code title="greater-than sign">&gt;</code></td>
+            <td>Greater-than sign</td>
+          </tr>
+          <tr id="cp-at-sign">
+            <td><code class="codepoint">U+0040</code></td>
+            <td><code title="at sign">@</code></td>
+            <td>At sign</td>
+          </tr>
+          <tr id="cp-uppercase-e">
+            <td><code class="codepoint">U+0045</code></td>
+            <td><code title="underscore">E</code></td>
+            <td>Latin capital letter E</td>
+          </tr>
+          <tr id="cp-bracket-left">
+            <td><code class="codepoint">U+005B</code></td>
+            <td><code title="left square bracket">[</code></td>
+            <td>Left square bracket</td>
+          </tr>
+          <tr id="cp-backslash">
+            <td><code class="codepoint">U+005C</code></td>
+            <td><code title="backslash">\</code></td>
+            <td>Backslash</td>
+          </tr>
+          <tr id="cp-bracket-right">
+            <td><code class="codepoint">U+005D</code></td>
+            <td><code title="right square bracket">[</code></td>
+            <td>Right square bracket</td>
+          </tr>
+          <tr id="cp-underscore">
+            <td><code class="codepoint">U+005F</code></td>
+            <td><code title="underscore">_</code></td>
+            <td>Underscore</td>
+          </tr>
+          <tr id="cp-lowercase-e">
+            <td><code class="codepoint">U+0065</code></td>
+            <td><code title="underscore">e</code></td>
+            <td>Latin small letter E</td>
+          </tr>
+          <tr id="cp-verticle-bar">
+            <td><code class="codepoint">U+007C</code></td>
+            <td><code title="verticle bar">|</code></td>
+            <td>Berticle bar</td>
+          </tr>
+          <tr id="cp-undertie">
+            <td><code class="codepoint">U+203F</code></td>
+            <td><code title="undertie">&#x203F;</code></td>
+            <td>Undertie</td>
+          </tr>
+          <tr id="cp-character-tie">
+            <td><code class="codepoint">U+2040</code></td>
+            <td><code title="character tie">&#x2040;</code></td>
+            <td>Character tie</td>
+          </tr>
+        </tbody>
+      </table>
+
+      Other short terminals are composed of specific sequences of unicode characters:
+      
+      <dl>
+        <dt id="cp-space"><code title="space">space</code></dt>
+        <dd><code class="codepoint">U+0020</code></dd>
+        <dt id="cp-triple-quote"><code>"""</code></dt>
+        <dd>three concatenated quotation mark characters, each having the code point <code class="codepoint">U+0022</code></dd>
+        <dt id="cp-triple-apostrophe"><code>'''</code></dt>
+        <dd>three concatenated apostrophes characters, each having the code point <code class="codepoint">U+0027</code></dd>
+        <dt id="cp-double-lt"><code>&lt;&lt;</code></dt>
+        <dd>two concatenated less-than sign characters, each having the code point <code class="codepoint">U+003C</code></dd>
+        <dt id="cp-double-gt"><code>&gt;&gt;</code></dt>
+        <dd>two concatenated greater-than sign characters, each having the code point <code class="codepoint">U+003E</code></dd>
+        <dt id="cp-double-circumflex"><code>^^</code></dt>
+        <dd>two concatenated circumflex accent characters, each having the code point <code class="codepoint">U+005E</code></dd>
+        <dt id="cp-lparen-pipe"><code>{|</code></dt>
+        <dd><a href="#cp-paren-left">left parenthesis</a> followed by <a href="#cp-verticle-bar">verticle bar</a></dd>
+        <dt id="cp-pipe-rparen"><code>|}</code></dt>
+        <dd><a href="#cp-verticle-bar">verticle bar</a> followed by <a href="#cp-paren-right">right parenthesis</a></dd>
+      </dl>
+    </dd>
+  </dl>
+
+  <p class="note">Notes are in light green boxes with a green left border and with a "Note" header in green.
+    Notes are always informative.</p>
+
+  <pre class="example nohighlight">
+    Examples are in light khaki boxes, with khaki left border,
+    and with a numbered "Example" header in khaki.
+    Examples are always informative. The content of the example is in monospace font and may be syntax colored.
+  </pre>
+</section>
 </section>
 
 <section id="language-features" class="informative">
@@ -198,15 +412,15 @@
   <p>A <a>Turtle document</a> allows writing down an <a data-cite="RDF12-CONCEPTS#dfn-rdf-graph">RDF graph</a> in a compact textual form.
     An <a data-cite="RDF12-CONCEPTS#dfn-rdf-graph">RDF graph</a> is made up of <a data-cite="RDF12-CONCEPTS#dfn-rdf-triple">triples</a>
     consisting of a subject, predicate and object.</p>
-  <p>Comments may follow a <code>#</code> (number sign, code point <code class="codepoint">U+0023</code>) that is not part of
+  <p>Comments may follow a <a href="#cp-number-sign"><code title="number sign">#</code></a> that is not part of
     another lexical token, and continue to the end of the line.</p>
 
   <section id="simple-triples">
     <h3>Simple Triples</h3>
     <p>The simplest triple statement is a sequence of (subject, predicate, object) terms,
       separated by white space
-      (spaces, code point <code class="codepoint">U+0020</code>, and/or tabs, code point <code class="codepoint">U+0009</code>)
-      and terminated by <code>.</code> (full stop, <code class="codepoint">U+002E</code>) after the object.</p>
+      (<a href="#cp-space"><code title="space">spaces</code></a>, and/or <a href="#cp-tab"><code title="horizontal tab">tabs</code></a>)
+      and terminated by <a href="#cp-full-stop"><code title="full stop">.</code></a> after the object.</p>
     <pre id="ex-simple-triple"
          class="example turtle" data-transform="updateExample"
          title="Simple Triple">
@@ -222,11 +436,11 @@
     <h3>Predicate Lists</h3>
     <p>Often the same subject will be referenced by a number of predicates.
       The <a href="#grammar-production-predicateObjectList">predicateObjectList production</a>
-      matches a series of predicates and objects, separated by <code>;</code> (semicolon, code point <code class="codepoint">U+003B</code>),
+      matches a series of predicates and objects, separated by <a href="#cp-semicolon"><code title="semicolon">;</code></a>,
       following a subject.
       This expresses a series of RDF Triples with that subject and each predicate
       and object allocated to one triple.
-      Thus, the <code>;</code> (semicolon, code point <code class="codepoint">U+003B</code>) is used to repeat the subject of triples
+      Thus, the <a href="#cp-semicolon"><code title="semicolon">;</code></a> is used to repeat the subject of triples
       that vary only in predicate and object RDF terms.</p>
       <p>These two examples are equivalent ways of writing the triples about Spiderman.</p>
 
@@ -254,10 +468,10 @@
     <p>
       As with predicates, the same subject and predicate often repeat with different objects.
       The <a href="#grammar-production-objectList">objectList production</a>
-      matches a series of objects separated by <code>,</code> (comma, code point <code class="codepoint">U+002C</code>) following a predicate.
+      matches a series of objects separated by <a href="#cp-comma"><code title="comma">,</code></a> following a predicate.
       This expresses a series of RDF Triples with the same subject and predicate
       and each object allocated to one triple.
-      Thus, the <code>,</code> (comma, code point <code class="codepoint">U+002C</code>) is used to repeat the subject and predicate
+      Thus, the <a href="#cp-comma"><code title="comma">,</code></a> is used to repeat the subject and predicate
       of triples that only differ in the object RDF term.</p>
 
     <p>These two examples  are equivalent ways of writing Spiderman's name in two languages.<p>
@@ -296,8 +510,8 @@
       <a data-cite="RDF12-CONCEPTS#dfn-iri">IRIs</a> may be written as <a data-cite="RFC3986#section-5">resolved</a> IRIs,
       <a data-cite="RDF12-CONCEPTS#dfn-relative-iri">Relative IRI references</a>,
       or <a>prefixed names</a>.
-      Relative and resolved IRIs are preceded by <code>&lt;</code> (code point <code class="codepoint">U+003C</code>),
-      followed by <code>&gt;</code> (code point <code class="codepoint">U+003E</code>), and
+      Relative and resolved IRIs are preceded by <a href="#cp-less-than"><code title="less-than sign">&lt;</code></a>,
+      followed by <a href="#cp-greater-than"><code title="greater-than sign">&gt;</code></a>, and
       may contain <a href="#numeric">numeric escape sequences</a> (described below).
       For example, <code>&lt;http://example.org/#green-goblin&gt;</code>.
     </p>
@@ -314,7 +528,7 @@
 
     <p>
       A <span id="prefixed-name"><dfn>prefixed name</dfn></span> is a prefix label and a local part,
-      separated by a <code>:</code> (colon, code point <code class="codepoint">U+003A</code>).
+      separated by a <a href="#cp-colon"><code title="colon">:</code></a>.
       A prefixed name is turned into an IRI by concatenating the IRI associated
       with the prefix and the local part.
       The <code>@prefix</code> or <code>PREFIX</code> directive associates
@@ -324,7 +538,7 @@
 
     <p class="note">
       The Turtle language originally permitted only the syntax including
-      the <code>@</code> character (at sign, code point <code class="codepoint">U+0040</code>) for writing prefix and base directives.
+      the <a href="#cp-at-sign"><code title="at sign">@</code></a> character for writing prefix and base directives.
       The case-insensitive <code>PREFIX</code> and <code>BASE</code>
       forms were added to align Turtle's syntax with that of SPARQL.
       The original directives <code>@prefix</code> and <code>@base</code> may also be used.
@@ -414,9 +628,9 @@
 
     <div class="note">
       <p>While the <code>@prefix</code> and <code>@base</code> directives
-        require a trailing <code>.</code> (full stop, <code class="codepoint">U+002E</code>) after the IRI,
+        require a trailing <a href="#cp-full-stop"><code title="full stop">.</code></a> after the IRI,
         the equivalent <code>PREFIX</code> and <code>BASE</code>
-        do not have a trailing <code>.</code> (full stop, <code class="codepoint">U+002E</code>) after the IRI part of the directive.
+        do not have a trailing <a href="#cp-full-stop"><code title="full stop">.</code></a> after the IRI part of the directive.
         The <code>PREFIX</code> and <code>BASE</code> are case-insensitive
         and can be written as <code>prefix</code> and <code>base</code>
         or use mixed case.
@@ -448,17 +662,16 @@
         <a href="#grammar-production-RDFLiteral">RDFLiteral</a>) have a lexical form
         followed by a language tag, a datatype IRI, or neither.
         The representation of the lexical form consists of an initial delimiter
-        (e.g., <code>&quot;</code> (quotation mark, code point <code class="codepoint">U+0022</code>));
+        (e.g., <a href="#cp-quotation-mark"><code title="quotation mark">&quot;</code></a>);
         a sequence of permitted characters, <a href="#numeric">numeric escapes</a>,
         and/or <a href="#string">string escapes</a>; and a final delimiter.
         The corresponding <a data-cite="RDF12-CONCEPTS#dfn-lexical-form">RDF lexical form</a>
         is the characters between the delimiters,
         after processing any escape sequences.
         If present, the <a data-cite="RDF12-CONCEPTS#dfn-language-tag">language tag</a> is preceded by
-        an <code>@</code> (at sign, <code class="codepoint">U+0040</code>).
+        an <a href="#cp-at-sign"><code title="at sign">@</code></a>.
         If there is no language tag, there may be a <a data-cite="RDF12-CONCEPTS#dfn-datatype-iri">datatype IRI</a>,
-        preceded by <code>^^</code>
-        (two concatenated circumflex accent characters, each having the code point <code class="codepoint">U+005E</code>).
+        preceded by <a href="#cp-double-circumflex"><code>^^</code></a>.
         A datatype IRI in Turtle may be written using either a
         <a href="#sec-iri">resolved IRI</a>,
         a <a href="#relative-iri">relative IRI reference</a>,
@@ -467,25 +680,25 @@
         the datatype is <code>xsd:string</code>.
       </p>
 
-      <p>A <code>\</code> (backslash, code point <code class="codepoint">U+005C</code>)
+      <p>A <a href="#cp-backslash"><code title="backslash">\</code></a>
         may not appear in any quoted literal except as part of an escape sequence.
         Other restrictions depend on the delimiter:</p>
 
       <ul>
-        <li>Literals delimited by <code>'</code> (apostrophe, code point <code class="codepoint">U+0027</code>)
+        <li>Literals delimited by <a href="#cp-apostrophe"><code title="apostrophe">'</code></a>
           may not contain unescaped
-          <code>'</code> (apostrophe, code point <code class="codepoint">U+0027</code>),
-          <code>LF</code> (line feed, code point <code class="codepoint">U+000A</code>), nor
-          <code>CR</code> (carriage return, code point <code class="codepoint">U+000D</code>)
+          <a href="#cp-apostrophe"><code title="apostrophe">'</code></a>,
+          <a href="#cp-line-feed"><code title="line feed">LF</code></a>, nor
+          <a href="#cp-carriage-return"><code title="carriage return">CR</code></a>
           characters.</li>
-        <li>Literals delimited by <code>&quot;</code> (quotation mark, code point <code class="codepoint">U+0022</code>)
+        <li>Literals delimited by <a href="#cp-quotation-mark"><code title="quotation mark">&quot;</code></a>
           may not contain unescaped
-          <code>&quot;</code> (quotation mark, code point <code class="codepoint">U+0022</code>),
-          <code>LF</code> (line feed, code point <code class="codepoint">U+000A</code>), nor
-          <code>CR</code> (carriage return, code point <code class="codepoint">U+000D</code>)
+          <a href="#cp-quotation-mark"><code title="quotation mark">&quot;</code></a>,
+          <a href="#cp-line-feed"><code title="line feed">LF</code></a>, nor
+          <a href="#cp-carriage-return"><code title="carriage return">CR</code></a>
           characters.</li>
-        <li>Literals delimited by <code>'''</code> (sequence of three apostrophes, code point <code class="codepoint">U+0027</code>) may not contain such a sequence.</li>        
-        <li>Literals delimited by <code>"""</code> (sequence of three quotation marks, code point <code class="codepoint">U+0022</code>) may not contain such a sequence.</li>
+        <li>Literals delimited by <a href="#cp-triple-apostrophe"><code>'''</code></a> may not contain such a sequence.</li>        
+        <li>Literals delimited by <a href="#cp-triple-quote"><code>"""</code></a> may not contain such a sequence.</li>
       </ul>
 
       <pre id="ex-quoted-literals"
@@ -548,8 +761,8 @@
             <td><code>"4.2E9"^^xsd:double</code></td>
             <td>Double-precision floating point values may be written as
               an optionally signed mantissa with an optional decimal point,
-              the letter <code>e</code> (code point <code class="codepoint">U+0065</code>)
-              or the letter <code>E</code> (code point <code class="codepoint">U+0045</code>),
+              the letter <a href="#cp-lowercase-e"><code>e</code></a>
+              or the letter <a href="#cp-uppercase-e"><code>E</code></a>,
               and an optionally signed integer exponent.
               The exponent matches the regular expression "<code>[+-]?[0-9]+</code>"
               and the mantissa matches one of these regular expressions:
@@ -613,18 +826,15 @@
       liberalized as follows:
     </p>
     <ul>
-      <li>The character <code>_</code> (underscore, <code class="codepoint">U+005F</code>) and
-      the digit characters <code>0</code>–<code>9</code> (zero through nine, 
-      <code class="codepoint">U+0030</code> 
-      through <code class="codepoint">U+0039</code>, inclusive)
+      <li>The character <a href="#cp-underscore"><code title="underscore">_</code></a> and
+      the digit characters <a class="#cp-zero"><code title="digit zero">0</code></a>–<a href="#cp-nine"><code title="digit nine">9</code></a>, inclusive)
       may appear anywhere in a
       <a data-cite="RDF12-CONCEPTS#dfn-blank-node-identifier">blank node identifier</a>.</li>
-      <li>The character <code>.</code> (full stop, <code class="codepoint">U+002E</code>) may appear anywhere except the first or last character.</li>
+      <li>The character <a href="#cp-full-stop"><code title="full stop">.</code></a> may appear anywhere except the first or last character.</li>
       <li>The characters
-        <code>-</code> (hyphen, <code class="codepoint">U+2010</code>),
-        <code>.</code> (full stop, <code class="codepoint">U+002E</code >),
-        &#x203F;&nbsp; (undertie, <code class="codepoint">U+203F</code>),
-        &#x2040;&nbsp; (character tie, <code class="codepoint">U+2040</code>),
+        <a href="#cp-hyphen"><code title="hyphen">-</code></a>,
+        <a href="#cp-undertie"><code title="undertie">&#x203F;</code></a>,
+        <a href="#cp-character-tie"><code title="character tie">&#x2040;</code></a>,
         and
         the combining diacritical marks (<code class="codepoint">U+0300</code>
                                       to <code class="codepoint">U+036F</code>)
@@ -678,9 +888,9 @@
   <p>
     The Turtle grammar allows <a href="#grammar-production-blankNodePropertyList">blankNodePropertyList</a>s
     to be nested.
-    In this case, each inner <code>[</code>
+    In this case, each inner <a href="#cp-bracket-left"><code title="left square bracket">[</code></a>
     establishes a new subject <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank node</a> which reverts to the outer node
-    at the <code>]</code>, and serves as the current subject
+    at the <a href="#cp-bracket-right"><code title="right square bracket">]</code></a>, and serves as the current subject
     for <a href="#grammar-production-predicateObjectList">predicate object lists</a>.
   </p>
 
@@ -731,10 +941,10 @@
     <p>
       RDF provides a <a data-cite="RDF12-SEMANTICS#rdf-collections">Collection</a> [[RDF12-SEMANTICS]]
       structure for lists of RDF nodes.
-      The Turtle syntax for Collections is a possibly empty list of RDF terms enclosed by <code>()</code>.
+      The Turtle syntax for Collections is a possibly empty list of RDF terms enclosed by <a href="#cp-paren-left"><code title="left parenthesis">(</code></a><a href="#cp-paren-right"><code title="right parenthesis">)</code></a>.
       This collection represents an <code>rdf:first</code>/<code>rdf:rest</code>
       list structure with the sequence of objects of the <code>rdf:first</code>
-      statements being the order of the terms enclosed by <code>()</code>.
+      statements being the order of the terms enclosed by <a href="#cp-paren-left"><code title="left parenthesis">(</code></a><a href="#cp-paren-right"><code title="right parenthesis">)</code></a>.
     </p>
 
     <p>
@@ -773,8 +983,8 @@
       with <code><a href="#grammar-production-subject">subject</a></code>,
       <code><a href="#grammar-production-predicate">predicate</a></code>, and
       <code><a href="#grammar-production-object">object</a></code>
-      preceded by <code>&lt;&lt;</code> (two concatenated less-than sign characters, each having the code point <code class="codepoint">U+003C</code>), and
-      followed by <code>&gt;&gt;</code> (two concatenated greater-than sign characters, each having the code point <code class="codepoint">U+003E</code>).
+      preceded by <a href="#cp-double-lt"><code>&lt;&lt;</code></a>, and
+      followed by <a href="#cp-double-gt"><code>&gt;&gt;</code></a>.
       Note that <a data-cite="RDF12-CONCEPTS#dfn-quoted-triple">quoted triples</a>
       may be nested.
      </p>
@@ -806,7 +1016,7 @@
         which provides a convenient shortcut.
         An annotation can be used to both assert a triple and have that triple be the
         <a data-cite="RDF12-CONCEPTS#dfn-subject">subject</a> of further triples.
-        The delimiters `{|` and `|}` follow an
+        The delimiters <a href="#cp-lparen-pipe"><code>{|</code></a> and <a href="#cp-pipe-rparen"><code>|}</code></a> follow an
         <a>asserted triple</a> to make that triple,
         as a <a>quoted triple</a>,
         the <a data-cite="RDF12-CONCEPTS#dfn-subject">subject</a>
@@ -870,7 +1080,7 @@
 
   <p>An example of two identical triples containing literal objects
   containing newlines, written in plain and long literal forms.
-  The line breaks in this example are <code>LF</code> (line feed, code point <code class="codepoint">U+000A</code>).
+  The line breaks in this example are <a href="#cp-line-feed"><code title="line feed">LF</code></a>.
   (<a href="examples/example3.ttl">example3.ttl</a>):</p>
 
   <pre class="example" data-include="examples/example3.ttl" data-oninclude="updateExample"></pre>
@@ -1034,11 +1244,11 @@
   <section id="sec-grammar-comments">
     <h3>Comments</h3>
 
-    <p>Comments in Turtle start with a <code>#</code> (number sign, <code class="codepoint">U+0023</code>) outside an
+    <p>Comments in Turtle start with a <a href="#cp-number-sign"><code title="number sign">#</code></a> outside an
     <a href="#grammar-production-IRIREF">IRIREF</a> or <a href="#grammar-production-String">String</a>,
     and continue to the end of line (marked by
-    <code>LF</code> (line feed, code point <code class="codepoint">U+000A</code>), or
-    <code>CR</code> (carriage return, code point <code class="codepoint">U+000D</code>)),
+    <a href="#cp-line-feed"><code title="line feed">LF</code></a>, or
+    <a href="#cp-carriage-return"><code title="carriage return">CR</code></a>),
     or end of file if there is no end of line after the comment marker.
     Comments are treated as white space.</p>
   </section>
@@ -1178,9 +1388,9 @@
       <li>
         <p>
           <em id="reserved">reserved character escape sequences</em> consist of
-          a <code>\</code> (backslash, code point <code class="codepoint">U+005C</code>)
+          a <a href="#cp-backslash"><code title="backslash">\</code></a>
           followed by one of <code>~.-!$&amp;'()*+,;=/?#@%_</code>
-          and represent the character to the right of the <code>\</code>.
+          and represent the character to the right of the <a href="#cp-backslash"><code title="backslash">\</code></a>.
         </p>
       </li>
     </ul>
@@ -1225,7 +1435,7 @@
     <p class="note">%-encoded sequences are in the
       <a href="#grammar-production-IRIREF">character range for IRIs</a>
       and are <a href="#grammar-production-PERCENT">explicitly allowed</a> in local names.
-      These appear as a <code>%</code> (percent sign, code point <code class="codepoint">U+0025</code>)
+      These appear as a <a href="#cp-percent-sign"><code title="percent sign">%</code></a>
       followed by two hex characters and represent that
       same sequence of three characters. These sequences are <em>not</em>
       decoded during processing.
@@ -1322,7 +1532,7 @@
       <li id="baseURI">IRI |baseURI|
         — When the <a href="#grammar-production-base">base
         production</a> is reached, the second rule argument,
-        <code>IRIREF</code>, is the base URI used for relative
+        <a href="#grammar-production-IRIREF"><code>IRIREF</code></a>, is the base URI used for relative
         IRI resolution.
         <!--
         <span class="testrefs">(test: <a
@@ -1334,18 +1544,18 @@
       <li id="namespaces">Map[<a class="type prefix" href="#prefix">prefix</a>
         -&gt; IRI]
         |namespaces| — The second and third rule arguments
-        (<code>PNAME_NS</code> and <code>IRIREF</code>)
+        (<a href="#grammar-production-PNAME_NS"><code>PNAME_NS</code></a> and <a href="#grammar-production-IRIREF"><code>IRIREF</code></a>)
         in the <a href="#grammar-production-prefixID">prefixID production</a>
-        assign a namespace name (<code>IRIREF</code>) for the prefix
-        (<code>PNAME_NS</code>).
+        assign a namespace name (<a href="#grammar-production-IRIREF"><code>IRIREF</code></a>) for the prefix
+        (<a href="#grammar-production-PNAME_NS"><code>PNAME_NS</code></a>).
         Outside of a <code>prefixID</code> production,
-        any <code>PNAME_NS</code> is substituted with the namespace.
+        any <a href="#grammar-production-PNAME_NS"><code>PNAME_NS</code></a> is substituted with the namespace.
         <!--
         <span class="testrefs">(test: <a href="tests/#prefix1">prefix1</a>
         <a href="tests/#escapedNamespace1">escapedNamespace1</a>)</span>
       -->
         Note that the prefix may be an empty string, per the
-        <code>PNAME_NS</code> production: <code>PN_PREFIX? ':'</code>.
+        <a href="#grammar-production-PNAME_NS"><code>PNAME_NS</code></a> production: <code>PN_PREFIX? ':'</code>.
         <!--
           <span class="testrefs">(test: <a href="tests/#default1">default1</a>)</span>.
           -->
@@ -1392,16 +1602,16 @@
         <tr><th>                                                                       production               </th><th>                                                                                       type            </th><th>procedure</th></tr>
       </thead>
       <tbody>
-      <tr id="handle-IRIREF"                          ><td style="text-align:left;"            ><a class="type IRI"          href="#grammar-production-IRIREF"                          >IRIREF                          </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-iri">          IRI          </a></td><td>The characters between <code>&lt;</code> and <code>&gt;</code> are taken, with the <a href="#numeric">numeric escape sequences</a> unescaped, to form the IRI. <a data-cite="RDF12-CONCEPTS#dfn-relative-iri">Relative IRI reference</a> resolution is performed per <a href="#sec-iri-references" class="sectionRef">Section 6.3</a>.</td></tr>
+      <tr id="handle-IRIREF"                          ><td style="text-align:left;"            ><a class="type IRI"          href="#grammar-production-IRIREF"                          >IRIREF                          </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-iri">          IRI          </a></td><td>The characters between <a href="#cp-less-than"><code title="less-than sign">&lt;</code></a> and <a href="#cp-greater-than"><code title="greater-than sign">&gt;</code></a> are taken, with the <a href="#numeric">numeric escape sequences</a> unescaped, to form the IRI. <a data-cite="RDF12-CONCEPTS#dfn-relative-iri">Relative IRI reference</a> resolution is performed per <a href="#sec-iri-references" class="sectionRef">Section 6.3</a>.</td></tr>
       <tr id="handle-PNAME_NS"                        ><td style="text-align:left;" rowspan="2"><a class="type string"       href="#grammar-production-PNAME_NS"                        >PNAME_NS                        </a></td><td><a href="#prefix">                              prefix       </a></td><td>When used in a <a href="#grammar-production-prefixID">prefixID</a> or <a href="#grammar-production-sparqlPrefix">sparqlPrefix</a> production, the <code>prefix</code> is the potentially empty <a data-cite="RDF12-CONCEPTS#dfn-rdf-string">RDF string</a> matching the first argument of the rule is a key into the <a href="#namespaces">namespaces map</a>.</td></tr>
       <tr id="handle-PNAME_NS2"                       >                                                                                                                                                                           <td><a data-cite="RDF12-CONCEPTS#dfn-iri">          IRI          </a></td><td>When used in a <a href="#grammar-production-PrefixedName">PrefixedName</a> production, the <code>iri</code> is the value in the <a href="#namespaces">namespaces map</a> corresponding to the first argument of the rule.</td></tr>
-      <tr id="handle-PNAME_LN"                        ><td style="text-align:left;"            ><a class="type IRI"          href="#grammar-production-PNAME_LN"                        >PNAME_LN                        </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-iri">          IRI          </a></td><td>A potentially empty <a href="#prefix">prefix</a> is identified by the first sequence, <code>PNAME_NS</code>. The <a href="#namespaces">namespaces map</a> <em class="rfc2119">MUST</em> have a corresponding <code>namespace</code>. The <a data-cite="RDF12-CONCEPTS#dfn-rdf-string">RDF string</a> of the IRI is formed by unescaping the <a href="#reserved">reserved characters</a> in the second argument, <code>PN_LOCAL</code>, and concatenating this onto the <code>namespace</code>.</td></tr>
+      <tr id="handle-PNAME_LN"                        ><td style="text-align:left;"            ><a class="type IRI"          href="#grammar-production-PNAME_LN"                        >PNAME_LN                        </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-iri">          IRI          </a></td><td>A potentially empty <a href="#prefix">prefix</a> is identified by the first sequence, <a href="#grammar-production-PNAME_NS"><code>PNAME_NS</code></a>. The <a href="#namespaces">namespaces map</a> <em class="rfc2119">MUST</em> have a corresponding <code>namespace</code>. The <a data-cite="RDF12-CONCEPTS#dfn-rdf-string">RDF string</a> of the IRI is formed by unescaping the <a href="#reserved">reserved characters</a> in the second argument, <code>PN_LOCAL</code>, and concatenating this onto the <code>namespace</code>.</td></tr>
       <!-- tr id="handle-PrefixedName"                ><td style="text-align:left;"            ><a class="type IRI"          href="#grammar-production-PrefixedName"                    >PrefixedName                    </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-iri">          IRI          </a></td><td>.</td></tr -->
       <tr id="handle-STRING_LITERAL_SINGLE_QUOTE"     ><td style="text-align:left;"            ><a class="type lexicalForm"  href="#grammar-production-STRING_LITERAL_SINGLE_QUOTE"     >STRING_LITERAL_SINGLE_QUOTE     </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-lexical-form"> lexical form </a></td><td>The characters between the outermost <code>'</code>s (apostrophe, <code class="codepoint">U+0027</code>) are taken, after <a href="#numeric">numeric</a> and <a href="#string">string</a> escape sequences are replaced with the characters that they represent, to form the <a data-cite="RDF12-CONCEPTS#dfn-rdf-string">RDF string</a> of a lexical form.</td></tr>
       <tr id="handle-STRING_LITERAL_QUOTE"            ><td style="text-align:left;"            ><a class="type lexicalForm"  href="#grammar-production-STRING_LITERAL_QUOTE"            >STRING_LITERAL_QUOTE            </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-lexical-form"> lexical form </a></td><td>The characters between the outermost <code>"</code>s   are taken, with <a href="#numeric">numeric</a> and <a href="#string">string</a> escape sequences unescaped, to form the <a data-cite="RDF12-CONCEPTS#dfn-rdf-string">RDF string</a> of a lexical form.</td></tr>
-      <tr id="handle-STRING_LITERAL_LONG_SINGLE_QUOTE"><td style="text-align:left;"            ><a class="type lexicalForm"  href="#grammar-production-STRING_LITERAL_LONG_SINGLE_QUOTE">STRING_LITERAL_LONG_SINGLE_QUOTE</a></td><td><a data-cite="RDF12-CONCEPTS#dfn-lexical-form"> lexical form </a></td><td>The characters between the outermost <code>'''</code>s are taken, with <a href="#numeric">numeric</a> and <a href="#string">string</a> escape sequences unescaped, to form the <a data-cite="RDF12-CONCEPTS#dfn-rdf-string">RDF string</a> of a lexical form.</td></tr>
-      <tr id="handle-STRING_LITERAL_LONG_QUOTE"       ><td style="text-align:left;"            ><a class="type lexicalForm"  href="#grammar-production-STRING_LITERAL_LONG_QUOTE"       >STRING_LITERAL_LONG_QUOTE       </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-lexical-form"> lexical form </a></td><td>The characters between the outermost <code>"""</code>s (sequence of three quotation mark characters, <code class="codepoint">U+0022</code>) are taken, after <a href="#numeric">numeric</a> and <a href="#string">string</a> escape sequences are are replaced with the characters that they represent, to form the <a data-cite="RDF12-CONCEPTS#dfn-rdf-string">RDF string</a> of a lexical form.</td></tr>
-      <tr id="handle-LANGTAG"                         ><td style="text-align:left;"            ><a class="type langTag"      href="#grammar-production-LANGTAG"                         >LANGTAG                         </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-language-tag"> language tag </a></td><td>The characters following the <code>@</code> form the the <a data-cite="RDF12-CONCEPTS#dfn-language-tag">language tag</a>.</td></tr>
+      <tr id="handle-STRING_LITERAL_LONG_SINGLE_QUOTE"><td style="text-align:left;"            ><a class="type lexicalForm"  href="#grammar-production-STRING_LITERAL_LONG_SINGLE_QUOTE">STRING_LITERAL_LONG_SINGLE_QUOTE</a></td><td><a data-cite="RDF12-CONCEPTS#dfn-lexical-form"> lexical form </a></td><td>The characters between the outermost <a href="#cp-triple-apostrophe"><code>'''</code></a>s are taken, with <a href="#numeric">numeric</a> and <a href="#string">string</a> escape sequences unescaped, to form the <a data-cite="RDF12-CONCEPTS#dfn-rdf-string">RDF string</a> of a lexical form.</td></tr>
+      <tr id="handle-STRING_LITERAL_LONG_QUOTE"       ><td style="text-align:left;"            ><a class="type lexicalForm"  href="#grammar-production-STRING_LITERAL_LONG_QUOTE"       >STRING_LITERAL_LONG_QUOTE       </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-lexical-form"> lexical form </a></td><td>The characters between the outermost <a href="#cp-triple-quote"><code>"""</code></a>s are taken, after <a href="#numeric">numeric</a> and <a href="#string">string</a> escape sequences are are replaced with the characters that they represent, to form the <a data-cite="RDF12-CONCEPTS#dfn-rdf-string">RDF string</a> of a lexical form.</td></tr>
+      <tr id="handle-LANGTAG"                         ><td style="text-align:left;"            ><a class="type langTag"      href="#grammar-production-LANGTAG"                         >LANGTAG                         </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-language-tag"> language tag </a></td><td>The characters following the <a href="#cp-at-sign"><code title="at sign">@</code></a> form the the <a data-cite="RDF12-CONCEPTS#dfn-language-tag">language tag</a>.</td></tr>
       <tr id="handle-RDFLiteral"                      ><td style="text-align:left;"            ><a class="type literal"      href="#grammar-production-RDFLiteral"                      >RDFLiteral                      </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-literal">      literal      </a></td><td>The literal has a lexical form of the first rule argument, <code>String</code>. If the <code>'^^' iri</code> rule matched, the datatype is <code>iri</code> and the literal has no language tag. If the <code>LANGTAG</code> rule matched, the datatype is <code>rdf:langString</code> and the language tag is <code>LANGTAG</code>. If neither matched, the datatype is <code>xsd:string</code> and the literal has no language tag.</td></tr>
       <tr id="handle-INTEGER"                         ><td style="text-align:left;"            ><a class="type integer"      href="#grammar-production-INTEGER"                         >INTEGER                         </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-literal">      literal      </a></td><td>The literal has a lexical form of the input string, and a datatype of <code>xsd:integer</code>.</td></tr>
       <tr id="handle-DECIMAL"                         ><td style="text-align:left;"            ><a class="type decimal"      href="#grammar-production-DECIMAL"                         >DECIMAL                         </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-literal">      literal      </a></td><td>The literal has a lexical form of the input string, and a datatype of <code>xsd:decimal</code>.</td></tr>
@@ -1459,22 +1669,22 @@
       production records the |curSubject|
       and |curPredicate|,
       and sets |curSubject|
-      to a novel <code>blank node</code> <code>B</code>.
+      to a novel <code>blank node</code> |B|.
       Finishing the <code><a href="#grammar-production-blankNodePropertyList">blankNodePropertyList</a></code>
       production restores |curSubject|
       and |curPredicate|.
       The node produced by matching <code><a href="#grammar-production-blankNodePropertyList">blankNodePropertyList</a></code>
-      is the blank node <code>B</code>.
+      is the blank node |B|.
     </p>
 
     <h4 id="collection" style="padding-bottom:0; margin-bottom:0;"><span>Collections:</span></h4>
 
     <p style="padding-top:0; margin-top:0;">
       Beginning the <code><a href="#grammar-production-collection">collection</a></code> production records the |curSubject| and |curPredicate|.
-      Each <code>object</code> in the <code><a href="#grammar-production-collection">collection</a></code> production has a |curSubject| set to a novel <code>blank node</code> <code>B</code> and a |curPredicate| set to <code>rdf:first</code>.
+      Each <code>object</code> in the <code><a href="#grammar-production-collection">collection</a></code> production has a |curSubject| set to a novel <code>blank node</code> |B| and a |curPredicate| set to <code>rdf:first</code>.
       For each object <code>object<sub>n</sub></code> after the first produces a triple:<span class="ntriple"><code>object<sub>n-1</sub></code> <code>rdf:rest</code> <code>object<sub>n</sub></code> .</span>
       Finishing the <code><a href="#grammar-production-collection">collection</a></code> production creates an additional triple <span class="ntriple"><code>curSubject rdf:rest rdf:nil</code> .</span> and restores |curSubject| and |curPredicate|
-      The node produced by matching <code><a href="#grammar-production-collection">collection</a></code> is the first blank node <code>B</code> for non-empty lists and <code>rdf:nil</code> for empty lists.
+      The node produced by matching <code><a href="#grammar-production-collection">collection</a></code> is the first blank node |B| for non-empty lists and <code>rdf:nil</code> for empty lists.
     </p>
   </section>
 
@@ -1553,7 +1763,9 @@
   </pre>
 
   <p>Turtle content should be placed in a <code>script</code> tag with the
-    <code>type</code> attribute set to <code>text/turtle</code>. <code>&lt;</code> and <code>&gt;</code> symbols
+    <code>type</code> attribute set to <code>text/turtle</code>.
+    <a href="#cp-less-than"><code title="less-than sign">&lt;</code></a> and
+    <a href="#cp-greater-than"><code title="greater-than sign">&gt;</code></a> symbols
     do not need to be escaped inside of script tags. The character encoding of the embedded Turtle
     will match the HTML documents encoding.</p>
 
