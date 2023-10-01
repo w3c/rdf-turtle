@@ -197,214 +197,6 @@
     <a href="#sec-grammar" class="sectionRef">Turtle Grammar</a>
     and <a href="#sec-parsing" class="sectionRef">Parsing</a>.
   </p>
-
-<section id="typographical-conventions" class="informative">
-  <h3>Typographical conventions</h3>
-
-  <p>The following typographic conventions are used in this specification:</p>
-
-  <dl class="typography">
-    <dt><code>markup</code></dt><dd>
-      Markup (elements, attributes, properties),
-      machine processable values (string, characters, media types),
-      property name,
-      or a file name is in red-orange monospace font.</dd>
-    <dt><dfn data-no-xref="">definition</dfn></dt><dd>
-      A definition of a term, to be used elsewhere in this or other specifications,
-      is in bold and italics.</dd>
-    <dt><a data-lt="definition">definition reference</a></dt><dd>
-      A reference to a definition <em>in this document</em>
-      is underlined and is also an active link to the definition itself. </dd>
-    <dt><a href="">hyperlink</a></dt><dd>
-      A hyperlink is underlined and in blue.</dd>
-    <dt>[<a href="">reference</a>]</dt><dd>
-      A document reference (normative or informative) is enclosed in square brackets
-      and links to the references section.</dd>
-    <dt><a href="" class="cp-terminal"><code>:</code></a></dt><dd>
-      A grammar literal terminal with specific Unicode code points.
-      Grammar literal terminals used in this specification include the following:
-
-      <!-- Selected unicode character descriptions, taken from https://en.wikipedia.org/wiki/List_of_Unicode_characters -->
-      <table class="cp-definitions">
-        <thead>
-          <tr><th>Code</th><th>Glyph</th><th>Description</th></tr>
-        </thead>
-        <tbody>
-          <tr id="cp-tab">
-            <td><code class="codepoint">U+0009</code></td>
-            <td><code title="horizontal tab">HT</code></td>
-            <td>Horizontal tab</td>
-          </tr>
-          <tr id="cp-line-feed">
-            <td><code class="codepoint">U+000A</code></td>
-            <td><code title="line feed">LF</code></td>
-            <td>Line feed</td>
-          </tr>
-          <tr id="cp-carriage-return">
-            <td><code class="codepoint">U+000D</code></td>
-            <td><code title="carriage return">CR</code></td>
-            <td>Carriage return</td>
-          </tr>
-          <tr id="cp-quotation-mark">
-            <td><code class="codepoint">U+0022</code></td>
-            <td><code title="quotation mark">&quot;</code></td>
-            <td>Quotation mark</td>
-          </tr>
-          <tr id="cp-number-sign">
-            <td><code class="codepoint">U+0023</code></td>
-            <td><code title="number sign">#</code></td>
-            <td>Number sign</td>
-          </tr>
-          <tr id="cp-percent-sign">
-            <td><code class="codepoint">U+0025</code></td>
-            <td><code title="percent sign">%</code></td>
-            <td>Percent sign</td>
-          </tr>
-          <tr id="cp-apostrophe">
-            <td><code class="codepoint">U+0027</code></td>
-            <td><code title="apostrophe">'</code></td>
-            <td>Apostrophe</td>
-          </tr>
-          <tr id="cp-paren-left">
-            <td><code class="codepoint">U+0028</code></td>
-            <td><code title="left parenthesis">(</code></td>
-            <td>Left parenthesis</td>
-          </tr>
-          <tr id="cp-paren-right">
-            <td><code class="codepoint">U+0029</code></td>
-            <td><code title="right parenthesis">)</code></td>
-            <td>Right parenthesis</td>
-          </tr>
-          <tr id="cp-comma">
-            <td><code class="codepoint">U+002C</code></td>
-            <td><code title="comma">,</code></td>
-            <td>Comma</td>
-          </tr>
-          <tr id="cp-hyphen">
-            <td><code class="codepoint">U+002D</code></td>
-            <td><code title="hyphen">-</code></td>
-            <td>Hyphen</td>
-          </tr>
-          <tr id="cp-full-stop">
-            <td><code class="codepoint">U+002E</code></td>
-            <td><code title="full stop">.</code></td>
-            <td>Full stop</td>
-          </tr>
-          <tr id="cp-zero">
-            <td><code class="codepoint">U+0030</code></td>
-            <td><code title="digit zero">0</code></td>
-            <td>Digit zero</td>
-          </tr>
-          <tr id="cp-nine">
-            <td><code class="codepoint">U+0039</code></td>
-            <td><code title="digit nine">9</code></td>
-            <td>Digit nine</td>
-          </tr>
-          <tr id="cp-colon">
-            <td><code class="codepoint">U+003B</code></td>
-            <td><code title="colon">:</code></td>
-            <td>Colon</td>
-          </tr>
-          <tr id="cp-semicolon">
-            <td><code class="codepoint">U+003B</code></td>
-            <td><code title="semicolon">;</code></td>
-            <td>Semicolon</td>
-          </tr>
-          <tr id="cp-less-than">
-            <td><code class="codepoint">U+003C</code></td>
-            <td><code title="less than sign">&lt;</code></td>
-            <td>Less-than sign</td>
-          </tr>
-          <tr id="cp-greater-than">
-            <td><code class="codepoint">U+003E</code></td>
-            <td><code title="greater-than sign">&gt;</code></td>
-            <td>Greater-than sign</td>
-          </tr>
-          <tr id="cp-at-sign">
-            <td><code class="codepoint">U+0040</code></td>
-            <td><code title="at sign">@</code></td>
-            <td>At sign</td>
-          </tr>
-          <tr id="cp-uppercase-e">
-            <td><code class="codepoint">U+0045</code></td>
-            <td><code title="underscore">E</code></td>
-            <td>Latin capital letter E</td>
-          </tr>
-          <tr id="cp-bracket-left">
-            <td><code class="codepoint">U+005B</code></td>
-            <td><code title="left square bracket">[</code></td>
-            <td>Left square bracket</td>
-          </tr>
-          <tr id="cp-backslash">
-            <td><code class="codepoint">U+005C</code></td>
-            <td><code title="backslash">\</code></td>
-            <td>Backslash</td>
-          </tr>
-          <tr id="cp-bracket-right">
-            <td><code class="codepoint">U+005D</code></td>
-            <td><code title="right square bracket">[</code></td>
-            <td>Right square bracket</td>
-          </tr>
-          <tr id="cp-underscore">
-            <td><code class="codepoint">U+005F</code></td>
-            <td><code title="underscore">_</code></td>
-            <td>Underscore</td>
-          </tr>
-          <tr id="cp-lowercase-e">
-            <td><code class="codepoint">U+0065</code></td>
-            <td><code title="underscore">e</code></td>
-            <td>Latin small letter E</td>
-          </tr>
-          <tr id="cp-verticle-bar">
-            <td><code class="codepoint">U+007C</code></td>
-            <td><code title="verticle bar">|</code></td>
-            <td>Berticle bar</td>
-          </tr>
-          <tr id="cp-undertie">
-            <td><code class="codepoint">U+203F</code></td>
-            <td><code title="undertie">&#x203F;</code></td>
-            <td>Undertie</td>
-          </tr>
-          <tr id="cp-character-tie">
-            <td><code class="codepoint">U+2040</code></td>
-            <td><code title="character tie">&#x2040;</code></td>
-            <td>Character tie</td>
-          </tr>
-        </tbody>
-      </table>
-
-      Other short terminals are composed of specific sequences of unicode characters:
-      
-      <dl>
-        <dt id="cp-space"><code title="space">space</code></dt>
-        <dd><code class="codepoint">U+0020</code></dd>
-        <dt id="cp-triple-quote"><code>"""</code></dt>
-        <dd>three concatenated quotation mark characters, each having the code point <code class="codepoint">U+0022</code></dd>
-        <dt id="cp-triple-apostrophe"><code>'''</code></dt>
-        <dd>three concatenated apostrophes characters, each having the code point <code class="codepoint">U+0027</code></dd>
-        <dt id="cp-double-lt"><code>&lt;&lt;</code></dt>
-        <dd>two concatenated less-than sign characters, each having the code point <code class="codepoint">U+003C</code></dd>
-        <dt id="cp-double-gt"><code>&gt;&gt;</code></dt>
-        <dd>two concatenated greater-than sign characters, each having the code point <code class="codepoint">U+003E</code></dd>
-        <dt id="cp-double-circumflex"><code>^^</code></dt>
-        <dd>two concatenated circumflex accent characters, each having the code point <code class="codepoint">U+005E</code></dd>
-        <dt id="cp-lparen-pipe"><code>{|</code></dt>
-        <dd><a href="#cp-paren-left">left parenthesis</a> followed by <a href="#cp-verticle-bar">verticle bar</a></dd>
-        <dt id="cp-pipe-rparen"><code>|}</code></dt>
-        <dd><a href="#cp-verticle-bar">verticle bar</a> followed by <a href="#cp-paren-right">right parenthesis</a></dd>
-      </dl>
-    </dd>
-  </dl>
-
-  <p class="note">Notes are in light green boxes with a green left border and with a "Note" header in green.
-    Notes are always informative.</p>
-
-  <pre class="example nohighlight">
-    Examples are in light khaki boxes, with khaki left border,
-    and with a numbered "Example" header in khaki.
-    Examples are always informative. The content of the example is in monospace font and may be syntax colored.
-  </pre>
-</section>
 </section>
 
 <section id="language-features" class="informative">
@@ -827,7 +619,7 @@
     </p>
     <ul>
       <li>The character <a href="#cp-underscore"><code title="underscore">_</code></a> and
-      the digit characters <a class="#cp-zero"><code title="digit zero">0</code></a>–<a href="#cp-nine"><code title="digit nine">9</code></a>, inclusive)
+      the digit characters <a href="#cp-zero"><code title="digit zero">0</code></a>–<a href="#cp-nine"><code title="digit nine">9</code></a>, inclusive)
       may appear anywhere in a
       <a data-cite="RDF12-CONCEPTS#dfn-blank-node-identifier">blank node identifier</a>.</li>
       <li>The character <a href="#cp-full-stop"><code title="full stop">.</code></a> may appear anywhere except the first or last character.</li>
@@ -1016,7 +808,7 @@
         which provides a convenient shortcut.
         An annotation can be used to both assert a triple and have that triple be the
         <a data-cite="RDF12-CONCEPTS#dfn-subject">subject</a> of further triples.
-        The delimiters <a href="#cp-lparen-pipe"><code>{|</code></a> and <a href="#cp-pipe-rparen"><code>|}</code></a> follow an
+        The delimiters <a href="#cp-curly-pipe"><code>{|</code></a> and <a href="#cp-pipe-curly"><code>|}</code></a> follow an
         <a>asserted triple</a> to make that triple,
         as a <a>quoted triple</a>,
         the <a data-cite="RDF12-CONCEPTS#dfn-subject">subject</a>
@@ -1502,6 +1294,180 @@
     </div>
 
     <div data-include="turtle-bnf.html"></div>
+  </section>
+
+  <section>
+    <h2>Selected Terminal Literal Strings</h2>
+    <p>This document uses some specific terminal literal strings [[EBNF-NOTATION]].
+      To clarify the Unicode code points used for these terminal literal strings, the following
+      table describes specific characters and sequences used throughout this document.</p>
+
+    <!-- Selected unicode character descriptions, taken from https://en.wikipedia.org/wiki/List_of_Unicode_characters -->
+    <table class="cp-definitions">
+      <thead>
+        <tr><th>Code</th><th>Glyph</th><th>Description</th></tr>
+      </thead>
+      <tbody>
+        <tr id="cp-tab">
+          <td><code class="codepoint">U+0009</code></td>
+          <td><code title="horizontal tab">HT</code></td>
+          <td>Horizontal tab</td>
+        </tr>
+        <tr id="cp-line-feed">
+          <td><code class="codepoint">U+000A</code></td>
+          <td><code title="line feed">LF</code></td>
+          <td>Line feed</td>
+        </tr>
+        <tr id="cp-carriage-return">
+          <td><code class="codepoint">U+000D</code></td>
+          <td><code title="carriage return">CR</code></td>
+          <td>Carriage return</td>
+        </tr>
+        <tr id="cp-quotation-mark">
+          <td><code class="codepoint">U+0022</code></td>
+          <td><code title="quotation mark">&quot;</code></td>
+          <td>Quotation mark</td>
+        </tr>
+        <tr id="cp-number-sign">
+          <td><code class="codepoint">U+0023</code></td>
+          <td><code title="number sign">#</code></td>
+          <td>Number sign</td>
+        </tr>
+        <tr id="cp-percent-sign">
+          <td><code class="codepoint">U+0025</code></td>
+          <td><code title="percent sign">%</code></td>
+          <td>Percent sign</td>
+        </tr>
+        <tr id="cp-apostrophe">
+          <td><code class="codepoint">U+0027</code></td>
+          <td><code title="apostrophe">'</code></td>
+          <td>Apostrophe</td>
+        </tr>
+        <tr id="cp-paren-left">
+          <td><code class="codepoint">U+0028</code></td>
+          <td><code title="left parenthesis">(</code></td>
+          <td>Left parenthesis</td>
+        </tr>
+        <tr id="cp-paren-right">
+          <td><code class="codepoint">U+0029</code></td>
+          <td><code title="right parenthesis">)</code></td>
+          <td>Right parenthesis</td>
+        </tr>
+        <tr id="cp-comma">
+          <td><code class="codepoint">U+002C</code></td>
+          <td><code title="comma">,</code></td>
+          <td>Comma</td>
+        </tr>
+        <tr id="cp-hyphen">
+          <td><code class="codepoint">U+002D</code></td>
+          <td><code title="hyphen">-</code></td>
+          <td>Hyphen</td>
+        </tr>
+        <tr id="cp-full-stop">
+          <td><code class="codepoint">U+002E</code></td>
+          <td><code title="full stop">.</code></td>
+          <td>Full stop</td>
+        </tr>
+        <tr id="cp-zero">
+          <td><code class="codepoint">U+0030</code></td>
+          <td><code title="digit zero">0</code></td>
+          <td>Digit zero</td>
+        </tr>
+        <tr id="cp-nine">
+          <td><code class="codepoint">U+0039</code></td>
+          <td><code title="digit nine">9</code></td>
+          <td>Digit nine</td>
+        </tr>
+        <tr id="cp-colon">
+          <td><code class="codepoint">U+003B</code></td>
+          <td><code title="colon">:</code></td>
+          <td>Colon</td>
+        </tr>
+        <tr id="cp-semicolon">
+          <td><code class="codepoint">U+003B</code></td>
+          <td><code title="semicolon">;</code></td>
+          <td>Semicolon</td>
+        </tr>
+        <tr id="cp-less-than">
+          <td><code class="codepoint">U+003C</code></td>
+          <td><code title="less than sign">&lt;</code></td>
+          <td>Less-than sign</td>
+        </tr>
+        <tr id="cp-greater-than">
+          <td><code class="codepoint">U+003E</code></td>
+          <td><code title="greater-than sign">&gt;</code></td>
+          <td>Greater-than sign</td>
+        </tr>
+        <tr id="cp-at-sign">
+          <td><code class="codepoint">U+0040</code></td>
+          <td><code title="at sign">@</code></td>
+          <td>At sign</td>
+        </tr>
+        <tr id="cp-uppercase-e">
+          <td><code class="codepoint">U+0045</code></td>
+          <td><code title="underscore">E</code></td>
+          <td>Latin capital letter E</td>
+        </tr>
+        <tr id="cp-bracket-left">
+          <td><code class="codepoint">U+005B</code></td>
+          <td><code title="left square bracket">[</code></td>
+          <td>Left square bracket</td>
+        </tr>
+        <tr id="cp-backslash">
+          <td><code class="codepoint">U+005C</code></td>
+          <td><code title="backslash">\</code></td>
+          <td>Backslash</td>
+        </tr>
+        <tr id="cp-bracket-right">
+          <td><code class="codepoint">U+005D</code></td>
+          <td><code title="right square bracket">[</code></td>
+          <td>Right square bracket</td>
+        </tr>
+        <tr id="cp-underscore">
+          <td><code class="codepoint">U+005F</code></td>
+          <td><code title="underscore">_</code></td>
+          <td>Underscore</td>
+        </tr>
+        <tr id="cp-lowercase-e">
+          <td><code class="codepoint">U+0065</code></td>
+          <td><code title="underscore">e</code></td>
+          <td>Latin small letter E</td>
+        </tr>
+        <tr id="cp-undertie">
+          <td><code class="codepoint">U+203F</code></td>
+          <td><code title="undertie">&#x203F;</code></td>
+          <td>Undertie</td>
+        </tr>
+        <tr id="cp-character-tie">
+          <td><code class="codepoint">U+2040</code></td>
+          <td><code title="character tie">&#x2040;</code></td>
+          <td>Character tie</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>Other short terminal literal strings are composed of specific sequences of Unicode characters:</p>
+  
+    <dl>
+      <dt id="cp-space"><code title="space">space</code></dt>
+      <dd><code class="codepoint">U+0020</code></dd>
+      <dt id="cp-triple-quote"><code>"""</code></dt>
+      <dd>three concatenated quotation mark characters, each having the code point <code class="codepoint">U+0022</code></dd>
+      <dt id="cp-triple-apostrophe"><code>'''</code></dt>
+      <dd>three concatenated apostrophes characters, each having the code point <code class="codepoint">U+0027</code></dd>
+      <dt id="cp-double-lt"><code>&lt;&lt;</code></dt>
+      <dd>two concatenated less-than sign characters, each having the code point <code class="codepoint">U+003C</code></dd>
+      <dt id="cp-double-gt"><code>&gt;&gt;</code></dt>
+      <dd>two concatenated greater-than sign characters, each having the code point <code class="codepoint">U+003E</code></dd>
+      <dt id="cp-double-circumflex"><code>^^</code></dt>
+      <dd>two concatenated circumflex accent characters, each having the code point <code class="codepoint">U+005E</code></dd>
+      <dt id="cp-curly-pipe"><code>{|</code></dt>
+      <dd><code title="left curly bracket">{</code> (left curly bracket, code point <code class="codepoint">U+007B</code>) followed by
+        <code title="verticle bar">|</code> (verticle bar, code point  <code class="codepoint">U+007C</code>)</dd>
+      <dt id="cp-pipe-curly"><code>|}</code></dt>
+      <dd><code title="verticle bar">|</code> (verticle bar, code point <code class="codepoint">U+007C</code>) followed by
+        <code title="right curly bracket">}</code> (right curly bracket, code point <code class="codepoint">U+007D</code>)</dd>
+    </dl>
   </section>
 </section>
 
