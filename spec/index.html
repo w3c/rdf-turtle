@@ -43,7 +43,7 @@
             company: "Lex Machina, Inc", companyURL: "https://lexmachina.com/"},
       ],
 
-      xref: [ "RDF12-CONCEPTS", "i18n-glossary" ],
+      xref: [ "RDF12-CONCEPTS", "I18N-GLOSSARY" ],
       github: "https://github.com/w3c/rdf-turtle/",
       group:           "rdf-star",
       doJsonLd:     true,
@@ -425,7 +425,7 @@
         the equivalent <a href="#grammar-production-sparqlPrefix"><code>PREFIX</code></a> and <a href="#grammar-production-sparqlBase"><code>BASE</code></a>
         do not have a trailing <a href="#cp-full-stop"><code title="full stop">.</code></a> after the IRI part of the directive.
         The <a href="#grammar-production-sparqlPrefix"><code>PREFIX</code></a> and <a href="#grammar-production-sparqlBase"><code>BASE</code></a> are case-insensitive
-        and can be written as <a href="#grammar-production-sparqlPrefix"><code>PREFIX</code></a> and <a href="#grammar-production-sparqlBase"><code>BASE</code></a>
+        and can be written as <a href="#grammar-production-sparqlPrefix"><code>prefix</code></a> and <a href="#grammar-production-sparqlBase"><code>base</code></a>
         or use mixed case.
     </div>
   </section>
@@ -1022,7 +1022,7 @@
 
   <p>A <a>Turtle document</a> is an <a data-cite="RDF12-CONCEPTS#dfn-rdf-string">RDF string</a>
     encoded in UTF-8 [[!RFC3629]].
-  Only <a data-cite="i18n-glossary#dfn-code-point">Unicode code points</a>
+  Only <a data-cite="I18N-GLOSSARY#dfn-code-point">Unicode code points</a>
   in the range <code class="codepoint">U+0000</code> to <code class="codepoint">U+10FFFF</code>
   inclusive are allowed.
   </p>
@@ -1081,7 +1081,7 @@
 
     <ul>
       <li>
-        <p><em id="numeric">numeric escape sequences</em> represent <a data-cite="i18n-glossary#dfn-code-point">Unicode code points</a>:</p>
+        <p><em id="numeric">numeric escape sequences</em> represent <a data-cite="I18N-GLOSSARY#dfn-code-point">Unicode code points</a>:</p>
 
         <table id="tab-uchar">
           <thead>
@@ -1096,7 +1096,7 @@
                 <a href="#grammar-production-HEX"><code>hex</code></a>
                 <a href="#grammar-production-HEX"><code>hex</code></a>
                 <a href="#grammar-production-HEX"><code>hex</code></a></td>
-              <td>A <a data-cite="i18n-glossary#dfn-code-point">Unicode code point</a>
+              <td>A <a data-cite="I18N-GLOSSARY#dfn-code-point">Unicode code point</a>
                 in the range <code class="codepoint">U+0000</code> to <code class="codepoint">U+FFFF</code> inclusive
                 corresponding to the value encoded by the four hexadecimal digits interpreted
                 from most significant to least significant digit.</td>
@@ -1111,7 +1111,7 @@
                 <a href="#grammar-production-HEX"><code>hex</code></a>
                 <a href="#grammar-production-HEX"><code>hex</code></a>
                 <a href="#grammar-production-HEX"><code>hex</code></a></td>
-              <td>A <a data-cite="i18n-glossary#dfn-code-point">Unicode code point</a>
+              <td>A <a data-cite="I18N-GLOSSARY#dfn-code-point">Unicode code point</a>
                 in the range <code class="codepoint">U+0000</code> to <code class="codepoint">U+0010FFFF</code> inclusive
                 corresponding to the value encoded by the eight hexadecimal digits
                 interpreted from most significant to least significant digit.</td>
@@ -1900,7 +1900,7 @@
 
     <dt>Encoding considerations:</dt>
     <dd>The syntax of Turtle is expressed over code points in Unicode [[!UNICODE]]. The encoding is always UTF-8 [[!UTF-8]].</dd>
-    <dd><a data-cite="i18n-glossary#dfn-code-point">Unicode code points</a> may also be expressed
+    <dd><a data-cite="I18N-GLOSSARY#dfn-code-point">Unicode code points</a> may also be expressed
       using <code>\uXXXX</code> (<code class="codepoint">U+0000</code> to <code class="codepoint">U+FFFF</code>)
       or <code>\UXXXXXXXX</code> syntax (for code points up to <code class="codepoint">U+10FFFF</code>)
       where X is a hexadecimal digit `[0-9A-Fa-f]`</dd>
