@@ -118,7 +118,7 @@
     format as well as the triple pattern syntax of
     [[[SPARQL12-QUERY]]] W3C Recommendation.</p>
 
-  <p>RDF 1.2 Turtle introduces <a>quoted triples</a>
+  <p>RDF 1.2 Turtle introduces <a>triple descriptors</a>
     as a fourth kind of <a data-cite="RDF12-CONCEPTS#dfn-rdf-term">RDF term</a>
     which can be used as the
     <a data-cite="RDF12-CONCEPTS#dfn-subject">subject</a> or
@@ -129,7 +129,7 @@
     <a data-cite="RDF12-CONCEPTS#dfn-dir-lang-string">directional language-tagged strings</a>.</p>
 
   <p>In addition, RDF 1.2 Turtle introduces an <a>annotation syntax</a> which allows
-    <a>quoted triples</a> to also be <a data-lt="asserted triple">asserted</a>.</p>
+    <a>triple descriptors</a> to also be <a data-lt="asserted triple">asserted</a>.</p>
 </section>
 
 <section id='sotd'>
@@ -294,7 +294,7 @@
     <a data-cite="RDF12-CONCEPTS#dfn-iri">IRIs</a> (Internationalized Resource Identifiers),
     <a data-cite="RDF12-CONCEPTS#dfn-literal">literals</a>,
     <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank nodes</a>, and
-    <a data-cite="RDF12-CONCEPTS#dfn-quoted-triple">quoted triples</a>;
+    <a data-cite="RDF12-CONCEPTS#dfn-triple-descriptor">triple descriptors</a>;
     Turtle provides a number of ways of writing each.
   </p>
 
@@ -787,17 +787,38 @@
       may be the <a data-cite="RDF12-CONCEPTS#dfn-subject">subject</a> or
       <a data-cite="RDF12-CONCEPTS#dfn-object">object</a> of an
       <a data-cite="RDF12-CONCEPTS#dfn-rdf-triple">RDF triple</a>.</p>
+    <p class="ednote"><em>Quoted Triple</em>, if it is retained, may be limited to this spec,
+      or replace with a term such as <em>Triple Token</em>.</p>
+
+    <p>A <a>quoted triple</a> is syntactic sugar for a relationship between an
+      identifier and a <a>triple descriptor</a>. The name becomes a way to refer
+      to a tokenized version of a unique <a>triple descriptor</a>, which
+      may or may not be asserted within the graph corresponding to this input document.</p>
 
     <p>A <a data-cite="RDF12-CONCEPTS#dfn-quoted-triple">quoted triple</a>
       is represented using the <a href="#grammar-production-quotedTriple"><code>quotedTriple</code></a> production
       with <a href="#grammar-production-subject"><code>subject</code></a>,
       <a href="#grammar-production-predicate"><code>predicate</code></a>, and
       <a href="#grammar-production-object"><code>object</code></a>
-      preceded by <a href="#cp-double-lt"><code>&lt;&lt;</code></a>, and
+      preceded by <a href="#cp-double-lt"><code>&lt;&lt;</code></a>
+      along with an optional <a href="#grammar-production-IRIREF"><code>IRIREF</code></a>
+      or <a href="#grammar-production-BlankNode"><code>BlankNode</code></a> used as an identifier, and
       followed by <a href="#cp-double-gt"><code>&gt;&gt;</code></a>.
       Note that <a data-cite="RDF12-CONCEPTS#dfn-quoted-triple">quoted triples</a>
-      may be nested.
-     </p>
+      may be nested.</p>
+
+    <p>If a <a href="#grammar-production-quotedTriple"><code>quotedTriple</code></a>
+      is not identified by an <a href="#grammar-production-IRIREF"><code>IRIREF</code></a>
+      or <a href="#grammar-production-BlankNode"><code>BlankNode</code></a>,
+      a fresh RDF <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank node</a> is allocated
+      and used to identify this relationship.</p>
+
+    <p>A quoted triple is syntactic sugar relating a
+      <a href="#grammar-production-subject"><code>subject</code></a>,
+      <a href="#grammar-production-predicate"><code>predicate</code></a>, and
+      <a href="#grammar-production-object"><code>object</code></a>
+      to a <a href="#grammar-production-tripleDescriptor"><code>tripleDescriptor</code></a>.
+    </p>
 
     <pre id="ex-quoted-triple"
          class="example turtle" data-transform="updateExample"
@@ -819,19 +840,32 @@
       like "employee38 has a `familyName` of 'Smith'" above;
       rather, it is known as a <a data-cite="RDF12-CONCEPTS#dfn-quoted-triple">quoted triple</a>.</p>
 
+    <p class="ednote">More examples, using identifiers and showing the expansion to Triple Descriptors,
+      or whatever is selected.</p>
+
     <section id="annotation-syntax">
       <h2>Annotation Syntax</h2>
       <p>Turtle also defines an <dfn data-lt="annotation-syntax">annotation syntax</dfn>
         to both quote and assert a <a data-cite="RDF12-CONCEPTS#dfn-rdf-triple">triple</a>,
         which provides a convenient shortcut.
-        An annotation can be used to both assert a triple and have that triple be the
+        An annotation can be used to both assert a triple,
+        via an implicit or explicit identifier,
+        and have that triple be the
         <a data-cite="RDF12-CONCEPTS#dfn-subject">subject</a> of further triples.
-        The delimiters <a href="#cp-curly-pipe"><code>{|</code></a> and <a href="#cp-pipe-curly"><code>|}</code></a> follow an
-        <a>asserted triple</a> to make that triple,
-        as a <a>quoted triple</a>,
-        the <a data-cite="RDF12-CONCEPTS#dfn-subject">subject</a>
-        of the <a href="#grammar-production-predicateObjectList"><code>predicateObjectList</code></a>
-        contained within the annotation delimeters.
+        As with a <a data-cite="RDF12-CONCEPTS#dfn-quoted-triple">quoted triple</a>,
+        the annotation syntax allows the definition of
+        an identifier as either an <a href="#grammar-production-IRIREF"><code>IRIREF</code></a>
+        or <a href="#grammar-production-BlankNode"><code>BlankNode</code></a>.
+        The delimiters <a href="#cp-curly-pipe"><code>{|</code></a> and <a href="#cp-pipe-curly"><code>|}</code></a>
+        surround an optional identifier along with a
+        <a href="#grammar-production-subject"><code>subject</code></a>,
+        <a href="#grammar-production-predicate"><code>predicate</code></a>, and
+        <a href="#grammar-production-object"><code>object</code></a>
+        to both assert a triple and create a <a data-cite="RDF12-CONCEPTS#dfn-quoted-triple">quoted triple</a> composed of any identifier
+        along with the
+        <a href="#grammar-production-subject"><code>subject</code></a>,
+        <a href="#grammar-production-predicate"><code>predicate</code></a>, and
+        <a href="#grammar-production-object"><code>object</code></a>.
       </p>
 
       <p class="note">The annotation syntax is a syntactic short cut in Turtle,
@@ -843,7 +877,7 @@
            title="Annotated Triple">
         <!--
         PREFIX : <http://example.com/>
-        :a :name "Alice" {| :statedBy :bob ; :recorded "2021-07-07"^^xsd:date |} .
+        :a :name "Alice" {| :t | :statedBy :bob ; :recorded "2021-07-07"^^xsd:date |} .
           -->
       </pre>
       <p>is the same set of triples as:</p>
@@ -852,12 +886,13 @@
            title="Annotated Triple expanded to Quoted Triples">
         <!--
         PREFIX : <http://example.com/>
-        << :a :name "Alice" >> :statedBy :bob .
-        << :a :name "Alice" >> :recorded "2021-07-07"^^xsd:date .
+        << :t | :a :name "Alice" >> :statedBy :bob .
+        << :t | :a :name "Alice" >> :recorded "2021-07-07"^^xsd:date .
         :a :name "Alice"
          -->
       </pre>
-      <p>and the graph contains three <a>asserted triples</a>.</p>
+      <p>and the graph contains three <a>asserted triples</a>.
+        The <a data-cite="RDF12-CONCEPTS#dfn-quoted-triple">quoted triple</a> is identified by `:t`.</p>
     </section>
 
   </section>
@@ -1572,8 +1607,7 @@
 
       <li id="curSubject">RDF_Term |curSubject|
         — The |curSubject| is bound to the
-        <a href="#grammar-production-subject"><code>subject</code></a>
-        and <a href="#grammar-production-qtSubject"><code>qtSubject</code></a> productions.</li>
+        <a href="#grammar-production-subject"><code>subject</code></a> production.</li>
 
       <li id="curPredicate">RDF_Term |curPredicate|
         — The |curPredicate| is bound to
@@ -1588,7 +1622,7 @@
       <li id="curObject">RDF_Term |curObject| —
         The |curObject| is bound to the
         <a href="#grammar-production-object"><code>object</code></a> and
-        <a href="#grammar-production-qtObject"><code>qtObject</code></a> productions.</li>
+        <a href="#grammar-production-tdObject"><code>tdObject</code></a> productions.</li>
     </ul>
     <p>Additionally, |curSubject|
       can be bound to any RDF_Term
@@ -1646,9 +1680,9 @@
 
     <p>
       A <a>Turtle document</a> defines an <a data-cite="RDF12-CONCEPTS#dfn-rdf-graph">RDF graph</a> composed of set of <a data-cite="RDF12-CONCEPTS#dfn-rdf-triple">RDF triple</a>s.
-      The <a href="#grammar-production-subject"><code>subject</code></a> and <a href="#grammar-production-qtSubject"><code>qtSubject</code></a> productions set the |curSubject|.
+      The <a href="#grammar-production-subject"><code>subject</code></a> production set the |curSubject|.
       The <a href="#grammar-production-verb"><code>verb</code></a> production sets the |curPredicate|.
-      The <a href="#grammar-production-object"><code>object</code></a> and <a href="#grammar-production-qtObject"><code>qtObject</code></a> productions set the }curObject|.
+      The <a href="#grammar-production-object"><code>object</code></a> and <a href="#grammar-production-tdObject"><code>tdObject</code></a> productions set the }curObject|.
       Each <a class="grammarRef" href="#grammar-production-object"><code>object</code></a> <var>N</var>
       in the document produces an RDF triple:
       <span class="ntriple">|curSubject|
