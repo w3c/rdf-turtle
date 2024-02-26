@@ -71,7 +71,7 @@
       <td>[12]</td>
       <td><code>subject</code></td>
       <td>::=</td>
-      <td><a href="#grammar-production-iri">iri</a> <code class="grammar-alt">|</code> <a href="#grammar-production-BlankNode">BlankNode</a> <code class="grammar-alt">|</code> <a href="#grammar-production-collection">collection</a> <code class="grammar-alt">|</code> <a href="#grammar-production-quotedTriple">quotedTriple</a></td>
+      <td><a href="#grammar-production-iri">iri</a> <code class="grammar-alt">|</code> <a href="#grammar-production-BlankNode">BlankNode</a> <code class="grammar-alt">|</code> <a href="#grammar-production-collection">collection</a> <code class="grammar-alt">|</code> <a href="#grammar-production-tripleOccurrence">tripleOccurrence</a></td>
     </tr>
     <tr id="grammar-production-predicate">
       <td>[13]</td>
@@ -83,7 +83,7 @@
       <td>[14]</td>
       <td><code>object</code></td>
       <td>::=</td>
-      <td><a href="#grammar-production-iri">iri</a> <code class="grammar-alt">|</code> <a href="#grammar-production-BlankNode">BlankNode</a> <code class="grammar-alt">|</code> <a href="#grammar-production-collection">collection</a> <code class="grammar-alt">|</code> <a href="#grammar-production-blankNodePropertyList">blankNodePropertyList</a> <code class="grammar-alt">|</code> <a href="#grammar-production-literal">literal</a> <code class="grammar-alt">|</code> <a href="#grammar-production-tripleDescriptor">tripleDescriptor</a> <code class="grammar-alt">|</code> <a href="#grammar-production-quotedTriple">quotedTriple</a></td>
+      <td><a href="#grammar-production-iri">iri</a> <code class="grammar-alt">|</code> <a href="#grammar-production-BlankNode">BlankNode</a> <code class="grammar-alt">|</code> <a href="#grammar-production-collection">collection</a> <code class="grammar-alt">|</code> <a href="#grammar-production-blankNodePropertyList">blankNodePropertyList</a> <code class="grammar-alt">|</code> <a href="#grammar-production-literal">literal</a> <code class="grammar-alt">|</code> <a href="#grammar-production-tripleTerm">tripleTerm</a> <code class="grammar-alt">|</code> <a href="#grammar-production-tripleOccurrence">tripleOccurrence</a></td>
     </tr>
     <tr id="grammar-production-literal">
       <td>[15]</td>
@@ -145,23 +145,23 @@
       <td>::=</td>
       <td><a href="#grammar-production-BLANK_NODE_LABEL">BLANK_NODE_LABEL</a> <code class="grammar-alt">|</code> <a href="#grammar-production-ANON">ANON</a></td>
     </tr>
-    <tr id="grammar-production-quotedTriple">
+    <tr id="grammar-production-tripleOccurrence">
       <td>[25]</td>
-      <td><code>quotedTriple</code></td>
+      <td><code>tripleOccurrence</code></td>
       <td>::=</td>
-      <td>'<code class="grammar-literal">&lt;&lt;</code>' <code class="grammar-paren">(</code><code class="grammar-paren">(</code><a href="#grammar-production-iri">iri</a> <code class="grammar-alt">|</code> <a href="#grammar-production-BlankNode">BlankNode</a><code class="grammar-paren">)</code> '<code class="grammar-literal">|</code>'<code class="grammar-paren">)</code><code class="grammar-opt">?</code> <a href="#grammar-production-subject">subject</a> <a href="#grammar-production-predicate">predicate</a> <a href="#grammar-production-tdObject">tdObject</a> '<code class="grammar-literal">&gt;&gt;</code>'</td>
+      <td>'<code class="grammar-literal">&lt;&lt;</code>' <code class="grammar-paren">(</code><code class="grammar-paren">(</code><a href="#grammar-production-iri">iri</a> <code class="grammar-alt">|</code> <a href="#grammar-production-BlankNode">BlankNode</a><code class="grammar-paren">)</code> '<code class="grammar-literal">|</code>'<code class="grammar-paren">)</code><code class="grammar-opt">?</code> <a href="#grammar-production-subject">subject</a> <a href="#grammar-production-predicate">predicate</a> <a href="#grammar-production-ttObject">ttObject</a> '<code class="grammar-literal">&gt;&gt;</code>'</td>
     </tr>
-    <tr id="grammar-production-tripleDescriptor">
+    <tr id="grammar-production-tripleTerm">
       <td>[26]</td>
-      <td><code>tripleDescriptor</code></td>
+      <td><code>tripleTerm</code></td>
       <td>::=</td>
-      <td>'<code class="grammar-literal">&lt;&lt;(</code>' <a href="#grammar-production-subject">subject</a> <a href="#grammar-production-predicate">predicate</a> <a href="#grammar-production-tdObject">tdObject</a> '<code class="grammar-literal">)&gt;&gt;</code>'</td>
+      <td>'<code class="grammar-literal">&lt;&lt;(</code>' <a href="#grammar-production-subject">subject</a> <a href="#grammar-production-predicate">predicate</a> <a href="#grammar-production-ttObject">ttObject</a> '<code class="grammar-literal">)&gt;&gt;</code>'</td>
     </tr>
-    <tr id="grammar-production-tdObject">
+    <tr id="grammar-production-ttObject">
       <td>[27]</td>
-      <td><code>tdObject</code></td>
+      <td><code>ttObject</code></td>
       <td>::=</td>
-      <td><a href="#grammar-production-iri">iri</a> <code class="grammar-alt">|</code> <a href="#grammar-production-BlankNode">BlankNode</a> <code class="grammar-alt">|</code> <a href="#grammar-production-literal">literal</a> <code class="grammar-alt">|</code> <a href="#grammar-production-tripleDescriptor">tripleDescriptor</a></td>
+      <td><a href="#grammar-production-iri">iri</a> <code class="grammar-alt">|</code> <a href="#grammar-production-BlankNode">BlankNode</a> <code class="grammar-alt">|</code> <a href="#grammar-production-literal">literal</a> <code class="grammar-alt">|</code> <a href="#grammar-production-tripleTerm">tripleTerm</a></td>
     </tr>
     <tr id="grammar-production-annotation">
       <td>[28]</td>
