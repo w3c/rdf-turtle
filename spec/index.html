@@ -801,7 +801,8 @@
       <a href="#grammar-production-object"><code>object</code></a>
       preceded by <a href="#cp-double-lt"><code>&lt;&lt;</code></a>
       along with an optional <a href="#grammar-production-IRIREF"><code>IRIREF</code></a>
-      or <a href="#grammar-production-BlankNode"><code>BlankNode</code></a> used as an identifier, and
+      or <a href="#grammar-production-BlankNode"><code>BlankNode</code></a>
+      delimited by <a href="#cp-pipe"><code>|</code></a>, if present, used as an identifier, and
       followed by <a href="#cp-double-gt"><code>&gt;&gt;</code></a>.
       Note that <a data-cite="RDF12-CONCEPTS#dfn-triple-occurrence">triple occurrenes</a>
       may be nested.</p>
@@ -828,6 +829,17 @@
       -->
     </pre>
 
+    <pre id="ex-triple-occurrence-with-id"
+         class="example turtle" data-transform="updateExample"
+         title="Triple Occurrence with explicit identifier">
+      <!--
+      PREFIX :    <http://www.example.org/>
+
+      :employee38 :familyName "Smith" .
+      << _:id | :employee38 :jobTitle "Assistant Designer" >> :accordingTo :employee22 .
+      -->
+    </pre>
+
     <p>After declaring a prefix so that IRIs can be abbreviated,
       the first triple in this example asserts that `employee38` has a `familyName` of "Smith".
       Note that this graph does not assert that `employee38` has a `jobTitle` of "Assistant Designer";
@@ -846,7 +858,7 @@
         to both quote and assert a <a data-cite="RDF12-CONCEPTS#dfn-rdf-triple">triple</a>,
         which provides a convenient shortcut.
         An annotation can be used to both assert a triple,
-        via an implicit or explicit identifier,
+        via an explicit or implicit or explicit identifier,
         and have that triple be the
         <a data-cite="RDF12-CONCEPTS#dfn-subject">subject</a> of further triples.
         If explicitly identified, the same identifier can then be used as the 
@@ -855,7 +867,9 @@
         As with a <a data-cite="RDF12-CONCEPTS#dfn-triple-occurrence">triple occurrence</a>,
         the annotation syntax allows the definition of
         an identifier as either an <a href="#grammar-production-IRIREF"><code>IRIREF</code></a>
-        or <a href="#grammar-production-BlankNode"><code>BlankNode</code></a>.
+        or <a href="#grammar-production-BlankNode"><code>BlankNode</code></a>
+        delimited by <a href="#cp-pipe"><code>|</code></a>, if present, used as an identifier, and
+        followed by <a href="#cp-double-gt"><code>&gt;&gt;</code></a>.
         The delimiters <a href="#cp-curly-pipe"><code>{|</code></a> and <a href="#cp-pipe-curly"><code>|}</code></a>
         surround an optional identifier along with a
         <a href="#grammar-production-subject"><code>subject</code></a>,
@@ -891,6 +905,7 @@
         :a :name "Alice"
          -->
       </pre>
+
       <p>and the graph contains three <a>asserted triples</a>.
         The <a data-cite="RDF12-CONCEPTS#dfn-triple-occurrence">triple occurrence</a> is identified by `:t`.</p>
 
@@ -1508,6 +1523,11 @@
           <td><code class="codepoint">U+0065</code></td>
           <td><code title="latin small letter E">e</code></td>
           <td>Latin small letter E</td>
+        </tr>
+        <tr id="cp-pipe">
+          <td><code class="codepoint">U+007C</code></td>
+          <td><code title="verticle bar">|</code></td>
+          <td>Verticle bar</td>
         </tr>
         <tr id="cp-middle-dot">
           <td><code class="codepoint">U+00B7</code></td>
