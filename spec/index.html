@@ -125,7 +125,7 @@
     <a data-cite="RDF12-CONCEPTS#dfn-rdf-triple">triple</a>,
     making it possible to make statements about other statements.
     <a data-cite="RDF12-CONCEPTS#dfn-triple-term">Triple terms</a> are typically not used explicitly
-    as the <a data-cite="RDF12-CONCEPTS#dfn-triple-occurrence">triple occurrence</a> construction is generally preferred.
+    as the <a>reification</a> construction is generally preferred.
     RDF 1.2 Turtle also adds support for
     <a data-cite="RDF12-CONCEPTS#dfn-dir-lang-string">directional language-tagged strings</a>.</p>
 
@@ -781,21 +781,21 @@
 
   </section>
 
-  <section id="triple-occurrences">
-    <h3>Triple Occurrences</h3>
+  <section id="reifications">
+    <h3>Reifications</h3>
 
-    <p>A <dfn data-cite="RDF12-CONCEPTS#dfn-triple-occurrence">triple occurence</dfn>
+    <p>A <dfn data-cite="RDF12-CONCEPTS#dfn-reification">reification</dfn>
       may be the <a data-cite="RDF12-CONCEPTS#dfn-subject">subject</a> or
       <a data-cite="RDF12-CONCEPTS#dfn-object">object</a> of an
       <a data-cite="RDF12-CONCEPTS#dfn-rdf-triple">RDF triple</a>.</p>
 
-    <p>A <a data-cite="RDF12-CONCEPTS#dfn-triple-occurrence">triple occurrence</a> is syntactic sugar for a specific relationship between an
+    <p>A <a>reification</a> is syntactic sugar for a specific relationship between an
       identifier and a <a data-cite="RDF12-CONCEPTS#dfn-triple-term">triple term</a>. The identifier becomes a way to refer
       to a tokenized version of a unique <a data-cite="RDF12-CONCEPTS#dfn-triple-term">triple term</a>, which
       may or may not be asserted within the graph corresponding to this input document.</p>
 
-    <p>A <a data-cite="RDF12-CONCEPTS#dfn-triple-occurrence">triple occurrence</a>
-      is represented using the <a href="#grammar-production-tripleOccurrence"><code>tripleOccurrence</code></a> production
+    <p>A <a>reification</a>
+      is represented using the <a href="#grammar-production-reification"><code>reification</code></a> production
       with <a href="#grammar-production-subject"><code>subject</code></a>,
       <a href="#grammar-production-predicate"><code>predicate</code></a>, and
       <a href="#grammar-production-object"><code>object</code></a>
@@ -804,23 +804,22 @@
       or <a href="#grammar-production-BlankNode"><code>BlankNode</code></a>
       delimited by <a href="#cp-pipe"><code>|</code></a>, if present, used as an identifier, and
       followed by <a href="#cp-double-gt"><code>&gt;&gt;</code></a>.
-      Note that <a data-cite="RDF12-CONCEPTS#dfn-triple-occurrence">triple occurrenes</a>
-      may be nested.</p>
+      Note that <a>reifications</a> may be nested.</p>
 
-    <p>If a <a href="#grammar-production-tripleOccurrence"><code>tripleOccurrence</code></a>
+    <p>If a <a href="#grammar-production-reification"><code>reification</code></a>
       is not identified by an <a href="#grammar-production-IRIREF"><code>IRIREF</code></a>
       or <a href="#grammar-production-BlankNode"><code>BlankNode</code></a>,
       a fresh RDF <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank node</a> is allocated
       and used to identify this relationship.</p>
 
-    <p>A triple occurrence is syntactic sugar relating an
+    <p>A reification is syntactic sugar relating an
       identifier to a <a href="#grammar-production-tripleTerm"><code>tripleTerm</code></a>
-      using the <code>rdf:nameOf</code> predicate.
+      using the <code>rdf:reifies</code> predicate.
     </p>
 
-    <pre id="ex-triple-occurrence"
+    <pre id="ex-reification"
          class="example turtle" data-transform="updateExample"
-         title="Triple Occurrence">
+         title="Reification">
       <!--
       PREFIX :    <http://www.example.org/>
 
@@ -829,9 +828,9 @@
       -->
     </pre>
 
-    <pre id="ex-triple-occurrence-with-id"
+    <pre id="ex-triple-reification-with-id"
          class="example turtle" data-transform="updateExample"
-         title="Triple Occurrence with explicit identifier">
+         title="Reification with explicit identifier">
       <!--
       PREFIX :    <http://www.example.org/>
 
@@ -843,11 +842,11 @@
     <p>After declaring a prefix so that IRIs can be abbreviated,
       the first triple in this example asserts that `employee38` has a `familyName` of "Smith".
       Note that this graph does not assert that `employee38` has a `jobTitle` of "Assistant Designer";
-      it says that `employee22` has made that claim using a <a data-cite="RDF12-CONCEPTS#dfn-triple-occurrence">triple occurrence</a>.
+      it says that `employee22` has made that claim using a <a>reification</a>.
       In other words, the triple "`employee38` has a `jobTitle` of 'Assistant Designer'"
       is not what we call an <dfn data-cite="RDF12-CONCEPTS#dfn-asserted-triple">asserted triple</dfn>,
       like "employee38 has a `familyName` of 'Smith'" above;
-      rather, it is known as a <a data-cite="RDF12-CONCEPTS#dfn-triple-occurrence">triple occurrence</a>.</p>
+      rather, it is known as a <a>reification</a>.</p>
 
     <p class="ednote">More examples, using identifiers and showing the expansion to <a data-cite="RDF12-CONCEPTS#dfn-triple-term">Triple Terms</a>,
       or whatever is selected.</p>
@@ -864,7 +863,7 @@
         If explicitly identified, the same identifier can then be used as the 
         <a data-cite="RDF12-CONCEPTS#dfn-object">object</a> of additional
         triples and/or <a data-cite="RDF12-CONCEPTS#dfn-triple-term">triple terms</a>.
-        As with a <a data-cite="RDF12-CONCEPTS#dfn-triple-occurrence">triple occurrence</a>,
+        As with a <a>reification</a>,
         the annotation syntax allows the definition of
         an identifier as either an <a href="#grammar-production-IRIREF"><code>IRIREF</code></a>
         or <a href="#grammar-production-BlankNode"><code>BlankNode</code></a>
@@ -875,7 +874,7 @@
         <a href="#grammar-production-subject"><code>subject</code></a>,
         <a href="#grammar-production-predicate"><code>predicate</code></a>, and
         <a href="#grammar-production-object"><code>object</code></a>
-        to both assert a triple and create a <a data-cite="RDF12-CONCEPTS#dfn-triple-occurrence">triple occurrence</a> composed of any identifier
+        to both assert a triple and create a <a>reification</a> composed of any identifier
         along with the
         <a href="#grammar-production-subject"><code>subject</code></a>,
         <a href="#grammar-production-predicate"><code>predicate</code></a>, and
@@ -897,7 +896,7 @@
       <p>is the same set of triples as:</p>
       <pre id="ex-annotated-triple-expanded"
            class="nohighlight example" data-transform="updateExample"
-           title="Annotated Triple expanded to Triple Occurrences">
+           title="Annotated Triple expanded to Reifications">
         <!--
         PREFIX : <http://example.com/>
         << :t | :a :name "Alice" >> :statedBy :bob .
@@ -907,17 +906,17 @@
       </pre>
 
       <p>and the graph contains three <a>asserted triples</a>.
-        The <a data-cite="RDF12-CONCEPTS#dfn-triple-occurrence">triple occurrence</a> is identified by `:t`.</p>
+        The <a>reification</a> is identified by `:t`.</p>
 
-      <p>Fully expanding to use <a data-cite="RDF12-CONCEPTS#dfn-triple-term">triple terms</a>, instead of triple occurences, results in the following:</p>
+      <p>Fully expanding to use <a data-cite="RDF12-CONCEPTS#dfn-triple-term">triple terms</a>, instead of reifications, results in the following:</p>
       <pre id="ex-annotated-triple-expanded"
            class="nohighlight example" data-transform="updateExample"
-           title="Annotated Triple expanded to Triple Occurrences">
+           title="Annotated Triple expanded to Triple Terms">
         <!--
         PREFIX : <http://example.com/>
         PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
         :a :name "Alice" .
-        :t rdf:nameOf <<( :a :name "Alice" )>> .
+        :t rdf:reifies <<( :a :name "Alice" )>> .
         :t :statedBy :bob .
         :t :recorded "2021-07-07"^^xsd:date .
          -->
@@ -1706,9 +1705,9 @@
           <a href="#grammar-production-ttObject"><code>ttObject</code></a> productions.
         </td>
       </tr>
-      <tr id="handle-tripleOccurrence"                ><td style="text-align:left;"            ><a class="type tripleOccurrence" href="#grammar-production-tripleOccurrence"            >tripleOccurrence                </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-iri">IRI</a> | <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank node</a></td>
+      <tr id="handle-reification"                     ><td style="text-align:left;"            ><a class="type reification" href="#grammar-production-reification"                      >reification                     </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-iri">IRI</a> | <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank node</a></td>
         <td>
-          The <a data-cite="RDF12-CONCEPTS#dfn-triple-occurrence">triple occurrence</a> production
+          The <a class="type reification" href="#grammar-production-reification">reification</a> production
           defines an RDF term in addition to a <a data-cite="RDF12-CONCEPTS#dfn-triple-term">triple term</a>.
           The term constructed from this production
           is composed of an identifier from either the <a href="#grammar-production-iri"><code>iri</code></a>
@@ -1716,7 +1715,7 @@
           if present, otherwise from a fresh RDF <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank node</a>.
         </td>
       </tr>
-      <tr id="handle-annotation"                      ><td style="text-align:left;"            ><a class="type annotation" href="#grammar-production-tripleOccurrence"                  >annotation                      </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-iri">IRI</a> | <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank node</a></td>
+      <tr id="handle-annotation"                      ><td style="text-align:left;"            ><a class="type annotation" href="#grammar-production-annotation"                        >annotation                      </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-iri">IRI</a> | <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank node</a></td>
         <td>
           The <a data-cite="RDF12-CONCEPTS#dfn-annotation">annotation</a> production
           defines an RDF term in addition to a <a data-cite="RDF12-CONCEPTS#dfn-triple-term">triple term</a>.
@@ -1753,19 +1752,19 @@
       yields the RDF triple |curSubject| |curPredicate| |curObject|
       and restores the recorded values of |curSubject| and |curPredicate|.</p>
 
-    <h4 id="tripleOccurence" style="padding-bottom:0; margin-bottom:0;"><span>Triple Occurrences:</span></h4>
+    <h4 id="reification" style="padding-bottom:0; margin-bottom:0;"><span>Reifications:</span></h4>
 
-    <p>Beginning the <a href="#grammar-production-tripleOccurrence"><code>tripleOccurrence</code></a> production
+    <p>Beginning the <a href="#grammar-production-reification"><code>reification</code></a> production
       records the |curSubject| and |curPredicate|.
       |curSubject| is taken from the
-      <a href="#handle-tripleOccurrence"><code>tripleOccurrence</code></a> term constructor.
+      <a href="#handle-reification"><code>reification</code></a> term constructor.
       A new <a href="#grammar-production-tripleTerm"><code>tripleTerm</code></a> instance |TT|
       is composed from
       the <a href="#grammar-production-subject"><code>subject</code></a>,
       <a href="#grammar-production-predicate"><code>predicate</code></a>, and
       <a href="#grammar-production-ttObject"><code>ttObject</code></a> productions.
-      Finishing the <a href="#grammar-production-tripleOccurrence"><code>tripleOccurrence</code></a> production
-      yields the RDF triple |curSubject| <code>rdf:nameOf</code> |TT|
+      Finishing the <a href="#grammar-production-reification"><code>reification</code></a> production
+      yields the RDF triple |curSubject| <code>rdf:reifies</code> |TT|
       and restores the recorded values of |curSubject| and |curPredicate|.</p>
 
     <h4 id="annotation" style="padding-bottom:0; margin-bottom:0;"><span>Annotations:</span></h4>
@@ -1777,7 +1776,7 @@
       The identifier |TI| is taken from the
       <a href="#handle-annotation"><code>annotation</code></a> term constructor.
       Finishing the <a href="#grammar-production-annotation"><code>annotation</code></a> production
-      yields the RDF triple |TI| <code>rdf:nameOf</code> |TT|
+      yields the RDF triple |TI| <code>rdf:reifies</code> |TT|
       and restores the recorded values of |curSubject| and |curPredicate|.</p>
 
     <h4 id="propertyList" style="padding-bottom:0; margin-bottom:0;"><span>Property Lists:</span></h4>
@@ -2117,7 +2116,7 @@
       and `STRING_LITERAL_SINGLE_QUOTE`.</li>
     <li>Separated <a href="#security"></a> from <a href="#sec-mediaReg"></a>
       and updated language.</li>
-    <li>Added <a href="#triple-occurrences" class="sectionRef"></a>
+    <li>Added <a href="#reifications" class="sectionRef"></a>
       and <a href="#annotation-syntax" class="sectionRef"></a>
       for representing <a data-cite="RDF12-CONCEPTS#dfn-triple-term">triple terms</a> in Turtle.</li>
     <li>Changes the `LANGTAG` terminal production to
