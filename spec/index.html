@@ -130,7 +130,7 @@
     <a data-cite="RDF12-CONCEPTS#dfn-dir-lang-string">directional language-tagged strings</a>.</p>
 
   <p>In addition, RDF 1.2 Turtle introduces an <a>annotation syntax</a> which allows
-    <a data-cite="RDF12-CONCEPTS#dfn-triple-term">triple terms</a> to also be <a data-lt="asserted triple">asserted</a>.</p>
+    <a data-cite="RDF12-CONCEPTS#dfn-triple-term">triple terms</a> to also be asserted.</p>
 </section>
 
 <section id='sotd'>
@@ -844,8 +844,7 @@
       Note that this graph does not assert that `employee38` has a `jobTitle` of "Assistant Designer";
       it says that `employee22` has made that claim using a <a>reification</a>.
       In other words, the triple "`employee38` has a `jobTitle` of 'Assistant Designer'"
-      is not what we call an <dfn data-cite="RDF12-CONCEPTS#dfn-asserted-triple">asserted triple</dfn>,
-      like "employee38 has a `familyName` of 'Smith'" above;
+      is not a member of the graph, itself, as "employee38 has a `familyName` of 'Smith'" is above;
       rather, it is known as a <a>reification</a>.</p>
 
     <p class="ednote">More examples, using identifiers and showing the expansion to <a data-cite="RDF12-CONCEPTS#dfn-triple-term">Triple Terms</a>,
@@ -905,7 +904,7 @@
          -->
       </pre>
 
-      <p>and the graph contains three <a>asserted triples</a>.
+      <p>and the graph contains three <a data-cite="RDF12-CONCEPTS#dfn-rdf-triple">triples</a>.
         The <a>reification</a> is identified by `:t`.</p>
 
       <p>Fully expanding to use <a data-cite="RDF12-CONCEPTS#dfn-triple-term">triple terms</a>, instead of reifications, results in the following:</p>
@@ -1717,7 +1716,7 @@
       </tr>
       <tr id="handle-annotation"                      ><td style="text-align:left;"            ><a class="type annotation" href="#grammar-production-annotation"                        >annotation                      </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-iri">IRI</a> | <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank node</a></td>
         <td>
-          The <a data-cite="RDF12-CONCEPTS#dfn-annotation">annotation</a> production
+          The <a href="#grammar-production-annotation"><code>annotation</code></a> production
           defines an RDF term in addition to a <a data-cite="RDF12-CONCEPTS#dfn-triple-term">triple term</a>.
           The term constructed from this production
           is composed of an identifier from either the <a href="#grammar-production-iri"><code>iri</code></a>
