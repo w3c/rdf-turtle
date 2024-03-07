@@ -790,8 +790,8 @@
       <a data-cite="RDF12-CONCEPTS#dfn-rdf-triple">RDF triple</a>.</p>
 
     <p>A <a>reification</a> is syntactic sugar for a specific relationship between an
-      identifier and a <a data-cite="RDF12-CONCEPTS#dfn-triple-term">triple term</a>. The identifier becomes a way to refer
-      to a tokenized version of a unique <a data-cite="RDF12-CONCEPTS#dfn-triple-term">triple term</a>, which
+      identifier and a <a data-cite="RDF12-CONCEPTS#dfn-triple-term">triple term</a>. The identifier becomes a way to indirectly refer
+      to a <a data-cite="RDF12-CONCEPTS#dfn-triple-term">triple term</a>, which
       may or may not be asserted within the graph corresponding to this input document.</p>
 
     <p>A <a>reification</a>
@@ -853,7 +853,7 @@
     <section id="annotation-syntax">
       <h2>Annotation Syntax</h2>
       <p>Turtle also defines an <dfn data-lt="annotation-syntax">annotation syntax</dfn>
-        to both quote and assert a <a data-cite="RDF12-CONCEPTS#dfn-rdf-triple">triple</a>,
+        to both reify and assert a <a data-cite="RDF12-CONCEPTS#dfn-rdf-triple">triple</a>,
         which provides a convenient shortcut.
         An annotation can be used to both assert a triple,
         via an explicit or implicit identifier,
@@ -880,7 +880,7 @@
         <a href="#grammar-production-object"><code>object</code></a>.
       </p>
 
-      <p class="note">The annotation syntax is a syntactic short cut in Turtle,
+      <p class="note">The annotation syntax is a syntactic shortcut in Turtle,
         and the RDF Abstract Syntax [[RDF11-CONCEPTS]] does not
         distinguished how the triples were written.</p>
 
@@ -898,9 +898,9 @@
            title="Annotated Triple expanded to Reifications">
         <!--
         PREFIX : <http://example.com/>
-        << :t | :a :name "Alice" >> :statedBy :bob .
-        << :t | :a :name "Alice" >> :recorded "2021-07-07"^^xsd:date .
-        :a :name "Alice"
+        :a :name "Alice" .
+        << :t | :a :name "Alice" >> :statedBy :bob ;
+                                    :recorded "2021-07-07"^^xsd:date .
          -->
       </pre>
 
@@ -1659,7 +1659,7 @@
     <p>Additionally, |curSubject|
       can be bound to any <a data-cite="RDF12-CONCEPTS#dfn-rdf-term">RDF Term</a>
       (including a <a data-cite="RDF12-CONCEPTS#dfn-triple-term">triple term</a>).
-      the |curTriple| is bound to a <a data-cite="RDF12-CONCEPTS#dfn-triple-term">triple term</a>
+      The |curTriple| is bound to a <a data-cite="RDF12-CONCEPTS#dfn-triple-term">triple term</a>
       constructed from |curSubject|, |curPredicate|, and |curObject|.</p>
   </section>
 
@@ -1761,7 +1761,7 @@
       is composed from
       the <a href="#grammar-production-subject"><code>subject</code></a>,
       <a href="#grammar-production-predicate"><code>predicate</code></a>, and
-      <a href="#grammar-production-ttObject"><code>ttObject</code></a> productions.
+      <a href="#grammar-production-object"><code>object</code></a> productions.
       Finishing the <a href="#grammar-production-reification"><code>reification</code></a> production
       yields the RDF triple |curSubject| <code>rdf:reifies</code> |TT|
       and restores the recorded values of |curSubject| and |curPredicate|.</p>
