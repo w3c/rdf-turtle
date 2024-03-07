@@ -825,11 +825,6 @@
       a fresh RDF <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank node</a> is allocated
       and used to identify this relationship.</p>
 
-    <p>A reification is syntactic sugar relating an
-      identifier to a <a href="#grammar-production-tripleTerm"><code>tripleTerm</code></a>
-      using the <code>rdf:reifies</code> predicate.
-    </p>
-
     <pre id="ex-reification"
          class="example turtle" data-transform="updateExample"
          title="Reification">
@@ -860,8 +855,9 @@
       is not a member of the graph, itself, as "employee38 has a `familyName` of 'Smith'" is above;
       rather, it is known as a <a>reification</a>.</p>
 
-    <p class="ednote">More examples, using identifiers and showing the expansion to <a data-cite="RDF12-CONCEPTS#dfn-triple-term">Triple Terms</a>,
-      or whatever is selected.</p>
+    <p>A reification is syntactic sugar relating an
+      identifier to a <a href="#grammar-production-tripleTerm"><code>tripleTerm</code></a>
+      using the <code>rdf:reifies</code> predicate.</p>
 
     <section id="annotation-syntax">
       <h2>Annotation Syntax</h2>
@@ -1669,11 +1665,6 @@
         <a href="#grammar-production-object"><code>object</code></a> and
         <a href="#grammar-production-ttObject"><code>ttObject</code></a> productions.</li>
     </ul>
-    <p>Additionally, |curSubject|
-      can be bound to any <a data-cite="RDF12-CONCEPTS#dfn-rdf-term">RDF Term</a>
-      (including a <a data-cite="RDF12-CONCEPTS#dfn-triple-term">triple term</a>).
-      The |curTriple| is bound to a <a data-cite="RDF12-CONCEPTS#dfn-triple-term">triple term</a>
-      constructed from |curSubject|, |curPredicate|, and |curObject|.</p>
   </section>
 
   <section  id="sec-parsing-terms">
