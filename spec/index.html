@@ -1738,7 +1738,7 @@
 
     <p>
       A <a>Turtle document</a> defines an <a data-cite="RDF12-CONCEPTS#dfn-rdf-graph">RDF graph</a> composed of set of <a data-cite="RDF12-CONCEPTS#dfn-rdf-triple">RDF triple</a>s.
-      The <a href="#grammar-production-subject"><code>subject</code></a> production set the |curSubject|.
+      The <a href="#grammar-production-subject"><code>subject</code></a> production sets the |curSubject|.
       The <a href="#grammar-production-verb"><code>verb</code></a> production sets the |curPredicate|.
       The <a href="#grammar-production-object"><code>object</code></a> and <a href="#grammar-production-ttObject"><code>ttObject</code></a> productions set the |curObject|.
       Each <a class="grammarRef" href="#grammar-production-object"><code>object</code></a> <var>N</var>
@@ -1752,7 +1752,6 @@
     <p>Beginning the <a href="#grammar-production-tripleTerm"><code>tripleTerm</code></a> production
       records the |curSubject| and |curPredicate|.
       Finishing the <a href="#grammar-production-tripleTerm"><code>tripleTerm</code></a> production
-      yields the RDF triple |curSubject| |curPredicate| |curObject|
       and restores the recorded values of |curSubject| and |curPredicate|.</p>
 
     <h4 id="reification" style="padding-bottom:0; margin-bottom:0;"><span>Reifications:</span></h4>
