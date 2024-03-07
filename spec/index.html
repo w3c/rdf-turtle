@@ -799,10 +799,21 @@
       with <a href="#grammar-production-subject"><code>subject</code></a>,
       <a href="#grammar-production-predicate"><code>predicate</code></a>, and
       <a href="#grammar-production-object"><code>object</code></a>
-      preceded by <a href="#cp-double-lt"><code>&lt;&lt;</code></a>
-      along with an optional <a href="#grammar-production-IRIREF"><code>IRIREF</code></a>
-      or <a href="#grammar-production-BlankNode"><code>BlankNode</code></a>
-      delimited by <a href="#cp-pipe"><code>|</code></a>, if present, used as an identifier, and
+A <a>reification</a> is represented using the <a href="#grammar-production-reification"><code>reification</code></a> production starting with
+<a href="#cp-double-lt"><code>&lt;&lt;</code></a>, followed by an optional
+identifier (<a href="#grammar-production-IRIREF"><code>IRIREF</code></a> or
+<a href="#grammar-production-BlankNode"><code>BlankNode</code></a>) delimited
+by <a href="#cp-pipe"><code>|</code></a>, then
+<a href="#grammar-production-subject"><code>subject</code></a>,
+<a href="#grammar-production-predicate"><code>predicate</code></a>, and
+<a href="#grammar-production-object"><code>object</code></a>,
+and ending with <a href="#cp-double-gt"><code>&gt;&gt;</code></a>. For
+example, `<< :IRIREF | :subject :predicate :object >>`. If the
+optional identifier is not present, a fresh RDF blank node is allocated, as
+with `<< :subject :predicate :object >>`. </p>
+     <p>Note that <a>reifications</a> may be nested, like
+`<< :IRIREF1 | :subject1 :predicate1 << :subject2 :predicate2 :object2 >> >>` 
+or `<< :subject4 :predicate4 << :IRIREF3 | :subject3 :predicate3 :object3 >> >>`. </p>
       followed by <a href="#cp-double-gt"><code>&gt;&gt;</code></a>.
       Note that <a>reifications</a> may be nested.</p>
 
