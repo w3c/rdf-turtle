@@ -801,28 +801,23 @@
       RDF 1.2 uses the term to identify a <a data-cite="RDF12-CONCEPTS#dfn-triple-term">triple terms</a>
       using the `rdf:reifies` predicate.</p>
 
-    <p>A <a>reification</a>
-      is represented using the <a href="#grammar-production-reification"><code>reification</code></a> production
-      with <a href="#grammar-production-subject"><code>subject</code></a>,
+    <p>A <a>reification</a> is represented using the
+      <a href="#grammar-production-reification"><code>reification</code></a> production
+      starting with <a href="#cp-double-lt"><code>&lt;&lt;</code></a>,
+      followed by an optional identifier (<a href="#grammar-production-IRIREF"><code>IRIREF</code></a>
+      or <a href="#grammar-production-BlankNode"><code>BlankNode</code></a>)
+      delimited by <a href="#cp-pipe"><code>|</code></a>,
+      then <a href="#grammar-production-subject"><code>subject</code></a>,
       <a href="#grammar-production-predicate"><code>predicate</code></a>, and
-      <a href="#grammar-production-object"><code>object</code></a>
-A <a>reification</a> is represented using the <a href="#grammar-production-reification"><code>reification</code></a> production starting with
-<a href="#cp-double-lt"><code>&lt;&lt;</code></a>, followed by an optional
-identifier (<a href="#grammar-production-IRIREF"><code>IRIREF</code></a> or
-<a href="#grammar-production-BlankNode"><code>BlankNode</code></a>) delimited
-by <a href="#cp-pipe"><code>|</code></a>, then
-<a href="#grammar-production-subject"><code>subject</code></a>,
-<a href="#grammar-production-predicate"><code>predicate</code></a>, and
-<a href="#grammar-production-object"><code>object</code></a>,
-and ending with <a href="#cp-double-gt"><code>&gt;&gt;</code></a>. For
-example, `<< :IRIREF | :subject :predicate :object >>`. If the
-optional identifier is not present, a fresh RDF blank node is allocated, as
-with `<< :subject :predicate :object >>`. </p>
-     <p>Note that <a>reifications</a> may be nested, like
-`<< :IRIREF1 | :subject1 :predicate1 << :subject2 :predicate2 :object2 >> >>` 
-or `<< :subject4 :predicate4 << :IRIREF3 | :subject3 :predicate3 :object3 >> >>`. </p>
-      followed by <a href="#cp-double-gt"><code>&gt;&gt;</code></a>.
-      Note that <a>reifications</a> may be nested.</p>
+      <a href="#grammar-production-object"><code>object</code></a>,
+      and ending with <a href="#cp-double-gt"><code>&gt;&gt;</code></a>.
+      For example, `&lt;&lt; :IRIREF | :subject :predicate :object &gt;&gt;`.
+      If the optional identifier is not present, a fresh RDF blank node is allocated,
+      as with `&lt;&lt; :subject :predicate :object &gt;&gt;`.</p>
+
+    <p class="note"><a>Reifications</a> may be nested,
+      like `&lt;&lt;&nbsp;:IRIREF1&nbsp;|&nbsp;:subject1&nbsp;:predicate1&nbsp;&lt;&lt;&nbsp;:subject2&nbsp;:predicate2&nbsp;:object2&nbsp;&gt;&gt;&nbsp;&gt;&gt;`
+      or `&lt;&lt;&nbsp;:subject4&nbsp;:predicate4&nbsp;&lt;&lt;&nbsp;:IRIREF3&nbsp;|&nbsp;:subject3&nbsp;:predicate3&nbsp;:object3&nbsp;&gt;&gt;&nbsp;&gt;&gt;`.</p>
 
     <p>If a <a href="#grammar-production-reification"><code>reification</code></a>
       is not identified by an <a href="#grammar-production-IRIREF"><code>IRIREF</code></a>
