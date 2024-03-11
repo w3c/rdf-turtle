@@ -1,4 +1,4 @@
-<!-- Generated with ebnf version 2.3.4. See https://github.com/dryruby/ebnf. -->
+<!-- Generated with ebnf version 2.5.0. See https://github.com/dryruby/ebnf. -->
 <table class="grammar">
   <tbody id="grammar-productions" class="ebnf">
     <tr id="grammar-production-turtleDoc">
@@ -71,7 +71,7 @@
       <td>[12]</td>
       <td><code>subject</code></td>
       <td>::=</td>
-      <td><a href="#grammar-production-iri">iri</a> <code class="grammar-alt">|</code> <a href="#grammar-production-BlankNode">BlankNode</a> <code class="grammar-alt">|</code> <a href="#grammar-production-collection">collection</a> <code class="grammar-alt">|</code> <a href="#grammar-production-quotedTriple">quotedTriple</a></td>
+      <td><a href="#grammar-production-iri">iri</a> <code class="grammar-alt">|</code> <a href="#grammar-production-BlankNode">BlankNode</a> <code class="grammar-alt">|</code> <a href="#grammar-production-collection">collection</a> <code class="grammar-alt">|</code> <a href="#grammar-production-reification">reification</a></td>
     </tr>
     <tr id="grammar-production-predicate">
       <td>[13]</td>
@@ -83,7 +83,7 @@
       <td>[14]</td>
       <td><code>object</code></td>
       <td>::=</td>
-      <td><a href="#grammar-production-iri">iri</a> <code class="grammar-alt">|</code> <a href="#grammar-production-BlankNode">BlankNode</a> <code class="grammar-alt">|</code> <a href="#grammar-production-collection">collection</a> <code class="grammar-alt">|</code> <a href="#grammar-production-blankNodePropertyList">blankNodePropertyList</a> <code class="grammar-alt">|</code> <a href="#grammar-production-literal">literal</a> <code class="grammar-alt">|</code> <a href="#grammar-production-quotedTriple">quotedTriple</a></td>
+      <td><a href="#grammar-production-iri">iri</a> <code class="grammar-alt">|</code> <a href="#grammar-production-BlankNode">BlankNode</a> <code class="grammar-alt">|</code> <a href="#grammar-production-collection">collection</a> <code class="grammar-alt">|</code> <a href="#grammar-production-blankNodePropertyList">blankNodePropertyList</a> <code class="grammar-alt">|</code> <a href="#grammar-production-literal">literal</a> <code class="grammar-alt">|</code> <a href="#grammar-production-tripleTerm">tripleTerm</a> <code class="grammar-alt">|</code> <a href="#grammar-production-reification">reification</a></td>
     </tr>
     <tr id="grammar-production-literal">
       <td>[15]</td>
@@ -145,29 +145,29 @@
       <td>::=</td>
       <td><a href="#grammar-production-BLANK_NODE_LABEL">BLANK_NODE_LABEL</a> <code class="grammar-alt">|</code> <a href="#grammar-production-ANON">ANON</a></td>
     </tr>
-    <tr id="grammar-production-quotedTriple">
+    <tr id="grammar-production-reification">
       <td>[25]</td>
-      <td><code>quotedTriple</code></td>
+      <td><code>reification</code></td>
       <td>::=</td>
-      <td>'<code class="grammar-literal">&lt;&lt;</code>' <a href="#grammar-production-qtSubject">qtSubject</a> <a href="#grammar-production-predicate">predicate</a> <a href="#grammar-production-qtObject">qtObject</a> '<code class="grammar-literal">&gt;&gt;</code>'</td>
+      <td>'<code class="grammar-literal">&lt;&lt;</code>' <code class="grammar-paren">(</code><code class="grammar-paren">(</code><a href="#grammar-production-iri">iri</a> <code class="grammar-alt">|</code> <a href="#grammar-production-BlankNode">BlankNode</a><code class="grammar-paren">)</code> '<code class="grammar-literal">|</code>'<code class="grammar-paren">)</code><code class="grammar-opt">?</code> <a href="#grammar-production-subject">subject</a> <a href="#grammar-production-predicate">predicate</a> <a href="#grammar-production-object">object</a> '<code class="grammar-literal">&gt;&gt;</code>'</td>
     </tr>
-    <tr id="grammar-production-qtSubject">
+    <tr id="grammar-production-tripleTerm">
       <td>[26]</td>
-      <td><code>qtSubject</code></td>
+      <td><code>tripleTerm</code></td>
       <td>::=</td>
-      <td><a href="#grammar-production-iri">iri</a> <code class="grammar-alt">|</code> <a href="#grammar-production-BlankNode">BlankNode</a> <code class="grammar-alt">|</code> <a href="#grammar-production-quotedTriple">quotedTriple</a></td>
+      <td>'<code class="grammar-literal">&lt;&lt;(</code>' <a href="#grammar-production-subject">subject</a> <a href="#grammar-production-predicate">predicate</a> <a href="#grammar-production-ttObject">ttObject</a> '<code class="grammar-literal">)&gt;&gt;</code>'</td>
     </tr>
-    <tr id="grammar-production-qtObject">
+    <tr id="grammar-production-ttObject">
       <td>[27]</td>
-      <td><code>qtObject</code></td>
+      <td><code>ttObject</code></td>
       <td>::=</td>
-      <td><a href="#grammar-production-iri">iri</a> <code class="grammar-alt">|</code> <a href="#grammar-production-BlankNode">BlankNode</a> <code class="grammar-alt">|</code> <a href="#grammar-production-literal">literal</a> <code class="grammar-alt">|</code> <a href="#grammar-production-quotedTriple">quotedTriple</a></td>
+      <td><a href="#grammar-production-iri">iri</a> <code class="grammar-alt">|</code> <a href="#grammar-production-BlankNode">BlankNode</a> <code class="grammar-alt">|</code> <a href="#grammar-production-literal">literal</a> <code class="grammar-alt">|</code> <a href="#grammar-production-tripleTerm">tripleTerm</a></td>
     </tr>
     <tr id="grammar-production-annotation">
       <td>[28]</td>
       <td><code>annotation</code></td>
       <td>::=</td>
-      <td>'<code class="grammar-literal">{|</code>' <a href="#grammar-production-predicateObjectList">predicateObjectList</a> '<code class="grammar-literal">|}</code>'</td>
+      <td>'<code class="grammar-literal">{|</code>' <code class="grammar-paren">(</code><code class="grammar-paren">(</code><a href="#grammar-production-iri">iri</a> <code class="grammar-alt">|</code> <a href="#grammar-production-BlankNode">BlankNode</a><code class="grammar-paren">)</code> '<code class="grammar-literal">|</code>'<code class="grammar-paren">)</code><code class="grammar-opt">?</code> <a href="#grammar-production-predicateObjectList">predicateObjectList</a> '<code class="grammar-literal">|}</code>'</td>
     </tr>
     <tr id="grammar-declaration-terminals">
       <td colspan="4">
@@ -406,7 +406,7 @@
       <td>[56]</td>
       <td><code>PN_LOCAL_ESC</code></td>
       <td>::=</td>
-      <td>'<code class="grammar-literal">\</code>' <code class="grammar-paren">(</code>'<code class="grammar-literal">_</code>' <code class="grammar-alt">|</code> '<code class="grammar-literal">~</code>' <code class="grammar-alt">|</code> '<code class="grammar-literal">.</code>' <code class="grammar-alt">|</code> '<code class="grammar-literal">-</code>' <code class="grammar-alt">|</code> '<code class="grammar-literal">!</code>' <code class="grammar-alt">|</code> '<code class="grammar-literal">$</code>' <code class="grammar-alt">|</code> '<code class="grammar-literal">&amp;</code>' <code class="grammar-alt">|</code> '<code class="grammar-literal">&apos;</code>' <code class="grammar-alt">|</code> '<code class="grammar-literal">(</code>' <code class="grammar-alt">|</code> '<code class="grammar-literal">)</code>' <code class="grammar-alt">|</code> '<code class="grammar-literal">*</code>' <code class="grammar-alt">|</code> '<code class="grammar-literal">+</code>' <code class="grammar-alt">|</code> '<code class="grammar-literal">,</code>' <code class="grammar-alt">|</code> '<code class="grammar-literal">;</code>' <code class="grammar-alt">|</code> '<code class="grammar-literal">=</code>' <code class="grammar-alt">|</code> '<code class="grammar-literal">/</code>' <code class="grammar-alt">|</code> '<code class="grammar-literal">?</code>' <code class="grammar-alt">|</code> '<code class="grammar-literal">#</code>' <code class="grammar-alt">|</code> '<code class="grammar-literal">@</code>' <code class="grammar-alt">|</code> '<code class="grammar-literal">%</code>'<code class="grammar-paren">)</code></td>
+      <td>'<code class="grammar-literal">\</code>' <code class="grammar-paren">(</code>'<code class="grammar-literal">_</code>' <code class="grammar-alt">|</code> '<code class="grammar-literal">~</code>' <code class="grammar-alt">|</code> '<code class="grammar-literal">.</code>' <code class="grammar-alt">|</code> '<code class="grammar-literal">-</code>' <code class="grammar-alt">|</code> "<code class="grammar-literal">!</code>" <code class="grammar-alt">|</code> '<code class="grammar-literal">$</code>' <code class="grammar-alt">|</code> '<code class="grammar-literal">&amp;</code>' <code class="grammar-alt">|</code> "<code class="grammar-literal">&apos;</code>" <code class="grammar-alt">|</code> '<code class="grammar-literal">(</code>' <code class="grammar-alt">|</code> '<code class="grammar-literal">)</code>' <code class="grammar-alt">|</code> '<code class="grammar-literal">*</code>' <code class="grammar-alt">|</code> '<code class="grammar-literal">+</code>' <code class="grammar-alt">|</code> '<code class="grammar-literal">,</code>' <code class="grammar-alt">|</code> '<code class="grammar-literal">;</code>' <code class="grammar-alt">|</code> '<code class="grammar-literal">=</code>' <code class="grammar-alt">|</code> '<code class="grammar-literal">/</code>' <code class="grammar-alt">|</code> '<code class="grammar-literal">?</code>' <code class="grammar-alt">|</code> '<code class="grammar-literal">#</code>' <code class="grammar-alt">|</code> '<code class="grammar-literal">@</code>' <code class="grammar-alt">|</code> '<code class="grammar-literal">%</code>'<code class="grammar-paren">)</code></td>
     </tr>
   </tbody>
 </table>
