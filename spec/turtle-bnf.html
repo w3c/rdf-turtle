@@ -59,7 +59,7 @@
       <td>[10]</td>
       <td><code>objectList</code></td>
       <td>::=</td>
-      <td><a href="#grammar-production-object">object</a> <a href="#grammar-production-annotation">annotation</a><code class="grammar-opt">?</code> <code class="grammar-paren">(</code>'<code class="grammar-literal">,</code>' <a href="#grammar-production-object">object</a> <a href="#grammar-production-annotation">annotation</a><code class="grammar-opt">?</code><code class="grammar-paren">)</code><code class="grammar-star">*</code></td>
+      <td><a href="#grammar-production-object">object</a> <a href="#grammar-production-annotation">annotation</a><code class="grammar-star">*</code> <code class="grammar-paren">(</code>'<code class="grammar-literal">,</code>' <a href="#grammar-production-object">object</a> <a href="#grammar-production-annotation">annotation</a><code class="grammar-star">*</code><code class="grammar-paren">)</code><code class="grammar-star">*</code></td>
     </tr>
     <tr id="grammar-production-verb">
       <td>[11]</td>
@@ -71,7 +71,7 @@
       <td>[12]</td>
       <td><code>subject</code></td>
       <td>::=</td>
-      <td><a href="#grammar-production-iri">iri</a> <code class="grammar-alt">|</code> <a href="#grammar-production-BlankNode">BlankNode</a> <code class="grammar-alt">|</code> <a href="#grammar-production-collection">collection</a> <code class="grammar-alt">|</code> <a href="#grammar-production-reification">reification</a></td>
+      <td><a href="#grammar-production-iri">iri</a> <code class="grammar-alt">|</code> <a href="#grammar-production-BlankNode">BlankNode</a> <code class="grammar-alt">|</code> <a href="#grammar-production-collection">collection</a> <code class="grammar-alt">|</code> <a href="#grammar-production-reifier">reifier</a></td>
     </tr>
     <tr id="grammar-production-predicate">
       <td>[13]</td>
@@ -83,7 +83,7 @@
       <td>[14]</td>
       <td><code>object</code></td>
       <td>::=</td>
-      <td><a href="#grammar-production-iri">iri</a> <code class="grammar-alt">|</code> <a href="#grammar-production-BlankNode">BlankNode</a> <code class="grammar-alt">|</code> <a href="#grammar-production-collection">collection</a> <code class="grammar-alt">|</code> <a href="#grammar-production-blankNodePropertyList">blankNodePropertyList</a> <code class="grammar-alt">|</code> <a href="#grammar-production-literal">literal</a> <code class="grammar-alt">|</code> <a href="#grammar-production-tripleTerm">tripleTerm</a> <code class="grammar-alt">|</code> <a href="#grammar-production-reification">reification</a></td>
+      <td><a href="#grammar-production-iri">iri</a> <code class="grammar-alt">|</code> <a href="#grammar-production-BlankNode">BlankNode</a> <code class="grammar-alt">|</code> <a href="#grammar-production-collection">collection</a> <code class="grammar-alt">|</code> <a href="#grammar-production-blankNodePropertyList">blankNodePropertyList</a> <code class="grammar-alt">|</code> <a href="#grammar-production-literal">literal</a> <code class="grammar-alt">|</code> <a href="#grammar-production-tripleTerm">tripleTerm</a> <code class="grammar-alt">|</code> <a href="#grammar-production-reifier">reifier</a></td>
     </tr>
     <tr id="grammar-production-literal">
       <td>[15]</td>
@@ -145,9 +145,9 @@
       <td>::=</td>
       <td><a href="#grammar-production-BLANK_NODE_LABEL">BLANK_NODE_LABEL</a> <code class="grammar-alt">|</code> <a href="#grammar-production-ANON">ANON</a></td>
     </tr>
-    <tr id="grammar-production-reification">
+    <tr id="grammar-production-reifier">
       <td>[25]</td>
-      <td><code>reification</code></td>
+      <td><code>reifier</code></td>
       <td>::=</td>
       <td>'<code class="grammar-literal">&lt;&lt;</code>' <code class="grammar-paren">(</code><code class="grammar-paren">(</code><a href="#grammar-production-iri">iri</a> <code class="grammar-alt">|</code> <a href="#grammar-production-BlankNode">BlankNode</a><code class="grammar-paren">)</code> '<code class="grammar-literal">|</code>'<code class="grammar-paren">)</code><code class="grammar-opt">?</code> <a href="#grammar-production-subject">subject</a> <a href="#grammar-production-predicate">predicate</a> <a href="#grammar-production-object">object</a> '<code class="grammar-literal">&gt;&gt;</code>'</td>
     </tr>
