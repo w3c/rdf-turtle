@@ -118,18 +118,19 @@
     format as well as the triple pattern syntax of
     [[[SPARQL12-QUERY]]] W3C Recommendation.</p>
 
-  <p>RDF 1.2 Turtle introduces <a>quoted triples</a>
+  <p>RDF 1.2 Turtle introduces <a data-cite="RDF12-CONCEPTS#dfn-triple-term">triple terms</a>
     as a fourth kind of <a data-cite="RDF12-CONCEPTS#dfn-rdf-term">RDF term</a>
     which can be used as the
-    <a data-cite="RDF12-CONCEPTS#dfn-subject">subject</a> or
     <a data-cite="RDF12-CONCEPTS#dfn-object">object</a> of another
     <a data-cite="RDF12-CONCEPTS#dfn-rdf-triple">triple</a>,
     making it possible to make statements about other statements.
+    <a data-cite="RDF12-CONCEPTS#dfn-triple-term">Triple terms</a> are typically not used explicitly
+    as the <a href="#handle-reifiedTriple"><code>reifiedTriple</code></a> construction is generally preferred.
     RDF 1.2 Turtle also adds support for
     <a data-cite="RDF12-CONCEPTS#dfn-dir-lang-string">directional language-tagged strings</a>.</p>
 
   <p>In addition, RDF 1.2 Turtle introduces an <a>annotation syntax</a> which allows
-    <a>quoted triples</a> to also be <a data-lt="asserted triple">asserted</a>.</p>
+    <a data-cite="RDF12-CONCEPTS#dfn-triple-term">triple terms</a> to also be asserted.</p>
 </section>
 
 <section id='sotd' class="updateable-rec">
@@ -294,7 +295,7 @@
     <a data-cite="RDF12-CONCEPTS#dfn-iri">IRIs</a> (Internationalized Resource Identifiers),
     <a data-cite="RDF12-CONCEPTS#dfn-literal">literals</a>,
     <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank nodes</a>, and
-    <a data-cite="RDF12-CONCEPTS#dfn-quoted-triple">quoted triples</a>;
+    <a data-cite="RDF12-CONCEPTS#dfn-triple-term">triple terms</a>;
     Turtle provides a number of ways of writing each.
   </p>
 
@@ -780,28 +781,54 @@
 
   </section>
 
-  <section id="quoted-triples">
-    <h3>Quoted Triples</h3>
+  <section id="reified-triples">
+    <h3>Reified Triples</h3>
 
-    <p>A <dfn data-cite="RDF12-CONCEPTS#dfn-quoted-triple">quoted triple</dfn>
+    <p>A <dfn data-cite="RDF12-CONCEPTS#dfn-reified-triple">reified triple</dfn>
       may be the <a data-cite="RDF12-CONCEPTS#dfn-subject">subject</a> or
       <a data-cite="RDF12-CONCEPTS#dfn-object">object</a> of an
       <a data-cite="RDF12-CONCEPTS#dfn-rdf-triple">RDF triple</a>.</p>
 
-    <p>A <a data-cite="RDF12-CONCEPTS#dfn-quoted-triple">quoted triple</a>
-      is represented using the <a href="#grammar-production-quotedTriple"><code>quotedTriple</code></a> production
-      with <a href="#grammar-production-subject"><code>subject</code></a>,
-      <a href="#grammar-production-predicate"><code>predicate</code></a>, and
-      <a href="#grammar-production-object"><code>object</code></a>
-      preceded by <a href="#cp-double-lt"><code>&lt;&lt;</code></a>, and
-      followed by <a href="#cp-double-gt"><code>&gt;&gt;</code></a>.
-      Note that <a data-cite="RDF12-CONCEPTS#dfn-quoted-triple">quoted triples</a>
-      may be nested.
-     </p>
+    <p>A <a>reified triple</a> is syntactic sugar for a specific relationship between an
+      identifier (<dfn data-cite="RDF12-CONCEPTS#dfn-reifier">reifier</dfn>) and a <a data-cite="RDF12-CONCEPTS#dfn-triple-term">triple term</a>.
+      The identifier becomes a way to indirectly refer
+      to a <a data-cite="RDF12-CONCEPTS#dfn-triple-term">triple term</a>, which
+      may or may not be asserted within the graph corresponding to this input document.</p>
 
-    <pre id="ex-quoted-triple"
+    <p class="note">Reification in RDF 1.2 is a concept distinct from the
+      <a data-cite="RDF12-SEMANTICS#Reif">Reification vocabulary</a> originally
+      defined in <a data-cite="RDF-MT#Reif">RDF Semantics</a>.
+      While both terms describe a representation of an RDF triple using components,
+      RDF 1.2 uses the term to identify a <a data-cite="RDF12-CONCEPTS#dfn-triple-term">triple term</a>
+      using the `rdf:reifies` predicate.</p>
+
+    <p>A <a>reified triple</a> is represented using the
+      <a href="#grammar-production-reifiedTriple"><code>reifiedTriple</code></a> production
+      starting with <a href="#cp-double-lt"><code>&lt;&lt;</code></a>,
+      followed by <a href="#grammar-production-subject"><code>subject</code></a>,
+      <a href="#grammar-production-predicate"><code>predicate</code></a>, and
+      <a href="#grammar-production-ttObject"><code>ttObject</code></a>,
+      optionally follwed by a <a href="#grammar-production-reifier"><code>reifier</code></a>
+      (<a href="#grammar-production-IRIREF"><code>IRIREF</code></a>
+      or <a href="#grammar-production-BlankNode"><code>BlankNode</code></a>),
+      and ending with <a href="#cp-double-gt"><code>&gt;&gt;</code></a>.
+      For example, `&lt;&lt; :subject :predicate :object ~ :IRIREF &gt;&gt;`.
+      If the optional reifier is not present, a fresh RDF blank node is allocated,
+      as with `&lt;&lt; :subject :predicate :object &gt;&gt;`.</p>
+
+    <p class="note"><a>Reified Triples</a> may be nested,
+      like `&lt;&lt;&nbsp;&nbsp;:subject1&nbsp;:predicate1&nbsp;&lt;&lt;&nbsp;:subject2&nbsp;:predicate2&nbsp;:object2&nbsp;&gt;&gt;&nbsp;~:IRIREF1&nbsp;&gt;&gt;`
+      or `&lt;&lt;&nbsp;:subject4&nbsp;:predicate4&nbsp;&lt;&lt;&nbsp;&nbsp;:subject3&nbsp;:predicate3&nbsp;:object3&nbsp;~:IRIREF3&nbsp;&gt;&gt;&nbsp;&gt;&gt;`.</p>
+
+    <p>If a <a href="#grammar-production-reifiedTriple"><code>reifiedTriple</code></a>
+      is not identified by an <a href="#grammar-production-IRIREF"><code>IRIREF</code></a>
+      or <a href="#grammar-production-BlankNode"><code>BlankNode</code></a>,
+      a fresh RDF <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank node</a> is allocated
+      and used to identify this relationship.</p>
+
+    <pre id="ex-reified-triple"
          class="example turtle" data-transform="updateExample"
-         title="Quoted Triple">
+         title="Reified Triple">
       <!--
       PREFIX :    <http://www.example.org/>
 
@@ -810,31 +837,54 @@
       -->
     </pre>
 
+    <pre id="ex-reified-triple-with-reifier"
+         class="example turtle" data-transform="updateExample"
+         title="Reified Triple with explicit reifier">
+      <!--
+      PREFIX :    <http://www.example.org/>
+
+      :employee38 :familyName "Smith" .
+      << :employee38 :jobTitle "Assistant Designer" ~ _:id >> :accordingTo :employee22 .
+      -->
+    </pre>
+
     <p>After declaring a prefix so that IRIs can be abbreviated,
       the first triple in this example asserts that `employee38` has a `familyName` of "Smith".
       Note that this graph does not assert that `employee38` has a `jobTitle` of "Assistant Designer";
-      it says that `employee22` has made that claim.
+      it says that `employee22` has made that claim using a <a>reified triple</a>.
       In other words, the triple "`employee38` has a `jobTitle` of 'Assistant Designer'"
-      is not what we call an <dfn data-cite="RDF12-CONCEPTS#dfn-asserted-triple">asserted triple</dfn>,
-      like "employee38 has a `familyName` of 'Smith'" above;
-      rather, it is known as a <a data-cite="RDF12-CONCEPTS#dfn-quoted-triple">quoted triple</a>.</p>
+      is not a member of the graph, itself, as "employee38 has a `familyName` of 'Smith'" is above;
+      rather, it is known as a <a>reified triple</a>.</p>
+
+    <p>A <a>reified triple</a> is syntactic sugar relating an
+      <a>reifier</a> to a <a href="#grammar-production-tripleTerm"><code>tripleTerm</code></a>
+      using the <code>rdf:reifies</code> predicate.</p>
 
     <section id="annotation-syntax">
       <h2>Annotation Syntax</h2>
       <p>Turtle also defines an <dfn data-lt="annotation-syntax">annotation syntax</dfn>
-        to both quote and assert a <a data-cite="RDF12-CONCEPTS#dfn-rdf-triple">triple</a>,
+        to both reify and assert a <a data-cite="RDF12-CONCEPTS#dfn-rdf-triple">triple</a>,
         which provides a convenient shortcut.
-        An annotation can be used to both assert a triple and have that triple be the
+        An annotation can be used to both assert a triple,
+        via an explicit or implicit identifier,
+        and have that triple be the
         <a data-cite="RDF12-CONCEPTS#dfn-subject">subject</a> of further triples.
-        The delimiters <a href="#cp-curly-pipe"><code>{|</code></a> and <a href="#cp-pipe-curly"><code>|}</code></a> follow an
-        <a>asserted triple</a> to make that triple,
-        as a <a>quoted triple</a>,
-        the <a data-cite="RDF12-CONCEPTS#dfn-subject">subject</a>
-        of the <a href="#grammar-production-predicateObjectList"><code>predicateObjectList</code></a>
-        contained within the annotation delimeters.
+        If explicitly identified, the same reifier can then be used as the 
+        <a data-cite="RDF12-CONCEPTS#dfn-object">object</a> of additional
+        triples and/or <a data-cite="RDF12-CONCEPTS#dfn-triple-term">triple terms</a>.
+        As with a <a>reified triple</a>,
+        the annotation syntax allows the definition of
+        an <a>reifier</a> as either an <a href="#grammar-production-IRIREF"><code>IRIREF</code></a>
+        or <a href="#grammar-production-BlankNode"><code>BlankNode</code></a>
+        preceded by <a href="#cp-tilda"><code>~</code></a>,
+        which proceeds the annotation block.
+        The delimiters <a href="#cp-curly-pipe"><code>{|</code></a> and <a href="#cp-pipe-curly"><code>|}</code></a>
+        <a href="#grammar-production-subject"><code>subject</code></a>,
+        <a href="#grammar-production-predicate"><code>predicate</code></a>,
+        <a href="#grammar-production-object"><code>object</code></a>.
       </p>
 
-      <p class="note">The annotation syntax is a syntactic short cut in Turtle,
+      <p class="note">The annotation syntax is a syntactic shortcut in Turtle,
         and the RDF Abstract Syntax [[RDF11-CONCEPTS]] does not
         distinguished how the triples were written.</p>
 
@@ -843,21 +893,37 @@
            title="Annotated Triple">
         <!--
         PREFIX : <http://example.com/>
-        :a :name "Alice" {| :statedBy :bob ; :recorded "2021-07-07"^^xsd:date |} .
+        :a :name "Alice" ~ :t {| :statedBy :bob ; :recorded "2021-07-07"^^xsd:date |} .
           -->
       </pre>
       <p>is the same set of triples as:</p>
-      <pre id="ex-annotated-triple-expanded"
+      <pre id="ex-annotated-triple-expanded-to-reifiers"
            class="nohighlight example" data-transform="updateExample"
-           title="Annotated Triple expanded to Quoted Triples">
+           title="Annotated Triple expanded to Reifiers">
         <!--
         PREFIX : <http://example.com/>
-        << :a :name "Alice" >> :statedBy :bob .
-        << :a :name "Alice" >> :recorded "2021-07-07"^^xsd:date .
-        :a :name "Alice"
+        :a :name "Alice" .
+        << :a :name "Alice" ~ :t >> :statedBy :bob ;
+                                    :recorded "2021-07-07"^^xsd:date .
          -->
       </pre>
-      <p>and the graph contains three <a>asserted triples</a>.</p>
+
+      <p>and the graph contains three <a data-cite="RDF12-CONCEPTS#dfn-rdf-triple">triples</a>.
+        The <a>reifier</a> is identified by `:t`.</p>
+
+      <p>Fully expanding to use <a data-cite="RDF12-CONCEPTS#dfn-triple-term">triple terms</a>, instead of reifiers, results in the following:</p>
+      <pre id="ex-annotated-triple-expanded-to-triple-terms"
+           class="nohighlight example" data-transform="updateExample"
+           title="Annotated Triple expanded to Triple Terms">
+        <!--
+        PREFIX : <http://example.com/>
+        PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+        :a :name "Alice" .
+        :t rdf:reifies <<( :a :name "Alice" )>> .
+        :t :statedBy :bob .
+        :t :recorded "2021-07-07"^^xsd:date .
+         -->
+      </pre>
     </section>
 
   </section>
@@ -1460,6 +1526,16 @@
           <td><code title="latin small letter E">e</code></td>
           <td>Latin small letter E</td>
         </tr>
+        <tr id="cp-pipe">
+          <td><code class="codepoint">U+007C</code></td>
+          <td><code title="verticle bar">|</code></td>
+          <td>Verticle bar</td>
+        </tr>
+        <tr id="cp-tilda">
+          <td><code class="codepoint">U+007E</code></td>
+          <td><code title="tilda">~</code></td>
+          <td>Tilda</td>
+        </tr>
         <tr id="cp-middle-dot">
           <td><code class="codepoint">U+00B7</code></td>
           <td><code title="middle dot">·</code></td>
@@ -1514,7 +1590,7 @@
     <a data-cite="RDF12-CONCEPTS#dfn-iri">IRIs</a>,
     <a data-cite="RDF12-CONCEPTS#dfn-literal">literals</a>,
     <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank nodes</a>, and
-    <a data-cite="RDF12-CONCEPTS#dfn-quoted-triple">quoted triples</a>.
+    <a data-cite="RDF12-CONCEPTS#dfn-triple-term">triple terms</a>.
 
     Literals are composed of a <a data-cite="RDF12-CONCEPTS#dfn-lexical-form">lexical form</a>
     and an optional <a data-cite="RDF12-CONCEPTS#dfn-language-tag">language tag</a> [[!BCP47]]
@@ -1532,6 +1608,8 @@
     <h3>Parser State</h3>
 
     <p>Parsing Turtle requires a state of six items:</p>
+
+    <p class="ednote">Describe parser state for tracking reifier to associated with an annotation block.</p>
 
     <ul>
       <li id="baseURI">IRI |baseURI|
@@ -1570,12 +1648,11 @@
         -&gt; <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank node</a>] |bnodeLabels|
         — A mapping from string to blank node.</li>
 
-      <li id="curSubject">RDF_Term |curSubject|
+      <li id="curSubject"><a data-cite="RDF12-CONCEPTS#dfn-rdf-term">RDF Term</a> |curSubject|
         — The |curSubject| is bound to the
-        <a href="#grammar-production-subject"><code>subject</code></a>
-        and <a href="#grammar-production-qtSubject"><code>qtSubject</code></a> productions.</li>
+        <a href="#grammar-production-subject"><code>subject</code></a> production.</li>
 
-      <li id="curPredicate">RDF_Term |curPredicate|
+      <li id="curPredicate"><a data-cite="RDF12-CONCEPTS#dfn-rdf-term">RDF Term</a> |curPredicate|
         — The |curPredicate| is bound to
         the <a href="#grammar-production-verb"><code>verb</code></a> production.
         If token matched was <a href="#cp-lowercase-a"><code title="latin small letter A">a</code></a>,
@@ -1585,14 +1662,11 @@
           <span class="testrefs">(test: <a href="tests/#type">type</a>)</span>
         -->
       </li>
-      <li id="curObject">RDF_Term |curObject| —
+      <li id="curObject"><a data-cite="RDF12-CONCEPTS#dfn-rdf-term">RDF Term</a> |curObject| —
         The |curObject| is bound to the
         <a href="#grammar-production-object"><code>object</code></a> and
-        <a href="#grammar-production-qtObject"><code>qtObject</code></a> productions.</li>
+        <a href="#grammar-production-ttObject"><code>ttObject</code></a> productions.</li>
     </ul>
-    <p>Additionally, |curSubject|
-      can be bound to any RDF_Term
-      (including a <a>quoted triple</a>).</p>
   </section>
 
   <section  id="sec-parsing-terms">
@@ -1627,13 +1701,34 @@
       <tr id="handle-blankNodePropertyList"           ><td style="text-align:left;"            ><a class="type bNode"        href="#grammar-production-blankNodePropertyList"           >blankNodePropertyList           </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-blank-node">   blank node   </a></td><td>A blank node is generated. Note the rules for <code>blankNodePropertyList</code> in the next section.</td></tr>
       <tr id="handle-collection"                      ><td style="text-align:left;" rowspan="2"><a class="type bNode"        href="#grammar-production-collection"                      >collection                      </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-blank-node">   blank node   </a></td><td>For non-empty lists, a blank node is generated. Note the rules for <code>collection</code> in the next section.</td></tr>
       <tr id="handle-collection2"                     >                                                                                                                                                                           <td><a data-cite="RDF12-CONCEPTS#dfn-iri">          IRI          </a></td><td>For empty lists, the resulting IRI is <code>rdf:nil</code>. Note the rules for <code>collection</code> in the next section.</td></tr>
-      <tr id="handle-quotedTriple"                    ><td style="text-align:left;"            ><a class="type quotedTriple" href="#grammar-production-quotedTriple"                    >quotedTriple                    </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-quoted-triple">quoted triple</a></td>
+      <tr id="handle-tripleTerm"                      ><td style="text-align:left;"            ><a class="type tripleTerm"   href="#grammar-production-tripleTerm"                      >tripleTerm                      </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-triple-term">  triple term  </a></td>
         <td>
-          The <a data-cite="RDF12-CONCEPTS#dfn-quoted-triple">quoted triple</a>
+          The <a data-cite="RDF12-CONCEPTS#dfn-triple-term">triple term</a>
           is composed of the terms constructed from
           the <a href="#grammar-production-subject"><code>subject</code></a>,
           <a href="#grammar-production-predicate"><code>predicate</code></a>, and
-          <a href="#grammar-production-object"><code>object</code></a> productions.
+          <a href="#grammar-production-ttObject"><code>ttObject</code></a> productions.
+        </td>
+      </tr>
+      <tr id="handle-reifiedTriple"                   ><td style="text-align:left;"            ><a class="type reifiedTriple" href="#grammar-production-reifiedTriple"                 >reifiedTriple                   </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-iri">IRI</a> | <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank node</a></td>
+        <td>
+          The <a class="type reifiedTriple" href="#grammar-production-reifiedTriple">reifiedTriple</a> production
+          defines an RDF term in addition to a <a data-cite="RDF12-CONCEPTS#dfn-triple-term">triple term</a>.
+          The term constructed from this production
+          is composed of an identifier from either the <a href="#grammar-production-iri"><code>iri</code></a>
+          or <a href="#grammar-production-BlankNode"><code>BlankNode</code></a> productions,
+          if present, otherwise from a fresh RDF <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank node</a>.
+        </td>
+      </tr>
+      <tr id="handle-annotation"                      ><td style="text-align:left;"            ><a class="type annotation" href="#grammar-production-annotation"                        >annotation                      </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-iri">IRI</a> | <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank node</a></td>
+        <td>
+          The <a href="#grammar-production-annotation"><code>annotation</code></a> production
+          defines an RDF term in addition to a <a data-cite="RDF12-CONCEPTS#dfn-triple-term">triple term</a>.
+          The term constructed from this production
+          is composed of an identifier from either the <a href="#grammar-production-iri"><code>iri</code></a>
+          or <a href="#grammar-production-BlankNode"><code>BlankNode</code></a> productions,
+          if present, otherwise from a fresh RDF <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank node</a>.
+          <div class="ednote">Requires state to recall any previously defined <a href="#grammar-production-reifier"><code>reifier</code></a>.</div>
         </td>
       </tr>
       </tbody>
@@ -1646,26 +1741,49 @@
 
     <p>
       A <a>Turtle document</a> defines an <a data-cite="RDF12-CONCEPTS#dfn-rdf-graph">RDF graph</a> composed of set of <a data-cite="RDF12-CONCEPTS#dfn-rdf-triple">RDF triple</a>s.
-      The <a href="#grammar-production-subject"><code>subject</code></a> and <a href="#grammar-production-qtSubject"><code>qtSubject</code></a> productions set the |curSubject|.
+      The <a href="#grammar-production-subject"><code>subject</code></a> production sets the |curSubject|.
       The <a href="#grammar-production-verb"><code>verb</code></a> production sets the |curPredicate|.
-      The <a href="#grammar-production-object"><code>object</code></a> and <a href="#grammar-production-qtObject"><code>qtObject</code></a> productions set the }curObject|.
+      The <a href="#grammar-production-object"><code>object</code></a> and <a href="#grammar-production-ttObject"><code>ttObject</code></a> productions set the |curObject|.
       Each <a class="grammarRef" href="#grammar-production-object"><code>object</code></a> <var>N</var>
       in the document produces an RDF triple:
       <span class="ntriple">|curSubject|
         |curPredicate| <var>N</var> .</span>
     </p>
 
-    <p>Beginning the <a href="#grammar-production-quotedTriple"><code>quotedTriple</code></a> production
+    <h4 id="tripleTerm" style="padding-bottom:0; margin-bottom:0;"><span>Triple Terms:</span></h4>
+
+    <p>Beginning the <a href="#grammar-production-tripleTerm"><code>tripleTerm</code></a> production
       records the |curSubject| and |curPredicate|.
-      Finishing the <a href="#grammar-production-quotedTriple"><code>quotedTriple</code></a> production
-      yields the RDF triple |curSubject| |curPredicate| |curObject|
+      Finishing the <a href="#grammar-production-tripleTerm"><code>tripleTerm</code></a> production
       and restores the recorded values of |curSubject| and |curPredicate|.</p>
 
+    <h4 id="reifier" style="padding-bottom:0; margin-bottom:0;"><span>Reifiers:</span></h4>
+
+    <p>Beginning the <a href="#grammar-production-reifiedTriple"><code>reifiedTriple</code></a> production
+      records the |curSubject| and |curPredicate|.
+      |curSubject| is taken from the
+      <a href="#handle-reifiedTriple"><code>reifiedTriple</code></a> term constructor.
+      A new <a href="#grammar-production-tripleTerm"><code>tripleTerm</code></a> instance |TT|
+      is composed from
+      the <a href="#grammar-production-subject"><code>subject</code></a>,
+      <a href="#grammar-production-predicate"><code>predicate</code></a>, and
+      <a href="#grammar-production-object"><code>object</code></a> productions.
+      Finishing the <a href="#grammar-production-reifier"><code>reifier</code></a> production
+      yields the RDF triple |curSubject| <code>rdf:reifies</code> |TT|
+      and restores the recorded values of |curSubject| and |curPredicate|.</p>
+
+    <h4 id="annotation" style="padding-bottom:0; margin-bottom:0;"><span>Annotations:</span></h4>
+
     <p>Beginning the <a href="#grammar-production-annotation"><code>annotation</code></a> production
-      records the |curSubject| and |curPredicate|,
-      and sets the |curSubject| to the RDF triple |curSubject| |curPredicate| |curObject|.
+      records the |curSubject| and |curPredicate|.
+      A new <a href="#grammar-production-tripleTerm"><code>tripleTerm</code></a> instance |TT|
+      is created using |curSubject| |curPredicate| |curObject|.
+      The identifier |TI| is taken from the
+      <a href="#handle-annotation"><code>annotation</code></a> term constructor.
       Finishing the <a href="#grammar-production-annotation"><code>annotation</code></a> production
-      restores the recorded values of |curSubject| and |curPredicate|.</p>
+      yields the RDF triple |TI| <code>rdf:reifies</code> |TT|
+      and restores the recorded values of |curSubject| and |curPredicate|.</p>
+    <p class="ednote">Describe parser state for recording and assigning any <a>reifier</a>.</p>
 
     <h4 id="propertyList" style="padding-bottom:0; margin-bottom:0;"><span>Property Lists:</span></h4>
 
@@ -2004,9 +2122,9 @@
       and `STRING_LITERAL_SINGLE_QUOTE`.</li>
     <li>Separated <a href="#security"></a> from <a href="#sec-mediaReg"></a>
       and updated language.</li>
-    <li>Added <a href="#quoted-triples" class="sectionRef"></a>
+    <li>Added <a href="#reifiers" class="sectionRef"></a>
       and <a href="#annotation-syntax" class="sectionRef"></a>
-      for representing <a>quoted triples</a> in Turtle.</li>
+      for representing <a data-cite="RDF12-CONCEPTS#dfn-triple-term">triple terms</a> in Turtle.</li>
     <li>Changes the `LANGTAG` terminal production to
       <a href="#grammar-production-LANG_DIR" class="type langDir"><code>LANG_DIR</code></a> to include
       an optional <a data-cite="RDF12-CONCEPTS#dfn-base-direction">base direction</a>.</li>
