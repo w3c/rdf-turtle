@@ -808,19 +808,26 @@
       followed by <a href="#grammar-production-ttSubject"><code>ttSubject</code></a>,
       <a href="#grammar-production-predicate"><code>predicate</code></a>, and
       <a href="#grammar-production-ttObject"><code>ttObject</code></a>,
-      optionally followed by a <a href="#grammar-production-reifier"><code>reifier</code></a>,
+      followed by zero or more <a href="#grammar-production-reifier"><code>reifier</code></a>,
       composed of a <a href="#cp-tilda"><code title="tilda">~</code></a>
-      followed by an <a href="#grammar-production-iri"><code>iri</code></a>
+      followed by an optional <a href="#grammar-production-iri"><code>iri</code></a>
       or <a href="#grammar-production-BlankNode"><code>BlankNode</code></a>,
       and ending with <a href="#cp-double-gt"><code>&gt;&gt;</code></a>.
       For example, `&lt;&lt; :subject :predicate :object ~ :IRIREF &gt;&gt;`.
-      If the optional reifier is not present,
-      a fresh <a data-cite="RDF12-CONCEPTS#dfn-blank-node">RDF blank nodes</a> is allocated,
-      as with `&lt;&lt; :subject :predicate :object &gt;&gt;`.</p>
+      If the no reifiers are not present,
+      or a <a href="#grammar-production-reifier"><code>reifier</code></a>
+      is not immediately followed by an <a href="#grammar-production-iri"><code>iri</code></a>
+      or <a href="#grammar-production-BlankNode"><code>BlankNode</code></a>,
+      a fresh <a data-cite="RDF12-CONCEPTS#dfn-blank-node">RDF blank node</a> is allocated,
+      as with `&lt;&lt; :subject :predicate :object &gt;&gt;`,
+      or `&lt;&lt; :subject :predicate :object ~ &gt;&gt;`.</p>
 
     <p class="note"><a>Reified Triples</a> may be nested,
-      like `&lt;&lt;&nbsp;:subject1&nbsp;:predicate1&nbsp;&lt;&lt;&nbsp;:subject2&nbsp;:predicate2&nbsp;:object2&nbsp;&gt;&gt;&nbsp;~:IRIREF1&nbsp;&gt;&gt;`
-      or `&lt;&lt;&nbsp;:subject4&nbsp;:predicate4&nbsp;&lt;&lt;&nbsp;:subject3&nbsp;:predicate3&nbsp;:object3&nbsp;~:IRIREF3&nbsp;&gt;&gt;&nbsp;&gt;&gt;`.</p>
+      like
+      <br/>`&lt;&lt;&nbsp;:subject1&nbsp;:predicate1 &lt;&lt;&nbsp;:subject2&nbsp;:predicate2&nbsp;:object2&nbsp;&gt;&gt; ~:IRIREF1&nbsp;&gt;&gt;`
+      or <br/>`&lt;&lt;&nbsp;:subject4&nbsp;:predicate4&nbsp;&lt;&lt;:subject3&nbsp;:predicate3&nbsp;:object3&nbsp;~:IRIREF3&nbsp;&gt;&gt;&nbsp;&gt;&gt;`.</p>
+
+    <p class="note">A <a>reified triple</a> can include any number of reifiers.</p>
 
     <p>If a <a href="#grammar-production-reifiedTriple"><code>reifiedTriple</code></a>
       is not identified by an <a href="#grammar-production-iri"><code>iri</code></a>
@@ -850,6 +857,17 @@
       -->
     </pre>
 
+    <pre id="ex-reified-triple-with-multiple-reifiers"
+         class="example turtle" data-transform="updateExample"
+         title="Reified Triple with multiple reifiers">
+      <!--
+      PREFIX :    <http://www.example.org/>
+
+      :employee38 :familyName "Smith" .
+      << :employee38 :jobTitle "Assistant Designer" ~:id ~_:bn ~ >> :accordingTo :employee22 .
+      -->
+    </pre>
+
     <p>After declaring a prefix so that IRIs can be abbreviated,
       the first triple in this example asserts that `employee38` has a `familyName` of "Smith".
       Note that this graph does not assert that `employee38` has a `jobTitle` of "Assistant Designer";
@@ -858,8 +876,8 @@
       is not a member of the graph, itself, as "employee38 has a `familyName` of 'Smith'" is above;
       rather, it is known as a <a>reified triple</a>.</p>
 
-    <p>A <a>reified triple</a> is syntactic sugar relating an
-      <a>reifier</a> to a <a href="#grammar-production-tripleTerm"><code>tripleTerm</code></a>
+    <p>A <a>reified triple</a> is syntactic sugar relating one ore more
+      <a>reifiers</a> to a <a href="#grammar-production-tripleTerm"><code>tripleTerm</code></a>
       using the <code>rdf:reifies</code> predicate.</p>
 
     <section id="annotation-syntax">
@@ -870,21 +888,24 @@
         An annotation can be used to simultaneously assert a triple,
         via an explicit or implicit identifier,
         and have that triple be the
-        <a data-cite="RDF12-CONCEPTS#dfn-subject">subject</a> of further triples.
-        If explicitly identified, the same reifier can then be used as the
+        <a data-cite="RDF12-CONCEPTS#dfn-subject">subject</a> or
+        <a data-cite="RDF12-CONCEPTS#dfn-object">object</a> of further triples.
+        If explicitly identified, the same <a>reifier</a> can then be used as the
         <a data-cite="RDF12-CONCEPTS#dfn-subject">subject</a> or
         <a data-cite="RDF12-CONCEPTS#dfn-object">object</a> of additional
         triples and/or <a data-cite="RDF12-CONCEPTS#dfn-triple-term">triple terms</a>.
         As with a <a>reified triple</a>,
         the annotation syntax allows the definition of
-        an <a>reifier</a> as either an <a href="#grammar-production-iri"><code>iri</code></a>
+        one or more <a>reifiers</a> as either an <a href="#grammar-production-iri"><code>iri</code></a>
         or <a href="#grammar-production-BlankNode"><code>BlankNode</code></a>
         preceded by <a href="#cp-tilda"><code>~</code></a>,
         which proceeds the annotation block.
-        The delimiters <a href="#cp-curly-pipe"><code>{|</code></a> and <a href="#cp-pipe-curly"><code>|}</code></a>
-        <a href="#grammar-production-subject"><code>subject</code></a>,
-        <a href="#grammar-production-predicate"><code>predicate</code></a>,
-        <a href="#grammar-production-object"><code>object</code></a>.
+        If not followed by an annotation block, a <a>reifier</a>
+        is treated like a <a href="#grammar-production-reifiedTriple"><code>reifiedTriple</code></a>
+        without annotations.
+        If an annotation block is not proceeded by a <a>reifier</a>,
+        an RDF blank node is allocated to serve as the <a>reifier</a> of a
+        <a data-cite="RDF12-CONCEPTS#dfn-triple-term">triple terms</a>.
       </p>
 
       <p class="note">The annotation syntax is a syntactic shortcut in Turtle,
@@ -927,6 +948,9 @@
         :t :recorded "2021-07-07"^^xsd:date .
          -->
       </pre>
+
+      <p class="note">A <a href="#grammar-production-annotation"><code>annotation</code></a> can include any number of reifiers.</p>
+      
     </section>
 
   </section>
