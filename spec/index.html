@@ -805,23 +805,25 @@
     <p>A <a>reified triple</a> is represented using the
       <a href="#grammar-production-reifiedTriple"><code>reifiedTriple</code></a> production
       starting with <a href="#cp-double-lt"><code>&lt;&lt;</code></a>,
-      followed by <a href="#grammar-production-subject"><code>subject</code></a>,
+      followed by <a href="#grammar-production-ttSubject"><code>ttSubject</code></a>,
       <a href="#grammar-production-predicate"><code>predicate</code></a>, and
       <a href="#grammar-production-ttObject"><code>ttObject</code></a>,
-      optionally follwed by a <a href="#grammar-production-reifier"><code>reifier</code></a>
-      (<a href="#grammar-production-IRIREF"><code>IRIREF</code></a>
-      or <a href="#grammar-production-BlankNode"><code>BlankNode</code></a>),
+      optionally followed by a <a href="#grammar-production-reifier"><code>reifier</code></a>,
+      composed of a <a href="#cp-tilda"><code title="tilda">~</code></a>
+      followed by an <a href="#grammar-production-iri"><code>iri</code></a>
+      or <a href="#grammar-production-BlankNode"><code>BlankNode</code></a>,
       and ending with <a href="#cp-double-gt"><code>&gt;&gt;</code></a>.
       For example, `&lt;&lt; :subject :predicate :object ~ :IRIREF &gt;&gt;`.
-      If the optional reifier is not present, a fresh RDF blank node is allocated,
+      If the optional reifier is not present,
+      a fresh <a data-cite="RDF12-CONCEPTS#dfn-blank-node">RDF blank nodes</a> is allocated,
       as with `&lt;&lt; :subject :predicate :object &gt;&gt;`.</p>
 
     <p class="note"><a>Reified Triples</a> may be nested,
-      like `&lt;&lt;&nbsp;&nbsp;:subject1&nbsp;:predicate1&nbsp;&lt;&lt;&nbsp;:subject2&nbsp;:predicate2&nbsp;:object2&nbsp;&gt;&gt;&nbsp;~:IRIREF1&nbsp;&gt;&gt;`
-      or `&lt;&lt;&nbsp;:subject4&nbsp;:predicate4&nbsp;&lt;&lt;&nbsp;&nbsp;:subject3&nbsp;:predicate3&nbsp;:object3&nbsp;~:IRIREF3&nbsp;&gt;&gt;&nbsp;&gt;&gt;`.</p>
+      like `&lt;&lt;&nbsp;:subject1&nbsp;:predicate1&nbsp;&lt;&lt;&nbsp;:subject2&nbsp;:predicate2&nbsp;:object2&nbsp;&gt;&gt;&nbsp;~:IRIREF1&nbsp;&gt;&gt;`
+      or `&lt;&lt;&nbsp;:subject4&nbsp;:predicate4&nbsp;&lt;&lt;&nbsp;:subject3&nbsp;:predicate3&nbsp;:object3&nbsp;~:IRIREF3&nbsp;&gt;&gt;&nbsp;&gt;&gt;`.</p>
 
     <p>If a <a href="#grammar-production-reifiedTriple"><code>reifiedTriple</code></a>
-      is not identified by an <a href="#grammar-production-IRIREF"><code>IRIREF</code></a>
+      is not identified by an <a href="#grammar-production-iri"><code>iri</code></a>
       or <a href="#grammar-production-BlankNode"><code>BlankNode</code></a>,
       a fresh RDF <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank node</a> is allocated
       and used to identify this relationship.</p>
@@ -865,16 +867,17 @@
       <p>Turtle also defines an <dfn data-lt="annotation-syntax">annotation syntax</dfn>
         to both reify and assert a <a data-cite="RDF12-CONCEPTS#dfn-rdf-triple">triple</a>,
         which provides a convenient shortcut.
-        An annotation can be used to both assert a triple,
+        An annotation can be used to simultaneously assert a triple,
         via an explicit or implicit identifier,
         and have that triple be the
         <a data-cite="RDF12-CONCEPTS#dfn-subject">subject</a> of further triples.
-        If explicitly identified, the same reifier can then be used as the 
+        If explicitly identified, the same reifier can then be used as the
+        <a data-cite="RDF12-CONCEPTS#dfn-subject">subject</a> or
         <a data-cite="RDF12-CONCEPTS#dfn-object">object</a> of additional
         triples and/or <a data-cite="RDF12-CONCEPTS#dfn-triple-term">triple terms</a>.
         As with a <a>reified triple</a>,
         the annotation syntax allows the definition of
-        an <a>reifier</a> as either an <a href="#grammar-production-IRIREF"><code>IRIREF</code></a>
+        an <a>reifier</a> as either an <a href="#grammar-production-iri"><code>iri</code></a>
         or <a href="#grammar-production-BlankNode"><code>BlankNode</code></a>
         preceded by <a href="#cp-tilda"><code>~</code></a>,
         which proceeds the annotation block.
@@ -886,7 +889,7 @@
 
       <p class="note">The annotation syntax is a syntactic shortcut in Turtle,
         and the RDF Abstract Syntax [[RDF11-CONCEPTS]] does not
-        distinguished how the triples were written.</p>
+        distinguish how the triples were written.</p>
 
       <pre id="ex-annotated-triple"
            class="example turtle" data-transform="updateExample" 
@@ -1609,7 +1612,7 @@
 
     <p>Parsing Turtle requires a state of six items:</p>
 
-    <p class="ednote">Describe parser state for tracking reifier to associated with an annotation block.</p>
+    <p class="ednote">Describe parser state for tracking reifier to be associated with an annotation block.</p>
 
     <ul>
       <li id="baseURI">IRI |baseURI|
@@ -1705,7 +1708,7 @@
         <td>
           The <a data-cite="RDF12-CONCEPTS#dfn-triple-term">triple term</a>
           is composed of the terms constructed from
-          the <a href="#grammar-production-subject"><code>subject</code></a>,
+          the <a href="#grammar-production-ttSubject"><code>ttSubject</code></a>,
           <a href="#grammar-production-predicate"><code>predicate</code></a>, and
           <a href="#grammar-production-ttObject"><code>ttObject</code></a> productions.
         </td>
@@ -1715,8 +1718,8 @@
           The <a class="type reifiedTriple" href="#grammar-production-reifiedTriple">reifiedTriple</a> production
           defines an RDF term in addition to a <a data-cite="RDF12-CONCEPTS#dfn-triple-term">triple term</a>.
           The term constructed from this production
-          is composed of an identifier from either the <a href="#grammar-production-iri"><code>iri</code></a>
-          or <a href="#grammar-production-BlankNode"><code>BlankNode</code></a> productions,
+          is composed of an optional identifier from either the <a href="#grammar-production-iri"><code>iri</code></a>
+          or the <a href="#grammar-production-BlankNode"><code>BlankNode</code></a> productions,
           if present, otherwise from a fresh RDF <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank node</a>.
         </td>
       </tr>
