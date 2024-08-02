@@ -781,6 +781,37 @@
 
   </section>
 
+  <section id="triple-terms">
+    <h3>Triple Terms</h3>
+
+    <p>A <a data-cite="RDF12-CONCEPTS#dfn-triple-term">triple term</a>
+      may be the <a data-cite="RDF12-CONCEPTS#dfn-object">object</a> of an
+      <a data-cite="RDF12-CONCEPTS#dfn-rdf-triple">RDF triple</a>.</p>
+
+    <p>A <a data-cite="RDF12-CONCEPTS#dfn-triple-term">triple term</a>
+      is represented as a <a href="#grammar-production-tripleTerm"><code>tripleTerm</code></a> with
+      <a href="#grammar-production-ttSubject"><code>ttSubject</code></a>,
+      <a href="#grammar-production-predicate"><code>predicate</code></a>, and
+      <a href="#grammar-production-ttObject"><code>ttObject</code></a>
+      preceded by <a href="#cp-double-lt-paren"><code>&lt;&lt;(</code></a>, and
+      followed by <a href="#cp-paren-double-gt"><code>)&gt;&gt;</code></a>.
+      Note that <a data-cite="RDF12-CONCEPTS#dfn-triple-term">triple terms</a>
+      may be nested.
+     </p>
+
+    <pre id="ex-triple-term" class="example turtle" data-transform="updateExample"
+         title="Triple Term">
+      <!--
+      PREFIX :    <http://www.example.org/>
+      PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+      _:e38  :familyName                     "Smith" .
+      _:anno rdf:reifies <<( _:e38 :jobTitle "Designer" )>> .
+      _:anno :accordingTo                     _:e22 .
+      -->
+    </pre>
+  </section>
+
   <section id="reified-triples">
     <h3>Reified Triples</h3>
 
@@ -1594,6 +1625,12 @@
       <dd>two concatenated less-than sign characters, each having the code point <code class="codepoint">U+003C</code></dd>
       <dt id="cp-double-gt"><code>&gt;&gt;</code></dt>
       <dd>two concatenated greater-than sign characters, each having the code point <code class="codepoint">U+003E</code></dd>
+      <dt id="cp-double-lt-paren"><code>&lt;&lt;(</code></dt>
+      <dd>two concatenated less-than sign characters, each having the code point <code class="codepoint">U+003C</code>,
+        followed by a left parenthesis character, having the code point <code class="codepoint">U+0028</code></dd>
+      <dt id="cp-paren-double-gt"><code>)&gt;&gt;</code></dt>
+      <dd>a left parenthesis character, having the code point <code class="codepoint">U+0029</code>
+        followed by two concatenated greater-than sign characters, each having the code point <code class="codepoint">U+003E</code></dd>
       <dt id="cp-double-circumflex"><code>^^</code></dt>
       <dd>two concatenated circumflex accent characters, each having the code point <code class="codepoint">U+005E</code></dd>
       <dt id="cp-curly-pipe"><code>{|</code></dt>
