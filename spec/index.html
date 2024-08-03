@@ -836,16 +836,17 @@
     <p>A <a>reified triple</a> is represented using the
       <a href="#grammar-production-reifiedTriple"><code>reifiedTriple</code></a> production
       starting with <a href="#cp-double-lt"><code>&lt;&lt;</code></a>,
-      followed by <a href="#grammar-production-ttSubject"><code>ttSubject</code></a>,
-      <a href="#grammar-production-predicate"><code>predicate</code></a>, and
-      <a href="#grammar-production-ttObject"><code>ttObject</code></a>,
-      followed by zero or more <a href="#grammar-production-reifier"><code>reifier</code></a>,
+      followed by either a <a href="#grammar-production-subject"><code>subject</code></a>
+      or <a href="#grammar-production-reifiedTriple"><code>reifiedTriple</code></a>,
+      a <a href="#grammar-production-predicate"><code>predicate</code></a>, and
+      a <a href="#grammar-production-ttObject"><code>ttObject</code></a>,
+      followed by an optional <a href="#grammar-production-reifier"><code>reifier</code></a>,
       composed of a <a href="#cp-tilda"><code title="tilda">~</code></a>
       followed by an optional <a href="#grammar-production-iri"><code>iri</code></a>
       or <a href="#grammar-production-BlankNode"><code>BlankNode</code></a>,
       and ending with <a href="#cp-double-gt"><code>&gt;&gt;</code></a>.
       For example, `&lt;&lt; :subject :predicate :object ~ :IRIREF &gt;&gt;`.
-      If the no reifiers are not present,
+      If the no reifiers are present,
       or a <a href="#grammar-production-reifier"><code>reifier</code></a>
       is not immediately followed by an <a href="#grammar-production-iri"><code>iri</code></a>
       or <a href="#grammar-production-BlankNode"><code>BlankNode</code></a>,
@@ -857,8 +858,6 @@
       like
       <br/>`&lt;&lt;&nbsp;:subject1&nbsp;:predicate1 &lt;&lt;&nbsp;:subject2&nbsp;:predicate2&nbsp;:object2&nbsp;&gt;&gt; ~:IRIREF1&nbsp;&gt;&gt;`
       or <br/>`&lt;&lt;&nbsp;:subject4&nbsp;:predicate4&nbsp;&lt;&lt;:subject3&nbsp;:predicate3&nbsp;:object3&nbsp;~:IRIREF3&nbsp;&gt;&gt;&nbsp;&gt;&gt;`.</p>
-
-    <p class="note">A <a>reified triple</a> can include any number of reifiers.</p>
 
     <p>If a <a href="#grammar-production-reifiedTriple"><code>reifiedTriple</code></a>
       is not identified by an <a data-cite="RDF12-CONCEPTS#dfn-iri">IRI</a>
@@ -885,17 +884,6 @@
 
       :employee38 :familyName "Smith" .
       << :employee38 :jobTitle "Assistant Designer" ~ _:id >> :accordingTo :employee22 .
-      -->
-    </pre>
-
-    <pre id="ex-reified-triple-with-multiple-reifiers"
-         class="example turtle" data-transform="updateExample"
-         title="Reified Triple with multiple reifiers">
-      <!--
-      PREFIX :    <http://www.example.org/>
-
-      :employee38 :familyName "Smith" .
-      << :employee38 :jobTitle "Assistant Designer" ~:id ~_:bn ~ >> :accordingTo :employee22 .
       -->
     </pre>
 
@@ -927,9 +915,9 @@
         triples and/or <a data-cite="RDF12-CONCEPTS#dfn-triple-term">triple terms</a>.
         As with a <a>reified triple</a>,
         the annotation syntax allows the definition of
-        one or more <a>reifiers</a> as either an <a data-cite="RDF12-CONCEPTS#dfn-iri">IRI</a>
-        or <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank node</a>
-        preceded by <a href="#cp-tilda"><code>~</code></a>,
+        one or more <a>reifiers</a> as either an <a data-cite="RDF12-CONCEPTS#dfn-iri">IRIs</a>
+        or <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank nodes</a>
+        each preceded by <a href="#cp-tilda"><code>~</code></a>,
         which proceeds the annotation block.
         If not followed by an annotation block, a <a>reifier</a>
         is treated like a <a href="#grammar-production-reifiedTriple"><code>reifiedTriple</code></a>
