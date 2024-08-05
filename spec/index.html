@@ -846,7 +846,7 @@
       or <a href="#grammar-production-BlankNode"><code>BlankNode</code></a>,
       and ending with <a href="#cp-double-gt"><code>&gt;&gt;</code></a>.
       For example, `&lt;&lt; :subject :predicate :object ~ :IRIREF &gt;&gt;`.
-      If the no reifiers are present,
+      If no reifiers are present,
       or a <a href="#grammar-production-reifier"><code>reifier</code></a>
       is not immediately followed by an <a href="#grammar-production-iri"><code>iri</code></a>
       or <a href="#grammar-production-BlankNode"><code>BlankNode</code></a>,
@@ -915,9 +915,9 @@
         triples and/or <a data-cite="RDF12-CONCEPTS#dfn-triple-term">triple terms</a>.
         As with a <a>reified triple</a>,
         the annotation syntax allows the definition of
-        one or more <a>reifiers</a> as either an <a data-cite="RDF12-CONCEPTS#dfn-iri">IRIs</a>
-        or <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank nodes</a>
-        each preceded by <a href="#cp-tilda"><code>~</code></a>,
+        one or more <a>reifiers</a> as either <a data-cite="RDF12-CONCEPTS#dfn-iri">IRIs</a>
+        or <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank nodes</a>,
+        each preceded by a tilde (<a href="#cp-tilda"><code>~</code></a>),
         which proceeds the annotation block.
         If not followed by an annotation block, a <a>reifier</a>
         is treated like a <a href="#grammar-production-reifiedTriple"><code>reifiedTriple</code></a>
@@ -968,7 +968,7 @@
          -->
       </pre>
 
-      <p class="note">A <a href="#grammar-production-annotation"><code>annotation</code></a> can include any number of reifiers.</p>
+      <p class="note">An <a href="#grammar-production-annotation"><code>annotation</code></a> can include any number of <a>reifiers</a>.</p>
       
     </section>
 
