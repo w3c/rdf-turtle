@@ -792,9 +792,9 @@
       is represented as a <a href="#grammar-production-tripleTerm"><code>tripleTerm</code></a> with
       <a href="#grammar-production-ttSubject"><code>ttSubject</code></a>,
       <a href="#grammar-production-predicate"><code>predicate</code></a>, and
-      <a href="#grammar-production-ttObject"><code>ttObject</code></a>
+      <a href="#grammar-production-ttObject"><code>ttObject</code></a>, all
       preceded by <a href="#cp-double-lt-paren"><code>&lt;&lt;(</code></a>, and
-      followed by <a href="#cp-paren-double-gt"><code>)&gt;&gt;</code></a>.
+      all followed by <a href="#cp-paren-double-gt"><code>)&gt;&gt;</code></a>.
       Note that <a data-cite="RDF12-CONCEPTS#dfn-triple-term">triple terms</a>
       may be nested.
      </p>
@@ -842,8 +842,8 @@
       a <a href="#grammar-production-ttObject"><code>ttObject</code></a>,
       followed by an optional <a href="#grammar-production-reifier"><code>reifier</code></a>,
       composed of a <a href="#cp-tilde"><code title="tilde">~</code></a>
-      followed by an optional <a href="#grammar-production-iri"><code>iri</code></a>
-      or <a href="#grammar-production-BlankNode"><code>BlankNode</code></a>,
+      followed by an optional <a href="#grammar-production-iri"><code>iri</code></a> production
+      or <a href="#grammar-production-BlankNode"><code>BlankNode</code></a> production,
       and ending with <a href="#cp-double-gt"><code>&gt;&gt;</code></a>.
       For example, `&lt;&lt; :subject :predicate :object ~ :IRIREF &gt;&gt;`.
       If no reifiers are present,
@@ -923,8 +923,8 @@
         is treated like a <a href="#grammar-production-reifiedTriple"><code>reifiedTriple</code></a>
         without annotations.
         If an annotation block is not proceeded by a <a>reifier</a>,
-        an RDF blank node is allocated to serve as the <a>reifier</a> of a
-        <a data-cite="RDF12-CONCEPTS#dfn-triple-term">triple terms</a>.
+        an RDF blank node is allocated to serve as the <a>reifier</a> of the
+        <a data-cite="RDF12-CONCEPTS#dfn-triple-term">triple term</a>.
       </p>
 
       <p class="note">The annotation syntax is a syntactic shortcut in Turtle,
@@ -1768,7 +1768,7 @@
           defines an RDF term in addition to a <a data-cite="RDF12-CONCEPTS#dfn-triple-term">triple term</a>.
           The term constructed from this production
           is composed of an optional identifier from either the <a href="#grammar-production-iri"><code>iri</code></a>
-          or the <a href="#grammar-production-BlankNode"><code>BlankNode</code></a> productions,
+          production or the <a href="#grammar-production-BlankNode"><code>BlankNode</code></a> production,
           if present, otherwise from a fresh RDF <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank node</a>.
         </td>
       </tr>
