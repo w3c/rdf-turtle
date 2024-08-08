@@ -47,7 +47,7 @@
       <td>[8]</td>
       <td><code>triples</code></td>
       <td>::=</td>
-      <td><code class="grammar-paren">(</code><a href="#grammar-production-subject">subject</a> <a href="#grammar-production-predicateObjectList">predicateObjectList</a><code class="grammar-paren">)</code> <code class="grammar-alt">|</code> <code class="grammar-paren">(</code><a href="#grammar-production-blankNodePropertyList">blankNodePropertyList</a> <a href="#grammar-production-predicateObjectList">predicateObjectList</a><code class="grammar-opt">?</code><code class="grammar-paren">)</code></td>
+      <td><code class="grammar-paren">(</code><a href="#grammar-production-subject">subject</a> <a href="#grammar-production-predicateObjectList">predicateObjectList</a><code class="grammar-paren">)</code> <code class="grammar-alt">|</code> <code class="grammar-paren">(</code><a href="#grammar-production-blankNodePropertyList">blankNodePropertyList</a> <a href="#grammar-production-predicateObjectList">predicateObjectList</a><code class="grammar-opt">?</code><code class="grammar-paren">)</code> <code class="grammar-alt">|</code> <code class="grammar-paren">(</code><a href="#grammar-production-reifiedTriple">reifiedTriple</a> <a href="#grammar-production-predicateObjectList">predicateObjectList</a><code class="grammar-opt">?</code><code class="grammar-paren">)</code></td>
     </tr>
     <tr id="grammar-production-predicateObjectList">
       <td>[9]</td>
@@ -71,7 +71,7 @@
       <td>[12]</td>
       <td><code>subject</code></td>
       <td>::=</td>
-      <td><a href="#grammar-production-iri">iri</a> <code class="grammar-alt">|</code> <a href="#grammar-production-BlankNode">BlankNode</a> <code class="grammar-alt">|</code> <a href="#grammar-production-collection">collection</a> <code class="grammar-alt">|</code> <a href="#grammar-production-reifier">reifier</a></td>
+      <td><a href="#grammar-production-iri">iri</a> <code class="grammar-alt">|</code> <a href="#grammar-production-BlankNode">BlankNode</a> <code class="grammar-alt">|</code> <a href="#grammar-production-collection">collection</a></td>
     </tr>
     <tr id="grammar-production-predicate">
       <td>[13]</td>
@@ -149,13 +149,13 @@
       <td>[25]</td>
       <td><code>reifier</code></td>
       <td>::=</td>
-      <td>'<code class="grammar-literal">~</code>' <code class="grammar-paren">(</code><a href="#grammar-production-iri">iri</a> <code class="grammar-alt">|</code> <a href="#grammar-production-BlankNode">BlankNode</a><code class="grammar-paren">)</code></td>
+      <td>'<code class="grammar-literal">~</code>' <code class="grammar-paren">(</code><a href="#grammar-production-iri">iri</a> <code class="grammar-alt">|</code> <a href="#grammar-production-BlankNode">BlankNode</a><code class="grammar-paren">)</code><code class="grammar-opt">?</code></td>
     </tr>
     <tr id="grammar-production-reifiedTriple">
       <td>[26]</td>
       <td><code>reifiedTriple</code></td>
       <td>::=</td>
-      <td>'<code class="grammar-literal">&lt;&lt;</code>' <a href="#grammar-production-subject">subject</a> <a href="#grammar-production-predicate">predicate</a> <a href="#grammar-production-object">object</a> <a href="#grammar-production-reifier">reifier</a><code class="grammar-opt">?</code> '<code class="grammar-literal">&gt;&gt;</code>'</td>
+      <td>'<code class="grammar-literal">&lt;&lt;</code>' <code class="grammar-paren">(</code><a href="#grammar-production-subject">subject</a> <code class="grammar-alt">|</code> <a href="#grammar-production-reifiedTriple">reifiedTriple</a><code class="grammar-paren">)</code> <a href="#grammar-production-predicate">predicate</a> <a href="#grammar-production-object">object</a> <a href="#grammar-production-reifier">reifier</a><code class="grammar-star">*</code> '<code class="grammar-literal">&gt;&gt;</code>'</td>
     </tr>
     <tr id="grammar-production-tripleTerm">
       <td>[27]</td>
@@ -406,7 +406,7 @@
       <td>[57]</td>
       <td><code>PN_LOCAL_ESC</code></td>
       <td>::=</td>
-      <td>'<code class="grammar-literal">\</code>' <code class="grammar-paren">(</code>'<code class="grammar-literal">_</code>' <code class="grammar-alt">|</code> '<code class="grammar-literal">~</code>' <code class="grammar-alt">|</code> '<code class="grammar-literal">.</code>' <code class="grammar-alt">|</code> '<code class="grammar-literal">-</code>' <code class="grammar-alt">|</code> '<code class="grammar-literal">!</code>' <code class="grammar-alt">|</code> '<code class="grammar-literal">$</code>' <code class="grammar-alt">|</code> '<code class="grammar-literal">&amp;</code>' <code class="grammar-alt">|</code> "<code class="grammar-literal">&apos;</code>" <code class="grammar-alt">|</code> '<code class="grammar-literal">(</code>' <code class="grammar-alt">|</code> '<code class="grammar-literal">)</code>' <code class="grammar-alt">|</code> '<code class="grammar-literal">*</code>' <code class="grammar-alt">|</code> '<code class="grammar-literal">+</code>' <code class="grammar-alt">|</code> '<code class="grammar-literal">,</code>' <code class="grammar-alt">|</code> '<code class="grammar-literal">;</code>' <code class="grammar-alt">|</code> '<code class="grammar-literal">=</code>' <code class="grammar-alt">|</code> '<code class="grammar-literal">/</code>' <code class="grammar-alt">|</code> '<code class="grammar-literal">?</code>' <code class="grammar-alt">|</code> '<code class="grammar-literal">#</code>' <code class="grammar-alt">|</code> '<code class="grammar-literal">@</code>' <code class="grammar-alt">|</code> '<code class="grammar-literal">%</code>'<code class="grammar-paren">)</code></td>
+      <td>'<code class="grammar-literal">\</code>' <code class="grammar-paren">(</code>'<code class="grammar-literal">_</code>' <code class="grammar-alt">|</code> '<code class="grammar-literal">~</code>' <code class="grammar-alt">|</code> '<code class="grammar-literal">.</code>' <code class="grammar-alt">|</code> '<code class="grammar-literal">-</code>' <code class="grammar-alt">|</code> "<code class="grammar-literal">!</code>" <code class="grammar-alt">|</code> '<code class="grammar-literal">$</code>' <code class="grammar-alt">|</code> '<code class="grammar-literal">&amp;</code>' <code class="grammar-alt">|</code> "<code class="grammar-literal">&apos;</code>" <code class="grammar-alt">|</code> '<code class="grammar-literal">(</code>' <code class="grammar-alt">|</code> '<code class="grammar-literal">)</code>' <code class="grammar-alt">|</code> '<code class="grammar-literal">*</code>' <code class="grammar-alt">|</code> '<code class="grammar-literal">+</code>' <code class="grammar-alt">|</code> '<code class="grammar-literal">,</code>' <code class="grammar-alt">|</code> '<code class="grammar-literal">;</code>' <code class="grammar-alt">|</code> '<code class="grammar-literal">=</code>' <code class="grammar-alt">|</code> '<code class="grammar-literal">/</code>' <code class="grammar-alt">|</code> '<code class="grammar-literal">?</code>' <code class="grammar-alt">|</code> '<code class="grammar-literal">#</code>' <code class="grammar-alt">|</code> '<code class="grammar-literal">@</code>' <code class="grammar-alt">|</code> '<code class="grammar-literal">%</code>'<code class="grammar-paren">)</code></td>
     </tr>
   </tbody>
 </table>

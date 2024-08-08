@@ -5,11 +5,13 @@ prefixID              ::= '@prefix' PNAME_NS IRIREF '.'
 base                  ::= '@base' IRIREF '.'
 sparqlPrefix          ::=	"PREFIX" PNAME_NS IRIREF
 sparqlBase            ::=	"BASE" IRIREF
-triples               ::= subject predicateObjectList | blankNodePropertyList predicateObjectList?
+triples               ::= subject predicateObjectList
+                        | blankNodePropertyList predicateObjectList?
+                        | reifiedTriple predicateObjectList?
 predicateObjectList   ::= verb objectList (';' (verb objectList)? )*
 objectList            ::= object annotation ( ',' object annotation )*
 verb                  ::= predicate | 'a'
-subject               ::= iri | BlankNode | collection | reifier
+subject               ::= iri | BlankNode | collection
 predicate             ::= iri
 object                ::= iri | BlankNode | collection | blankNodePropertyList | literal | tripleTerm | reifiedTriple
 literal               ::= RDFLiteral | NumericLiteral | BooleanLiteral
@@ -23,8 +25,8 @@ String                ::= STRING_LITERAL_QUOTE | STRING_LITERAL_SINGLE_QUOTE
 iri                   ::= IRIREF | PrefixedName
 PrefixedName          ::= PNAME_LN | PNAME_NS
 BlankNode             ::= BLANK_NODE_LABEL | ANON
-reifier               ::= '~' (iri | BlankNode)
-reifiedTriple         ::= '<<' subject predicate object reifier? '>>'
+reifier               ::= '~' (iri | BlankNode)?
+reifiedTriple         ::= '<<' (subject | reifiedTriple) predicate object reifier* '>>'
 tripleTerm            ::= '<<(' ttSubject predicate ttObject ')>>'
 ttSubject             ::=	iri | BlankNode
 ttObject              ::=	iri | BlankNode | literal | tripleTerm
