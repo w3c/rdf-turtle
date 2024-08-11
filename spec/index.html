@@ -1659,9 +1659,7 @@
   <section id="sec-parsing-state">
     <h3>Parser State</h3>
 
-    <p>Parsing Turtle requires a state of six items:</p>
-
-    <p class="ednote">Describe parser state for tracking reifier to be associated with an annotation block.</p>
+    <p>Parsing Turtle requires a state of seven items:</p>
 
     <ul>
       <li id="baseURI">IRI |baseURI|
@@ -1718,6 +1716,13 @@
         The |curObject| is bound to the
         <a href="#grammar-production-object"><code>object</code></a> and
         <a href="#grammar-production-ttObject"><code>ttObject</code></a> productions.</li>
+      <li id="curReifier"><a data-cite="RDF12-CONCEPTS#dfn-rdf-term">RDF Term</a> |curReifier| —
+        The |curReifier| is bound to the
+        <a href="#grammar-production-reifier"><code>reifier</code></a> and
+        <a href="#grammar-production-annotationBlock"><code>annotationBlock</code></a> productions.</li>
+      <li id="curTripleTerm"><a data-cite="RDF12-CONCEPTS#dfn-triple-term">Triple term</a> |curTripleTerm| —
+        Is set in the <a href="#annotation">Annotations</a> constructor.
+      </li>
     </ul>
   </section>
 
@@ -1753,6 +1758,16 @@
       <tr id="handle-blankNodePropertyList"           ><td style="text-align:left;"            ><a class="type bNode"        href="#grammar-production-blankNodePropertyList"           >blankNodePropertyList           </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-blank-node">   blank node   </a></td><td>A blank node is generated. Note the rules for <code>blankNodePropertyList</code> in the next section.</td></tr>
       <tr id="handle-collection"                      ><td style="text-align:left;" rowspan="2"><a class="type bNode"        href="#grammar-production-collection"                      >collection                      </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-blank-node">   blank node   </a></td><td>For non-empty lists, a blank node is generated. Note the rules for <code>collection</code> in the next section.</td></tr>
       <tr id="handle-collection2"                     >                                                                                                                                                                           <td><a data-cite="RDF12-CONCEPTS#dfn-iri">          IRI          </a></td><td>For empty lists, the resulting IRI is <code>rdf:nil</code>. Note the rules for <code>collection</code> in the next section.</td></tr>
+      <tr id="handle-reifier"                         ><td style="text-align:left;"            ><a class="type reifier" href="#grammar-production-reifier"                              >reifier                         </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-iri">          IRI          </a>
+                                                                                                                                                                                                                                    | <a data-cite="RDF12-CONCEPTS#dfn-blank-node">   blank node   </a></td>
+        <td>
+          The <a data-cite="RDF12-CONCEPTS#dfn-rdf-term">term</a> sets |curReifier| and is taken from the matched
+          <a href="#grammar-production-iri"><code>iri</code></a> production
+          or <a href="#grammar-production-BlankNode"><code>BlankNode</code></a> production, if any.
+          If no such production is matched, it is taken
+          from a fresh RDF <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank node</a>.
+        </td>
+      </tr>
       <tr id="handle-tripleTerm"                      ><td style="text-align:left;"            ><a class="type tripleTerm"   href="#grammar-production-tripleTerm"                      >tripleTerm                      </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-triple-term">  triple term  </a></td>
         <td>
           The <a data-cite="RDF12-CONCEPTS#dfn-triple-term">triple term</a>
@@ -1762,28 +1777,19 @@
           <a href="#grammar-production-ttObject"><code>ttObject</code></a> productions.
         </td>
       </tr>
-      <tr id="handle-reifiedTriple"                   ><td style="text-align:left;"            ><a class="type reifiedTriple" href="#grammar-production-reifiedTriple"                 >reifiedTriple                   </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-iri">IRI</a> | <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank node</a></td>
+      <tr id="handle-reifiedTriple"                   ><td style="text-align:left;"            ><a class="type reifiedTriple" href="#grammar-production-reifiedTriple"                  >reifiedTriple                   </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-iri">IRI</a> | <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank node</a></td>
         <td>
-          The <a class="type reifiedTriple" href="#grammar-production-reifiedTriple">reifiedTriple</a> production
-          defines an RDF term in addition to a <a data-cite="RDF12-CONCEPTS#dfn-triple-term">triple term</a>.
-          The term constructed from this production
-          is composed of an optional identifier from either the <a href="#grammar-production-iri"><code>iri</code></a>
-          production or the <a href="#grammar-production-BlankNode"><code>BlankNode</code></a> production,
-          if present, otherwise from a fresh RDF <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank node</a>.
+          The <a data-cite="RDF12-CONCEPTS#dfn-rdf-term">term</a> taken from the matched <a href="#grammar-production-reifier"><code>reifier</code></a>, if any,
+          or from a fresh RDF <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank node</a>.
         </td>
       </tr>
-      <tr id="handle-annotation"                      ><td style="text-align:left;"            ><a class="type annotation" href="#grammar-production-annotation"                        >annotation                      </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-iri">IRI</a> | <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank node</a></td>
+      <tr id="handle-annotationBlock"                 ><td style="text-align:left;"            ><a class="type annotation" href="#grammar-production-annotationBlock"                   >annotationBlock                 </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-iri">IRI</a> | <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank node</a></td>
         <td>
-          The <a href="#grammar-production-annotation"><code>annotation</code></a> production
-          defines an RDF term in addition to a <a data-cite="RDF12-CONCEPTS#dfn-triple-term">triple term</a>.
-          The term constructed from this production
-          is composed of an identifier from either the <a href="#grammar-production-iri"><code>iri</code></a>
-          or <a href="#grammar-production-BlankNode"><code>BlankNode</code></a> productions,
-          if present, otherwise from a fresh RDF <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank node</a>.
-          <div class="ednote">Requires state to recall any previously defined <a href="#grammar-production-reifier"><code>reifier</code></a>.</div>
+          The <a data-cite="RDF12-CONCEPTS#dfn-rdf-term">term</a> taken from a previously matched <a>reifier</a>, if any,
+          or from a fresh RDF <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank node</a>.
         </td>
       </tr>
-      </tbody>
+    </tbody>
     </table>
 
   </section>
@@ -1807,35 +1813,51 @@
     <p>Beginning the <a href="#grammar-production-tripleTerm"><code>tripleTerm</code></a> production
       records the |curSubject| and |curPredicate|.
       Finishing the <a href="#grammar-production-tripleTerm"><code>tripleTerm</code></a> production
-      and restores the recorded values of |curSubject| and |curPredicate|.</p>
+      restores the recorded values of |curSubject| and |curPredicate|.</p>
 
-    <h4 id="reifier" style="padding-bottom:0; margin-bottom:0;"><span>Reifiers:</span></h4>
+    <h4 id="reifier" style="padding-bottom:0; margin-bottom:0;"><span>Reifier:</span></h4>
+
+    <p>Beginning the <a href="#grammar-production-reifier"><code>reifier</code></a> production,
+      if |curReifier| is set, the production yields the RDF triple |curReifier| <code>rdf:reifies</code> |curTripleTerm|.
+      Finishing the <a href="#grammar-production-reifier"><code>reifier</code></a> production
+      |curReifier| is taken from the <a href="#handle-reifier"><code>reifier</code></a> term constructor.</p>
+
+    <h4 id="reifiedTriple" style="padding-bottom:0; margin-bottom:0;"><span>Reified Triple:</span></h4>
 
     <p>Beginning the <a href="#grammar-production-reifiedTriple"><code>reifiedTriple</code></a> production
       records the |curSubject| and |curPredicate|.
       |curSubject| is taken from the
-      <a href="#handle-reifiedTriple"><code>reifiedTriple</code></a> term constructor.
+      <a href="#handle-reifiedTriple"><code>reifiedTriple</code></a> term constructor,
+      or a fresh RDF blank node, if not matched.
       A new <a href="#grammar-production-tripleTerm"><code>tripleTerm</code></a> instance |TT|
       is composed from
       the <a href="#grammar-production-subject"><code>subject</code></a>,
       <a href="#grammar-production-predicate"><code>predicate</code></a>, and
       <a href="#grammar-production-object"><code>object</code></a> productions.
-      Finishing the <a href="#grammar-production-reifier"><code>reifier</code></a> production
+      Finishing the <a href="#grammar-production-reifiedTriple"><code>reifiedTriple</code></a> production
       yields the RDF triple |curSubject| <code>rdf:reifies</code> |TT|
       and restores the recorded values of |curSubject| and |curPredicate|.</p>
+
+    <h4 id="annotationBlock" style="padding-bottom:0; margin-bottom:0;"><span>Annotation Block:</span></h4>
+
+    <p>Beginning the <a href="#grammar-production-annotationBlock"><code>annotationBlock</code></a> production
+      |curReifier| is taken from a fresh RDF <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank node</a> if not already set,
+      and |curSubject| is taken from |curReifier|.
+      Finishing the <a href="#grammar-production-annotationBlock"><code>annotationBlock</code></a> production
+      yields the RDF triple |curReifier| <code>rdf:reifies</code> |curTripleTerm|,
+      and resets the value of |curReifier|.</p>
 
     <h4 id="annotation" style="padding-bottom:0; margin-bottom:0;"><span>Annotations:</span></h4>
 
     <p>Beginning the <a href="#grammar-production-annotation"><code>annotation</code></a> production
       records the |curSubject| and |curPredicate|.
-      A new <a href="#grammar-production-tripleTerm"><code>tripleTerm</code></a> instance |TT|
-      is created using |curSubject| |curPredicate| |curObject|.
-      The identifier |TI| is taken from the
-      <a href="#handle-annotation"><code>annotation</code></a> term constructor.
+      A new <a href="#grammar-production-tripleTerm"><code>tripleTerm</code></a> instance |curTripleTerm|
+      is created using |curSubject| |curPredicate| |curObject|,
+      and the value of |curReifier| is reset.
       Finishing the <a href="#grammar-production-annotation"><code>annotation</code></a> production
-      yields the RDF triple |TI| <code>rdf:reifies</code> |TT|
+      yields the RDF triple |curReifier| <code>rdf:reifies</code> |curTripleTerm|,
+      resets the value of |curReifier|,
       and restores the recorded values of |curSubject| and |curPredicate|.</p>
-    <p class="ednote">Describe parser state for recording and assigning any <a>reifier</a>.</p>
 
     <h4 id="propertyList" style="padding-bottom:0; margin-bottom:0;"><span>Property Lists:</span></h4>
 
@@ -2174,7 +2196,7 @@
       and `STRING_LITERAL_SINGLE_QUOTE`.</li>
     <li>Separated <a href="#security"></a> from <a href="#sec-mediaReg"></a>
       and updated language.</li>
-    <li>Added <a href="#reifiers" class="sectionRef"></a>
+    <li>Added <a href="#triple-terms" class="sectionRef"></a>, <a href="#reified-triples" class="sectionRef"></a>,
       and <a href="#annotation-syntax" class="sectionRef"></a>
       for representing <a data-cite="RDF12-CONCEPTS#dfn-triple-term">triple terms</a> in Turtle.</li>
     <li>Changes the `LANGTAG` terminal production to

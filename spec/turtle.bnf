@@ -30,7 +30,8 @@ reifiedTriple         ::= '<<' (subject | reifiedTriple) predicate object reifie
 tripleTerm            ::= '<<(' ttSubject predicate ttObject ')>>'
 ttSubject             ::=	iri | BlankNode
 ttObject              ::=	iri | BlankNode | literal | tripleTerm
-annotation            ::= (reifier | '{|' predicateObjectList '|}')*
+annotation            ::= (reifier | annotationBlock)*
+annotationBlock       ::= '{|' predicateObjectList '|}'
 
 @terminals
 
