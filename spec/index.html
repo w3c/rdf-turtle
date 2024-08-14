@@ -125,7 +125,7 @@
     <a data-cite="RDF12-CONCEPTS#dfn-rdf-triple">triple</a>,
     making it possible to make statements about other statements.
     <a data-cite="RDF12-CONCEPTS#dfn-triple-term">Triple terms</a> are typically not used explicitly
-    as the <a href="#handle-reifingTriple"><code>reifingTriple</code></a> construction is generally preferred.
+    as the <a href="#handle-reifyingTriple"><code>reifyingTriple</code></a> construction is generally preferred.
     RDF 1.2 Turtle also adds support for
     <a data-cite="RDF12-CONCEPTS#dfn-dir-lang-string">directional language-tagged strings</a>.</p>
 
@@ -812,15 +812,15 @@
     </pre>
   </section>
 
-  <section id="reifing-triples">
-    <h3>Reifing Triples</h3>
+  <section id="reifying-triples">
+    <h3>Reifying Triples</h3>
 
-    <p>A <dfn data-cite="RDF12-CONCEPTS#dfn-reifing-triple">reifing triple</dfn>
+    <p>A <dfn data-cite="RDF12-CONCEPTS#dfn-reifying-triple">reifying triple</dfn>
       may be the <a data-cite="RDF12-CONCEPTS#dfn-subject">subject</a> or
       <a data-cite="RDF12-CONCEPTS#dfn-object">object</a> of an
       <a data-cite="RDF12-CONCEPTS#dfn-rdf-triple">RDF triple</a>.</p>
 
-    <p>A <a>reifing triple</a> is syntactic sugar for a specific relationship between an
+    <p>A <a>reifying triple</a> is syntactic sugar for a specific relationship between an
       identifier (<dfn data-cite="RDF12-CONCEPTS#dfn-reifier">reifier</dfn>) and a <a data-cite="RDF12-CONCEPTS#dfn-triple-term">triple term</a>.
       The identifier becomes a way to indirectly refer
       to a <a data-cite="RDF12-CONCEPTS#dfn-triple-term">triple term</a>, which
@@ -833,11 +833,11 @@
       RDF 1.2 uses the term to identify a <a data-cite="RDF12-CONCEPTS#dfn-triple-term">triple term</a>
       using the `rdf:reifies` predicate.</p>
 
-    <p>A <a>reifing triple</a> is represented using the
-      <a href="#grammar-production-reifingTriple"><code>reifingTriple</code></a> production
+    <p>A <a>reifying triple</a> is represented using the
+      <a href="#grammar-production-reifyingTriple"><code>reifyingTriple</code></a> production
       starting with <a href="#cp-double-lt"><code>&lt;&lt;</code></a>,
       followed by either a <a href="#grammar-production-subject"><code>subject</code></a>
-      or <a href="#grammar-production-reifingTriple"><code>reifingTriple</code></a>,
+      or <a href="#grammar-production-reifyingTriple"><code>reifyingTriple</code></a>,
       a <a href="#grammar-production-predicate"><code>predicate</code></a>, and
       a <a href="#grammar-production-ttObject"><code>ttObject</code></a>,
       followed by an optional <a href="#grammar-production-reifier"><code>reifier</code></a>,
@@ -854,20 +854,20 @@
       as with `&lt;&lt; :subject :predicate :object &gt;&gt;`,
       or `&lt;&lt; :subject :predicate :object ~ &gt;&gt;`.</p>
 
-    <p class="note"><a>Reifing Triples</a> may be nested,
+    <p class="note"><a>Reifying Triples</a> may be nested,
       like
       <br/>`&lt;&lt; :subject1 :predicate1 &lt;&lt; :subject2 :predicate2 :object2 &gt;&gt; ~:IRIREF1 &gt;&gt;`
       or <br/>`&lt;&lt; :subject4 :predicate4 &lt;&lt; :subject3 :predicate3 :object3 ~:IRIREF3 &gt;&gt; &gt;&gt;`.</p>
 
-    <p>If a <a href="#grammar-production-reifingTriple"><code>reifingTriple</code></a>
+    <p>If a <a href="#grammar-production-reifyingTriple"><code>reifyingTriple</code></a>
       is not identified by an <a data-cite="RDF12-CONCEPTS#dfn-iri">IRI</a>
       or <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank node</a>,
       a fresh RDF <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank node</a> is allocated
       and used to identify this relationship.</p>
 
-    <pre id="ex-reifing-triple"
+    <pre id="ex-reifying-triple"
          class="example turtle" data-transform="updateExample"
-         title="Reifing Triple">
+         title="Reifying Triple">
       <!--
       PREFIX :    <http://www.example.org/>
 
@@ -876,9 +876,9 @@
       -->
     </pre>
 
-    <pre id="ex-reifing-triple-with-reifier"
+    <pre id="ex-reifying-triple-with-reifier"
          class="example turtle" data-transform="updateExample"
-         title="Reifing Triple with explicit reifier">
+         title="Reifying Triple with explicit reifier">
       <!--
       PREFIX :    <http://www.example.org/>
 
@@ -890,12 +890,12 @@
     <p>After declaring a prefix so that IRIs can be abbreviated,
       the first triple in this example asserts that `employee38` has a `familyName` of "Smith".
       Note that this graph does not assert that `employee38` has a `jobTitle` of "Assistant Designer";
-      it says that `employee22` has made that claim using a <a>reifing triple</a>.
+      it says that `employee22` has made that claim using a <a>reifying triple</a>.
       In other words, the triple "`employee38` has a `jobTitle` of 'Assistant Designer'"
       is not a member of the graph, itself, as "employee38 has a `familyName` of 'Smith'" is above;
-      rather, it is known as a <a>reifing triple</a>.</p>
+      rather, it is known as a <a>reifying triple</a>.</p>
 
-    <p>A <a>reifing triple</a> is syntactic sugar relating one ore more
+    <p>A <a>reifying triple</a> is syntactic sugar relating one ore more
       <a>reifiers</a> to a <a href="#grammar-production-tripleTerm"><code>tripleTerm</code></a>
       using the <code>rdf:reifies</code> predicate.</p>
 
@@ -913,14 +913,14 @@
         <a data-cite="RDF12-CONCEPTS#dfn-subject">subject</a> or
         <a data-cite="RDF12-CONCEPTS#dfn-object">object</a> of additional
         triples and/or <a data-cite="RDF12-CONCEPTS#dfn-triple-term">triple terms</a>.
-        As with a <a>reifing triple</a>,
+        As with a <a>reifying triple</a>,
         the annotation syntax allows the definition of
         one or more <a>reifiers</a> as either <a data-cite="RDF12-CONCEPTS#dfn-iri">IRIs</a>
         or <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank nodes</a>,
         each preceded by a tilde (<a href="#cp-tilde"><code title="tilde">~</code></a>),
         which proceeds the annotation block.
         If not followed by an annotation block, a <a>reifier</a>
-        is treated like a <a href="#grammar-production-reifingTriple"><code>reifingTriple</code></a>
+        is treated like a <a href="#grammar-production-reifyingTriple"><code>reifyingTriple</code></a>
         without annotations.
         If an annotation block is not proceeded by a <a>reifier</a>,
         an RDF blank node is allocated to serve as the <a>reifier</a> of the
@@ -1777,7 +1777,7 @@
           <a href="#grammar-production-ttObject"><code>ttObject</code></a> productions.
         </td>
       </tr>
-      <tr id="handle-reifingTriple"                   ><td style="text-align:left;"            ><a class="type reifingTriple" href="#grammar-production-reifingTriple"                  >reifingTriple                   </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-iri">IRI</a> | <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank node</a></td>
+      <tr id="handle-reifyingTriple"                   ><td style="text-align:left;"           ><a class="type reifyingTriple" href="#grammar-production-reifyingTriple"                >reifyingTriple                  </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-iri">IRI</a> | <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank node</a></td>
         <td>
           The <a data-cite="RDF12-CONCEPTS#dfn-rdf-term">term</a> is taken from the matched <a href="#grammar-production-reifier"><code>reifier</code></a>, if any,
           or from a fresh RDF <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank node</a>.
@@ -1822,19 +1822,19 @@
       Finishing the <a href="#grammar-production-reifier"><code>reifier</code></a> production,
       |curReifier| is taken from the <a href="#handle-reifier"><code>reifier</code></a> term constructor.</p>
 
-    <h4 id="reifingTriple" style="padding-bottom:0; margin-bottom:0;"><span>Reifing Triple:</span></h4>
+    <h4 id="reifyingTriple" style="padding-bottom:0; margin-bottom:0;"><span>Reifying Triple:</span></h4>
 
-    <p>Beginning the <a href="#grammar-production-reifingTriple"><code>reifingTriple</code></a> production
+    <p>Beginning the <a href="#grammar-production-reifyingTriple"><code>reifyingTriple</code></a> production
       records the |curSubject| and |curPredicate|.
       |curSubject| is taken from the
-      <a href="#handle-reifingTriple"><code>reifingTriple</code></a> term constructor,
+      <a href="#handle-reifyingTriple"><code>reifyingTriple</code></a> term constructor,
       or a fresh RDF blank node, if not matched.
       A new <a href="#grammar-production-tripleTerm"><code>tripleTerm</code></a> instance |TT|
       is composed from
       the <a href="#grammar-production-subject"><code>subject</code></a>,
       <a href="#grammar-production-predicate"><code>predicate</code></a>, and
       <a href="#grammar-production-object"><code>object</code></a> productions.
-      Finishing the <a href="#grammar-production-reifingTriple"><code>reifingTriple</code></a> production
+      Finishing the <a href="#grammar-production-reifyingTriple"><code>reifyingTriple</code></a> production
       yields the RDF triple |curSubject| <code>rdf:reifies</code> |TT|
       and restores the recorded values of |curSubject| and |curPredicate|.</p>
 
@@ -2196,7 +2196,7 @@
       and `STRING_LITERAL_SINGLE_QUOTE`.</li>
     <li>Separated <a href="#security"></a> from <a href="#sec-mediaReg"></a>
       and updated language.</li>
-    <li>Added <a href="#triple-terms" class="sectionRef"></a>, <a href="#reifing-triples" class="sectionRef"></a>,
+    <li>Added <a href="#triple-terms" class="sectionRef"></a>, <a href="#reifying-triples" class="sectionRef"></a>,
       and <a href="#annotation-syntax" class="sectionRef"></a>
       for representing <a data-cite="RDF12-CONCEPTS#dfn-triple-term">triple terms</a> in Turtle.</li>
     <li>Changes the `LANGTAG` terminal production to
