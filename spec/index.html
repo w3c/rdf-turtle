@@ -876,6 +876,8 @@
       -->
     </pre>
 
+    <!-- possibly add the equivalent N-TRIPLE for the above here as well -->
+
     <pre id="ex-reified-triple-with-reifier"
          class="example turtle" data-transform="updateExample"
          title="Reified Triple with explicit reifier">
@@ -886,6 +888,23 @@
       << :employee38 :jobTitle "Assistant Designer" ~ _:id >> :accordingTo :employee22 .
       -->
     </pre>
+
+    <!-- sorry, I'm unsure how to refer to a specific example with a hyperlink -->
+    For instance, the syntactic sugar of the above example is equivalent to:
+    <pre id="ex-reified-triple-with-reifier"
+         class="example turtle" data-transform="updateExample"
+         title="Expanded N-TRIPLES version of Reified Triple">
+      <!--
+      PREFIX :    <http://www.example.org/>
+
+      :employee38 :familyName "Smith" .
+      _:id rdf:reifies <<( :employee38 :jobTitle "Assistant Designer" )>> .
+      _:id :accordingTo :employee22 .
+      -->
+    </pre>
+
+    <p class="note">Note the difference in syntax between the syntactic sugar of <a href="#grammar-production-reifiedTriple"><code>reifiedTriple</code></a>, 
+      i.e., `<< [...] >>` vs. the regular <a href="#grammar-production-tripleTerm"><code>tripleTerm</code></a>, i.e., `<<( [...] )>>`.</p>
 
     <p>After declaring a prefix so that IRIs can be abbreviated,
       the first triple in this example asserts that `employee38` has a `familyName` of "Smith".
