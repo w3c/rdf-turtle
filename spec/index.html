@@ -820,10 +820,11 @@
       only as the <a data-cite="RDF12-CONCEPTS#dfn-object">object</a> of a <a data-cite="RDF12-CONCEPTS#dfn-rdf-triple">triple</a>
       using the `rdf:reifies` <a data-cite="RDF12-CONCEPTS#dfn-predicate">predicate</a>.
       Such a triple is called a <dfn data-cite="RDF12-CONCEPTS#dfn-reifying-triple">reifying triple</dfn>.
-      Turtle supports <a>reifying triples</a> using the <a href="#grammar-production-reifiedTriple"><code>reifiedTriple</code></a> production.</p>
+      Turtle provides a shorthand notation for writing <a>reifying triples</a>
+      using the <a href="#grammar-production-reifiedTriple"><code>reifiedTriple</code></a> production.</p>
 
     <p>A <a href="#grammar-production-reifiedTriple"><code>reifiedTriple</code></a>
-      is syntactic sugar represeneting a <a>reifying triple</a>,
+      is syntactic sugar representing a <a>reifying triple</a>,
       which defines a specific relationship between an
       identifier (<dfn data-cite="RDF12-CONCEPTS#dfn-reifier">reifier</dfn>)
       and a <a data-cite="RDF12-CONCEPTS#dfn-triple-term">triple term</a>.
@@ -859,7 +860,7 @@
       as with `&lt;&lt; :subject :predicate :object &gt;&gt;`,
       or `&lt;&lt; :subject :predicate :object ~ &gt;&gt;`.</p>
 
-    <p class="note"><a href="#grammar-production-reifiedTriple"><code>reifiedTriples</code></a>> may be nested,
+    <p class="note"><a href="#grammar-production-reifiedTriple"><code>reifiedTriples</code></a> may be nested,
       like
       <br/>`&lt;&lt; :subject1 :predicate1 &lt;&lt; :subject2 :predicate2 :object2 &gt;&gt; ~:IRIREF1 &gt;&gt;`
       or <br/>`&lt;&lt; :subject4 :predicate4 &lt;&lt; :subject3 :predicate3 :object3 ~:IRIREF3 &gt;&gt; &gt;&gt;`.</p>
