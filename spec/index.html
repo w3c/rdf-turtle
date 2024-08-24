@@ -1814,21 +1814,21 @@
         |curPredicate| <var>N</var> .</span>
     </p>
 
-    <h4 id="tripleTerm" style="padding-bottom:0; margin-bottom:0;"><span>Triple Terms:</span></h4>
+    <h4 id="tripleTerm" style="padding-bottom:0; margin-bottom:0;"><span>Triple Terms</span></h4>
 
     <p>Beginning the <a href="#grammar-production-tripleTerm"><code>tripleTerm</code></a> production
       records the |curSubject| and |curPredicate|.
       Finishing the <a href="#grammar-production-tripleTerm"><code>tripleTerm</code></a> production
       restores the recorded values of |curSubject| and |curPredicate|.</p>
 
-    <h4 id="reifier" style="padding-bottom:0; margin-bottom:0;"><span>Reifier:</span></h4>
+    <h4 id="reifier" style="padding-bottom:0; margin-bottom:0;"><span>Reifier</span></h4>
 
     <p>Beginning the <a href="#grammar-production-reifier"><code>reifier</code></a> production,
       if |curReifier| is set, the production yields the RDF triple |curReifier| <code>rdf:reifies</code> |curTripleTerm|.
       Finishing the <a href="#grammar-production-reifier"><code>reifier</code></a> production,
       |curReifier| is taken from the <a href="#handle-reifier"><code>reifier</code></a> term constructor.</p>
 
-    <h4 id="reifiedTriple" style="padding-bottom:0; margin-bottom:0;"><span>Reified Triple:</span></h4>
+    <h4 id="reifiedTriple" style="padding-bottom:0; margin-bottom:0;"><span>Reified Triple</span></h4>
 
     <p>Beginning the <a href="#grammar-production-reifiedTriple"><code>reifiedTriple</code></a> production
       records the |curSubject| and |curPredicate|.
@@ -1844,7 +1844,7 @@
       yields the RDF triple |curSubject| <code>rdf:reifies</code> |TT|
       and restores the recorded values of |curSubject| and |curPredicate|.</p>
 
-    <h4 id="annotationBlock" style="padding-bottom:0; margin-bottom:0;"><span>Annotation Block:</span></h4>
+    <h4 id="annotationBlock" style="padding-bottom:0; margin-bottom:0;"><span>Annotation Block</span></h4>
 
     <p>Beginning the <a href="#grammar-production-annotationBlock"><code>annotationBlock</code></a> production,
       |curReifier| is taken from a fresh RDF <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank node</a>, if not already set,
@@ -1853,7 +1853,7 @@
       yields the RDF triple |curReifier| <code>rdf:reifies</code> |curTripleTerm|,
       and resets the value of |curReifier|.</p>
 
-    <h4 id="annotation" style="padding-bottom:0; margin-bottom:0;"><span>Annotations:</span></h4>
+    <h4 id="annotation" style="padding-bottom:0; margin-bottom:0;"><span>Annotations</span></h4>
 
     <p>Beginning the <a href="#grammar-production-annotation"><code>annotation</code></a> production
       records the |curSubject| and |curPredicate|.
@@ -1865,7 +1865,7 @@
       resets the value of |curReifier|,
       and restores the recorded values of |curSubject| and |curPredicate|.</p>
 
-    <h4 id="propertyList" style="padding-bottom:0; margin-bottom:0;"><span>Property Lists:</span></h4>
+    <h4 id="propertyList" style="padding-bottom:0; margin-bottom:0;"><span>Property Lists</span></h4>
 
     <p style="padding-top:0; margin-top:0;">
       Beginning the <a href="#grammar-production-blankNodePropertyList"><code>blankNodePropertyList</code></a>
@@ -1880,7 +1880,7 @@
       is the blank node |B|.
     </p>
 
-    <h4 id="collection" style="padding-bottom:0; margin-bottom:0;"><span>Collections:</span></h4>
+    <h4 id="collection" style="padding-bottom:0; margin-bottom:0;"><span>Collections</span></h4>
 
     <p style="padding-top:0; margin-top:0;">
       Beginning the <a href="#grammar-production-collection"><code>collection</code></a> production records the |curSubject| and |curPredicate|.
