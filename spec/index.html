@@ -1833,7 +1833,9 @@
     <p>Beginning the <a href="#grammar-production-reifiedTriple"><code>reifiedTriple</code></a> production
       records the |curSubject| and |curPredicate|.
       |curSubject| is taken from the
-      <a href="#handle-reifiedTriple"><code>reifiedTriple</code></a> term constructor,
+      <a href="#grammar-production-reifier"><code>reifier</code></a> of the
+      <a href="#handle-reifiedTriple"><code>reifiedTriple</code></a> term constructor
+      if present,
       or a fresh RDF blank node, if not matched.
       A new <a href="#grammar-production-tripleTerm"><code>tripleTerm</code></a> instance |TT|
       is composed from
