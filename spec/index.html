@@ -1641,7 +1641,7 @@
   </section>
 </section>
 
-<section id="sec-parsing">
+<section id="sec-parsing" class="algorithm">
   <h2>Parsing</h2>
 
   <p>The RDF 1.2 Concepts and Abstract Syntax specification [[!RDF12-CONCEPTS]] defines four types of <a data-cite="RDF12-CONCEPTS#dfn-rdf-term">RDF terms</a>:
@@ -1854,7 +1854,7 @@
       is created using |curSubject| |curPredicate| |curObject|,
       and the value of |curReifier| is cleared.           
       Finishing the <a href="#grammar-production-annotation"><code>annotation</code></a> production
-      yields the RDF triple |curReifier| <code>rdf:reifies</code> |curTripleTerm|,
+      yields the RDF triple |curReifier| <code>rdf:reifies</code> |curTripleTerm| if |curReifier| is set,
       resets the value of |curReifier|,
       and restores the recorded values of |curSubject| and |curPredicate|.</p>
 
