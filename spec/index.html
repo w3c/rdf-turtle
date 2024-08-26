@@ -1845,13 +1845,12 @@
     <h4 id="annotation" style="padding-bottom:0; margin-bottom:0;"><span>Annotations</span></h4>
 
     <p>Beginning the <a href="#grammar-production-annotation"><code>annotation</code></a> production
-      records the |curSubject| and |curPredicate|.
+      records the |curSubject|, |curPredicate|, and |curReifier|.
       A new <a href="#grammar-production-tripleTerm"><code>tripleTerm</code></a> instance |curTripleTerm|
       is created using the |curSubject| |curPredicate| |curObject|,
       and the value of the |curReifier| is cleared.
-      Finishing the <a href="#grammar-production-annotation"><code>annotation</code></a> production,
-      clear the |curReifier|,
-      and restore the recorded values of the |curSubject| and |curPredicate|.</p>
+      Finishing the <a href="#grammar-production-annotation"><code>annotation</code></a> production
+      restores the recorded values of the |curSubject|, |curPredicate|, and |curReifier|.</p>
 
     <h4 id="annotationBlock" style="padding-bottom:0; margin-bottom:0;"><span>Annotation Blocks</span></h4>
 
