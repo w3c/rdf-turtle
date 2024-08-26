@@ -1819,7 +1819,7 @@
     <p>Beginning the <a href="#grammar-production-tripleTerm"><code>tripleTerm</code></a> production
       records the |curSubject| and |curPredicate|.
       Finishing the <a href="#grammar-production-tripleTerm"><code>tripleTerm</code></a> production
-      restores the recorded values of |curSubject| and |curPredicate|.</p>
+      restores the previously recorded values of |curSubject| and |curPredicate|.</p>
 
     <h4 id="reifier" style="padding-bottom:0; margin-bottom:0;"><span>Reifier</span></h4>
 
@@ -1852,7 +1852,7 @@
       records the |curSubject| and |curPredicate|.
       A new <a href="#grammar-production-tripleTerm"><code>tripleTerm</code></a> instance |curTripleTerm|
       is created using |curSubject| |curPredicate| |curObject|,
-      and the value of |curReifier| is reset.
+      and the value of |curReifier| is cleared.           
       Finishing the <a href="#grammar-production-annotation"><code>annotation</code></a> production
       yields the RDF triple |curReifier| <code>rdf:reifies</code> |curTripleTerm|,
       resets the value of |curReifier|,
@@ -1861,10 +1861,10 @@
     <h4 id="annotationBlock" style="padding-bottom:0; margin-bottom:0;"><span>Annotation Block</span></h4>
 
     <p>Beginning the <a href="#grammar-production-annotationBlock"><code>annotationBlock</code></a> production,
-      |curReifier| is taken from a fresh RDF <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank node</a>, if not already set,
+      if |curReifier| is not set, then |curReifier| is assigned a fresh RDF <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank node</a> and then yield RDF triple |curReifier| <code>rdf:reifies</code> |curTripleTerm|.
       and |curSubject| is taken from |curReifier|
       and yields the RDF triple |curReifier| <code>rdf:reifies</code> |curTripleTerm|,
-      and resets the value of |curReifier|.</p>
+      and clears the value of |curReifier|.</p>
 
     <h4 id="propertyList" style="padding-bottom:0; margin-bottom:0;"><span>Property Lists</span></h4>
 
