@@ -1826,18 +1826,18 @@
       Finishing the <a href="#grammar-production-tripleTerm"><code>tripleTerm</code></a> production
       restores the previously recorded values of |curSubject| and |curPredicate|.</p>
 
-    <h4 id="reifier" style="padding-bottom:0; margin-bottom:0;"><span>Reifier</span></h4>
+    <h4 id="reifier" style="padding-bottom:0; margin-bottom:0;"><span>Reifiers</span></h4>
 
     <p>Beginning the <a href="#grammar-production-reifier"><code>reifier</code></a> production,
       if |curReifier| is set, the production yields the RDF triple |curReifier| <code>rdf:reifies</code> |curTripleTerm|.
       Finishing the <a href="#grammar-production-reifier"><code>reifier</code></a> production,
       |curReifier| is taken from the <a href="#handle-reifier"><code>reifier</code></a> term constructor.</p>
 
-    <h4 id="reifiedTriple" style="padding-bottom:0; margin-bottom:0;"><span>Reified Triple</span></h4>
+    <h4 id="reifiedTriple" style="padding-bottom:0; margin-bottom:0;"><span>Reified Triples</span></h4>
 
     <p>Beginning the <a href="#grammar-production-reifiedTriple"><code>reifiedTriple</code></a> production
       records the |curSubject| and |curPredicate|.
-      |curSubject| is taken from the
+      The |curSubject| is taken from the
       <a href="#grammar-production-reifier"><code>reifier</code></a> of the
       <a href="#handle-reifiedTriple"><code>reifiedTriple</code></a> term constructor
       if present,
@@ -1856,32 +1856,29 @@
     <p>Beginning the <a href="#grammar-production-annotation"><code>annotation</code></a> production
       records the |curSubject| and |curPredicate|.
       A new <a href="#grammar-production-tripleTerm"><code>tripleTerm</code></a> instance |curTripleTerm|
-      is created using |curSubject| |curPredicate| |curObject|,
-      and the value of |curReifier| is cleared.           
+      is created using the |curSubject| |curPredicate| |curObject|,
+      and the value of the |curReifier| is cleared.           
       Finishing the <a href="#grammar-production-annotation"><code>annotation</code></a> production
-      yields the RDF triple |curReifier| <code>rdf:reifies</code> |curTripleTerm| if |curReifier| is set,
-      resets the value of |curReifier|,
-      and restores the recorded values of |curSubject| and |curPredicate|.</p>
+      yields the RDF triple |curReifier| <code>rdf:reifies</code> |curTripleTerm| if the |curReifier| is set,
+      resets the |curReifier|,
+      and restores the recorded values of the |curSubject| and |curPredicate|.</p>
 
-    <h4 id="annotationBlock" style="padding-bottom:0; margin-bottom:0;"><span>Annotation Block</span></h4>
+    <h4 id="annotationBlock" style="padding-bottom:0; margin-bottom:0;"><span>Annotation Blocks</span></h4>
 
     <p>Beginning the <a href="#grammar-production-annotationBlock"><code>annotationBlock</code></a> production,
-      if |curReifier| is not set, then |curReifier| is assigned a fresh RDF <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank node</a> and then yield RDF triple |curReifier| <code>rdf:reifies</code> |curTripleTerm|.
-      and |curSubject| is taken from |curReifier|
+      if the |curReifier| is not set, then the |curReifier| is assigned a fresh RDF <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank node</a> and then yield RDF triple |curReifier| <code>rdf:reifies</code> |curTripleTerm|.
+      and the |curSubject| is taken from the |curReifier|
       and yields the RDF triple |curReifier| <code>rdf:reifies</code> |curTripleTerm|,
-      and clears the value of |curReifier|.</p>
+      and clears the value of the |curReifier|.</p>
 
     <h4 id="propertyList" style="padding-bottom:0; margin-bottom:0;"><span>Property Lists</span></h4>
 
     <p style="padding-top:0; margin-top:0;">
       Beginning the <a href="#grammar-production-blankNodePropertyList"><code>blankNodePropertyList</code></a>
-      production records the |curSubject|
-      and |curPredicate|,
-      and sets |curSubject|
-      to a novel <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank node</a> |B|.
+      production records the |curSubject| and |curPredicate|,
+      and sets the |curSubject| to a novel <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank node</a> |B|.
       Finishing the <a href="#grammar-production-blankNodePropertyList"><code>blankNodePropertyList</code></a>
-      production restores |curSubject|
-      and |curPredicate|.
+      production restores the |curSubject| and |curPredicate|.
       The node produced by matching <a href="#grammar-production-blankNodePropertyList"><code>blankNodePropertyList</code></a>
       is the blank node |B|.
     </p>
@@ -1890,9 +1887,9 @@
 
     <p style="padding-top:0; margin-top:0;">
       Beginning the <a href="#grammar-production-collection"><code>collection</code></a> production records the |curSubject| and |curPredicate|.
-      Each <a href="#grammar-production-object"><code>object</code></a> in the <a href="#grammar-production-collection"><code>collection</code></a> production has a |curSubject| set to a novel <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank node</a> |B| and a |curPredicate| set to <code>rdf:first</code>.
+      Each <a href="#grammar-production-object"><code>object</code></a> in the <a href="#grammar-production-collection"><code>collection</code></a> production has |curSubject| set to a novel <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank node</a> |B| and |curPredicate| set to <code>rdf:first</code>.
       For each object <var>object<sub>n</sub></var> after the first produces a triple:<span class="ntriple"><var>object<sub>n-1</sub></var> <code>rdf:rest</code> <var>object<sub>n</sub></var> .</span>
-      Finishing the <a href="#grammar-production-collection"><code>collection</code></a> production creates an additional triple <span class="ntriple"><code>curSubject rdf:rest rdf:nil</code> .</span> and restores |curSubject| and |curPredicate|
+      Finishing the <a href="#grammar-production-collection"><code>collection</code></a> production creates an additional triple <span class="ntriple"><code>curSubject rdf:rest rdf:nil</code> .</span> and restores the |curSubject| and |curPredicate|
       The node produced by matching <a href="#grammar-production-collection"><code>collection</code></a> is the first blank node |B| for non-empty lists and <code>rdf:nil</code> for empty lists.
     </p>
   </section>
