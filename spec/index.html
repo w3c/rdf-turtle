@@ -1819,37 +1819,25 @@
         |curPredicate| <var>N</var> .</span>
     </p>
 
-    <h4 id="tripleTerm" style="padding-bottom:0; margin-bottom:0;"><span>Triple Terms</span></h4>
-
-    <p>Beginning the <a href="#grammar-production-tripleTerm"><code>tripleTerm</code></a> production
-      records the |curSubject| and |curPredicate|.
-      Finishing the <a href="#grammar-production-tripleTerm"><code>tripleTerm</code></a> production
-      restores the previously recorded values of |curSubject| and |curPredicate|.</p>
-
     <h4 id="reifier" style="padding-bottom:0; margin-bottom:0;"><span>Reifiers</span></h4>
 
     <p>Beginning the <a href="#grammar-production-reifier"><code>reifier</code></a> production,
-      if |curReifier| is set, the production yields the RDF triple |curReifier| <code>rdf:reifies</code> |curTripleTerm|.
-      Finishing the <a href="#grammar-production-reifier"><code>reifier</code></a> production,
-      |curReifier| is taken from the <a href="#handle-reifier"><code>reifier</code></a> term constructor.</p>
+      the |curReifier| is taken from the <a href="#handle-reifier"><code>reifier</code></a> term constructor.
+      Then yield the the RDF triple |curReifier| <code>rdf:reifies</code> |curTripleTerm|.</p>
 
     <h4 id="reifiedTriple" style="padding-bottom:0; margin-bottom:0;"><span>Reified Triples</span></h4>
 
     <p>Beginning the <a href="#grammar-production-reifiedTriple"><code>reifiedTriple</code></a> production
-      records the |curSubject| and |curPredicate|.
-      The |curSubject| is taken from the
-      <a href="#grammar-production-reifier"><code>reifier</code></a> of the
-      <a href="#handle-reifiedTriple"><code>reifiedTriple</code></a> term constructor
-      if present,
-      or a fresh RDF blank node, if not matched.
-      A new <a href="#grammar-production-tripleTerm"><code>tripleTerm</code></a> instance |TT|
-      is composed from
+      records the |curTripleTerm| as an RDF Triple composed from
       the <a href="#grammar-production-subject"><code>subject</code></a>,
-      <a href="#grammar-production-predicate"><code>predicate</code></a>, and
+      <a href="#grammar-production-verb"><code>verb</code></a>, and
       <a href="#grammar-production-object"><code>object</code></a> productions.
-      Finishing the <a href="#grammar-production-reifiedTriple"><code>reifiedTriple</code></a> production
-      yields the RDF triple |curSubject| <code>rdf:reifies</code> |TT|
-      and restores the recorded values of |curSubject| and |curPredicate|.</p>
+
+      Finishing the <a href="#grammar-production-reifiedTriple"><code>reifiedTriple</code></a> production,
+      if the |curReifier| is not set, it is assigned a fresh fresh RDF <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank node</a>
+      and yields the the RDF triple |curReifier| <code>rdf:reifies</code> |curTripleTerm|.
+      The node produced by matching <a href="#grammar-production-reifiedTriple"><code>reifiedTriple</code></a>
+      is the the |curReifier|.</p>
 
     <h4 id="annotation" style="padding-bottom:0; margin-bottom:0;"><span>Annotations</span></h4>
 
@@ -1857,19 +1845,19 @@
       records the |curSubject| and |curPredicate|.
       A new <a href="#grammar-production-tripleTerm"><code>tripleTerm</code></a> instance |curTripleTerm|
       is created using the |curSubject| |curPredicate| |curObject|,
-      and the value of the |curReifier| is cleared.           
-      Finishing the <a href="#grammar-production-annotation"><code>annotation</code></a> production
-      yields the RDF triple |curReifier| <code>rdf:reifies</code> |curTripleTerm| if the |curReifier| is set,
-      resets the |curReifier|,
-      and restores the recorded values of the |curSubject| and |curPredicate|.</p>
+      and the value of the |curReifier| is cleared.
+      Finishing the <a href="#grammar-production-annotation"><code>annotation</code></a> production,
+      clear the |curReifier|,
+      and restore the recorded values of the |curSubject| and |curPredicate|.</p>
 
     <h4 id="annotationBlock" style="padding-bottom:0; margin-bottom:0;"><span>Annotation Blocks</span></h4>
 
     <p>Beginning the <a href="#grammar-production-annotationBlock"><code>annotationBlock</code></a> production,
-      if the |curReifier| is not set, then the |curReifier| is assigned a fresh RDF <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank node</a> and then yield RDF triple |curReifier| <code>rdf:reifies</code> |curTripleTerm|.
-      and the |curSubject| is taken from the |curReifier|
-      and yields the RDF triple |curReifier| <code>rdf:reifies</code> |curTripleTerm|,
-      and clears the value of the |curReifier|.</p>
+      if the |curReifier| is not set, then the |curReifier| is assigned a fresh RDF <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank node</a>
+      and then yields the RDF triple |curReifier| <code>rdf:reifies</code> |curTripleTerm|.
+      The |curSubject| is taken from the |curReifier|
+      Finishing the <a href="#grammar-production-annotationBlock"><code>annotationBlock</code></a> production,
+      clears the value of the |curReifier|.</p>
 
     <h4 id="propertyList" style="padding-bottom:0; margin-bottom:0;"><span>Property Lists</span></h4>
 
