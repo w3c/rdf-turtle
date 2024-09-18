@@ -842,10 +842,9 @@
     <p>A <a>reifying triple</a> is represented using the
       <a href="#grammar-production-reifiedTriple"><code>reifiedTriple</code></a> production
       starting with <a href="#cp-double-lt"><code>&lt;&lt;</code></a>,
-      followed by either a <a href="#grammar-production-subject"><code>subject</code></a>
-      or <a href="#grammar-production-reifiedTriple"><code>reifiedTriple</code></a>,
+      followed by a <a href="#grammar-production-rtSubject"><code>rtSubject</code></a>,
       a <a href="#grammar-production-predicate"><code>predicate</code></a>, and
-      a <a href="#grammar-production-ttObject"><code>ttObject</code></a>,
+      a <a href="#grammar-production-rtObject"><code>rtObject</code></a>,
       followed by an optional <a href="#grammar-production-reifier"><code>reifier</code></a>,
       composed of a <a href="#cp-tilde"><code title="tilde">~</code></a>
       followed by an optional <a href="#grammar-production-iri"><code>iri</code></a> production
@@ -1726,9 +1725,10 @@
       <li id="curSubject"><a data-cite="RDF12-CONCEPTS#dfn-rdf-term">RDF Term</a> |curSubject|
         — The |curSubject| is bound to the
         <a href="#grammar-production-subject"><code>subject</code></a>,
+        <a href="#grammar-production-rtSubject"><code>rtSubject</code></a>,
+        <a href="#grammar-production-ttSubject"><code>ttSubject</code></a>,
         <a href="#grammar-production-blankNodePropertyList"><code>blankNodePropertyList</code></a>,
-        <a href="#grammar-production-collection"><code>collection</code></a>,
-        <a href="#grammar-production-tripleTerm"><code>tripleTerm</code></a>, and
+        <a href="#grammar-production-collection"><code>collection</code></a>,and
         <a href="#grammar-production-annotationBlock"><code>annotationBlock</code></a>
          productions.</li>
 
@@ -1744,7 +1744,8 @@
       </li>
       <li id="curObject"><a data-cite="RDF12-CONCEPTS#dfn-rdf-term">RDF Term</a> |curObject| —
         The |curObject| is bound to the
-        <a href="#grammar-production-object"><code>object</code></a> and
+        <a href="#grammar-production-object"><code>object</code></a>,
+        <a href="#grammar-production-ttObject"><code>rtObject</code></a>, and
         <a href="#grammar-production-ttObject"><code>ttObject</code></a> productions.</li>
       <li id="curReifier"><a data-cite="RDF12-CONCEPTS#dfn-rdf-term">RDF Term</a> |curReifier| —
         The |curReifier| is bound to the
@@ -1853,9 +1854,9 @@
       records the |curTripleTerm|.
       A new <a href="#grammar-production-tripleTerm"><code>tripleTerm</code></a> instance |curTripleTerm|
       is created using the
-      <a href="#grammar-production-subject"><code>subject</code></a>,
+      <a href="#grammar-production-rtSubject"><code>rtSubject</code></a>,
       <a href="#grammar-production-verb"><code>verb</code></a>, and
-      <a href="#grammar-production-object"><code>object</code></a> productions.
+      <a href="#grammar-production-rtObject"><code>rtObject</code></a> productions.
 
       Finishing the <a href="#grammar-production-reifiedTriple"><code>reifiedTriple</code></a> production,
       if the |curReifier| is not set, it is assigned a fresh RDF <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank node</a>;
