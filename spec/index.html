@@ -2114,19 +2114,8 @@
 
 <section id="sec-mediaReg" class="appendix">
   <h2>Internet Media Type, File Extension and Macintosh File Type</h2>
-  <dl>
-    <dt>Contact:</dt>
-    <dd>Eric Prud'hommeaux</dd>
-    <dt>See also:</dt>
-
-    <dd><a href="https://www.w3.org/2002/06/registering-mediatype">How to Register a Media Type for a W3C Specification</a></dd>
-    <dd><a href="https://www.w3.org/2001/tag/2002/0129-mime">Internet Media Type registration, consistency of use</a><br />TAG Finding 3 June 2002 (Revised 4 September 2002)</dd>
-  </dl>
   <p>The Internet Media Type (formerly known as MIME Type) for Turtle is &quot;text/turtle&quot;.</p>
-  <p>It is recommended that Turtle files have the extension &quot;.ttl&quot; (all lowercase) on all platforms.</p>
-
-  <p>It is recommended that Turtle files stored on Macintosh HFS file systems be given a file type of &quot;TEXT&quot;.</p>
-  <p>This information that follows has been <a href="https://lists.w3.org/Archives/Public/www-archive/2007Dec/0065.html">submitted to the IESG</a> for review, approval, and registration with IANA.</p>
+  <p>The information that follows has been submitted to the Internet Engineering Steering Group (IESG) for review, approval, and registration with IANA.</p>
   <dl>
     <dt>Type name:</dt>
     <dd>text</dd>
@@ -2152,27 +2141,31 @@
     <dd>This specification.</dd>
     <dt>Applications which use this media type:</dt>
 
-    <dd>No widely deployed applications are known to use this media type. It may be used by some web services and clients consuming their data.</dd>
+    <dd>Turtle is used widely for representing RDF data.
+      There are implementations available in most common programming languages.</dd>
     <dt>Additional information:</dt>
+    <dd>
+    <dl>
     <dt>Magic number(s):</dt>
     <dd>Turtle documents may have the strings '@prefix' or '@base' (case sensitive) or the strings 'PREFIX' or 'BASE' (case insensitive) near the beginning of the document.</dd>
     <dt>File extension(s):</dt>
-    <dd>".ttl"</dd>
+    <dd>.ttl</dd>
+    <dt>Macintosh file type code(s):</dt>
+    <dd>TEXT</dd>
+    </dl>
+    </dd>
 
     <dt>Base URI:</dt>
     <dd>The Turtle '@base &lt;IRIref&gt;' or 'BASE &lt;IRIref&gt;' term can change the current base URI for <a data-cite="RDF12-CONCEPTS#dfn-relative-iri">relative IRI references</a> in the query language that are used sequentially later in the document.</dd>
-    <dt>Macintosh file type code(s):</dt>
-    <dd>&quot;TEXT&quot;</dd>
     <dt>Person &amp; email address to contact for further information:</dt>
 
-    <dd>Eric Prud'hommeaux &lt;eric@w3.org&gt;</dd>
+    <dd>RDF-star Working Group &lt;public-rdf-star-wg@w3.org&gt;</dd>
     <dt>Intended usage:</dt>
-    <dd>COMMON</dd>
+    <dd>Common</dd>
     <dt>Restrictions on usage:</dt>
     <dd>None</dd>
-    <dt>Author/Change controller:</dt>
-
-    <dd>The Turtle specification is the product of the RDF WG. The W3C reserves change control over this specifications.</dd>
+    <dt>Author(s):</dt>
+    <dd>The Turtle specification is the product of the RDF-star WG. The W3C reserves change control over this specifications.</dd>
   </dl>
 </section>
 
