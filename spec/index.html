@@ -679,7 +679,7 @@
       That subject or object is a fresh RDF <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank node</a>.
       This blank node also serves as the subject of the triples produced by matching
       the <a href="#grammar-production-predicateObjectList"><code>predicateObjectList</code></a> production
-      embedded in a blankNodePropertyList.
+      embedded in a <code>blankNodePropertyList</code>.
       The generation of these triples is described in
       <a href="#predicate-lists">Predicate Lists</a>.
       Blank nodes are also allocated for <a href="#collections">collections</a>
@@ -1255,7 +1255,7 @@
             </tr>
 
             <tr>
-              <td><code>\U</code> <a href="#grammar-production-HEX">hex</a>
+              <td><code>\U</code> <a href="#grammar-production-HEX"><code>hex</code></a>
                 <a href="#grammar-production-HEX"><code>hex</code></a>
                 <a href="#grammar-production-HEX"><code>hex</code></a>
                 <a href="#grammar-production-HEX"><code>hex</code></a>
@@ -1599,13 +1599,13 @@
         </tr>
         <tr id="cp-pipe">
           <td><code class="codepoint">U+007C</code></td>
-          <td><code title="verticle bar">|</code></td>
-          <td>Verticle bar</td>
+          <td><code title="vertical bar">|</code></td>
+          <td>Vertical bar</td>
         </tr>
         <tr id="cp-tilde">
           <td><code class="codepoint">U+007E</code></td>
           <td><code title="tilde">~</code></td>
-          <td>Tilda</td>
+          <td>Tilde</td>
         </tr>
         <tr id="cp-middle-dot">
           <td><code class="codepoint">U+00B7</code></td>
@@ -1648,9 +1648,9 @@
       <dd>two concatenated circumflex accent characters, each having the code point <code class="codepoint">U+005E</code></dd>
       <dt id="cp-curly-pipe"><code>{|</code></dt>
       <dd><code title="left curly bracket">{</code> (left curly bracket, code point <code class="codepoint">U+007B</code>) followed by
-        <code title="verticle bar">|</code> (verticle bar, code point  <code class="codepoint">U+007C</code>)</dd>
+        <code title="vertical bar">|</code> (vertical bar, code point  <code class="codepoint">U+007C</code>)</dd>
       <dt id="cp-pipe-curly"><code>|}</code></dt>
-      <dd><code title="verticle bar">|</code> (verticle bar, code point <code class="codepoint">U+007C</code>) followed by
+      <dd><code title="vertical bar">|</code> (vertical bar, code point <code class="codepoint">U+007C</code>) followed by
         <code title="right curly bracket">}</code> (right curly bracket, code point <code class="codepoint">U+007D</code>)</dd>
       <dt id="cp-underscore-colon"><code>_:</code></dt>
       <dd><a href="#cp-underscore"><code title="underscore">_</code></a> followed by <a href="#cp-colon"><code title="colon">:</code></a></dd>
@@ -1847,7 +1847,7 @@
 
     <p>Beginning the <a href="#grammar-production-reifier"><code>reifier</code></a> production,
       the |curReifier| is taken from the <a href="#handle-reifier"><code>reifier</code></a> term constructor.
-      Then yield the the RDF triple |curReifier| <code>rdf:reifies</code> |curTripleTerm|.</p>
+      Then yield the RDF triple |curReifier| <code>rdf:reifies</code> |curTripleTerm|.</p>
 
     <h4 id="reifiedTriple" style="padding-bottom:0; margin-bottom:0;"><span>Reified Triples</span></h4>
 
