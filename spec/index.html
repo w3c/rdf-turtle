@@ -308,7 +308,7 @@
       or <a>prefixed names</a>.
       Relative and resolved IRIs are preceded by <a href="#cp-less-than"><code title="less-than sign">&lt;</code></a>,
       followed by <a href="#cp-greater-than"><code title="greater-than sign">&gt;</code></a>, and
-      may contain <a href="#numeric">numeric escape sequences</a> (described below).
+      may contain <a>numeric escape sequences</a> (described below).
       For example, <code>&lt;http://example.org/#green-goblin&gt;</code>.
     </p>
     <p id="relative-iri"><a data-cite="RDF12-CONCEPTS#dfn-relative-iri">Relative IRI references</a> like <code>&lt;#green-goblin&gt;</code>
@@ -385,7 +385,7 @@
       <ul>
         <li>leading digits, e.g., <code>leg:3032571</code> or <code>isbn13:9780136019701</code></li>
         <li>non leading colons, e.g., <code>og:video:height</code></li>
-        <li><a href="#reserved">reserved character escape sequences</a>, e.g., <code>wgs:lat\-long</code></li>
+        <li><a data-lt="reserved character escape sequence">reserved character escape sequences</a>, e.g., <code>wgs:lat\-long</code></li>
       </ul>
     </div>
 
@@ -466,11 +466,10 @@
         <a href="#cp-apostrophe"><code title="apostrophe">'</code></a>,
         <a href="#cp-triple-quote"><code>"""</code></a>, or
         <a href="#cp-triple-apostrophe"><code>'''</code></a>);
-        a sequence of permitted characters, <a href="#numeric">numeric escapes</a>,
-        and/or <a href="#string">string escapes</a>; and a final delimiter (matching the initial delimiter).
+        a sequence of permitted characters, <a>numeric escape sequences</a>,
+        and/or <a>string escape sequences</a>; and a final delimiter matching the initial delimiter.
         The corresponding <a data-cite="RDF12-CONCEPTS#dfn-lexical-form">RDF lexical form</a>
-        is the characters between the delimiters,
-        after processing any escape sequences.</p>
+        is the characters between the delimiters, after processing any escape sequences.</p>
 
       <p>If present, the <a data-cite="RDF12-CONCEPTS#dfn-language-tag">language tag</a> is preceded by
         an <a href="#cp-at-sign"><code title="at sign">@</code></a>
@@ -637,7 +636,7 @@
     </p>
     <ul>
       <li>The character <a href="#cp-underscore"><code title="underscore">_</code></a> and
-      the digit characters <a href="#cp-zero"><code title="digit zero">0</code></a>–<a href="#cp-nine"><code title="digit nine">9</code></a>, inclusive)
+      the digit characters <a href="#cp-zero"><code title="digit zero">0</code></a>–<a href="#cp-nine"><code title="digit nine">9</code></a>
       may appear anywhere in a
       <a data-cite="RDF12-CONCEPTS#dfn-blank-node-identifier">blank node identifier</a>.</li>
       <li>The character <a href="#cp-full-stop"><code title="full stop">.</code></a> may appear anywhere except the first or last character.</li>
@@ -1174,9 +1173,12 @@
 
   <p>A <a>Turtle document</a> is an <a data-cite="RDF12-CONCEPTS#dfn-rdf-string">RDF string</a>
     encoded in UTF-8 [[!RFC3629]].
-  Only <a data-cite="I18N-GLOSSARY#dfn-code-point">Unicode code points</a>
-  in the range <code class="codepoint">U+0000</code> to <code class="codepoint">U+10FFFF</code>
-  inclusive are allowed.
+    Only <a data-cite="I18N-GLOSSARY#dfn-scalar-value" class="lint-ignore">Unicode scalar values</a>,
+    in the ranges <code class="codepoint">U+0000</code> to <code class="codepoint">U+D7FF</code> 
+    and <code class="codepoint">U+E000</code> to <code class="codepoint">U+10FFFF</code>,
+    are allowed. This excludes 
+    <a data-cite="I18N-GLOSSARY#dfn-surrogate" class="lint-ignore">surrogate code points</a>,
+    range <code class="codepoint">U+D800</code> to <code class="codepoint">U+DFFF</code>.
   </p>
 
   <section id="sec-grammar-ws">
@@ -1233,9 +1235,17 @@
 
     <ul>
       <li>
-        <p><em id="numeric">numeric escape sequences</em> represent <a data-cite="I18N-GLOSSARY#dfn-code-point">Unicode code points</a>:</p>
-
-        <table id="tab-uchar">
+        <p>
+          A <dfn>numeric escape sequence</dfn> represents the value of
+          a <a data-cite="I18N-GLOSSARY#dfn-code-point">Unicode code point</a>.
+        </p>
+        <p>
+          A <a>numeric escape sequence</a> MUST NOT produce a code point value
+          in the range <code class="codepoint">U+D800</code> to <code class="codepoint">U+DFFF</code>,
+          which is the range for 
+          Unicode <a data-cite="I18N-GLOSSARY#dfn-surrogate" class="lint-ignore">surrogates</a>.
+        </p>
+        <table id="tab-uchar" class="separated">
           <thead>
             <tr>
               <th>Escape sequence</th>
@@ -1249,11 +1259,11 @@
                 <a href="#grammar-production-HEX"><code>hex</code></a>
                 <a href="#grammar-production-HEX"><code>hex</code></a></td>
               <td>A <a data-cite="I18N-GLOSSARY#dfn-code-point">Unicode code point</a>
-                in the range <code class="codepoint">U+0000</code> to <code class="codepoint">U+FFFF</code> inclusive
+                in the ranges <code class="codepoint">U+0000</code> to <code class="codepoint">U+D7FF</code>
+                and <code class="codepoint">U+E000</code> to <code class="codepoint">U+D7FF</code>,
                 corresponding to the value encoded by the four hexadecimal digits interpreted
                 from most significant to least significant digit.</td>
             </tr>
-
             <tr>
               <td><code>\U</code> <a href="#grammar-production-HEX"><code>hex</code></a>
                 <a href="#grammar-production-HEX"><code>hex</code></a>
@@ -1264,27 +1274,23 @@
                 <a href="#grammar-production-HEX"><code>hex</code></a>
                 <a href="#grammar-production-HEX"><code>hex</code></a></td>
               <td>A <a data-cite="I18N-GLOSSARY#dfn-code-point">Unicode code point</a>
-                in the range <code class="codepoint">U+0000</code> to <code class="codepoint">U+0010FFFF</code> inclusive
+                in the ranges <code class="codepoint">U+0000</code> to
+                <code class="codepoint">U+D7FF</code>
+                and <code class="codepoint">U+E000</code> to <code class="codepoint">U+10FFFF</code>,
                 corresponding to the value encoded by the eight hexadecimal digits
                 interpreted from most significant to least significant digit.</td>
             </tr>
           </tbody>
         </table>
-
         <p>where <a href="#grammar-production-HEX"><code>hex</code></a> is a hexadecimal character</p>
-
-        <blockquote>
-          <p><span style="font-family: monospace; font-size: 85%;">
-            <a href="#grammar-production-HEX"><code>HEX</code></a>
-            ::= [0-9] | [A-F] | [a-f]</span></p>
-        </blockquote>
+        <p style="margin-left: 2em"><code><a href="#grammar-production-HEX"><code>HEX</code></a> ::= [0-9] | [A-F] | [a-f]</code></p>
       </li>
+
       <li>
         <p>
-          <em id="string">string escape sequences</em> represent the characters traditionally escaped in string literals:
+          A <dfn>string escape sequence</dfn> represents a character traditionally escaped in string literals:
         </p>
-
-        <table id="tab-echar">
+        <table id="tab-echar" class="separated">
           <thead>
             <tr>
               <th>Escape sequence</th>
@@ -1333,14 +1339,15 @@
             </tr>
           </tbody>
         </table>
+        <p></p>
       </li>
 
-      <li>
+      <li> 
         <p>
-          <em id="reserved">reserved character escape sequences</em> consist of
-          a <a href="#cp-backslash"><code title="backslash">\</code></a>
-          followed by one of <code>~.-!$&amp;'()*+,;=/?#@%_</code>
-          and represent the character to the right of the <a href="#cp-backslash"><code title="backslash">\</code></a>.
+          A <dfn>reserved character escape sequence</dfn> consists of a
+          <a href="#cp-backslash"><code title="backslash">\</code></a>
+          followed by one of these characters <code>~.-!$&amp;'()*+,;=/?#@%_</code>,
+          and represents the character to the right of the <a href="#cp-backslash"><code title="backslash">\</code></a>.
         </p>
       </li>
     </ul>
@@ -1350,9 +1357,9 @@
       <thead>
         <tr>
           <th></th>
-          <th><a href="#numeric">numeric<br/>escapes</a></th>
-          <th><a href="#string">string<br/>escapes</a></th>
-          <th><a href="#reserved">reserved character<br/>escapes</a></th>
+          <th><a data-lt="numeric escape sequence">numeric<br/>escapes</a></th>
+          <th><a data-lt="string escape sequence">string<br/>escapes</a></th>
+          <th><a data-lt="reserved character escape sequence">reserved character<br/>escapes</a></th>
         </tr>
       </thead>
       <tbody>
@@ -1721,9 +1728,9 @@
           -->
       </li>
 
-      <li id="bnodeLabels">Map[<a class="type string" href="#string">string</a>
+      <li id="bnodeLabels">Map[<span class="type string">string</span>
         -&gt; <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank node</a>] |bnodeLabels|
-        — A mapping from string to blank node.</li>
+        — A mapping from a string to a blank node.</li>
 
       <li id="curSubject"><a data-cite="RDF12-CONCEPTS#dfn-rdf-term">RDF Term</a> |curSubject|
         — The |curSubject| is bound to the
@@ -1775,15 +1782,15 @@
         <tr><th>                                                                       production               </th><th>                                                                                       type            </th><th>procedure</th></tr>
       </thead>
       <tbody>
-      <tr id="handle-IRIREF"                          ><td style="text-align:left;"            ><a class="type IRI"          href="#grammar-production-IRIREF"                          >IRIREF                          </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-iri">          IRI          </a></td><td>The characters between <a href="#cp-less-than"><code title="less-than sign">&lt;</code></a> and <a href="#cp-greater-than"><code title="greater-than sign">&gt;</code></a> are taken, with the <a href="#numeric">numeric escape sequences</a> unescaped, to form the IRI. <a data-cite="RDF12-CONCEPTS#dfn-relative-iri">Relative IRI reference</a> resolution is performed per <a href="#sec-iri-references" class="sectionRef">Section 6.3</a>.</td></tr>
+      <tr id="handle-IRIREF"                          ><td style="text-align:left;"            ><a class="type IRI"          href="#grammar-production-IRIREF"                          >IRIREF                          </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-iri">          IRI          </a></td><td>The characters between <a href="#cp-less-than"><code title="less-than sign">&lt;</code></a> and <a href="#cp-greater-than"><code title="greater-than sign">&gt;</code></a> are taken, with the <a data-lt="numeric escape sequence">numeric escape sequences</a> unescaped, to form the IRI. <a data-cite="RDF12-CONCEPTS#dfn-relative-iri">Relative IRI reference</a> resolution is performed per <a href="#sec-iri-references" class="sectionRef">Section 6.3</a>.</td></tr>
       <tr id="handle-PNAME_NS"                        ><td style="text-align:left;" rowspan="2"><a class="type string"       href="#grammar-production-PNAME_NS"                        >PNAME_NS                        </a></td><td><a href="#prefix">                              prefix       </a></td><td>When used in a <a href="#grammar-production-prefixID"><code>prefixID</code></a> or <a href="#grammar-production-sparqlPrefix"><code>sparqlPrefix</code></a> production, the <code>prefix</code> is the potentially empty <a data-cite="RDF12-CONCEPTS#dfn-rdf-string">RDF string</a> matching the first argument of the rule is a key into the <a href="#namespaces">namespaces map</a> into which the expanded second argument is stored for future lookup.</td></tr>
       <tr id="handle-PNAME_NS2"                       >                                                                                                                                                                           <td><a data-cite="RDF12-CONCEPTS#dfn-iri">          IRI          </a></td><td>When used in a <a href="#grammar-production-PrefixedName"><code>PrefixedName</code></a> production; the <a href="#namespaces">namespaces map</a> MUST have a corresponding <code>namespace</code>, which forms the <a data-cite="RDF12-CONCEPTS#dfn-rdf-string">RDF string</a> of the IRI.</td></tr>
-      <tr id="handle-PNAME_LN"                        ><td style="text-align:left;"            ><a class="type IRI"          href="#grammar-production-PNAME_LN"                        >PNAME_LN                        </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-iri">          IRI          </a></td><td>A potentially empty <a href="#prefix">prefix</a> is identified by the first sequence, <a href="#grammar-production-PNAME_NS"><code>PNAME_NS</code></a>. The <a href="#namespaces">namespaces map</a> <em class="rfc2119">MUST</em> have a corresponding <code>namespace</code>. The <a data-cite="RDF12-CONCEPTS#dfn-rdf-string">RDF string</a> of the IRI is formed by unescaping the <a href="#reserved">reserved characters</a> in the second argument, <a href="#grammar-production-PN_LOCAL"><code>PN_LOCAL</code></a>, and concatenating this onto the <code>namespace</code>.</td></tr>
+      <tr id="handle-PNAME_LN"                        ><td style="text-align:left;"            ><a class="type IRI"          href="#grammar-production-PNAME_LN"                        >PNAME_LN                        </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-iri">          IRI          </a></td><td>A potentially empty <a href="#prefix">prefix</a> is identified by the first sequence, <a href="#grammar-production-PNAME_NS"><code>PNAME_NS</code></a>. The <a href="#namespaces">namespaces map</a> <em class="rfc2119">MUST</em> have a corresponding <code>namespace</code>. The <a data-cite="RDF12-CONCEPTS#dfn-rdf-string">RDF string</a> of the IRI is formed by unescaping the <a data-lt="reserved character escape sequence">reserved characters</a> in the second argument, <a href="#grammar-production-PN_LOCAL"><code>PN_LOCAL</code></a>, and concatenating this onto the <code>namespace</code>.</td></tr>
       <!-- tr id="handle-PrefixedName"                ><td style="text-align:left;"            ><a class="type IRI"          href="#grammar-production-PrefixedName"                    >PrefixedName                    </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-iri">          IRI          </a></td><td>.</td></tr -->
-      <tr id="handle-STRING_LITERAL_SINGLE_QUOTE"     ><td style="text-align:left;"            ><a class="type lexicalForm"  href="#grammar-production-STRING_LITERAL_SINGLE_QUOTE"     >STRING_LITERAL_SINGLE_QUOTE     </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-lexical-form"> lexical form </a></td><td>The characters between the outermost <a href="#cp-apostrophe"><code title="apostrophe">'</code></a>s are taken, after <a href="#numeric">numeric</a> and <a href="#string">string</a> escape sequences are replaced with the characters that they represent, to form the <a data-cite="RDF12-CONCEPTS#dfn-rdf-string">RDF string</a> of a lexical form.</td></tr>
-      <tr id="handle-STRING_LITERAL_QUOTE"            ><td style="text-align:left;"            ><a class="type lexicalForm"  href="#grammar-production-STRING_LITERAL_QUOTE"            >STRING_LITERAL_QUOTE            </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-lexical-form"> lexical form </a></td><td>The characters between the outermost <a href="#cp-quotation-mark"><code title="quotation mark">&quot;</code></a>s are taken, with <a href="#numeric">numeric</a> and <a href="#string">string</a> escape sequences unescaped, to form the <a data-cite="RDF12-CONCEPTS#dfn-rdf-string">RDF string</a> of a lexical form.</td></tr>
-      <tr id="handle-STRING_LITERAL_LONG_SINGLE_QUOTE"><td style="text-align:left;"            ><a class="type lexicalForm"  href="#grammar-production-STRING_LITERAL_LONG_SINGLE_QUOTE">STRING_LITERAL_LONG_SINGLE_QUOTE</a></td><td><a data-cite="RDF12-CONCEPTS#dfn-lexical-form"> lexical form </a></td><td>The characters between the outermost <a href="#cp-triple-apostrophe"><code>'''</code></a>s are taken, with <a href="#numeric">numeric</a> and <a href="#string">string</a> escape sequences unescaped, to form the <a data-cite="RDF12-CONCEPTS#dfn-rdf-string">RDF string</a> of a lexical form.</td></tr>
-      <tr id="handle-STRING_LITERAL_LONG_QUOTE"       ><td style="text-align:left;"            ><a class="type lexicalForm"  href="#grammar-production-STRING_LITERAL_LONG_QUOTE"       >STRING_LITERAL_LONG_QUOTE       </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-lexical-form"> lexical form </a></td><td>The characters between the outermost <a href="#cp-triple-quote"><code>"""</code></a>s are taken, after <a href="#numeric">numeric</a> and <a href="#string">string</a> escape sequences are are replaced with the characters that they represent, to form the <a data-cite="RDF12-CONCEPTS#dfn-rdf-string">RDF string</a> of a lexical form.</td></tr>
+      <tr id="handle-STRING_LITERAL_SINGLE_QUOTE"     ><td style="text-align:left;"            ><a class="type lexicalForm"  href="#grammar-production-STRING_LITERAL_SINGLE_QUOTE"     >STRING_LITERAL_SINGLE_QUOTE     </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-lexical-form"> lexical form </a></td><td>The characters between the outermost <a href="#cp-apostrophe"><code title="apostrophe">'</code></a>s are taken, after <a data-lt="numeric escape sequence">numeric</a> and <a data-lt="string escape sequence">string</a> escape sequences are replaced with the characters that they represent, to form the <a data-cite="RDF12-CONCEPTS#dfn-rdf-string">RDF string</a> of a lexical form.</td></tr>
+      <tr id="handle-STRING_LITERAL_QUOTE"            ><td style="text-align:left;"            ><a class="type lexicalForm"  href="#grammar-production-STRING_LITERAL_QUOTE"            >STRING_LITERAL_QUOTE            </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-lexical-form"> lexical form </a></td><td>The characters between the outermost <a href="#cp-quotation-mark"><code title="quotation mark">&quot;</code></a>s are taken, with <a data-lt="numeric escape sequence">numeric</a> and <a data-lt="string escape sequence">string</a> escape sequences unescaped, to form the <a data-cite="RDF12-CONCEPTS#dfn-rdf-string">RDF string</a> of a lexical form.</td></tr>
+      <tr id="handle-STRING_LITERAL_LONG_SINGLE_QUOTE"><td style="text-align:left;"            ><a class="type lexicalForm"  href="#grammar-production-STRING_LITERAL_LONG_SINGLE_QUOTE">STRING_LITERAL_LONG_SINGLE_QUOTE</a></td><td><a data-cite="RDF12-CONCEPTS#dfn-lexical-form"> lexical form </a></td><td>The characters between the outermost <a href="#cp-triple-apostrophe"><code>'''</code></a>s are taken, with <a data-lt="numeric escape sequence">numeric</a> and <a data-lt="string escape sequence">string</a> escape sequences unescaped, to form the <a data-cite="RDF12-CONCEPTS#dfn-rdf-string">RDF string</a> of a lexical form.</td></tr>
+      <tr id="handle-STRING_LITERAL_LONG_QUOTE"       ><td style="text-align:left;"            ><a class="type lexicalForm"  href="#grammar-production-STRING_LITERAL_LONG_QUOTE"       >STRING_LITERAL_LONG_QUOTE       </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-lexical-form"> lexical form </a></td><td>The characters between the outermost <a href="#cp-triple-quote"><code>"""</code></a>s are taken, after <a data-lt="numeric escape sequence">numeric</a> and <a href="#dfn-string-escape-sequence">string</a> escape sequences are are replaced with the characters that they represent, to form the <a data-cite="RDF12-CONCEPTS#dfn-rdf-string">RDF string</a> of a lexical form.</td></tr>
       <tr id="handle-LANG_DIR"                        ><td style="text-align:left;"            ><a class="type langDir"      href="#grammar-production-LANG_DIR"                        >LANG_DIR                        </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-language-tag"> language tag </a></td><td>The characters following the <a href="#cp-at-sign"><code title="at sign">@</code></a> form the <a data-cite="RDF12-CONCEPTS#dfn-language-tag">language tag</a> and optionally the <a data-cite="RDF12-CONCEPTS#dfn-base-direction">base direction</a>, if the matched characters include <a href="#cp-hyphen-hyphen"><code>--</code></a>.</td></tr>
       <tr id="handle-RDFLiteral"                      ><td style="text-align:left;"            ><a class="type literal"      href="#grammar-production-RDFLiteral"                      >RDFLiteral                      </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-literal">      literal      </a></td><td>The literal has a lexical form of the first rule argument, <a href="#grammar-production-String"><code>String</code></a>. If the <code>'^^' iri</code> rule is matched, the <a data-cite="RDF12-CONCEPTS#dfn-datatype-iri">datatype IRI</a> is derived from the <code>iri</code>, and the literal has no language tag. If the <a href="#grammar-production-LANG_DIR" class="type langDir"><code>LANG_DIR</code></a> rule is matched, the <a data-cite="RDF12-CONCEPTS#dfn-language-tag">language tag</a> and <a data-cite="RDF12-CONCEPTS#dfn-base-direction">base direction</a> are taken from <a href=#handle-LANG_DIR class="type langDir"><code>LANG_DIR</code></a>. If there is no <a data-cite="RDF12-CONCEPTS#dfn-base-direction">base direction</a>, the datatype is <code>rdf:langString</code>. If there is a <a data-cite="RDF12-CONCEPTS#dfn-base-direction">base direction</a>, the datatype is <code>rdf:dirLangString</code>. If neither matched, the datatype is <code>xsd:string</code>, and the literal has no language tag.</td></tr>
       <tr id="handle-INTEGER"                         ><td style="text-align:left;"            ><a class="type integer"      href="#grammar-production-INTEGER"                         >INTEGER                         </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-literal">      literal      </a></td><td>The literal has a lexical form of the input string, and a datatype of <code>xsd:integer</code>.</td></tr>
@@ -2224,6 +2231,9 @@
     <li>Changes the `LANGTAG` terminal production to
       <a href="#grammar-production-LANG_DIR" class="type langDir"><code>LANG_DIR</code></a> to include
       an optional <a data-cite="RDF12-CONCEPTS#dfn-base-direction">base direction</a>.</li>
+    <li>Clarify that 
+      <a data-cite="I18N-GLOSSARY#dfn-surrogate" class="lint-ignore">Unicode surrogates</a> 
+      are not legal in Turtle documents, nor as the value of a Unicode escape sequence.</li>
   </ul>
 </section>
 
