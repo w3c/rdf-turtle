@@ -3,6 +3,7 @@
 <head>
   <title>RDF 1.2 Turtle</title>
   <meta charset="utf-8"/>
+  <meta name="color-scheme" content="light dark" />
   <script src="https://www.w3.org/Tools/respec/respec-w3c" class="remove"></script>
   <script src="./common/local-biblio.js" class="remove"></script>
   <script src="./common/fixup.js" class="remove"></script>
@@ -52,14 +53,51 @@
   </script>
 
   <style>
+    body { color-scheme: light; }
+    body.darkmode { color-scheme: dark; }
+
+    /* Copy of hljs light/dark values, since hljs uses media
+     * prefers-color-scheme rule which isn't controlled by color-scheme. */
+    body .hljs {
+      --base: rgba(0, 0, 0, .03); /* Altered from hljs default of #fafafa; more like bikeshed/pygments */
+      --mono-1: #383a42;
+      --mono-2: #686b77;
+      --mono-3: #717277;
+      --hue-1: #0b76c5;
+      --hue-2: #336ae3;
+      --hue-3: #a626a4;
+      --hue-4: #42803c;
+      --hue-5: #ca4706;
+      --hue-5-2: #c91243;
+      --hue-6: #986801;
+      --hue-6-2: #9a6a01;
+    }
+    body.darkmode .hljs {
+      --base: #282c34;
+      --base: rgba(255, 255, 255, .05); /* Altered from hljs default of #282c34; more like bikeshed/pygments */
+      --mono-1: #abb2bf;
+      --mono-2: #818896;
+      --mono-3: #5c6370;
+      --hue-1: #56b6c2;
+      --hue-2: #61aeee;
+      --hue-3: #c678dd;
+      --hue-4: #98c379;
+      --hue-5: #e06c75;
+      --hue-5-2: #be5046;
+      --hue-6: #d19a66;
+      --hue-6-2: #e6c07b;
+    }
+
     /* Style Turtle script blocks to be visable */
     pre.example script {
         display:block;
     }
+    /*
     .separated { border-collapse:collapse; }
     .separated thead tr th { border:1px solid black; padding: .2em; min-width: 10vw }
     .separated tbody tr td { border:1px solid black; text-align: center; min-width: 10vw }
     .separated tbody tr td.r { text-align: right; padding: .5em; }
+    */
     .grammar td { font-family: monospace; vertical-align: top; }
     .grammar-opt,
     .grammar-alt,
@@ -83,14 +121,19 @@
     @media (max-width: 767px) {
       table { word-break: break-all; }
       .separated thead tr th { border:1px solid black; padding: .2em; min-width: 10vw }
+      .separated tbody tr td:first-child,
+      .separated tbody tr th:first-child {max-width: 220px; overflow-wrap: anywhere;}
       .separated thead tr th:nth-child(2) { word-break: break-all; }
       .separated tbody tr td:nth-child(2) {padding: 3px 2px;}
       .separated tbody tr td:nth-child(3) {padding: 3px 2px;}
       .separated tbody tr td { border:1px solid black; text-align: center; min-width: 10vw }
+
+      body.darkmode .separated thead tr th { border:1px solid white; }
+      body.darkmode .separated tbody tr td { border:1px solid white; }
+
       table { word-break: normal; overflow-wrap: anywhere; }
       table.ex, .ex th, .ex td { border: none; padding: 0; }
       table.ex { font-size: 1.4vw; }
-      .separated tbody tr td:first-child, .separated tbody tr th:first-child {max-width: 220px; overflow-wrap: anywhere;}
 
     }
     .ex th { text-align: center; }
@@ -101,6 +144,11 @@
     table.cp-definitions th,
     table.cp-definitions td { border:1px solid black; padding:0.2em; }
     table.cp-definitions td:nth-child(2) { text-align: center; }
+
+    body.darkmode table.cp-definitions { background-color: black}
+    body.darkmode table.cp-definitions,
+    body.darkmode table.cp-definitions th,
+    body.darkmode table.cp-definitions td { border:1px solid white; }
   </style> 
 </head>
 
