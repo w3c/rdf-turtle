@@ -1,10 +1,12 @@
 turtleDoc             ::= statement*
 statement             ::= directive | triples '.'
-directive             ::= prefixID | base | sparqlPrefix | sparqlBase
+directive             ::= prefixID | base | version | sparqlPrefix | sparqlBase | sparqlVersion
 prefixID              ::= '@prefix' PNAME_NS IRIREF '.'
 base                  ::= '@base' IRIREF '.'
+version               ::= '@version' VERSION_SPECIFIER  '.'
 sparqlPrefix          ::=	"PREFIX" PNAME_NS IRIREF
 sparqlBase            ::=	"BASE" IRIREF
+sparqlVersion         ::=	"VERSION" VERSION_SPECIFIER
 triples               ::= subject predicateObjectList
                         | blankNodePropertyList predicateObjectList?
                         | reifiedTriple predicateObjectList?
@@ -81,3 +83,4 @@ PLX               ::= PERCENT | PN_LOCAL_ESC
 PERCENT           ::= '%' HEX HEX
 HEX               ::= ([0-9] | [A-F] | [a-f])
 PN_LOCAL_ESC      ::= '\' ( '_' | '~' | '.' | '-' | '!' | '$' | '&' | "'" | '(' | ')' | '*' | '+' | ',' | ';' | '=' | '/' | '?' | '#' | '@' | '%' )
+VERSION_SPECIFIER ::= '"' [0-9]+ '.' [0-9]+ '"'
