@@ -335,7 +335,7 @@
       -->
     </pre>
 
-    <p>When providing content over HTTP, serveres can announce the version
+    <p>When providing content over HTTP, servers can announce the version
       using the optional `version` Content-Type parameter:</p>
 
     <pre id="ex-http-version-decl"
@@ -351,7 +351,7 @@
     <p>In the absense of an explicit version announcement,
       processors should treat the document as having version "1.2".</p>
 
-    <p class="note">Version numbers other thann "1.2" are not defined by
+    <p class="note">Version numbers other than "1.2" are not defined by
       this specification.
       Processors may treat this as an error or warning.
       While a version of "1.1" is not defined, processors may treat this
@@ -1563,8 +1563,8 @@
           '<a href="#grammar-production-base"><code class="grammar-literal">@base</code></a>', and
           '<a href="#grammar-production-version"><code class="grammar-literal">@version</code></a>'
           match the pattern for <a href="#grammar-production-LANG_DIR"><code>LANG_DIR</code></a>,
-          though neither <code class="grammar-literal">prefix</code>
-          nor <code class="grammar-literal">base</code>
+          though neither <code class="grammar-literal">prefix</code>,
+          <code class="grammar-literal">base</code>, nor <code class="grammar-literal">version</code>
           are <a data-cite="?LANG-SUBTAG-REGISTRY#">registered language subtags</a>.
           This specification does not define whether a quoted literal
           followed by either of these tokens (e.g., <code>"A"@base</code>)
