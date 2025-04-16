@@ -335,6 +335,20 @@
       -->
     </pre>
 
+    <p>If the value has the form of an xsd:decimal, the surrounding
+      <a href="#cp-quotation-mark"><code title="quotation mark">&quot;</code></a>s
+      can be omitted.</p>
+
+    <pre id="ex-quoteless-version-decl"
+         class="example turtle" data-transform="updateExample"
+         title="Quoteless version announcement">
+      <!--
+      VERSION 1.2
+      PREFIX : <http://example.com/>
+      :a :name "Alice" ~ :t {| :statedBy :bob ; :recorded "2021-07-07"^^xsd:date |} .
+      -->
+    </pre>
+
     <p>When providing content over HTTP, servers can announce the version
       using the optional `version` Content-Type parameter:</p>
 
@@ -1879,9 +1893,11 @@
       <li id="curTripleTerm"><a data-cite="RDF12-CONCEPTS#dfn-triple-term">Triple term</a> |curTripleTerm| —
         The |curTripleTerm| is set in the <a href="#annotation">Annotations</a> constructor.
       </li>
-      <li id="curVersion">`xsd:decimal` |curVersion| –
+      <li id="curVersion">`xsd:string` |curVersion| –
         The RDF version used for parsing the document into <a data-cite="RDF12-CONCEPTS#dfn-rdf-triple">Triples</a>.
-        The only defined value is `1.2`. Parser behavior for other version values is undefined.
+        If specified as part of a <a href="#sec-mediaReg">Media Type</a>, the default value for |curVersion| is taken from the `version` parameter.
+        The only defined value is `"1.2"`. Parser behavior for other version values is undefined.
+        This specification does not define behavior if different versions are provided for |curVersion|.
       </li>
     </ul>
 
@@ -1905,8 +1921,7 @@
       <tr id="handle-PNAME_NS"                        ><td style="text-align:left;" rowspan="2"><a class="type string"       href="#grammar-production-PNAME_NS"                        >PNAME_NS                        </a></td><td><a href="#prefix">                              prefix       </a></td><td>When used in a <a href="#grammar-production-prefixID"><code>prefixID</code></a> or <a href="#grammar-production-sparqlPrefix"><code>sparqlPrefix</code></a> production, the <code>prefix</code> is the potentially empty <a data-cite="RDF12-CONCEPTS#dfn-rdf-string">RDF string</a> matching the first argument of the rule is a key into the <a href="#namespaces">namespaces map</a> into which the expanded second argument is stored for future lookup.</td></tr>
       <tr id="handle-PNAME_NS2"                       >                                                                                                                                                                           <td><a data-cite="RDF12-CONCEPTS#dfn-iri">          IRI          </a></td><td>When used in a <a href="#grammar-production-PrefixedName"><code>PrefixedName</code></a> production; the <a href="#namespaces">namespaces map</a> MUST have a corresponding <code>namespace</code>, which forms the <a data-cite="RDF12-CONCEPTS#dfn-rdf-string">RDF string</a> of the IRI.</td></tr>
       <tr id="handle-PNAME_LN"                        ><td style="text-align:left;"            ><a class="type IRI"          href="#grammar-production-PNAME_LN"                        >PNAME_LN                        </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-iri">          IRI          </a></td><td>A potentially empty <a href="#prefix">prefix</a> is identified by the first sequence, <a href="#grammar-production-PNAME_NS"><code>PNAME_NS</code></a>. The <a href="#namespaces">namespaces map</a> <em class="rfc2119">MUST</em> have a corresponding <code>namespace</code>. The <a data-cite="RDF12-CONCEPTS#dfn-rdf-string">RDF string</a> of the IRI is formed by unescaping the <a data-lt="reserved character escape sequence">reserved characters</a> in the second argument, <a href="#grammar-production-PN_LOCAL"><code>PN_LOCAL</code></a>, and concatenating this onto the <code>namespace</code>.</td></tr>
-      <tr id="handle-VERSION_SPECIFIER"               ><td style="text-align:left;"            ><a class="type string"       href="#grammar-production-VERSION_SPECIFIER"               >VERSION_SPECIFIER               </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-literal">      literal      </a></td><td>The characters between the <a href="#cp-quotation-mark"><code title="quotation mark">&quot;</code></a>s are taken to form the decimal value of |curVersion|.</td></tr>
-      <!-- tr id="handle-PrefixedName"                ><td style="text-align:left;"            ><a class="type IRI"          href="#grammar-production-PrefixedName"                    >PrefixedName                    </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-iri">          IRI          </a></td><td>.</td></tr -->
+      <tr id="handle-VERSION_SPECIFIER"               ><td style="text-align:left;"            ><a class="type literal"     href="#grammar-production-VERSION_SPECIFIER"               >VERSION_SPECIFIER               </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-literal">      literal.     </a></td><td>The |curVersion| is taken from a literal having a lexical form the matched value exclusive of surrounding <a href="#cp-quotation-mark"><code title="quotation mark">&quot;</code></a>s and datatype `xsd:string`.</td></tr>
       <tr id="handle-STRING_LITERAL_SINGLE_QUOTE"     ><td style="text-align:left;"            ><a class="type lexicalForm"  href="#grammar-production-STRING_LITERAL_SINGLE_QUOTE"     >STRING_LITERAL_SINGLE_QUOTE     </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-lexical-form"> lexical form </a></td><td>The characters between the outermost <a href="#cp-apostrophe"><code title="apostrophe">'</code></a>s are taken, after <a data-lt="numeric escape sequence">numeric</a> and <a data-lt="string escape sequence">string</a> escape sequences are replaced with the characters that they represent, to form the <a data-cite="RDF12-CONCEPTS#dfn-rdf-string">RDF string</a> of a lexical form.</td></tr>
       <tr id="handle-STRING_LITERAL_QUOTE"            ><td style="text-align:left;"            ><a class="type lexicalForm"  href="#grammar-production-STRING_LITERAL_QUOTE"            >STRING_LITERAL_QUOTE            </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-lexical-form"> lexical form </a></td><td>The characters between the outermost <a href="#cp-quotation-mark"><code title="quotation mark">&quot;</code></a>s are taken, with <a data-lt="numeric escape sequence">numeric</a> and <a data-lt="string escape sequence">string</a> escape sequences unescaped, to form the <a data-cite="RDF12-CONCEPTS#dfn-rdf-string">RDF string</a> of a lexical form.</td></tr>
       <tr id="handle-STRING_LITERAL_LONG_SINGLE_QUOTE"><td style="text-align:left;"            ><a class="type lexicalForm"  href="#grammar-production-STRING_LITERAL_LONG_SINGLE_QUOTE">STRING_LITERAL_LONG_SINGLE_QUOTE</a></td><td><a data-cite="RDF12-CONCEPTS#dfn-lexical-form"> lexical form </a></td><td>The characters between the outermost <a href="#cp-triple-apostrophe"><code>'''</code></a>s are taken, with <a data-lt="numeric escape sequence">numeric</a> and <a data-lt="string escape sequence">string</a> escape sequences unescaped, to form the <a data-cite="RDF12-CONCEPTS#dfn-rdf-string">RDF string</a> of a lexical form.</td></tr>
