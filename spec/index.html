@@ -307,7 +307,7 @@
       RDF 1.2 Turtle introduces the
       <a href="#grammar-production-sparqlVersion"><code>VERSION</code></a> and
       <a href="#grammar-production-version"><code>@version</code></a> directives
-      along with an optional `version` <a href="#sec-mediaReg">HTTP Media Type parameter</a>.
+      along with an optional `version` <a href="#sec-mediaReg">Media Type parameter</a>.
       When serializing Turtle with new features such as base direction or triple terms,
       authors can announce the presense of these features using these directives.
     </p>
@@ -349,8 +349,8 @@
       -->
     </pre>
 
-    <p>When providing content over HTTP, servers can announce the version
-      using the optional `version` Content-Type parameter:</p>
+    <p>When providing content over HTTP, serveres can announce the version
+      using the optional `version` <a href="#sec-mediaReg">Media Type parameter</a>:</p>
 
     <pre id="ex-http-version-decl"
          class="example turtle" data-transform="updateExample"
@@ -362,15 +362,9 @@
       -->
     </pre>
 
-    <p>In the absense of an explicit version announcement,
-      processors should treat the document as having version "1.2".</p>
-
     <p class="note">Version numbers other than "1.2" are not defined by
       this specification.
-      Processors may treat this as an error or warning.
-      While a version of "1.1" is not defined, processors may treat this
-      as an indication that no RDF 1.2 features are used, so that
-      if they are encountered when parsing a document, it can be treated as an error.</p>
+      Processors may treat this as an error or warning.</p>
   </section>
 
   <section id="sec-iri">
@@ -1820,7 +1814,7 @@
   <section id="sec-parsing-state">
     <h3>Parser State</h3>
 
-    <p>Parsing Turtle requires a state of eight items:</p>
+    <p>Parsing Turtle requires a state of nine items:</p>
 
     <ul>
       <li id="baseURI">IRI |baseURI|
