@@ -212,9 +212,10 @@
       <td>'<code class="grammar-literal">{|</code>' <a href="#grammar-production-predicateObjectList">predicateObjectList</a> '<code class="grammar-literal">|}</code>'</td>
     </tr>
     <tr id="grammar-declaration-terminals">
-      <td colspan="4">
-        <h3 id="terminals">Productions for terminals</h3>
-      </td>
+      <td>@terminals</td>
+      <td><code></code></td>
+      <td></td>
+      <td><strong># Productions for terminals</strong></td>
     </tr>
     <tr id="grammar-production-IRIREF">
       <td>[37]</td>
@@ -441,7 +442,7 @@
       <td>[63]</td>
       <td><code>VERSION_SPECIFIER</code></td>
       <td>::=</td>
-      <td><code class="grammar-paren">(</code><code class="grammar-brac">[</code><code class="grammar-literal">0-9</code><code class="grammar-brac">]</code><code class="grammar-plus">+</code> '<code class="grammar-literal">.</code>' <code class="grammar-brac">[</code><code class="grammar-literal">0-9</code><code class="grammar-brac">]</code><code class="grammar-plus">+</code><code class="grammar-paren">)</code> <code class="grammar-alt">|</code> <code class="grammar-paren">(</code>'<code class="grammar-literal">&quot;</code>' <a href="#grammar-production-PN_CHARS">PN_CHARS</a><code class="grammar-plus">+</code> '<code class="grammar-literal">&quot;</code>'<code class="grammar-paren">)</code></td>
+      <td><code class="grammar-paren">(</code><code class="grammar-brac">[</code><code class="grammar-literal">0-9a-z</code><code class="grammar-brac">]</code><code class="grammar-plus">+</code> <code class="grammar-paren">(</code><code class="grammar-brac">[</code><code class="grammar-literal">.-</code><code class="grammar-brac">]</code> <code class="grammar-brac">[</code><code class="grammar-literal">0-9a-z</code><code class="grammar-brac">]</code><code class="grammar-plus">+</code><code class="grammar-paren">)</code><code class="grammar-star">*</code><code class="grammar-paren">)</code> <code class="grammar-alt">|</code> <code class="grammar-paren">(</code>'<code class="grammar-literal">&quot;</code>' <code class="grammar-brac">[</code><code class="grammar-literal">0-9a-z</code><code class="grammar-brac">]</code><code class="grammar-plus">+</code> <code class="grammar-paren">(</code><code class="grammar-brac">[</code><code class="grammar-literal">.-</code><code class="grammar-brac">]</code> <code class="grammar-brac">[</code><code class="grammar-literal">0-9a-z</code><code class="grammar-brac">]</code><code class="grammar-plus">+</code><code class="grammar-paren">)</code><code class="grammar-star">*</code> '<code class="grammar-literal">&quot;</code>'<code class="grammar-paren">)</code></td>
     </tr>
   </tbody>
 </table>
