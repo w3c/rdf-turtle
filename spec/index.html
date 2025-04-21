@@ -308,7 +308,9 @@
       <a href="#grammar-production-sparqlVersion"><code>VERSION</code></a> and
       <a href="#grammar-production-version"><code>@version</code></a> directives
       along with an optional `version` <a href="#sec-mediaReg">Media Type parameter</a>.
-      When serializing Turtle with new features such as base direction or triple terms,
+      When serializing Turtle with new features such as
+      <a data-cite="RDF12-CONCEPTS#dfn-base-direction">initial text direction</a>
+      or<a data-cite="RDF12-CONCEPTS#dfn-triple-term">triple terms</a>,
       authors can announce the use of the new syntax forms using these directives.
     </p>
 
@@ -530,7 +532,7 @@
         Quoted Literals (Grammar production
         <a href="#grammar-production-RDFLiteral"><code>RDFLiteral</code></a>) have a lexical form
         followed by a <a data-cite="RDF12-CONCEPTS#dfn-language-tag">language tag</a>
-        (possibly including a <a data-cite="RDF12-CONCEPTS#dfn-base-direction">base direction</a>),
+        (possibly including an <a data-cite="RDF12-CONCEPTS#dfn-base-direction">initial text direction</a>),
         a <a data-cite="RDF12-CONCEPTS#dfn-datatype-iri">datatype IRI</a>, or neither.</p>
 
       <p>The representation of the lexical form consists of an initial delimiter
@@ -546,7 +548,7 @@
 
       <p>If present, the <a data-cite="RDF12-CONCEPTS#dfn-language-tag">language tag</a> is preceded by
         an <a href="#cp-at-sign"><code title="at sign">@</code></a>
-        and may be followed by a <a data-cite="RDF12-CONCEPTS#dfn-base-direction">base direction</a>
+        and may be followed by an <a data-cite="RDF12-CONCEPTS#dfn-base-direction">initial text direction</a>
         separated from the language tag by <a href="#cp-hyphen-hyphen"><code>--</code></a>.</p>
 
       <p class="note">When using RDF 1.2-specific features, such as
@@ -604,8 +606,8 @@
         show:218 rdfs:label "That Seventies Show"^^<http://www.w3.org/2001/XMLSchema#string> . # same as above
         show:218 rdfs:label "That Seventies Show" .                                            # same again
         show:218 show:localName "That Seventies Show"@en .                     # literal with a language tag
-        show:218 show:localName "HTML היא שפת סימון."@he--rtl .                # literal with a language tag and base direction
-        show:218 show:localName "That Seventies Show"@en-us--ltr .             # literal with a language tag, region subtag, and base direction
+        show:218 show:localName "HTML היא שפת סימון."@he--rtl .                # literal with a language tag and initial text direction
+        show:218 show:localName "That Seventies Show"@en-us--ltr .             # literal with a language tag, region subtag, and initial text direction
         show:218 show:localName 'Cette Série des Années Soixante-dix'@fr .     # literal delimited by single quote
         show:218 show:localName "Cette Série des Années Septante"@fr-be .      # literal with a region subtag
         show:218 show:blurb '''This is a multi-line
@@ -1801,7 +1803,7 @@
 
     Literals are composed of a <a data-cite="RDF12-CONCEPTS#dfn-lexical-form">lexical form</a>
     and an optional <a data-cite="RDF12-CONCEPTS#dfn-language-tag">language tag</a> [[!BCP47]]
-    – possibly including a <a data-cite="RDF12-CONCEPTS#dfn-base-direction">base direction</a> –
+    – possibly including an <a data-cite="RDF12-CONCEPTS#dfn-base-direction">initial text direction</a> –
     or <a data-cite="RDF12-CONCEPTS#dfn-datatype-iri">datatype IRI</a>.
     An extra type, <code id="prefix" class="dfn">prefix</code>, is used during parsing to map string identifiers to namespace IRIs.
 
@@ -1920,8 +1922,8 @@
       <tr id="handle-STRING_LITERAL_QUOTE"            ><td style="text-align:left;"            ><a class="type lexicalForm"  href="#grammar-production-STRING_LITERAL_QUOTE"            >STRING_LITERAL_QUOTE            </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-lexical-form"> lexical form </a></td><td>The characters between the outermost <a href="#cp-quotation-mark"><code title="quotation mark">&quot;</code></a>s are taken, with <a data-lt="numeric escape sequence">numeric</a> and <a data-lt="string escape sequence">string</a> escape sequences unescaped, to form the <a data-cite="RDF12-CONCEPTS#dfn-rdf-string">RDF string</a> of a lexical form.</td></tr>
       <tr id="handle-STRING_LITERAL_LONG_SINGLE_QUOTE"><td style="text-align:left;"            ><a class="type lexicalForm"  href="#grammar-production-STRING_LITERAL_LONG_SINGLE_QUOTE">STRING_LITERAL_LONG_SINGLE_QUOTE</a></td><td><a data-cite="RDF12-CONCEPTS#dfn-lexical-form"> lexical form </a></td><td>The characters between the outermost <a href="#cp-triple-apostrophe"><code>'''</code></a>s are taken, with <a data-lt="numeric escape sequence">numeric</a> and <a data-lt="string escape sequence">string</a> escape sequences unescaped, to form the <a data-cite="RDF12-CONCEPTS#dfn-rdf-string">RDF string</a> of a lexical form.</td></tr>
       <tr id="handle-STRING_LITERAL_LONG_QUOTE"       ><td style="text-align:left;"            ><a class="type lexicalForm"  href="#grammar-production-STRING_LITERAL_LONG_QUOTE"       >STRING_LITERAL_LONG_QUOTE       </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-lexical-form"> lexical form </a></td><td>The characters between the outermost <a href="#cp-triple-quote"><code>"""</code></a>s are taken, after <a data-lt="numeric escape sequence">numeric</a> and <a href="#dfn-string-escape-sequence">string</a> escape sequences are are replaced with the characters that they represent, to form the <a data-cite="RDF12-CONCEPTS#dfn-rdf-string">RDF string</a> of a lexical form.</td></tr>
-      <tr id="handle-LANG_DIR"                        ><td style="text-align:left;"            ><a class="type langDir"      href="#grammar-production-LANG_DIR"                        >LANG_DIR                        </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-language-tag"> language tag </a></td><td>The characters following the <a href="#cp-at-sign"><code title="at sign">@</code></a> form the <a data-cite="RDF12-CONCEPTS#dfn-language-tag">language tag</a> and optionally the <a data-cite="RDF12-CONCEPTS#dfn-base-direction">base direction</a>, if the matched characters include <a href="#cp-hyphen-hyphen"><code>--</code></a>.</td></tr>
-      <tr id="handle-RDFLiteral"                      ><td style="text-align:left;"            ><a class="type literal"      href="#grammar-production-RDFLiteral"                      >RDFLiteral                      </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-literal">      literal      </a></td><td>The literal has a lexical form of the first rule argument, <a href="#grammar-production-String"><code>String</code></a>. If the <code>'^^' iri</code> rule is matched, the <a data-cite="RDF12-CONCEPTS#dfn-datatype-iri">datatype IRI</a> is derived from the <code>iri</code>, and the literal has no language tag. If the <a href="#grammar-production-LANG_DIR" class="type langDir"><code>LANG_DIR</code></a> rule is matched, the <a data-cite="RDF12-CONCEPTS#dfn-language-tag">language tag</a> and <a data-cite="RDF12-CONCEPTS#dfn-base-direction">base direction</a> are taken from <a href=#handle-LANG_DIR class="type langDir"><code>LANG_DIR</code></a>. If there is no <a data-cite="RDF12-CONCEPTS#dfn-base-direction">base direction</a>, the datatype is <code>rdf:langString</code>. If there is a <a data-cite="RDF12-CONCEPTS#dfn-base-direction">base direction</a>, the datatype is <code>rdf:dirLangString</code>. If neither matched, the datatype is <code>xsd:string</code>, and the literal has no language tag.</td></tr>
+      <tr id="handle-LANG_DIR"                        ><td style="text-align:left;"            ><a class="type langDir"      href="#grammar-production-LANG_DIR"                        >LANG_DIR                        </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-language-tag"> language tag </a></td><td>The characters following the <a href="#cp-at-sign"><code title="at sign">@</code></a> form the <a data-cite="RDF12-CONCEPTS#dfn-language-tag">language tag</a> and optionally the <a data-cite="RDF12-CONCEPTS#dfn-base-direction">initial text direction</a>, if the matched characters include <a href="#cp-hyphen-hyphen"><code>--</code></a>.</td></tr>
+      <tr id="handle-RDFLiteral"                      ><td style="text-align:left;"            ><a class="type literal"      href="#grammar-production-RDFLiteral"                      >RDFLiteral                      </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-literal">      literal      </a></td><td>The literal has a lexical form of the first rule argument, <a href="#grammar-production-String"><code>String</code></a>. If the <code>'^^' iri</code> rule is matched, the <a data-cite="RDF12-CONCEPTS#dfn-datatype-iri">datatype IRI</a> is derived from the <code>iri</code>, and the literal has no language tag. If the <a href="#grammar-production-LANG_DIR" class="type langDir"><code>LANG_DIR</code></a> rule is matched, the <a data-cite="RDF12-CONCEPTS#dfn-language-tag">language tag</a> and <a data-cite="RDF12-CONCEPTS#dfn-base-direction">initial text direction</a> are taken from <a href=#handle-LANG_DIR class="type langDir"><code>LANG_DIR</code></a>. If there is no <a data-cite="RDF12-CONCEPTS#dfn-base-direction">initial text direction</a>, the datatype is <code>rdf:langString</code>. If there is a <a data-cite="RDF12-CONCEPTS#dfn-base-direction">initial text direction</a>, the datatype is <code>rdf:dirLangString</code>. If neither matched, the datatype is <code>xsd:string</code>, and the literal has no language tag.</td></tr>
       <tr id="handle-INTEGER"                         ><td style="text-align:left;"            ><a class="type integer"      href="#grammar-production-INTEGER"                         >INTEGER                         </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-literal">      literal      </a></td><td>The literal has a lexical form of the input string, and a datatype of <code>xsd:integer</code>.</td></tr>
       <tr id="handle-DECIMAL"                         ><td style="text-align:left;"            ><a class="type decimal"      href="#grammar-production-DECIMAL"                         >DECIMAL                         </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-literal">      literal      </a></td><td>The literal has a lexical form of the input string, and a datatype of <code>xsd:decimal</code>.</td></tr>
       <tr id="handle-DOUBLE"                          ><td style="text-align:left;"            ><a class="type double"       href="#grammar-production-DOUBLE"                          >DOUBLE                          </a></td><td><a data-cite="RDF12-CONCEPTS#dfn-literal">      literal      </a></td><td>The literal has a lexical form of the input string, and a datatype of <code>xsd:double</code>.</td></tr>
@@ -2360,7 +2362,7 @@
       for representing <a data-cite="RDF12-CONCEPTS#dfn-triple-term">triple terms</a> in Turtle.</li>
     <li>Changes the `LANGTAG` terminal production to
       <a href="#grammar-production-LANG_DIR" class="type langDir"><code>LANG_DIR</code></a> to include
-      an optional <a data-cite="RDF12-CONCEPTS#dfn-base-direction">base direction</a>.</li>
+      an optional <a data-cite="RDF12-CONCEPTS#dfn-base-direction">initial text direction</a>.</li>
     <li>Clarify that 
       <a data-cite="I18N-GLOSSARY#dfn-surrogate" class="lint-ignore">Unicode surrogates</a> 
       are not legal in Turtle documents, nor as the value of a Unicode escape sequence.</li>
