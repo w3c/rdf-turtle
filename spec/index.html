@@ -314,22 +314,9 @@
       authors can announce the use of the new syntax forms using these directives.
     </p>
 
-    <pre id="ex-version-decl"
-         class="example turtle" data-transform="updateExample"
-         title="Version announcement">
-      <!--
-      @version "1.2" .
-      @prefix : <http://example.com/> .
-      :a :name "Alice" ~ :t {| :statedBy :bob ; :recorded "2021-07-07"^^xsd:date |} .
-      -->
-    </pre>
-
-    <p>Alternatively, the SPARQL style directive can be used
-      (note that there is no trailing <a href="#cp-full-stop"><code title="full stop">.</code></a>):</p>
-
     <pre id="ex-sparql-version-decl"
          class="example turtle" data-transform="updateExample"
-         title="SPARQL-style version announcement">
+         title="Version announcement">
       <!--
       VERSION "1.2"
       PREFIX : <http://example.com/>
@@ -337,16 +324,15 @@
       -->
     </pre>
 
-    <p>The surrounding
-      quotation marks (<a href="#cp-quotation-mark"><code title="quotation mark">&quot;</code></a>)
-      may also be omitted.</p>
+    <p>Alternatively, the old-style directive can be used
+      (note that there is no trailing <a href="#cp-full-stop"><code title="full stop">.</code></a>):</p>
 
-    <pre id="ex-quoteless-version-decl"
+    <pre id="ex-version-decl"
          class="example turtle" data-transform="updateExample"
-         title="Quoteless version announcement">
+         title="Old-style version announcement">
       <!--
-      VERSION 1.2
-      PREFIX : <http://example.com/>
+      @version "1.2" .
+      @prefix : <http://example.com/> .
       :a :name "Alice" ~ :t {| :statedBy :bob ; :recorded "2021-07-07"^^xsd:date |} .
       -->
     </pre>
@@ -428,25 +414,25 @@
         <code>&lt;http://www.perceive.net/schemas/relationship/enemyOf></code></li>
     </ol>
 
-    <p>This can be written using either the original Turtle syntax for prefix declarations:</p>
-
-    <pre id="ex-prefix-decl"
-         class="example turtle" data-transform="updateExample"
-         title="Original syntax for prefix declarations">
-      <!--
-      @prefix somePrefix: <http://www.perceive.net/schemas/relationship/> .
-
-      <http://example.org/#green-goblin> somePrefix:enemyOf <http://example.org/#spiderman> .
-      -->
-    </pre>
-
-    <p>or SPARQL's syntax for prefix declarations:</p>
+    <p>This can be written using either the SPARQL-style syntax for prefix declarations:</p>
 
     <pre id="ex-sparql-prefix-decl"
          class="example turtle" data-transform="updateExample"
          title="SPARQL syntax for prefix declarations">
       <!--
       PREFIX somePrefix: <http://www.perceive.net/schemas/relationship/>
+
+      <http://example.org/#green-goblin> somePrefix:enemyOf <http://example.org/#spiderman> .
+      -->
+    </pre>
+
+    <p>or original Turtle syntax for prefix declarations:</p>
+
+    <pre id="ex-prefix-decl"
+         class="example turtle" data-transform="updateExample"
+         title="Original syntax for prefix declarations">
+      <!--
+      @prefix somePrefix: <http://www.perceive.net/schemas/relationship/> .
 
       <http://example.org/#green-goblin> somePrefix:enemyOf <http://example.org/#spiderman> .
       -->
