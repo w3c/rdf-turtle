@@ -357,7 +357,10 @@
       or <a href="#grammar-production-version"><code>@version</code></a>
       directives early in the document.
       This allows parsers that do not support these features to detect
-      the presense of such features early.
+      the presense of such features early, and potentially 
+      inform the user, giving them an opportunity to stop the job
+      or otherwise act on the fact that some amount of the input data 
+      will not be processed as desired.
     </p>
 
     <p class="note">Version numbers other than "1.2" are not defined by
@@ -2328,7 +2331,7 @@
       Note that this also includes a provision that `@version` does not match
       <a href="#grammar-production-LANG_DIR" class="type langDir"><code>LANG_DIR</code></a>;
       the previous version of the grammar would allow such a match,
-      but would result in a literal with a non-well-formed language tag accroding to [[BCP47]], and form an invalid literal.</li>
+      but would result in a literal with an ill-formed language tag according to [[BCP47]], and form an invalid literal.</li>
   </ul>
 </section>
 
