@@ -350,6 +350,16 @@
       -->
     </pre>
 
+    <p class="note">When using RDF 1.2-specific features, such as
+      <a data-cite="RDF12-CONCEPTS#dfn-base-direction">initial text direction</a>,
+      the specific RDF version should be announced using
+      either the <a href="#grammar-production-sparqlVersion"><code>VERSION</code></a>
+      or <a href="#grammar-production-version"><code>@version</code></a>
+      directives early in the document.
+      This allows parsers that do not support these features to detect
+      the presense of such features early.
+    </p>
+
     <p class="note">Version numbers other than "1.2" are not defined by
       this specification.
       Processors may treat this as an error or warning.</p>
@@ -536,16 +546,6 @@
         an <a href="#cp-at-sign"><code title="at sign">@</code></a>
         and may be followed by an <a data-cite="RDF12-CONCEPTS#dfn-base-direction">initial text direction</a>
         separated from the language tag by <a href="#cp-hyphen-hyphen"><code>--</code></a>.</p>
-
-      <p class="note">When using RDF 1.2-specific features, such as
-        <a data-cite="RDF12-CONCEPTS#dfn-base-direction">initial text direction</a>,
-        the specific RDF version should be announced using
-        either the <a href="#grammar-production-sparqlVersion"><code>VERSION</code></a>
-        or <a href="#grammar-production-version"><code>@version</code></a>
-        directives early in the document.
-        This allows parsers that do not support these features to detect
-        the presense of such features early.
-      </p>
 
       <p>If there is no language tag, there may be a <a data-cite="RDF12-CONCEPTS#dfn-datatype-iri">datatype IRI</a>,
         preceded by <a href="#cp-double-circumflex"><code>^^</code></a>.
@@ -870,16 +870,6 @@
       may be nested.
      </p>
 
-    <p class="note">When using RDF 1.2-specific features, such as
-      <a data-cite="RDF12-CONCEPTS#dfn-triple-term">triple terms</a>,
-      the specific RDF version should be announced using
-      either the <a href="#grammar-production-sparqlVersion"><code>VERSION</code></a>
-      or <a href="#grammar-production-version"><code>@version</code></a>
-      directives early in the document.
-      This allows parsers that do not support these features to detect
-      the presence of such features early.
-    </p>
-
     <pre id="ex-triple-term" class="example turtle" data-transform="updateExample"
          title="Triple Term">
       <!--
@@ -951,16 +941,6 @@
       or <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank node</a>,
       a fresh RDF <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank node</a> is allocated
       and used to identify this relationship.</p>
-
-    <p class="note">When using RDF 1.2-specific features, such as
-      <a data-cite="RDF12-CONCEPTS#dfn-triple-term">triple terms</a>,
-      the specific RDF version should be announced using
-      either the <a href="#grammar-production-sparqlVersion"><code>VERSION</code></a>
-      or <a href="#grammar-production-version"><code>@version</code></a>
-      directives early in the document.
-      This allows parsers that do not support these features to detect
-      the presence of such features early.
-    </p>
 
     <pre id="ex-reified-triple"
          class="example turtle" data-transform="updateExample"
@@ -1047,16 +1027,6 @@
       <p class="note">The annotation syntax is a syntactic shortcut in Turtle,
         and the RDF Abstract Syntax [[RDF11-CONCEPTS]] does not
         distinguish how the triples were written.</p>
-
-      <p class="note">When using RDF 1.2-specific features, such as
-        <a data-cite="RDF12-CONCEPTS#dfn-triple-term">triple terms</a>,
-        the specific RDF version should be announced using
-        either the <a href="#grammar-production-sparqlVersion"><code>VERSION</code></a>
-        or <a href="#grammar-production-version"><code>@version</code></a>
-        directives early in the document.
-        This allows parsers that do not support these features to detect
-        the presense of such features early.
-      </p>
 
       <pre id="ex-annotated-triple"
            class="example turtle" data-transform="updateExample" 
