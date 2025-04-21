@@ -303,13 +303,13 @@
     <h3>Version Announcement</h3>
 
     <p>The Turtle language has evolved since its origin, and RDF 1.2
-      introduces new features which may confuse non-compliant parsers.
+      adds new syntax.
       RDF 1.2 Turtle introduces the
       <a href="#grammar-production-sparqlVersion"><code>VERSION</code></a> and
       <a href="#grammar-production-version"><code>@version</code></a> directives
       along with an optional `version` <a href="#sec-mediaReg">Media Type parameter</a>.
       When serializing Turtle with new features such as base direction or triple terms,
-      authors can announce the presense of these features using these directives.
+      authors can announce the use of the new syntax forms using these directives.
     </p>
 
     <pre id="ex-version-decl"
@@ -550,7 +550,7 @@
         separated from the language tag by <a href="#cp-hyphen-hyphen"><code>--</code></a>.</p>
 
       <p class="note">When using RDF 1.2-specific features, such as
-        <a data-cite="RDF12-CONCEPTS#dfn-base-direction">base direction</a>,
+        <a data-cite="RDF12-CONCEPTS#dfn-base-direction">initial text direction</a>,
         the specific RDF version should be announced using
         either the <a href="#grammar-production-sparqlVersion"><code>VERSION</code></a>
         or <a href="#grammar-production-version"><code>@version</code></a>
@@ -889,7 +889,7 @@
       or <a href="#grammar-production-version"><code>@version</code></a>
       directives early in the document.
       This allows parsers that do not support these features to detect
-      the presense of such features early.
+      the presence of such features early.
     </p>
 
     <pre id="ex-triple-term" class="example turtle" data-transform="updateExample"
@@ -971,7 +971,7 @@
       or <a href="#grammar-production-version"><code>@version</code></a>
       directives early in the document.
       This allows parsers that do not support these features to detect
-      the presense of such features early.
+      the presence of such features early.
     </p>
 
     <pre id="ex-reified-triple"
