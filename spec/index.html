@@ -7,6 +7,16 @@
   <script src="./common/local-biblio.js" class="remove"></script>
   <script src="./common/fixup.js" class="remove"></script>
   <script class='remove'>
+    // Use fragment identifier of test as name.
+    function data_test_display() {
+        const test_references = document.querySelectorAll('details.respec-tests-details a');
+        for( const a of test_references ) {
+            const href = a.href;
+            const test_reference = href.split('#')[1];
+            a.textContent = test_reference;
+        }
+    }
+
     var respecConfig = {
       localBiblio:          localBibliography,
       specStatus:           "ED",
@@ -44,6 +54,8 @@
       ],
 
       xref: [ "RDF12-CONCEPTS", "I18N-GLOSSARY" ],
+      postProcess: [data_test_display],
+
       github: "https://github.com/w3c/rdf-turtle/",
       group:           "rdf-star",
       doJsonLd:     true,
@@ -1268,15 +1280,27 @@
   <section id="sec-grammar-ws">
     <h3>White Space</h3>
 
-    <p>White space (production <a href="#grammar-production-WS"><code>WS</code></a>) is used to separate two terminals which would otherwise be (mis-)recognized as one terminal. Rule names below in capitals indicate where white space is significant; these form a possible choice of terminals for constructing a Turtle parser.</p>
+    <p id="ws-tests1" data-tests="
+      ../../rdf11/rdf-turtle/index.html#turtle-eval-struct-02,
+      ../../rdf11/rdf-turtle/index.html#turtle-subm-23,
+      ../../rdf11/rdf-turtle/index.html#turtle-subm-24">
+      White space (production <a href="#grammar-production-WS"><code>WS</code></a>) is used to separate two terminals which would otherwise be (mis-)recognized as one terminal. Rule names below in capitals indicate where white space is significant; these form a possible choice of terminals for constructing a Turtle parser.</p>
 
-    <p>White space is significant in the production <a href="#grammar-production-String"><code>String</code></a>.</p>
+    <p id="ws-tests2" data-tests="
+      ../../rdf11/rdf-turtle/index.html#turtle-syntax-string-08,
+      ../../rdf11/rdf-turtle/index.html#turtle-syntax-string-09,
+      ../../rdf11/rdf-turtle/index.html#turtle-syntax-string-10,
+      ../../rdf11/rdf-turtle/index.html#turtle-syntax-string-11">
+      White space is significant in the production <a href="#grammar-production-String"><code>String</code></a>.</p>
   </section>
 
   <section id="sec-grammar-comments">
     <h3>Comments</h3>
 
-    <p>Comments in Turtle start with a <a href="#cp-number-sign"><code title="number sign">#</code></a> outside an
+    <p id="comments-tests1" data-tests="
+      ../../rdf11/rdf-turtle/index.html#comment_following_localName,
+      ../../rdf11/rdf-turtle/index.html#comment_following_PNAME_NS">
+      Comments in Turtle start with a <a href="#cp-number-sign"><code title="number sign">#</code></a> outside an
     <a href="#grammar-production-IRIREF"                          ><code>IRIREF</code>                          </a>,
     <a href="#grammar-production-STRING_LITERAL_SINGLE_QUOTE"     ><code>STRING_LITERAL_SINGLE_QUOTE</code>     </a>,
     <a href="#grammar-production-STRING_LITERAL_QUOTE"            ><code>STRING_LITERAL_QUOTE</code>            </a>,
@@ -1291,7 +1315,11 @@
 
   <section id="sec-iri-references">
     <h3>IRI References</h3>
-    <p>
+    <p id="iri-tests1" data-tests="
+      ../../rdf11/rdf-turtle/index.html#IRI-resolution-01,
+      ../../rdf11/rdf-turtle/index.html#IRI-resolution-02,
+      ../../rdf11/rdf-turtle/index.html#IRI-resolution-03,
+      ../../rdf11/rdf-turtle/index.html#IRI-resolution-04">
       <a data-cite="RDF12-CONCEPTS#dfn-relative-iri">Relative IRI references</a> are resolved with base IRIs
       as per [[[RFC3986]]] [[RFC3986]] using only the basic algorithm in section 5.2.
       Neither Syntax-Based Normalization nor Scheme-Based Normalization
@@ -1299,7 +1327,13 @@
       Characters additionally allowed in IRI references are treated in the same way that
       unreserved characters are treated in URI references, per section 6.5 of [[[RFC3987]]] [[RFC3987]].
     </p>
-    <p>
+    <p id="iri-tests2" data-tests="
+      ../../rdf11/rdf-turtle/index.html#old_style_base,
+      ../../rdf11/rdf-turtle/index.html#SPARQL_style_base,
+      ../../rdf11/rdf-turtle/index.html#turtle-syntax-base-01,
+      ../../rdf11/rdf-turtle/index.html#turtle-syntax-base-02,
+      ../../rdf11/rdf-turtle/index.html#turtle-syntax-base-03,
+      ../../rdf11/rdf-turtle/index.html#turtle-syntax-base-04">
       The <code>@base</code> or <a href="#grammar-production-sparqlBase"><code>BASE</code></a> directive
       defines the Base IRI used to resolve <a data-cite="RDF12-CONCEPTS#dfn-relative-iri">relative IRI references</a>
       per [[RFC3986]] <a data-cite="RFC3986#section-5.1.1">section 5.1.1, "Base URI Embedded in Content"</a>.
@@ -1323,11 +1357,25 @@
 
     <ul>
       <li>
-        <p>
+        <p id="numeric-escape-tests1" data-tests="
+          ../../rdf11/rdf-turtle/index.html#IRI_with_four_digit_numeric_escape,
+          ../../rdf11/rdf-turtle/index.html#IRI_with_eight_digit_numeric_escape,
+          ../../rdf11/rdf-turtle/index.html#literal_with_numeric_escape4,
+          ../../rdf11/rdf-turtle/index.html#literal_with_numeric_escape8">
           A <dfn>numeric escape sequence</dfn> represents the value of
           a <a data-cite="I18N-GLOSSARY#dfn-code-point">Unicode code point</a>.
         </p>
-        <p>
+        <p id="numeric-escape-tests2" data-tests="
+          ../../rdf11/rdf-turtle/index.html#turtle-syntax-bad-numeric-escape-01,
+          ../../rdf11/rdf-turtle/index.html#turtle-syntax-bad-numeric-escape-02,
+          ../../rdf11/rdf-turtle/index.html#turtle-syntax-bad-numeric-escape-03,
+          ../../rdf11/rdf-turtle/index.html#turtle-syntax-bad-numeric-escape-04,
+          ../../rdf11/rdf-turtle/index.html#turtle-syntax-bad-numeric-escape-05,
+          ../../rdf11/rdf-turtle/index.html#turtle-syntax-bad-numeric-escape-06,
+          ../../rdf11/rdf-turtle/index.html#turtle-syntax-bad-numeric-escape-07,
+          ../../rdf11/rdf-turtle/index.html#turtle-syntax-bad-numeric-escape-08,
+          ../../rdf11/rdf-turtle/index.html#turtle-syntax-bad-numeric-escape-09,
+          ../../rdf11/rdf-turtle/index.html#turtle-syntax-bad-numeric-escape-10">
           A <a>numeric escape sequence</a> MUST NOT produce a code point value
           in the range <code class="codepoint">U+D800</code> to <code class="codepoint">U+DFFF</code>,
           which is the range for 
@@ -1375,7 +1423,14 @@
       </li>
 
       <li>
-        <p>
+        <p id="echar-tests" data-tests="
+          ../../rdf11/rdf-turtle/index.html#literal_with_escaped_CHARACTER_TABULATION,
+          ../../rdf11/rdf-turtle/index.html#literal_with_escaped_BACKSPACE,
+          ../../rdf11/rdf-turtle/index.html#literal_with_escaped_LINE_FEED,
+          ../../rdf11/rdf-turtle/index.html#literal_with_escaped_CARRIAGE_RETURN,
+          ../../rdf11/rdf-turtle/index.html#literal_with_escaped_FORM_FEED,
+          ../../rdf11/rdf-turtle/index.html#LITERAL_LONG2_with_1_squote,
+          ../../rdf11/rdf-turtle/index.html#literal_with_REVERSE_SOLIDUS">
           A <dfn>string escape sequence</dfn> represents a character traditionally escaped in string literals:
         </p>
         <table id="tab-echar" class="separated">
@@ -1431,7 +1486,8 @@
       </li>
 
       <li> 
-        <p>
+        <p id="reserved-char-tests" data-tests="
+          ../../rdf11/rdf-turtle/index.html#reserved_escaped_localName">
           A <dfn>reserved character escape sequence</dfn> consists of a
           <a href="#cp-backslash"><code title="backslash">\</code></a>
           followed by one of these characters <code>~.-!$&amp;'()*+,;=/?#@%_</code>,
@@ -1952,13 +2008,32 @@
 
     <h4 id="reifier" style="padding-bottom:0; margin-bottom:0;"><span>Reifiers</span></h4>
 
-    <p>Beginning the <a href="#grammar-production-reifier"><code>reifier</code></a> production,
+    <p data-id="reifier-tests" data-tests="
+      syntax/index.html#turtle12-ann-5,
+      syntax/index.html#turtle12-ann-6,
+      syntax/index.html#turtle12-ann-7,
+      syntax/index.html#turtle12-ann-8,
+      eval/index.html#turtle12-annotation-06,
+      eval/index.html#turtle12-annotation-08,
+      eval/index.html#turtle12-annotation-09,
+      eval/index.html#turtle12-annotation-11,
+      eval/index.html#turtle12-annotation-12">
+      Beginning the <a href="#grammar-production-reifier"><code>reifier</code></a> production,
       the |curReifier| is taken from the <a href="#handle-reifier"><code>reifier</code></a> term constructor.
       Then yield the RDF triple |curReifier| <code>rdf:reifies</code> |curTripleTerm|.</p>
 
     <h4 id="reifiedTriple" style="padding-bottom:0; margin-bottom:0;"><span>Reified Triples</span></h4>
 
-    <p>Beginning the <a href="#grammar-production-reifiedTriple"><code>reifiedTriple</code></a> production
+    <p id="reifiedTriple-tests" data-tests="
+      eval/index.html#turtle12-rt-01,
+      eval/index.html#turtle12-rt-02,
+      eval/index.html#turtle12-rt-03,
+      eval/index.html#turtle12-rt-04,
+      eval/index.html#turtle12-rt-05,
+      eval/index.html#turtle12-rt-06,
+      eval/index.html#turtle12-rt-07,
+      eval/index.html#turtle12-rt-08">
+      Beginning the <a href="#grammar-production-reifiedTriple"><code>reifiedTriple</code></a> production
       records the |curTripleTerm|.
       A new <a href="#grammar-production-tripleTerm"><code>tripleTerm</code></a> instance |curTripleTerm|
       is created using the
@@ -1975,7 +2050,27 @@
 
     <h4 id="annotation" style="padding-bottom:0; margin-bottom:0;"><span>Annotations</span></h4>
 
-    <p>Beginning the <a href="#grammar-production-annotation"><code>annotation</code></a> production
+    <p id="annotations-test" data-tests="
+      syntax/index.html#turtle12-ann-1,
+      syntax/index.html#turtle12-ann-2,
+      syntax/index.html#turtle12-ann-3,
+      syntax/index.html#turtle12-ann-4,
+      syntax/index.html#turtle12-ann-5,
+      syntax/index.html#turtle12-ann-6,
+      syntax/index.html#turtle12-ann-7,
+      syntax/index.html#turtle12-ann-8,
+      eval/index.html#turtle12-annotation-01,
+      eval/index.html#turtle12-annotation-02,
+      eval/index.html#turtle12-annotation-03,
+      eval/index.html#turtle12-annotation-04,
+      eval/index.html#turtle12-annotation-05,
+      eval/index.html#turtle12-annotation-06,
+      eval/index.html#turtle12-annotation-08,
+      eval/index.html#turtle12-annotation-09,
+      eval/index.html#turtle12-annotation-10,
+      eval/index.html#turtle12-annotation-11,
+      eval/index.html#turtle12-annotation-12">
+      Beginning the <a href="#grammar-production-annotation"><code>annotation</code></a> production
       records the |curSubject| and |curPredicate|.
       A new <a href="#grammar-production-tripleTerm"><code>tripleTerm</code></a> instance |curTripleTerm|
       is created using the |curSubject| |curPredicate| |curObject|,
@@ -1985,7 +2080,25 @@
 
     <h4 id="annotationBlock" style="padding-bottom:0; margin-bottom:0;"><span>Annotation Blocks</span></h4>
 
-    <p>Beginning the <a href="#grammar-production-annotationBlock"><code>annotationBlock</code></a> production records the |curTripleTerm|.
+    <p id="annotationBlock-tests" data-tests="
+      syntax/index.html#turtle12-ann-1,
+      syntax/index.html#turtle12-ann-2,
+      syntax/index.html#turtle12-ann-3,
+      syntax/index.html#turtle12-ann-4,
+      syntax/index.html#turtle12-ann-7,
+      syntax/index.html#turtle12-ann-8,
+      eval/index.html#turtle12-annotation-01,
+      eval/index.html#turtle12-annotation-02,
+      eval/index.html#turtle12-annotation-03,
+      eval/index.html#turtle12-annotation-04,
+      eval/index.html#turtle12-annotation-05,
+      eval/index.html#turtle12-annotation-06,
+      eval/index.html#turtle12-annotation-08,
+      eval/index.html#turtle12-annotation-09,
+      eval/index.html#turtle12-annotation-10,
+      eval/index.html#turtle12-annotation-11,
+      eval/index.html#turtle12-annotation-12">
+      Beginning the <a href="#grammar-production-annotationBlock"><code>annotationBlock</code></a> production records the |curTripleTerm|.
       If the |curReifier| is not set, then it is assigned a fresh RDF <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank node</a>
       and the production yields the RDF triple |curReifier| <code>rdf:reifies</code> |curTripleTerm|.
       The |curSubject| is taken from the |curReifier|
@@ -1998,7 +2111,15 @@
 
     <h4 id="propertyList" style="padding-bottom:0; margin-bottom:0;"><span>Property Lists</span></h4>
 
-    <p style="padding-top:0; margin-top:0;">
+    <p id="propertyList" style="padding-top:0; margin-top:0;" data-tests="
+      ../../rdf11/rdf-turtle/index.html#sole_blankNodePropertyList,
+      ../../rdf11/rdf-turtle/index.html#blankNodePropertyList_as_subject,
+      ../../rdf11/rdf-turtle/index.html#blankNodePropertyList_as_object,
+      ../../rdf11/rdf-turtle/index.html#blankNodePropertyList_as_object_containing_objectList,
+      ../../rdf11/rdf-turtle/index.html#blankNodePropertyList_as_object_containing_objectList_of_two_objects,
+      ../../rdf11/rdf-turtle/index.html#blankNodePropertyList_with_multiple_triples,
+      ../../rdf11/rdf-turtle/index.html#nested_blankNodePropertyLists,
+      ../../rdf11/rdf-turtle/index.html#predicateObjectList_with_blankNodePropertyList_as_object">
       Beginning the <a href="#grammar-production-blankNodePropertyList"><code>blankNodePropertyList</code></a>
       production records the |curSubject| and |curPredicate|,
       and sets the |curSubject| to a novel <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank node</a> |B|.
@@ -2010,7 +2131,12 @@
 
     <h4 id="collection" style="padding-bottom:0; margin-bottom:0;"><span>Collections</span></h4>
 
-    <p style="padding-top:0; margin-top:0;">
+    <p id="collection-tests" style="padding-top:0; margin-top:0;" data-tests="
+      ../../rdf11/rdf-turtle/index.html#collection_subject,
+      ../../rdf11/rdf-turtle/index.html#collection_object,
+      ../../rdf11/rdf-turtle/index.html#empty_collection,
+      ../../rdf11/rdf-turtle/index.html#nested_collection,
+      ../../rdf11/rdf-turtle/index.html#blankNodePropertyList_containing_collection">
       Beginning the <a href="#grammar-production-collection"><code>collection</code></a> production records the |curSubject| and |curPredicate|.
       Each <a href="#grammar-production-object"><code>object</code></a> in the <a href="#grammar-production-collection"><code>collection</code></a> production has |curSubject| set to a novel <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank node</a> |B| and |curPredicate| set to <code>rdf:first</code>.
       For each object <var>object<sub>n</sub></var> after the first produces a triple:<span class="ntriple"><var>object<sub>n-1</sub></var> <code>rdf:rest</code> <var>object<sub>n</sub></var> .</span>
