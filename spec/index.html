@@ -1915,8 +1915,9 @@
       <li id="curVersion">`xsd:string` |curVersion| –
         The RDF version used for parsing the document into <a data-cite="RDF12-CONCEPTS#dfn-rdf-triple">Triples</a>.
         If specified as part of a <a href="#sec-mediaReg">Media Type</a>, the default value for |curVersion| is taken from the `version` parameter.
-        The only defined value is `"1.2"`. Parser behavior for other version values is undefined.
-        This specification does not define behavior if different versions are provided for |curVersion|.
+        Acceptable values for `version` are defined in <a data-cite="RDF12-CONCEPTSE#defined-version-labels">2.1 Version Lables</a> in [[RDF12-CONCEPTS]].
+        Parser behavior for version values is undefined and MAY be used
+        to signal errors or warnings.
       </li>
     </ul>
 
