@@ -345,12 +345,13 @@
       <!--
       VERSION "1.2"
       PREFIX : <http://example.com/>
+      PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
       :a :name "Alice" ~ :t {| :statedBy :bob ; :recorded "2021-07-07"^^xsd:date |} .
       -->
     </pre>
 
     <p>Alternatively, the old-style directive can be used
-      (note that there is no trailing &quot;<a href="#cp-full-stop"><code title="full stop">.</code></a>&quot;):</p>
+      (note that there is a trailing &quot;<a href="#cp-full-stop"><code title="full stop">.</code></a>&quot;):</p>
 
     <pre id="ex-version-decl"
          class="example turtle" data-transform="updateExample"
@@ -358,6 +359,7 @@
       <!--
       @version "1.2" .
       @prefix : <http://example.com/> .
+      @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
       :a :name "Alice" ~ :t {| :statedBy :bob ; :recorded "2021-07-07"^^xsd:date |} .
       -->
     </pre>
@@ -1062,16 +1064,18 @@
         <!--
         VERSION     "1.2"
         PREFIX : <http://example.com/>
+        PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
         :a :name "Alice" ~ :t {| :statedBy :bob ; :recorded "2021-07-07"^^xsd:date |} .
           -->
       </pre>
       <p>is the same set of triples as:</p>
       <pre id="ex-annotated-triple-expanded-to-reifiers"
-           class="nohighlight example" data-transform="updateExample"
+           class="example turtle" data-transform="updateExample"
            title="Annotated Triple expanded to Reifiers">
         <!--
         VERSION     "1.2"
         PREFIX : <http://example.com/>
+        PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
         :a :name "Alice" .
         << :a :name "Alice" ~ :t >> :statedBy :bob ;
                                     :recorded "2021-07-07"^^xsd:date .
@@ -1083,12 +1087,13 @@
 
       <p>Fully expanding to use <a data-cite="RDF12-CONCEPTS#dfn-triple-term">triple terms</a>, instead of reifiers, results in the following:</p>
       <pre id="ex-annotated-triple-expanded-to-triple-terms"
-           class="nohighlight example" data-transform="updateExample"
+           class="example turtle" data-transform="updateExample"
            title="Annotated Triple expanded to Triple Terms">
         <!--
         VERSION     "1.2"
         PREFIX : <http://example.com/>
         PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+        PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
         :a :name "Alice" .
         :t rdf:reifies <<( :a :name "Alice" )>> .
         :t :statedBy :bob .
