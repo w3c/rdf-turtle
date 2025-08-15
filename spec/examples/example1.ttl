@@ -3,7 +3,7 @@ PREFIX dc: <http://purl.org/dc/elements/1.1/>
 PREFIX ex: <http://example.org/stuff/1.0/>
 
 <http://www.w3.org/TR/rdf-syntax-grammar>
-  dc:title "RDF/XML Syntax Specification (Revised)" ;
+  dc:title "RDF 1.2 XML Syntax" ;
   ex:editor [
     ex:fullname "Dave Beckett";
     ex:homePage <http://purl.org/net/dajobe/>
