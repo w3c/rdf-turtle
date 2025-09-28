@@ -3,6 +3,7 @@
 <head>
   <title>RDF 1.2 Turtle</title>
   <meta charset="utf-8"/>
+  <meta name="color-scheme" content="light dark" />
   <script src="https://www.w3.org/Tools/respec/respec-w3c" class="remove"></script>
   <script src="./common/local-biblio.js" class="remove"></script>
   <script src="./common/fixup.js" class="remove"></script>
@@ -64,13 +65,14 @@
   </script>
 
   <style>
+
     /* Style Turtle script blocks to be visable */
     pre.example script {
         display:block;
     }
     .separated { border-collapse:collapse; }
-    .separated thead tr th { border:1px solid black; padding: .2em; min-width: 10vw }
-    .separated tbody tr td { border:1px solid black; text-align: center; min-width: 10vw }
+    .separated thead tr th { border:1px solid; padding: .2em; min-width: 10vw }
+    .separated tbody tr td { border:1px solid; text-align: center; min-width: 10vw }
     .separated tbody tr td.r { text-align: right; padding: .5em; }
     .separated tbody tr td:first-child,
     .separated tbody tr td:last-child {text-align: left; padding: .5em; }
@@ -102,14 +104,19 @@
     @media (max-width: 767px) {
       table { word-break: break-all; }
       .separated thead tr th { border:1px solid black; padding: .2em; min-width: 10vw }
+      .separated tbody tr td:first-child,
+      .separated tbody tr th:first-child {max-width: 220px; overflow-wrap: anywhere;}
       .separated thead tr th:nth-child(2) { word-break: break-all; }
       .separated tbody tr td:nth-child(2) {padding: 3px 2px;}
       .separated tbody tr td:nth-child(3) {padding: 3px 2px;}
       .separated tbody tr td { border:1px solid black; text-align: center; min-width: 10vw }
+
+      /*body.darkmode .separated thead tr th { border:1px solid white; }
+      body.darkmode .separated tbody tr td { border:1px solid white; }*/
+
       table { word-break: normal; overflow-wrap: anywhere; }
       table.ex, .ex th, .ex td { border: none; padding: 0; }
       table.ex { font-size: 1.4vw; }
-      .separated tbody tr td:first-child, .separated tbody tr th:first-child {max-width: 220px; overflow-wrap: anywhere;}
 
     }
     .ex th { text-align: center; }
@@ -118,6 +125,7 @@
     table.simple th, table.simple td  { border:1px solid black; padding:0.2em; }
 
     table.cp-definitions { border-collapse:collapse; background-color: #DDDDFF}
+    body.darkmode table.cp-definitions { background-color: black}
 
     table.cp-definitions,
     table.cp-definitions th,
