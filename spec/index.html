@@ -412,9 +412,8 @@
       will not be processed as desired.
     </p>
 
-    <p class="note">Version numbers other than "1.2" are not defined by
-      this specification.
-      Processors may treat this as an error or warning.</p>
+    <p class="note">Acceptable version numbers are the ones defined in <a data-cite="RDF12-CONCEPTS#defined-version-labels">2.1 Version Labels</a> in [[RDF12-CONCEPTS]].
+      Processors may treat other version numbers as an error or warning.</p>
   </section>
 
   <section id="sec-iri">
@@ -1951,11 +1950,12 @@
       <li id="curVersion">`xsd:string` |curVersion| –
         The RDF version used for parsing the document into <a data-cite="RDF12-CONCEPTS#dfn-rdf-triple">Triples</a>.
         If specified as part of a <a href="#sec-mediaReg">Media Type</a>, the default value for |curVersion| is taken from the `version` parameter.
-        Acceptable values for `version` are defined in <a data-cite="RDF12-CONCEPTS#defined-version-labels">2.1 Version Labels</a> in [[RDF12-CONCEPTS]].
+        Acceptable values for |curVersion| are defined in <a data-cite="RDF12-CONCEPTS#defined-version-labels">2.1 Version Labels</a> in [[RDF12-CONCEPTS]].
         The version announcement is only a hint;
         this specification does not mandate any parser behavior based on |curVersion|,
         but a parser MAY signal an error or a warning
-        when it encounters a feature that does not match the value of |curVersion|.
+        when it encounters a feature that does not match the value of |curVersion|,
+        or an unaccaptable value for |curVersion|.
       </li>
     </ul>
 
