@@ -399,7 +399,7 @@
       -->
     </pre>
 
-    <p class="note">When using RDF 1.2-specific features, such as
+    <p>When using RDF 1.2-specific features, such as
       <a data-cite="RDF12-CONCEPTS#dfn-base-direction">initial text direction</a>,
       the specific RDF version should be announced using
       either <a href="#grammar-production-sparqlVersion"><code>VERSION</code></a>
@@ -412,8 +412,23 @@
       will not be processed as desired.
     </p>
 
-    <p class="note">Acceptable version numbers are the ones defined in <a data-cite="RDF12-CONCEPTS#defined-version-labels">2.1 Version Labels</a> in [[RDF12-CONCEPTS]].
-      Processors may treat other version numbers as an error or warning.</p>
+    <p>Multiple version announcement directives may appear in a Turtle document, each of them applying to the part of the document following it and until the next one or the end of the document.
+    </p>
+
+    <p>
+     In the absence of a version announcement directive, the version specified as part of the <a href="#sec-mediaReg">Media Type</a> is considered, if any.
+     In the absence of any version information, a sensible default is `"1.1"`, to maximize compatibility with the previous version of Turtle [[TURTLE]].
+      In any case, the version announcement is merely a hint;
+      parsers are not required to reject features that are outside the announced version (but could signal them with a warning).
+    </p>
+
+    <div class="note">Acceptable version numbers are the ones defined in <a data-cite="RDF12-CONCEPTS#defined-version-labels">2.1 Version Labels</a> in [[RDF12-CONCEPTS]].
+      Processors may treat other version numbers as an error or warning.
+
+      <p>
+        While `"1.1"` is an acceptable version label, its use in a `VERSION` or `@version` directive is discouraged, as it would needlessly cause Turtle 1.1 parsers to fail.
+      </p>
+    </div>
   </section>
 
   <section id="sec-iri">
