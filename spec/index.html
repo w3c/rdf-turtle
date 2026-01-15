@@ -412,17 +412,22 @@
       will not be processed as desired.
     </p>
 
-    <p>Multiple version announcement directives may appear in a Turtle document, each of them applying to the part of the document following it and until the next one or the end of the document.
+    <p>Multiple version directives may appear in a Turtle document.
+    The directive applies to the part of the document following the directive,
+    until another directive is encountered or the end of the document is reached.
     </p>
 
     <p>
-     In the absence of a version announcement directive, the version specified as part of the <a href="#sec-mediaReg">Media Type</a> is considered, if any.
+     In the absence of a current version directive, any version specified as part of the <a href="#sec-mediaReg">Media Type</a> is considered.
      In the absence of any version information, a sensible default is `"1.1"`, to maximize compatibility with the previous version of Turtle [[TURTLE]].
       In any case, the version announcement is merely a hint;
-      parsers are not required to reject features that are outside the announced version (but could signal them with a warning).
+      parsers are not required to reject features that are outside the announced version
+      (but could signal them with a warning).
     </p>
 
-    <div class="note">Acceptable version numbers are the ones defined in <a data-cite="RDF12-CONCEPTS#defined-version-labels">2.1 Version Labels</a> in [[RDF12-CONCEPTS]].
+    <div class="note">Acceptable version numbers are the ones defined in
+      <a data-cite="RDF12-CONCEPTS#defined-version-labels">2.1 Version Labels</a>
+      in [[RDF12-CONCEPTS]].
       Processors may treat other version numbers as an error or warning.
 
       <p>
