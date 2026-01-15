@@ -425,13 +425,13 @@
       (but could signal them with a warning).
     </p>
 
-    <div class="note">Acceptable version numbers are the ones defined in
-      <a data-cite="RDF12-CONCEPTS#defined-version-labels">2.1 Version Labels</a>
-      in [[RDF12-CONCEPTS]].
-      Processors may treat other version numbers as an error or warning.
-
+    <div class="note">Version labels are defined in [[[RDF12-CONCEPTS]]] section
+      <a data-cite="RDF12-CONCEPTS#defined-version-labels">2.1 Version Labels</a>.
+      Processors may treat unrecognized labels as an error or as a warning.
       <p>
-        While `"1.1"` is an acceptable version label, its use in a `VERSION` or `@version` directive is discouraged, as it would needlessly cause Turtle 1.1 parsers to fail.
+        While `"1.1"` is an acceptable version label,
+        its use in a `VERSION` or `@version` directive is discouraged,
+        as it would needlessly cause Turtle 1.1 parsers to fail.
       </p>
     </div>
   </section>
