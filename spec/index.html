@@ -399,7 +399,7 @@
       -->
     </pre>
 
-    <p class="note">When using RDF 1.2-specific features, such as
+    <p>When using RDF 1.2-specific features, such as
       <a data-cite="RDF12-CONCEPTS#dfn-base-direction">initial text direction</a>,
       the specific RDF version should be announced using
       either <a href="#grammar-production-sparqlVersion"><code>VERSION</code></a>
@@ -412,9 +412,28 @@
       will not be processed as desired.
     </p>
 
-    <p class="note">Version numbers other than "1.2" are not defined by
-      this specification.
-      Processors may treat this as an error or warning.</p>
+    <p>Multiple version directives may appear in a Turtle document.
+    The directive applies to the part of the document following the directive,
+    until another directive is encountered or the end of the document is reached.
+    </p>
+
+    <p>
+     In the absence of a current version directive, any version specified as part of the <a href="#sec-mediaReg">Media Type</a> is considered.
+     In the absence of any version information, a sensible default is `"1.1"`, to maximize compatibility with the previous version of Turtle [[TURTLE]].
+      In any case, the version announcement is merely a hint;
+      parsers are not required to reject features that are outside the announced version
+      (but could signal them with a warning).
+    </p>
+
+    <div class="note">Version labels are defined in [[[RDF12-CONCEPTS]]] section
+      <a data-cite="RDF12-CONCEPTS#defined-version-labels">2.1 Version Labels</a>.
+      Processors may treat unrecognized labels as an error or as a warning.
+      <p>
+        While `"1.1"` is an acceptable version label,
+        its use in a `VERSION` or `@version` directive is discouraged,
+        as it would needlessly cause Turtle 1.1 parsers to fail.
+      </p>
+    </div>
   </section>
 
   <section id="sec-iri">
@@ -1951,11 +1970,12 @@
       <li id="curVersion">`xsd:string` |curVersion| –
         The RDF version used for parsing the document into <a data-cite="RDF12-CONCEPTS#dfn-rdf-triple">Triples</a>.
         If specified as part of a <a href="#sec-mediaReg">Media Type</a>, the default value for |curVersion| is taken from the `version` parameter.
-        Acceptable values for `version` are defined in <a data-cite="RDF12-CONCEPTS#defined-version-labels">2.1 Version Labels</a> in [[RDF12-CONCEPTS]].
+        Acceptable values for |curVersion| are defined in <a data-cite="RDF12-CONCEPTS#defined-version-labels">2.1 Version Labels</a> in [[RDF12-CONCEPTS]].
         The version announcement is only a hint;
         this specification does not mandate any parser behavior based on |curVersion|,
         but a parser MAY signal an error or a warning
-        when it encounters a feature that does not match the value of |curVersion|.
+        when it encounters a feature that does not match the value of |curVersion|,
+        or an unaccaptable value for |curVersion|.
       </li>
     </ul>
 
