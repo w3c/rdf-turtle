@@ -435,6 +435,60 @@
       </p>
     </div>
 
+    <section id="sec-version-conneg">
+      <h4>Syntax Version and Content Negotiation</h4>
+
+      <p>Just as HTTP servers can announce the syntax version of Turtle content
+        provided, HTTP clients can use the `version` media type parameter in
+        the `Accept` header, for the purpose of
+        <a data-cite="RFC9110#section-12.5.1">Content Negotiation</a>,
+        as follows:</p>
+      <pre id="ex-http-version-request"
+          class="example http" data-transform="updateExample"
+          title="HTTP content negotation for Turtle using version parameter">
+        <!--
+        GET /document HTTP/1.1
+        Host: example.com
+        Accept: text/turtle; version=1.2
+        -->
+      </pre>
+
+      <p>Note that the accept header of a client does not have to make use of
+        the `version` media type parameter. A request can simply look like:</p>
+      <pre id="ex-http-versionless-request"
+          class="example http" data-transform="updateExample"
+          title="HTTP content negotation for Turtle without version parameter">
+        <!--
+        GET /document HTTP/1.1
+        Host: example.com
+        Accept: text/turtle
+        -->
+      </pre>
+      <p>This carries no implication about the parsing capabilities of the
+        client. However, since the client doesn't advertise what version of
+        Turtle it is capable of parsing, a server might be conservative
+        here and explicitly serve 1.1 content instead:</p>
+      <pre id="ex-http-version-11-response"
+          class="example http" data-transform="updateExample"
+          title="HTTP response announcing Turtle version 1.1 response">
+        <!--
+        HTTP/1.1 200 OK
+        Content-Type: text/turtle; version=1.1
+        Content-Location: https://example.com/document-basic.ttl
+        -->
+      </pre>
+      <p>Note that while content negotiation follows clear rules, it is a "best
+        available" design, and a server is free to simply serve what it has,
+        without regard for the version parameter. The specific circumstances
+        leading to a conservative response, as above, are beyond the scope of
+        this document to define. Other services might, for example,
+        conditionally serve different syntaxes when the `version` parameter is
+        used in combination with the `q`
+        <a data-cite="RFC9110#section-12.4.2">media type preference</a>
+        parameter, or unconditionally serve Turtle 1.2 syntax.</p>
+
+    </section>
+
   </section>
 
   <section id="sec-iri">
