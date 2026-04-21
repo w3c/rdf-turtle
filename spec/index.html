@@ -389,13 +389,12 @@
     <p>When providing content over HTTP, servers can announce the version
       using the optional `version` <a href="#sec-mediaReg">Media Type parameter</a>:</p>
 
-    <pre id="ex-http-version-decl"
-         class="example turtle" data-transform="updateExample"
-         title="HTTP version announcement">
+    <pre id="ex-http-version-12-response"
+         class="example http" data-transform="updateExample"
+         title="HTTP response announcing Turtle version 1.2 response">
       <!--
-      GET /document.ttl HTTP/1.1
-      Host: example.com
-      Accept: text/turtle; version=1.2
+      HTTP/1.1 200 OK
+      Content-Type: text/turtle; version=1.2
       -->
     </pre>
 
