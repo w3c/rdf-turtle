@@ -1081,17 +1081,29 @@
         <a data-cite="RDF12-CONCEPTS#dfn-subject">subject</a> or
         <a data-cite="RDF12-CONCEPTS#dfn-object">object</a> of additional
         triples and/or <a data-cite="RDF12-CONCEPTS#dfn-triple-term">triple terms</a>.
-        As with a <a href="#grammar-production-reifiedTriple"><code>reifiedTriple</code></a>,
-        the annotation syntax allows the definition of
-        one or more <a>reifiers</a> as either <a data-cite="RDF12-CONCEPTS#dfn-iri">IRIs</a>
-        or <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank nodes</a>,
-        each preceded by a tilde (<a href="#cp-tilde"><code title="tilde">~</code></a>),
-        which precedes the annotation block.
-        If not followed by an annotation block, a <a>reifier</a>
-        is treated like a <a href="#grammar-production-reifiedTriple"><code>reifiedTriple</code></a>
-        without annotations.
+      </p>
+
+      <p>Like a <a href="#grammar-production-reifiedTriple"><code>reifiedTriple</code></a>,
+        the annotation syntax uses a <a>reifier</a>, written as either an
+        <a data-cite="RDF12-CONCEPTS#dfn-iri">IRI</a> or a
+        <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank node</a>,
+        preceded by a tilde (<a href="#cp-tilde"><code title="tilde">~</code></a>),
+        to identify the
+        <a data-cite="RDF12-CONCEPTS#dfn-triple-term">triple term</a> being reified.
+        However, while a
+        <a href="#grammar-production-reifiedTriple"><code>reifiedTriple</code></a>
+        may contain at most one <a>reifier</a>, the annotation syntax may contain
+        any number of <a>reifiers</a>. Each <a>reifier</a> causes a corresponding
+        reifying triple to be produced.
+      </p>
+
+      <p>A <a>reifier</a> may be followed by an annotation block.
+        If a <a>reifier</a> is not followed by an annotation block, it is treated
+        analogously to a
+        <a href="#grammar-production-reifiedTriple"><code>reifiedTriple</code></a>
+        without additional annotations.
         If an annotation block is not immediately preceded by a <a>reifier</a>,
-        an RDF blank node is allocated to serve as the <a>reifier</a> of the
+        a fresh RDF blank node is allocated to serve as the <a>reifier</a> of the
         <a data-cite="RDF12-CONCEPTS#dfn-triple-term">triple term</a>.
       </p>
 
