@@ -1112,50 +1112,162 @@
         distinguish how the triples were written.</p>
 
       <pre id="ex-annotated-triple"
-           class="example turtle" data-transform="updateExample" 
+           class="example turtle" data-transform="updateExample"
            title="Annotated Triple">
-        <!--
-        VERSION     "1.2"
-        PREFIX : <http://example.com/>
-        PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-        :a :name "Alice" ~ :t {| :statedBy :bob ; :recorded "2021-07-07"^^xsd:date |} .
-          -->
+      <!--
+      VERSION     "1.2"
+      PREFIX : <http://example.com/>
+      PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+      :alice :name "Alice" ~ :t {| :statedBy :bob ; :recorded "2021-07-07"^^xsd:date |} .
+      -->
       </pre>
       <p>is the same set of triples as:</p>
       <pre id="ex-annotated-triple-expanded-to-reifiers"
            class="example turtle" data-transform="updateExample"
            title="Annotated Triple expanded to Reifiers">
-        <!--
-        VERSION     "1.2"
-        PREFIX : <http://example.com/>
-        PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-        :a :name "Alice" .
-        << :a :name "Alice" ~ :t >> :statedBy :bob ;
-                                    :recorded "2021-07-07"^^xsd:date .
-         -->
+      <!--
+      VERSION     "1.2"
+      PREFIX : <http://example.com/>
+      PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+      :alice :name "Alice" .
+      << :alice :name "Alice" ~ :t >> :statedBy :bob ;
+                                      :recorded "2021-07-07"^^xsd:date .
+      -->
       </pre>
 
-      <p>and the graph contains three <a data-cite="RDF12-CONCEPTS#dfn-rdf-triple">triples</a>.
-        The <a>reifier</a> is identified by `:t`.</p>
-
-      <p>Fully expanding to use <a data-cite="RDF12-CONCEPTS#dfn-triple-term">triple terms</a>, instead of reifiers, results in the following:</p>
+      <p>Fully expanding to use <a data-cite="RDF12-CONCEPTS#dfn-triple-term">triple terms</a>,
+        instead of reifiers, results in the following:</p>
       <pre id="ex-annotated-triple-expanded-to-triple-terms"
            class="example turtle" data-transform="updateExample"
            title="Annotated Triple expanded to Triple Terms">
-        <!--
-        VERSION     "1.2"
-        PREFIX : <http://example.com/>
-        PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-        PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-        :a :name "Alice" .
-        :t rdf:reifies <<( :a :name "Alice" )>> .
-        :t :statedBy :bob .
-        :t :recorded "2021-07-07"^^xsd:date .
-         -->
+      <!--
+      VERSION     "1.2"
+      PREFIX : <http://example.com/>
+      PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+      PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+      :alice :name "Alice" .
+      :t rdf:reifies <<( :alice :name "Alice" )>> .
+      :t :statedBy :bob .
+      :t :recorded "2021-07-07"^^xsd:date .
+      -->
       </pre>
 
-      <p class="note">An <a href="#grammar-production-annotation"><code>annotation</code></a> can include any number of <a>reifiers</a>.</p>
-      
+      <p>In the previous example, the graph contains four
+      <a data-cite="RDF12-CONCEPTS#dfn-rdf-triple">triples</a>.
+      The <a>reifier</a> is identified by <code>:t</code>.</p>
+
+      <p>The annotation block may also be used without an explicit
+        <a>reifier</a>. In that case, a fresh RDF blank node is allocated
+        to serve as the <a>reifier</a> of the
+        <a data-cite="RDF12-CONCEPTS#dfn-triple-term">triple term</a>.</p>
+
+      <pre id="ex-annotated-triple-implicit-reifier"
+           class="example turtle" data-transform="updateExample"
+           title="Annotated Triple with an implicit Reifier">
+      <!--
+      VERSION     "1.2"
+      PREFIX : <http://example.com/>
+      PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+      :alice :name "Alice" {| :statedBy :bob ; :recorded "2021-07-07"^^xsd:date |} .
+      -->
+      </pre>
+
+      <p>Fully expanding this example results in the following triples, where
+        <code>_:b0</code> stands for a fresh RDF blank node:</p>
+
+      <pre id="ex-annotated-triple-implicit-reifier-expanded"
+           class="example turtle" data-transform="updateExample"
+           title="Annotated Triple with an implicit Reifier expanded">
+      <!--
+      VERSION     "1.2"
+      PREFIX : <http://example.com/>
+      PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+      PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+      :alice :name "Alice" .
+      _:b0 rdf:reifies <<( :alice :name "Alice" )>> .
+      _:b0 :statedBy :bob .
+      _:b0 :recorded "2021-07-07"^^xsd:date .
+      -->
+      </pre>
+
+      <p>An <a href="#grammar-production-annotation"><code>annotation</code></a>
+        may include any number of annotation blocks. If such blocks are not
+        immediately preceded by explicit <a>reifiers</a>, each block is associated
+        with a fresh RDF blank node allocated as its <a>reifier</a>.</p>
+
+      <pre id="ex-annotated-triple-multiple-implicit-reifiers"
+           class="example turtle" data-transform="updateExample"
+           title="Annotated Triple with multiple implicit Reifiers">
+      <!--
+      VERSION     "1.2"
+      PREFIX : <http://example.com/>
+      PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+      :alice :name "Alice"
+        {| :statedBy :alice ; :recorded "2017-02-01"^^xsd:date |}
+        {| :statedBy :bob ; :recorded "2021-07-07"^^xsd:date |} .
+      -->
+      </pre>
+
+      <p>Fully expanding this example results in the following triples, where
+        <code>_:b0</code> and <code>_:b1</code> stand for fresh RDF blank nodes:</p>
+
+      <pre id="ex-annotated-triple-multiple-implicit-reifiers-expanded"
+           class="example turtle" data-transform="updateExample"
+           title="Annotated Triple with multiple implicit Reifiers expanded">
+      <!--
+      VERSION     "1.2"
+      PREFIX : <http://example.com/>
+      PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+      PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+      :alice :name "Alice" .
+      _:b0 rdf:reifies <<( :alice :name "Alice" )>> .
+      _:b0 :statedBy :alice .
+      _:b0 :recorded "2017-02-01"^^xsd:date .
+      _:b1 rdf:reifies <<( :alice :name "Alice" )>> .
+      _:b1 :statedBy :bob .
+      _:b1 :recorded "2021-07-07"^^xsd:date .
+      -->
+      </pre>
+
+      <p>The annotation syntax may also contain multiple explicit
+        <a>reifiers</a> without annotation blocks. Each such <a>reifier</a>
+        causes a corresponding reifying triple to be produced.</p>
+
+      <pre id="ex-annotated-triple-multiple-reifiers"
+           class="example turtle" data-transform="updateExample"
+           title="Annotated Triple with multiple explicit Reifiers">
+      <!--
+      VERSION     "1.2"
+      PREFIX : <http://example.com/>
+      PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+      :alice :name "Alice" ~ :stmt1 ~ :stmt2 .
+      -->
+      </pre>
+
+      <p>Fully expanding this example results in the following triples:</p>
+
+      <pre id="ex-annotated-triple-multiple-reifiers-expanded"
+           class="example turtle" data-transform="updateExample"
+           title="Annotated Triple with multiple explicit Reifiers expanded">
+      <!--
+      VERSION     "1.2"
+      PREFIX : <http://example.com/>
+      PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+      :alice :name "Alice" .
+      :stmt1 rdf:reifies <<( :alice :name "Alice" )>> .
+      :stmt2 rdf:reifies <<( :alice :name "Alice" )>> .
+      -->
+      </pre>
+
     </section>
 
   </section>
