@@ -140,6 +140,9 @@
     table.cp-definitions th,
     table.cp-definitions td { border:0px solid black; padding:0.2em; }
     table.cp-definitions td:nth-child(2) { text-align: center; }
+
+    .term2escape-yes { background-color: lightgreen; }
+    .darkmode .term2escape-yes { background-color: darkgreen; }
   </style> 
 </head>
 
@@ -1693,7 +1696,7 @@
           <a href="#grammar-production-sparqlPrefix"><code>PREFIX</code></a>,
           <a href="#grammar-production-base"><code>@base</code></a>,
           or <a href="#grammar-production-sparqlBase"><code>BASE</code></a> declarations</td>
-        <td style="background-color: lightgreen; border:1px solid black;">yes</td>
+        <td class="term2escape-yes">yes</td>
         <td>no</td>
         <td>no</td>
       </tr>
@@ -1701,12 +1704,12 @@
         <td class="r"><a href="#grammar-production-PN_LOCAL"><span style="font-weight:bold;">local name</span>s</a></td>
         <td>no</td>
         <td>no</td>
-        <td style="background-color: lightgreen; border:1px solid black;">yes</td>
+        <td class="term2escape-yes">yes</td>
       </tr>
       <tr>
         <td class="r"><span style="font-weight:bold;">String</span>s</td>
-        <td style="background-color: lightgreen; border:1px solid black;">yes</td>
-        <td style="background-color: lightgreen; border:1px solid black;">yes</td>
+        <td class="term2escape-yes">yes</td>
+        <td class="term2escape-yes">yes</td>
         <td>no</td>
       </tr>
       </tbody>
