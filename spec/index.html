@@ -1714,6 +1714,61 @@
       </tbody>
     </table>
 
+    <p>
+      Escape sequences are processed by taking the sequence of Unicode code points
+      matching the relevant grammar production, then applying the following steps.
+    </p>
+    <ol>
+      <li>
+        The sequence of Unicode code points is scanned left-to-right for the
+        first matching escape sequence.
+      </li>
+      <li>
+        When an escape sequence is found, the code point(s) corresponding to that escape sequence
+        are substituted for the escape sequence.
+      </li>
+      <li>
+        Scanning of the sequence of Unicode code points continues from the code point 
+        immediately following the substituted escape sequence.
+      </li>
+    </ol>
+
+    <table class="separated last-center">
+      <caption>Examples of processed escape sequences</caption>
+      <thead>
+        <tr>
+          <th>Input Codepoints</th><th>Output Codepoints</th><th>Number of codepoints</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>`abc\u005Cdef`</td><td>`abc\def`</td><td>7</td>
+        </tr>
+        <tr>
+          <td>`abc\u005Ctuv`</td><td>`abc\tuv`</td><td>7</td>
+        </tr>
+        <tr>
+          <td>`\u005CA`</td><td>`\A`</td><td>2</td>
+        </tr>
+        <tr>
+          <td>`\\u005C`</td><td>`\u005C`</td><td>6</td>
+        </tr>
+        <tr>
+          <td>`\u005C\u005C`</td><td>`\\`</td><td>2</td>
+        </tr>
+        <tr>
+          <td>`\\\u005C`</td><td>`\\`</td><td>2</td>
+        </tr>
+        <tr>
+          <td>`\\\\`</td><td>`\\`</td><td>2</td>
+        </tr>
+        <tr>
+          <td>`\u005Cn`</td><td>`\n`</td><td>2</td>
+        </tr>
+      </tbody>
+    </table>
+      
+
     <p class="note">%-encoded sequences are in the
       <a href="#grammar-production-IRIREF">character range for IRIs</a>
       and are <a href="#grammar-production-PERCENT">explicitly allowed</a> in local names.
@@ -1749,7 +1804,7 @@
           are case-sensitive.
           Keywords in quotation marks
           ("<code class="grammar-literal">BASE</code>",
-          "<code class="grammar-literal">PREFIX</code>"), and
+          "<code class="grammar-literal">PREFIX</code>", and
           "<code class="grammar-literal">VERSION</code>")
           are case-insensitive.
         </li>
