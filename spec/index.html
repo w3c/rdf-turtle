@@ -2560,17 +2560,21 @@
           This parameter is required when transferring non-ASCII data.
           If present, the value of <code>charset</code> is always <code>UTF-8</code>.
         </dd>
+
         <dt><code>version</code></dt>
-        <dd>This parameter is optional.
-          If present, acceptable values of <code>version</code> are
-          defined in <a data-cite="RDF12-CONCEPTS#defined-version-labels">2.1 Version Labels</a> in [[RDF12-CONCEPTS]].
+        <dd>
+          This parameter is optional.
+          If present, acceptable values of <code>version</code> are defined in
+          <a data-cite="RDF12-CONCEPTS#defined-version-labels">Version Labels</a>
+          in [[RDF12-CONCEPTS]].
         </dd>
+
         <dt><code>profile</code></dt>
         <dd>
           This parameter is optional and is used to include additional information.
-          It does not change the semantics of the resource representation when processed
-          without knowledge of the profile.
-          The value of a profile parameter is a non-empty list of space-separated URIs.
+          It does not change the semantics of the resource representation when
+          processed without knowledge of the profile. The value of a
+          <code>profile</code> parameter is a non-empty list of space-separated URIs.
           For more information and background, please refer to [[RFC6906]].
         </dd>
       </dl>
