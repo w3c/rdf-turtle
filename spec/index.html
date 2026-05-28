@@ -1437,11 +1437,7 @@
     <h2>Media Type and Content Encoding</h2>
 
     <p>The media type of Turtle is <code>text/turtle</code>.
-    The content encoding of Turtle content is always UTF-8 [[!RFC3629]].
-    Charset parameters on the media type are required until such time as the
-    <code>text/</code> media type tree permits UTF-8 to be sent without a
-    charset parameter. See <a href="#sec-mediaReg" class="sectionRef"></a> for the media type
-    registration form.
+      The content encoding of Turtle content is always UTF-8 [[!RFC3629]].
     </p>
   </section>
 </section>
@@ -2609,12 +2605,6 @@
     <dt>Optional parameters:</dt>
     <dd>
       <dl>
-        <dt><code>charset</code></dt>
-        <dd>
-          This parameter is required when transferring non-ASCII data.
-          If present, the value of <code>charset</code> is always <code>UTF-8</code>.
-        </dd>
-
         <dt><code>version</code></dt>
         <dd>
           This parameter is optional.
@@ -2788,6 +2778,7 @@
     <li>Added the optional <code>profile</code> media type parameter
       to allow clients and servers to convey additional profile information
       for Turtle representations without changing their semantics.</li>
+    <li>Update media registration now that UTF-8 can be required for text/.</li>
   </ul>
 </section>
 
