@@ -207,6 +207,7 @@
     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
     PREFIX foaf: <http://xmlns.com/foaf/0.1/>
     PREFIX rel: <http://www.perceive.net/schemas/relationship/>
+    PREFIX dct: <http://purl.org/dc/terms/>
 
     <#green-goblin>
       rel:enemyOf <#spiderman> ;
@@ -216,18 +217,20 @@
     <#spiderman>
       rel:enemyOf <#green-goblin> ;
       a foaf:Person ;
-      foaf:name "Spiderman", "Человек-паук"@ru .
+      foaf:name "Spiderman",
+       "الرجل العنكبوت"@ar--rtl {| dct:source <https://www.wikidata.org/> |}.
     -->
   </pre>
 
   <p>
-    This example introduces many of features of the Turtle language:
+    This example introduces many features of the Turtle language:
     <a href="#relative-iri">BASE and Relative IRI references</a>,
     <a href="#prefixed-name">PREFIX and prefixed names</a>,
     <a href="#predicate-lists">predicate lists</a> separated by <a href="#cp-semicolon"><code title="semicolon">;</code></a>,
     <a href="#object-lists">object lists</a> separated by <a href="#cp-comma"><code title="comma">,</code></a>,
     the token <a href="#iri-a"><code>a</code></a>,
-    and <a href="#literals">literals</a>.
+    <a href="#literals">literals</a>,
+    and <a href="#annotation-syntax">annotations</a>.
   </p>
 
   <p>
@@ -242,6 +245,10 @@
     The construction of an <a data-cite="RDF12-CONCEPTS#dfn-rdf-graph">RDF graph</a> from a <a>Turtle document</a> is defined in
     <a href="#sec-grammar" class="sectionRef">Turtle Grammar</a>
     and <a href="#sec-parsing" class="sectionRef">Parsing</a>.
+  </p>
+
+  <p>
+    This version of Turtle is fully backward compatible with the previous version [[?TURTLE]].
   </p>
 </section>
 
@@ -2754,6 +2761,19 @@
 <section class="appendix informative" id="changes-12">
   <h2>Changes between RDF 1.1 and RDF 1.2</h2>
 
+  <p>
+      This specification extends the original Turtle syntax, as defined in [[TURTLE]], to support the new features introduced by [[RDF12-CONCEPTS]].
+      This extension is fully backward compatible:
+      any document complying with the old version complies with the new version, and parses to the same graph.
+      Furthermore, any document complying with the new version and containing only RDF 1.1 features is also compliant with the older version
+      (with the exception of the `VERSION` directive; see <a href="#sec-version"></a>).
+      Finally, none of the new syntactic constructs are valid in the old syntax.
+      This means that any Turtle document using RDF 1.2 features does not
+      comply with the previous version of this specification and cannot be
+      interpreted as a different graph under it.
+  </p>
+
+  <p>More specifically, the following changes have been made:</p>
   <ul>
     <li>Update informative restrictions on included characters for `STRING_LITERAL_QUOTE`
       and `STRING_LITERAL_SINGLE_QUOTE`.</li>
