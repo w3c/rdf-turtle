@@ -639,24 +639,24 @@
       </p>
 
       <p>A <a href="#cp-backslash"><code title="backslash">\</code></a>
-        may not appear in any quoted literal except as part of an escape sequence.
+        MUST NOT appear in any quoted literal except as part of an escape sequence.
         Other restrictions depend on the delimiter:</p>
 
       <ul>
         <li>Literals delimited by <a href="#cp-apostrophe"><code title="apostrophe">'</code></a>
-          may not contain unescaped
+          can not contain unescaped
           <a href="#cp-apostrophe"><code title="apostrophe">'</code></a>,
           <a href="#cp-line-feed"><code title="line feed">LF</code></a>, nor
           <a href="#cp-carriage-return"><code title="carriage return">CR</code></a>
           characters.</li>
         <li>Literals delimited by <a href="#cp-quotation-mark"><code title="quotation mark">&quot;</code></a>
-          may not contain unescaped
+          MUST NOT contain unescaped
           <a href="#cp-quotation-mark"><code title="quotation mark">&quot;</code></a>,
           <a href="#cp-line-feed"><code title="line feed">LF</code></a>, nor
           <a href="#cp-carriage-return"><code title="carriage return">CR</code></a>
           characters.</li>
-        <li>Literals delimited by <a href="#cp-triple-apostrophe"><code>'''</code></a> may not contain such a sequence.</li>        
-        <li>Literals delimited by <a href="#cp-triple-quote"><code>"""</code></a> may not contain such a sequence.</li>
+        <li>Literals delimited by <a href="#cp-triple-apostrophe"><code>'''</code></a> MUST NOT contain such a sequence.</li>        
+        <li>Literals delimited by <a href="#cp-triple-quote"><code>"""</code></a> MUST NOT contain such a sequence.</li>
       </ul>
 
       <pre id="ex-quoted-literals"
