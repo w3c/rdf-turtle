@@ -1004,7 +1004,7 @@
       and ending with <a href="#cp-double-gt"><code>&gt;&gt;</code></a>.
       For example, `&lt;&lt; :subject :predicate :object ~ :IRIREF &gt;&gt;`.
       If no reifiers are present,
-      or a <a href="#grammar-production-reifier"><code>reifier</code></a>
+      or a <a href="#cp-tilde"><code title="tilde">~</code></a>
       is not immediately followed by an <a href="#grammar-production-iri"><code>iri</code></a>
       or <a href="#grammar-production-BlankNode"><code>BlankNode</code></a>,
       a fresh <a data-cite="RDF12-CONCEPTS#dfn-blank-node">RDF blank node</a> is allocated,
@@ -1015,12 +1015,6 @@
       like
       <br/>`&lt;&lt; :subject1 :predicate1 &lt;&lt; :subject2 :predicate2 :object2 &gt;&gt; ~:IRIREF1 &gt;&gt;`
       or <br/>`&lt;&lt; :subject4 :predicate4 &lt;&lt; :subject3 :predicate3 :object3 ~:IRIREF3 &gt;&gt; &gt;&gt;`.</p>
-
-    <p>If a <a href="#grammar-production-reifiedTriple"><code>reifiedTriple</code></a>
-      is not identified by an <a data-cite="RDF12-CONCEPTS#dfn-iri">IRI</a>
-      or <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank node</a>,
-      a fresh RDF <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank node</a> is allocated
-      and used to identify this relationship.</p>
 
     <pre id="ex-reified-triple"
          class="example turtle" data-transform="updateExample"
