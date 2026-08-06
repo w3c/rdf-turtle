@@ -1055,7 +1055,10 @@
       -->
     </pre>
 
-    <p class="note">Note the difference in syntax between the syntactic sugar of <a href="#grammar-production-reifiedTriple"><code>reifiedTriple</code></a>
+    <p class="note">A <a href="#grammar-production-reifiedTriple"><code>reifiedTriple</code></a> is syntactic sugar relating a
+      <a>reifier</a> to a <a href="#grammar-production-tripleTerm"><code>tripleTerm</code></a>
+      using the <code>rdf:reifies</code> predicate.
+      Note the difference in syntax between the syntactic sugar of <a href="#grammar-production-reifiedTriple"><code>reifiedTriple</code></a>
       (i.e., `&lt;&lt; [...] >>`) and the regular <a href="#grammar-production-tripleTerm"><code>tripleTerm</code></a> (i.e., `&lt;&lt;( [...] )>>`).</p>
 
     <p>After declaring a prefix so that IRIs can be abbreviated,
@@ -1065,10 +1068,6 @@
       In other words, the triple "`employee38` has a `jobTitle` of 'Assistant Designer'"
       is not a member of the graph, itself, as "employee38 has a `familyName` of 'Smith'" is above;
       rather, it is known as a <a>reifying triple</a>.</p>
-
-    <p>A <a href="#grammar-production-reifiedTriple"><code>reifiedTriple</code></a> is syntactic sugar relating a
-      <a>reifier</a> to a <a href="#grammar-production-tripleTerm"><code>tripleTerm</code></a>
-      using the <code>rdf:reifies</code> predicate.</p>
 
     <section id="annotation-syntax">
       <h2>Annotation Syntax</h2>
