@@ -1055,11 +1055,12 @@
       -->
     </pre>
 
-    <p class="note">A <a href="#grammar-production-reifiedTriple"><code>reifiedTriple</code></a> is syntactic sugar relating a
-      <a>reifier</a> to a <a href="#grammar-production-tripleTerm"><code>tripleTerm</code></a>
-      using the <code>rdf:reifies</code> predicate.
-      Note the difference in syntax between the syntactic sugar of <a href="#grammar-production-reifiedTriple"><code>reifiedTriple</code></a>
-      (i.e., `&lt;&lt; [...] >>`) and the regular <a href="#grammar-production-tripleTerm"><code>tripleTerm</code></a> (i.e., `&lt;&lt;( [...] )>>`).</p>
+    <p class="note">A <a href="#grammar-production-reifiedTriple"><code>reifiedTriple</code></a>
+      is syntactic sugar that uses the <code>rdf:reifies</code> predicate to relate a <a>reifier</a>
+      to a <a href="#grammar-production-tripleTerm"><code>tripleTerm</code></a>. Note the difference
+      in syntax between the syntactic sugar of a <a href="#grammar-production-reifiedTriple"><code>reifiedTriple</code></a>
+      (i.e., `&lt;&lt; [...] &gt;&gt;`) and the regular <a href="#grammar-production-tripleTerm"><code>tripleTerm</code></a>
+      (i.e., `&lt;&lt;( [...] )&gt;&gt;`).</p>
 
     <p>After declaring a prefix so that IRIs can be abbreviated,
       the first triple in this example asserts that `employee38` has a `familyName` of "Smith".
