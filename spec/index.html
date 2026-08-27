@@ -1043,6 +1043,7 @@
          title="Reified Triple expanded to Triple Term">
       <!--
       PREFIX :    <http://www.example.org/>
+      PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 
       :employee38 :familyName "Smith" .
       _:id rdf:reifies <<( :employee38 :jobTitle "Assistant Designer" )>> .
@@ -1050,24 +1051,22 @@
       -->
     </pre>
 
-<p>After declaring a prefix so that IRIs can be abbreviated,
-the first triple in this example asserts that `employee38` has a `familyName` of "Smith".
-Note that this graph does not assert that `employee38` has a `jobTitle` of "Assistant Designer";
-rather, it says that `employee22` has made that claim
-using a <a href="#grammar-production-reifiedTriple"><code>reifiedTriple</code></a>.
-In other words, the triple "`employee38` has a `jobTitle` of 'Assistant Designer'"
-is not a member of the graph, itself, as "employee38 has a `familyName` of 'Smith'" is above;
-instead, it is known as a <a>reifying triple</a>.</p>
+    <p>Each of the examples above asserts that `:employee38` has a `:familyName` of "Smith".
+      None of the examples asserts that `:employee38` has a `:jobTitle` of "Assistant Designer".
+      Instead, the latter triple is used as a
+      <a data-cite="RDF12-CONCEPTS#dfn-triple-term">triple term</a>,
+      which is the object of a <a>reifying triple</a>.
+      The <a>reifier</a> is related to `:employee22` using `:accordingTo`.</p>
 
     <div class="note">
-    <p>Note the difference
-      in syntax between the syntactic sugar of a <a href="#grammar-production-reifiedTriple"><code>reifiedTriple</code></a>
-      <br>(i.e., `&lt;&lt; [...] &gt;&gt;`) and the regular <a href="#grammar-production-tripleTerm"><code>tripleTerm</code></a>
-      <br>(i.e., `&lt;&lt;( [...] )&gt;&gt;`).</p>
-     <p class="note"><a href="#grammar-production-reifiedTriple"><code>reifiedTriples</code></a> may be nested,
-      like
-      <br/>`&lt;&lt; :subject1 :predicate1 &lt;&lt; :subject2 :predicate2 :object2 &gt;&gt; ~:IRIREF1 &gt;&gt;`
-      or <br/>`&lt;&lt; :subject4 :predicate4 &lt;&lt; :subject3 :predicate3 :object3 ~:IRIREF3 &gt;&gt; &gt;&gt;`.</p>
+      <p>Note the difference
+        in syntax between the syntactic sugar of a <a href="#grammar-production-reifiedTriple"><code>reifiedTriple</code></a>
+        <br>(i.e., `&lt;&lt; [...] &gt;&gt;`) and the regular <a href="#grammar-production-tripleTerm"><code>tripleTerm</code></a>
+        <br>(i.e., `&lt;&lt;( [...] )&gt;&gt;`).</p>
+      <p>A <a href="#grammar-production-reifiedTriple"><code>reifiedTriple</code></a>
+        may be nested inside another, as in
+        <br>`&lt;&lt; :subject1 :predicate1 &lt;&lt; :subject2 :predicate2 :object2 &gt;&gt; ~:IRIREF1 &gt;&gt;`
+        or <br>`&lt;&lt; :subject4 :predicate4 &lt;&lt; :subject3 :predicate3 :object3 ~:IRIREF3 &gt;&gt; &gt;&gt;`.</p>
     </div>
 
     <section id="annotation-syntax">
