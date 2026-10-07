@@ -1368,7 +1368,7 @@
     It makes the serialized RDF graph, as defined in <a href="#sec-parsing" class="sectionRef"></a>,
     available to the application, usually through some form of API.</p>
 
-  <p>The IRI that identifies the Turtle language is: <code>http://www.w3.org/ns/formats/Turtle</code></p>
+  <p>The IRI that identifies the Turtle language is <code>http://www.w3.org/ns/formats/Turtle</code>.</p>
 
   <p class="note">This specification does not define how Turtle parsers handle non-conforming input documents.</p>
 
@@ -2369,6 +2369,16 @@
 
     </ul>
   </section>
+
+  <section id="non-conformant-documents">
+    <h3>Non-conformant Documents</h3>
+  <p> If the target of a parsing process does not conform to the grammar specified in <a href="#sec-grammar" class="sectionRef"></a>, the result
+    is not defined by this specification.
+    Error detection, reporting, and recovery are left to implementors,
+    because the appropriate behavior depends on the application interfaces and protocols within which the parser is used.
+    </p>
+  </section>
+
 </section>
 
 <section id="in-html" class="appendix informative">
