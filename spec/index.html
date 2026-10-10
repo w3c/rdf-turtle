@@ -1378,6 +1378,19 @@
     <p>The media type of Turtle is <code>text/turtle</code>.
       The content encoding of Turtle content is always UTF-8 [[!RFC3629]].
     </p>
+
+   <section id="future-proof">
+    <h2>Future-proofness of Turtle</h2>
+
+    <p>Any future evolution of the Turtle format, if it reuses the same media type,
+     MUST require the use of a version directive
+     (either <a href="#grammar-production-version">`@version`</a> or <a href="#grammar-production-sparqlVersion">`VERSION`</a>)
+     with a version label posterior to `1.2`,
+     for any document that is not strictly compliant with Turtle 1.2.
+     This will allow parsers to gracefully handle more recent features that they do not support.
+    </p>
+   </section>
+    
   </section>
 </section>
 
