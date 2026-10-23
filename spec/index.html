@@ -1379,6 +1379,19 @@
       The content encoding of Turtle content is always UTF-8 [[!RFC3629]].
     </p>
   </section>
+
+  <section id="future-proof">
+    <h2>Future-proofness of Turtle</h2>
+
+    <p>Any future evolution of the Turtle format, if it reuses the same media type,
+      will require the use of a version directive
+      (either <a href="#grammar-production-version">`@version`</a>
+      or <a href="#grammar-production-sparqlVersion">`VERSION`</a>)
+      with a version label greater than `1.2`,
+      for any document that is not strictly compliant with Turtle 1.2.
+      This will allow parsers to gracefully handle newer features that they do not yet support.
+    </p>
+  </section>
 </section>
 
 <section id="sec-grammar">
